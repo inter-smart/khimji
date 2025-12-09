@@ -113,7 +113,7 @@ export default function Header() {
                           rounded-full
                           transition-all duration-200
                           hover:scale-105 active:scale-95
-                          shadow-md
+                          
                         "
                       >
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
