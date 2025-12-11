@@ -41,26 +41,26 @@
   --color-base2: #cdcdcd;
   --color-base3: #1d0a44;
 
-  --breakpoint-4xs: 20rem;
   /* 320px */
-  --breakpoint-3xs: 24rem;
+  --breakpoint-4xs: 20rem;
   /* 384px */
-  --breakpoint-2xs: 28rem;
+  --breakpoint-3xs: 24rem;
   /* 448px */
-  --breakpoint-xs: 36rem;
+  --breakpoint-2xs: 28rem;
   /* 576px */
-  --breakpoint-sm: 40rem;
+  --breakpoint-xs: 36rem;
   /* 640px */
-  --breakpoint-md: 48rem;
+  --breakpoint-sm: 40rem;
   /* 768px */
-  --breakpoint-lg: 64rem;
+  --breakpoint-md: 48rem;
   /* 1024px */
-  --breakpoint-xl: 75rem;
+  --breakpoint-lg: 64rem;
   /* 1280px */
-  --breakpoint-2xl: 96rem;
+  --breakpoint-xl: 75rem;
   /* 1536px */
-  --breakpoint-3xl: 115rem;
+  --breakpoint-2xl: 96rem;
   /* 1920px */
+  --breakpoint-3xl: 115rem;
 
   --breakpoint-gap: 15px;
   /* * */
@@ -309,8 +309,7 @@ body[data-scroll-locked] {
   border: 0 !important;
   z-index: 999;
 }
-
-
+ 
 
 @layer base {
   * {
@@ -320,4 +319,24 @@ body[data-scroll-locked] {
   body {
     @apply bg-background text-foreground;
   }
+}
+ 
+/* Float Animation - Smooth organic movement */
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(-180px, -260px)  ;
+    }
+    50% {
+        transform: translate(-160px, -360px)  ;
+    }
+    75% {
+        transform: translate(-120px, -230px)  ;
+    }
+}
+
+.animate-float {
+    animation: float 10s ease-in-out infinite;
 }
