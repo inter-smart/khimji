@@ -69,7 +69,9 @@ export default function VentureSection() {
                         >
                             <SwiperSlide>
                                 {/* Enhanced glass effect with backdrop filters */}
-                                <div className="relative z-0 w-full h-full overflow-hidden p-[20px] border border-white/20 rounded-xl flex flex-wrap backdrop-blur-lg backdrop-saturate-150 backdrop-filter bg-gradient-to-br from-white/15 to-white/5 shadow-[0_8px_32px_0_rgba(31,38,135,0.15)] before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/25 before:to-transparent before:rounded-xl before:z-[-1] after:absolute after:inset-0 after:bg-white/5 after:backdrop-blur-sm after:rounded-xl after:z-[-2]">
+                                <div className="relative z-0 w-full h-full overflow-hidden p-[20px] flex flex-wrap 
+                                backdrop-blur-[10px] backdrop-saturate-[183%] bg-[rgba(255,255,255,0.16)] 
+                                    rounded-[12px] border border-[rgba(255,255,255,0.125)]">
                                     <div className="w-[200px]">
                                         <div className="w-full h-full overflow-hidden rounded-[10px] backdrop-blur-sm">
                                             <video
@@ -102,7 +104,7 @@ export default function VentureSection() {
                                                             width={45}
                                                             height={30}
                                                             alt="Ship 1"
-                                                           className="w-full h-full max-h-[30px] object-cover min-w-[35px]"
+                                                            className="w-full h-full max-h-[30px] object-cover min-w-[35px]"
                                                         />
                                                     </div>
                                                 </div>
