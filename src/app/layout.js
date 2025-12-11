@@ -8,40 +8,17 @@ import WidgetSection from "@/components/common/WidgetSection";
 // Function to fetch banner status
  
 
-const NobelTRIAL = localFont({
+const Nobel = localFont({
   src: [
+     
     {
-      path: "../../public/fonts/NobelTRIAL-ExtraLight.woff2",
-      weight: "200",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/NobelTRIAL-Light.woff2",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/NobelTRIAL-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/NobelTRIAL-Book.woff2",
+      path: "../../public/fonts/Nobel-Book.woff2",
       weight: "500",
       style: "normal",
     },
-    {
-      path: "../../public/fonts/NobelTRIAL-Bold.woff2",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/NobelTRIAL-Black.woff2",
-      weight: "800",
-      style: "normal",
-    },
+   
   ],
-  variable: "--font-NobelTRIAL",
+  variable: "--font-Nobel",
   preload: true,
   display: "swap",
 });
@@ -57,7 +34,7 @@ export default async function RootLayout({ children }) {
   
   return (
     <html lang="en">
-       <body className={`${NobelTRIAL.className}`}>
+       <body className={`${Nobel.className}`}>
         {/* <LoadingProvider>
           <LoadingWrapper> */}
             <Header />
