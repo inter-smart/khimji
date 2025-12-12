@@ -57,7 +57,7 @@ export default function VentureSection() {
                 xl:!pl-[calc(((100%-var(--breakpoint-xl))/2)+var(--breakpoint-gap-xl))]
                 2xl:!pl-[calc(((100%-var(--breakpoint-2xl))/2)+var(--breakpoint-gap-2xl))]
                 3xl:!pl-[calc(((100%-var(--breakpoint-3xl))/2)+var(--breakpoint-gap-3xl)/2)]
-                not-last-of-type:mb-[140px]
+                not-last-of-type:mb-[20px] not-last-of-type:xl:mb-[60px] not-last-of-type:2xl:mb-[100px] not-last-of-type:3xl:mb-[140px]
             ">
                 {/* bg dot */}
                 <div className="absolute top-0 bottom-0 right-[70px] 2xl:right-[100px]
@@ -145,8 +145,8 @@ export default function VentureSection() {
                 3xl:!pr-[calc(((100%-var(--breakpoint-3xl))/2)+var(--breakpoint-gap-3xl)/2)]
             ">
                 {/* bg dot */}
-                <div className="absolute top-0 bottom-0 right-[70px] 2xl:right-[100px]
-                 3xl:right-[150px] m-auto w-[150px]  2xl:w-[200px] 3xl:w-[245px] h-[150px] 2xl:h-[200px] 3xl:h-[245px] blur-[165px] round-full bg-[#2FDDC3] animate-float"></div>
+                <div className="absolute top-0 bottom-0 left-[70px] 2xl:left-[100px]
+                 3xl:left-[150px] m-auto w-[150px]  2xl:w-[200px] 3xl:w-[245px] h-[150px] 2xl:h-[200px] 3xl:h-[245px] blur-[165px] round-full bg-[#0B436A] animate-float"></div>
                 <div className="flex flex-wrap w-full flex-row-reverse">
 
                     {/* LEFT CONTENT */}
