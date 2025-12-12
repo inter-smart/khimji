@@ -349,7 +349,7 @@ export default function ArchiveSection() {
                             <div className="rounded-3xl shadow-2xl overflow-hidden w-full h-full rounded-[10px] p-[30px] border border-white bg-transparent
                                 backdrop-blur-[20px] backdrop-saturate-[180%] 
                                 shadow-[inset_5px_1px_33px_#f1f1f1,inset_3px_-3px_5px_#fafafa] flex flex-col md:flex-row">
-                                <div className="2xl:w-[475px] 3xl:w-[600px]">
+                                <div className="w-[375px] 2xl:w-[475px] 3xl:w-[600px]">
                                     <div className="w-full h-full rounded-[10px] overflow-hidden group aspect-[600/280]">
                                         <Image
                                             src={currentItem.image}
@@ -360,7 +360,7 @@ export default function ArchiveSection() {
                                         />
                                     </div>
                                 </div>
-                                <div className="2xl:w-[calc(100%-475px)] 3xl:w-[calc(100%-600px)] flex items-center p-[40px] relative">
+                                <div className="w-[calc(100%-375px)] 2xl:w-[calc(100%-475px)] 3xl:w-[calc(100%-600px)] flex items-center p-[40px] relative">
                                     <div className="w-full">
                                         <div className="absolute top-0 right-0 flex items-center gap-3 ml-auto w-fit has-[button:disabled]:hidden">
                                             <button
