@@ -65,6 +65,157 @@ const local_data = {
       },
     ],
   },
+  board_directors_section_data: {
+    board_directors: [
+      {
+        directors_list: [
+          {
+            name: "Ajay Mathradas",
+            designation: "Khimji",
+            media: {
+              type: "image",
+              path: "/images/director-1.png",
+              alt: "Image",
+            },
+          },
+          {
+            name: "Ajay Mathradas",
+            designation: "Khimji",
+            media: {
+              type: "image",
+              path: "/images/director-2.png",
+              alt: "Image",
+            },
+          },
+          {
+            name: "Pankaj Kanaksi",
+            designation: "Khimji",
+            media: {
+              type: "image",
+              path: "/images/director-3.png",
+              alt: "Image",
+            },
+          },
+          {
+            name: "Nailesh Kanaksi",
+            designation: "Khimji",
+            media: {
+              type: "image",
+              path: "/images/director-4.png",
+              alt: "Image",
+            },
+          },
+          {
+            name: "Ajay Mathradas",
+            designation: "Khimji",
+            media: {
+              type: "image",
+              path: "/images/director-2.png",
+              alt: "Image",
+            },
+          },
+        ],
+      },
+      {
+        directors_list: [
+          {
+            name: "Kanan Anil",
+            designation: "Khimji",
+            media: {
+              type: "image",
+              path: "/images/director-5.png",
+              alt: "Image",
+            },
+          },
+          {
+            name: "Hritik Ajay",
+            designation: "Khimji",
+            media: {
+              type: "image",
+              path: "/images/director-6.png",
+              alt: "Image",
+            },
+          },
+          {
+            name: "Mihir Ajay",
+            designation: "Khimji",
+            media: {
+              type: "image",
+              path: "/images/director-7.png",
+              alt: "Image",
+            },
+          },
+          {
+            name: "Malvika Pankaj",
+            designation: "Khimji",
+            media: {
+              type: "image",
+              path: "/images/director-8.png",
+              alt: "Image",
+            },
+          },
+          {
+            name: "Hritik Ajay",
+            designation: "Khimji",
+            media: {
+              type: "image",
+              path: "/images/director-6.png",
+              alt: "Image",
+            },
+          },
+        ],
+      },
+      {
+        directors_list: [
+          {
+            name: "Kairavi Pankaj",
+            designation: "Khimji",
+            media: {
+              type: "image",
+              path: "/images/director-9.png",
+              alt: "Image",
+            },
+          },
+          {
+            name: "Chirayu Nailesh",
+            designation: "Khimji",
+            media: {
+              type: "image",
+              path: "/images/director-10.png",
+              alt: "Image",
+            },
+          },
+          {
+            name: "Varun Pankaj",
+            designation: "Khimji",
+            media: {
+              type: "image",
+              path: "/images/director-11.png",
+              alt: "Image",
+            },
+          },
+          {
+            name: "Saumya Nailesh",
+            designation: "Khimji",
+            media: {
+              type: "image",
+              path: "/images/director-12.png",
+              alt: "Image",
+            },
+          },
+          {
+            name: "Hritik Ajay",
+            designation: "Khimji",
+            media: {
+              type: "image",
+              path: "/images/director-6.png",
+              alt: "Image",
+            },
+          },
+        ],
+      },
+    ],
+  },
 };
 
 export default function page() {
@@ -83,7 +234,7 @@ export default function page() {
         />
         <DrivenSection data={local_data?.driven_section_data} />
         <HeritageSection data={local_data?.heritage_Section_data} />
-        <BoardDirectorSection />
+        <BoardDirectorSection data={local_data?.board_directors_section_data} />
       </div>
     </>
   );

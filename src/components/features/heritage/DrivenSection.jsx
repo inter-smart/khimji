@@ -24,7 +24,10 @@ export default function DrivenSection({ data }) {
           </div>
           <div className="w-full lg:w-[440px] 2xl:w-[530px] 3xl:w-[670px]">
             <div className="w-full h-auto">
-              <div className="w-full h-auto aspect-[620/300] p-[10px] 2xl:p-[15px] 3xl:p-[20px] mb-[10px] sm:mb-[15px] 2xl:mb-[20px] rounded-[7px] 2xl:rounded-[10px] border-1 border-blue-700 overflow-hidden block">
+              <div
+                className="w-full h-auto aspect-[620/300] p-[10px] 2xl:p-[15px] 3xl:p-[20px] mb-[10px] sm:mb-[15px] 2xl:mb-[20px] rounded-[7px] 2xl:rounded-[10px] border border-white bg-transparent
+                    backdrop-blur-[20px] backdrop-saturate-[180%] shadow-[inset_5px_1px_33px_#f1f1f1,inset_3px_-3px_5px_#fafafa] overflow-hidden block"
+              >
                 <Image
                   src={data?.media?.path || "/images/placeholder.png"}
                   alt={data?.media?.alt || "Image"}

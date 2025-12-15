@@ -310,7 +310,6 @@ body[data-scroll-locked] {
   border: 0 !important;
   z-index: 999;
 }
- 
 
 @layer base {
   * {
@@ -321,23 +320,24 @@ body[data-scroll-locked] {
     @apply bg-background text-foreground;
   }
 }
- 
+
 /* Float Animation - Smooth organic movement */
 @keyframes float {
-    0%, 100% {
-        transform: translate(0, 0);
-    }
-    25% {
-        transform: translate(-180px, -260px)  ;
-    }
-    50% {
-        transform: translate(-160px, -360px)  ;
-    }
-    75% {
-        transform: translate(-120px, -230px)  ;
-    }
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-180px, -260px);
+  }
+  50% {
+    transform: translate(-160px, -360px);
+  }
+  75% {
+    transform: translate(-120px, -230px);
+  }
 }
 
 .animate-float {
-    animation: float 10s ease-in-out infinite;
+  animation: float 10s ease-in-out infinite;
 }

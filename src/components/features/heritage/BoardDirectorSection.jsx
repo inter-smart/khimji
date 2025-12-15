@@ -5,161 +5,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
-const board_data = {
-  board_directors: [
-    {
-      directors_list: [
-        {
-          name: "Ajay Mathradas",
-          designation: "Khimji",
-          media: {
-            type: "image",
-            path: "/images/director-1.png",
-            alt: "Image",
-          },
-        },
-        {
-          name: "Ajay Mathradas",
-          designation: "Khimji",
-          media: {
-            type: "image",
-            path: "/images/director-2.png",
-            alt: "Image",
-          },
-        },
-        {
-          name: "Pankaj Kanaksi",
-          designation: "Khimji",
-          media: {
-            type: "image",
-            path: "/images/director-3.png",
-            alt: "Image",
-          },
-        },
-        {
-          name: "Nailesh Kanaksi",
-          designation: "Khimji",
-          media: {
-            type: "image",
-            path: "/images/director-4.png",
-            alt: "Image",
-          },
-        },
-        {
-          name: "Ajay Mathradas",
-          designation: "Khimji",
-          media: {
-            type: "image",
-            path: "/images/director-2.png",
-            alt: "Image",
-          },
-        },
-      ],
-    },
-    {
-      directors_list: [
-        {
-          name: "Kanan Anil",
-          designation: "Khimji",
-          media: {
-            type: "image",
-            path: "/images/director-5.png",
-            alt: "Image",
-          },
-        },
-        {
-          name: "Hritik Ajay",
-          designation: "Khimji",
-          media: {
-            type: "image",
-            path: "/images/director-6.png",
-            alt: "Image",
-          },
-        },
-        {
-          name: "Mihir Ajay",
-          designation: "Khimji",
-          media: {
-            type: "image",
-            path: "/images/director-7.png",
-            alt: "Image",
-          },
-        },
-        {
-          name: "Malvika Pankaj",
-          designation: "Khimji",
-          media: {
-            type: "image",
-            path: "/images/director-8.png",
-            alt: "Image",
-          },
-        },
-        {
-          name: "Hritik Ajay",
-          designation: "Khimji",
-          media: {
-            type: "image",
-            path: "/images/director-6.png",
-            alt: "Image",
-          },
-        },
-      ],
-    },
-    {
-      directors_list: [
-        {
-          name: "Kairavi Pankaj",
-          designation: "Khimji",
-          media: {
-            type: "image",
-            path: "/images/director-9.png",
-            alt: "Image",
-          },
-        },
-        {
-          name: "Chirayu Nailesh",
-          designation: "Khimji",
-          media: {
-            type: "image",
-            path: "/images/director-10.png",
-            alt: "Image",
-          },
-        },
-        {
-          name: "Varun Pankaj",
-          designation: "Khimji",
-          media: {
-            type: "image",
-            path: "/images/director-11.png",
-            alt: "Image",
-          },
-        },
-        {
-          name: "Saumya Nailesh",
-          designation: "Khimji",
-          media: {
-            type: "image",
-            path: "/images/director-12.png",
-            alt: "Image",
-          },
-        },
-        {
-          name: "Hritik Ajay",
-          designation: "Khimji",
-          media: {
-            type: "image",
-            path: "/images/director-6.png",
-            alt: "Image",
-          },
-        },
-      ],
-    },
-  ],
-};
-
-export default function BoardDirectorSection({ data = board_data }) {
+export default function BoardDirectorSection({ data }) {
   return (
-    <section className="w-full h-auto py-[40px] sm:py-[60px_50px] lg:py-[80px_70px] 2xl:py-[100px_90px] 3xl:py-[125px_110px]">
+    <section className="[--gradient:70px] sm:[--gradient:100px] lg:[--gradient:120px] 2xl:[--gradient:140px] 3xl:[--gradient:180px] w-full h-auto py-[40px] sm:py-[60px_50px] lg:py-[80px_70px] 2xl:py-[100px_90px] 3xl:py-[125px_110px] relative z-0">
+      <div className="animate-float w-[var(--gradient)] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] absolute -z-1 inset-[auto_auto_30%_-2%]"></div>
+      <div className="animate-float w-[var(--gradient)] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] absolute -z-1 inset-[30%_0_auto_auto]"></div>
       <div className="container">
         <Heading
           as="h2"
@@ -183,7 +33,7 @@ export default function BoardDirectorSection({ data = board_data }) {
                   disableOnInteraction: false,
                   pauseOnMouseEnter: true,
                 }}
-                speed={800}
+                speed={500}
                 loop={true}
                 breakpoints={{
                   640: {
@@ -212,7 +62,7 @@ export default function BoardDirectorSection({ data = board_data }) {
                 {item?.directors_list?.map((item, index) => (
                   <SwiperSlide key={index}>
                     <div className="w-full h-full block">
-                      <div className="w-full h-auto aspect-[280/325] mb-[10px] 2xl:mb-[15px] 3xl:mb-[20px] rounded-full overflow-hidden flex items-center justify-center relative z-0 before:content-[''] before:w-full before:h-[80%] before:bg-linear-to-t before:from-white before:to-[#C0E7E9] before:rounded-full before:absolute before:z-[-1] before:inset-[auto_0_0_0]">
+                      <div className="w-full h-auto aspect-[280/325] mb-[10px] 2xl:mb-[15px] 3xl:mb-[20px] rounded-full select-none overflow-hidden flex items-center justify-center relative z-0 before:content-[''] before:w-full before:h-[80%] before:bg-linear-to-t before:from-white before:to-[#C0E7E9] before:rounded-full before:absolute before:z-[-1] before:inset-[auto_0_0_0]">
                         <Image
                           src={item?.media?.path || "/images/placeholder.png"}
                           alt={item?.media?.alt || "Image"}
