@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Fragment } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -17,8 +18,8 @@ export default function InnerHero({
   breadCrumb_data,
 }) {
   return (
-    <section className="w-full h-auto block relative z-0">
-      <div className="w-full h-auto aspect-[1920/530] overflow-hidden block">
+    <section className="w-full h-[220px] sm:h-[250px] lg:h-[350px] 2xl:h-[420px] 3xl:h-[530px] block relative z-0 before:content-[''] before:w-full before:h-full before:bg-gradient-to-t before:from-black before:to-transparent before:opacity-80 before:absolute before:z-1 before:inset-0">
+      <div className="w-full h-full block">
         <picture className="w-full h-full">
           <source media="(max-width: 640px)" srcSet={coverImageMobile}></source>
           <Image
@@ -30,10 +31,10 @@ export default function InnerHero({
           />
         </picture>
       </div>
-      <div className="container py-[60px] absolute z-1 inset-[auto_auto_0_0]">
+      <div className="container py-[20px] sm:py-[30px] lg:py-[40px] 2xl:py-[50px] 3xl:py-[60px] absolute z-1 inset-[auto_auto_0_0]">
         <div
           dangerouslySetInnerHTML={{ __html: title }}
-          className="text-[70px] leading-[1.3] font-normal text-white uppercase mb-[35px]"
+          className="text-[22px] sm:text-[28px] md:text-[34px] lg:text-[45px] 2xl:text-[55px] 3xl:text-[70px] leading-[1.3] font-normal text-white uppercase mb-[10px] sm:mb-[15px] lg:mb-[20px] 2xl:mb-[30px] 3xl:mb-[35px]"
         ></div>
         <BreadCrumb items={breadCrumb_data} />
       </div>
@@ -46,10 +47,10 @@ function BreadCrumb({ items }) {
     <Breadcrumb>
       <BreadcrumbList>
         {items.map((item, index) => (
-          <>
+          <Fragment key={index}>
             <BreadcrumbItem
               key={index}
-              className="[&>*]:text-[18px] [&>*]:leading-[1.7] [&>*]:font-normal [&>*]:text-white [&>*]:hover:text-[#299B8A]"
+              className="[&_a,span]:text-[13px] sm:[&_a,span]:text-[14px] 2xl:[&_a,span]:text-[18px] [&_a,span]:leading-[1.7] [&_a,span]:font-normal [&_a,span]:text-white [&_a:hover]:text-[#299B8A]"
             >
               {index === items.length - 1 ? (
                 <BreadcrumbPage className="pointer-events-none">
@@ -62,8 +63,8 @@ function BreadCrumb({ items }) {
               )}
             </BreadcrumbItem>
             {index !== items.length - 1 && (
-              <BreadcrumbSeparator asChild>
-                <span className="w-[15px] h-[15px] aspect-square flex items-center justify-center">
+              <BreadcrumbSeparator>
+                <span className="w-[12px] sm:w-[15px] h-auto aspect-square flex items-center justify-center">
                   <Image
                     src="/images/breadcrumb.svg"
                     alt="breadCrumb"
@@ -74,7 +75,7 @@ function BreadCrumb({ items }) {
                 </span>
               </BreadcrumbSeparator>
             )}
-          </>
+          </Fragment>
         ))}
       </BreadcrumbList>
     </Breadcrumb>

@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@custom-variant dark (&:is(.dark *));
+@tailwind utilities;
+
 /* Custom loader animations */
 @keyframes spin-reverse {
   from {
@@ -139,7 +142,7 @@
 
   --radius-lg: var(--radius);
 
-  --radius-xl: calc(var(--radius) + 4px)
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
 body {
@@ -156,11 +159,11 @@ body {
   }
 
   p {
-    @apply text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-black font-medium
+    @apply text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-black font-medium;
   }
 
   .typography {
-    &>* {
+    & > * {
       @apply my-[10px] lg:my-[15px];
     }
 
@@ -194,16 +197,15 @@ body {
       @apply pl-[20px] lg:pl-[30px];
     }
 
-    ul>li,
-    ol>li {
+    ul > li,
+    ol > li {
       @apply 3xl:text-[20px] 2xl:text-[16px] xl:text-[13px] lg:text-[12px] text-[12px] font-normal leading-normal text-[#4B4B4B] my-[10px] lg:my-[15px] list-decimal;
     }
 
-    ul>li {
+    ul > li {
       @apply list-disc;
     }
   }
-
 }
 
 :root {
@@ -282,14 +284,13 @@ body {
 
   body {
     @apply bg-background text-foreground font-base1;
-
   }
 }
 
 .swiper-pagination-bullet-active {
   width: 45px !important;
   border-radius: 8px !important;
-  background-color: #2E4C99 !important;
+  background-color: #2e4c99 !important;
 }
 
 body[data-scroll-locked] {
@@ -300,17 +301,15 @@ body[data-scroll-locked] {
   position: fixed;
   top: 0;
   animation-name: fadeInDown;
-  animation-duration: .8s;
+  animation-duration: 0.8s;
   animation-fill-mode: both;
   background: #fff;
   -webkit-backdrop-filter: blur(30px);
   backdrop-filter: blur(30px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   border: 0 !important;
   z-index: 999;
 }
-
-
 
 @layer base {
   * {
