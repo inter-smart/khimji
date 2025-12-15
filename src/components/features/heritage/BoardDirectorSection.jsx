@@ -184,6 +184,7 @@ export default function BoardDirectorSection({ data = board_data }) {
                   pauseOnMouseEnter: true,
                 }}
                 speed={800}
+                loop={true}
                 breakpoints={{
                   640: {
                     slidesPerView: 3,

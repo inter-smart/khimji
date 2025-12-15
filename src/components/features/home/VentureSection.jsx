@@ -4,54 +4,96 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
-import Image from "next/image";
+
 import { Heading } from "@/components/layout/Heading";
 import Link from "next/link";
+import VentureCard from "@/components/common/VentureCard";
 
-const CONTACT_BUTTON_CLASS = "text-[12px] 2xl:text-[16px] 3xl:text-[18px] text-black capitalize font-medium flex items-center group transition-all duration-300 hover:text-[#299B8A]";
-const ARROW_ICON_CLASS = "w-[14px] h-[14px] flex items-center mt-[5px] mx-[15px] transition-transform duration-300 group-hover:translate-x-1";
+
+const CONTACT_BUTTON_CLASS = `
+  text-[12px] 2xl:text-[16px] 3xl:text-[18px]
+  text-black capitalize font-medium
+  flex items-center group transition-all duration-300
+  hover:text-[#299B8A] max-w-fit max-lg:m-auto max-lg:mb-[25px]
+`;
+
+const ARROW_ICON_CLASS = `
+  w-[14px] h-[14px] flex items-center
+  mt-[5px] mx-[15px]
+  transition-transform duration-300
+  group-hover:translate-x-1
+`;
+
+const VENTURE_SLIDES = [
+    {
+        video: "/videos/venture-1.mp4",
+        title: "Logistics & Shipping",
+        description:
+            "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
+        logos: ["ship-1", "ship-2", "ship-3", "ship-4"],
+    },
+    {
+        video: "/videos/venture-2.mp4",
+        title: "Logistics & Shipping",
+        description:
+            "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
+        logos: ["ship-1", "ship-2", "ship-3", "ship-4"],
+    },
+]; 
 
 export default function VentureSection() {
     return (
-        <section className='relative z-0 py-[45px] 2xl:py-[80px_50px] 3xl:py-[100px_70px] overflow-hidden'>
+        <section className="relative z-0 py-[45px] 2xl:py-[80px_50px] 3xl:py-[100px_70px] overflow-hidden">
+            {/* Heading */}
             <div className="container">
-                <Heading
-                    size="heading1"
-                    as="h2"
-                    className="text-center">
+                <Heading size="heading1" as="h2" className="text-center">
                     Ventures
                 </Heading>
-            </div>
-            <div className="container">
-                <div className="flex flex-wrap">
-                    <div className="w-[350px]">
-                        <Heading
-                            size="heading2"
-                            as="div"
-                        >
-                            Corporate Oriented
-                        </Heading>
-                        <p className="mb-[40px]">Khimji Ramdas drives growth across Retail, Infrastructure,
-                            Logistics, Lifestyle, and Travel.
-                            Through strong joint ventures and international presence,
-                            we connect markets and enrich communities</p>
-                        <Link href="#!" className={CONTACT_BUTTON_CLASS}>
-                            View All
-                            <div className={ARROW_ICON_CLASS}>
-                                <svg className="w-full h-full object-cover" viewBox="0 0 14 15">
-                                    <g clipPath="url(#clip0_1055_230)">
-                                        <path d="M7.23334 12.7448C7.14887 12.7465 7.0637 12.7245 6.98857 12.6748C6.7718 12.5318 6.70577 12.2213 6.8362 11.9893C6.84717 11.9688 8.2096 9.53275 10.8103 7.99975H0.700004C0.442637 7.99975 0.233337 7.7755 0.233337 7.49975C0.233337 7.224 0.442637 6.99975 0.700004 6.99975H10.8103C8.22407 5.4755 6.84624 3.02875 6.8327 3.00425C6.70507 2.77075 6.77577 2.46 6.99347 2.32175C7.2142 2.1815 7.50494 2.26275 7.63677 2.5005C7.84887 2.863 9.8378 6.11275 13.4052 7.012C13.6187 7.06825 13.7667 7.2685 13.7667 7.5C13.7667 7.7315 13.6197 7.93225 13.4092 7.987C9.8266 8.8895 7.84444 12.1435 7.63024 12.5118C7.54624 12.656 7.39084 12.7415 7.23334 12.7448Z" fill="currentColor" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_1055_230">
-                                            <rect width="14" height="15" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </div>
-                        </Link>
+            </div> 
+            {/* venture section */}
+           <div className="
+                relative 
+                lg:!pl-[calc(((100%-var(--breakpoint-lg))/2)+var(--breakpoint-gap-lg))]
+                xl:!pl-[calc(((100%-var(--breakpoint-xl))/2)+var(--breakpoint-gap-xl))]
+                2xl:!pl-[calc(((100%-var(--breakpoint-2xl))/2)+var(--breakpoint-gap-2xl))]
+                3xl:!pl-[calc(((100%-var(--breakpoint-3xl))/2)+var(--breakpoint-gap-3xl)/2)]
+                not-last-of-type:mb-[20px] not-last-of-type:xl:mb-[60px] not-last-of-type:2xl:mb-[100px] not-last-of-type:3xl:mb-[140px]
+            ">
+                {/* bg dot */}
+                <div className="absolute top-0 bottom-0 right-[70px] 2xl:right-[100px]
+                 3xl:right-[150px] m-auto w-[150px]  2xl:w-[200px] 3xl:w-[245px] h-[150px] 2xl:h-[200px] 3xl:h-[245px] blur-[165px] round-full bg-[#2FDDC3] animate-float"></div>
+                <div className="flex flex-wrap w-full">
+
+                    {/* LEFT CONTENT */}
+                    <div className="w-full lg:w-[240px] xl:w-[300px] 2xl:w-[400px] 3xl:w-[450px] flex items-center">
+                        <div className="w-full max-w-[75%] max-lg:text-center max-lg:m-auto">
+                            <Heading size="heading2" as="div">
+                                Corporate Oriented
+                            </Heading>
+
+                            <p className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px]">
+                                Khimji Ramdas drives growth across Retail, Infrastructure,
+                                Logistics, Lifestyle, and Travel. Through strong joint ventures
+                                and international presence, we connect markets and enrich
+                                communities
+                            </p>
+
+                            <Link href="#!" className={CONTACT_BUTTON_CLASS}>
+                                View All
+                                <div className={ARROW_ICON_CLASS}>
+                                    <svg className="w-full h-full" viewBox="0 0 14 15">
+                                        <path
+                                            d="M7.23334 12.7448C7.14887 12.7465 7.0637 12.7245 6.98857 12.6748C6.7718 12.5318 6.70577 12.2213 6.8362 11.9893C6.84717 11.9688 8.2096 9.53275 10.8103 7.99975H0.700004C0.442637 7.99975 0.233337 7.7755 0.233337 7.49975C0.233337 7.224 0.442637 6.99975 0.700004 6.99975H10.8103C8.22407 5.4755 6.84624 3.02875 6.8327 3.00425C6.70507 2.77075 6.77577 2.46 6.99347 2.32175C7.2142 2.1815 7.50494 2.26275 7.63677 2.5005C7.84887 2.863 9.8378 6.11275 13.4052 7.012C13.6187 7.06825 13.7667 7.2685 13.7667 7.5C13.7667 7.7315 13.6197 7.93225 13.4092 7.987C9.8266 8.8895 7.84444 12.1435 7.63024 12.5118C7.54624 12.656 7.39084 12.7415 7.23334 12.7448Z"
+                                            fill="currentColor"
+                                        />
+                                    </svg>
+                                </div>
+                            </Link>
+                        </div>
                     </div>
-                    <div className="w-[calc(100%-350px)] pl-[50px]">
+
+                    {/* RIGHT CONTENT */}
+                    <div className="w-full lg:w-[calc(100%-240px)] xl:w-[calc(100%-300px)] 2xl:w-[calc(100%-400px)] 3xl:w-[calc(100%-450px)] max-lg:px-[35px] lg:pl-[60px] overflow-hidden">
                         <Swiper
                             modules={[Autoplay]}
                             autoplay={{ delay: 0, disableOnInteraction: false }}
@@ -60,95 +102,124 @@ export default function VentureSection() {
                             slidesPerView={2}
                             spaceBetween={25}
                             breakpoints={{
-                                640: { slidesPerView: 2 },
-                                768: { slidesPerView: 2 },
-                                1024: { slidesPerView: 1.2 },
-                                1280: { slidesPerView: 1.3 },
-                            }}
-                            className="!overflow-visible"
-                        >
-                            <SwiperSlide>
-                                {/* Enhanced glass effect with backdrop filters */}
-                                <div className="relative z-0 w-full h-full overflow-hidden p-[20px] border border-white bg-transparent backdrop-blur-md rounded-xl flex flex-wrap
-                                        backdrop-blur-lg backdrop-saturate-150 backdrop-filter ">
-                                    <div className="w-[200px]">
-                                        <div className="w-full h-full overflow-hidden rounded-[10px] ">
-                                            <video
-                                                autoPlay
-                                                loop
-                                                muted
-                                                playsInline
-                                                className="w-full h-full object-cover"
-                                            >
-                                                <source src="/videos/venture-1.mp4" type="video/mp4" />
-                                                Your browser does not support the video tag.
-                                            </video>
-                                        </div>
-                                    </div>
-                                    <div className="w-[calc(100%-200px)]">
-                                        <div className="w-full px-[35px]">
-                                            <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[23px] 3xl:text-[30px]
-                                                font-medium bg-gradient-to-r from-[#0B436A] to-[#299B8A] bg-clip-text text-transparent uppercase 
-                                                mb-[10px] 2xl:mb-[15px] 3xl:mb-[25px]">
-                                                Logistics & Shipping
-                                            </div>
-                                            <p>Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift),
-                                                Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC</p>
+                                640: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 10,
+                                },
+                                768: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 15,
+                                },
+                                1024: {
+                                    slidesPerView: 1.4,
+                                    spaceBetween: 30,
+                                },
+                                1280: {
+                                    slidesPerView: 1.5,
+                                    spaceBetween: 40,
 
-                                            <div className="flex items-center -m-[8px] mt-[20px]">
-                                                <div className="w-1/4 p-[8px]">
-                                                    <div className="w-full h-full flex items-center justify-center">
-                                                        <Image
-                                                            src="/images/ship-1.png"
-                                                            width={45}
-                                                            height={30}
-                                                            alt="Ship 1"
-                                                            className="w-full h-full max-h-[30px] object-cover min-w-[35px]"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="w-1/4 p-[8px]">
-                                                    <div className="w-full h-full flex items-center justify-center ">
-                                                        <Image
-                                                            src="/images/ship-2.png"
-                                                            width={45}
-                                                            height={30}
-                                                            alt="Ship 2"
-                                                            c className="w-full h-full max-h-[30px] object-cover min-w-[35px]"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="w-1/4 p-[8px]">
-                                                    <div className="w-full h-full flex items-center justify-center">
-                                                        <Image
-                                                            src="/images/ship-3.png"
-                                                            width={45}
-                                                            height={30}
-                                                            alt="Ship 3"
-                                                            className="w-full h-full max-h-[30px] object-cover min-w-[35px]"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="w-1/4 p-[8px]">
-                                                    <div className="w-full h-full flex items-center justify-center">
-                                                        <Image
-                                                            src="/images/ship-4.png"
-                                                            width={45}
-                                                            height={30}
-                                                            alt="Ship 4"
-                                                            className="w-full h-full max-h-[30px] object-cover min-w-[35px]"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
+                                },
+                                1920: {
+                                    slidesPerView: 1.5,
+                                    spaceBetween: 50, 
+                                },
+                            }} 
+                        >
+                            {VENTURE_SLIDES.map((item, index) => (
+                                <SwiperSlide key={index}>
+                                    <VentureCard item={item} />
+                                </SwiperSlide>
+                            ))}
                         </Swiper>
-                    </div>
+                    </div> 
                 </div>
             </div>
+             {/* venture section end*/}
+             
+            {/* venture section */}
+           <div className="
+                relative 
+                lg:!pr-[calc(((100%-var(--breakpoint-lg))/2)+var(--breakpoint-gap-lg))]
+                xl:!pr-[calc(((100%-var(--breakpoint-xl))/2)+var(--breakpoint-gap-xl))]
+                2xl:!pr-[calc(((100%-var(--breakpoint-2xl))/2)+var(--breakpoint-gap-2xl))]
+                3xl:!pr-[calc(((100%-var(--breakpoint-3xl))/2)+var(--breakpoint-gap-3xl)/2)]
+            ">
+                {/* bg dot */}
+                <div className="absolute top-0 bottom-0 left-[70px] 2xl:left-[100px]
+                 3xl:left-[150px] m-auto w-[150px]  2xl:w-[200px] 3xl:w-[245px] h-[150px] 2xl:h-[200px] 3xl:h-[245px] blur-[165px] round-full bg-[#0B436A] animate-float"></div>
+                <div className="flex flex-wrap w-full flex-row-reverse">
+
+                    {/* LEFT CONTENT */}
+                    <div className="w-full lg:w-[240px] xl:w-[300px] 2xl:w-[400px] 3xl:w-[450px] flex items-center">
+                        <div className="w-full max-w-[75%] max-lg:text-center max-lg:m-auto">
+                            <Heading size="heading2" as="div">
+                                Corporate Oriented
+                            </Heading>
+
+                            <p className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px]">
+                                Khimji Ramdas drives growth across Retail, Infrastructure,
+                                Logistics, Lifestyle, and Travel. Through strong joint ventures
+                                and international presence, we connect markets and enrich
+                                communities
+                            </p>
+
+                            <Link href="#!" className={CONTACT_BUTTON_CLASS}>
+                                View All
+                                <div className={ARROW_ICON_CLASS}>
+                                    <svg className="w-full h-full" viewBox="0 0 14 15">
+                                        <path
+                                            d="M7.23334 12.7448C7.14887 12.7465 7.0637 12.7245 6.98857 12.6748C6.7718 12.5318 6.70577 12.2213 6.8362 11.9893C6.84717 11.9688 8.2096 9.53275 10.8103 7.99975H0.700004C0.442637 7.99975 0.233337 7.7755 0.233337 7.49975C0.233337 7.224 0.442637 6.99975 0.700004 6.99975H10.8103C8.22407 5.4755 6.84624 3.02875 6.8327 3.00425C6.70507 2.77075 6.77577 2.46 6.99347 2.32175C7.2142 2.1815 7.50494 2.26275 7.63677 2.5005C7.84887 2.863 9.8378 6.11275 13.4052 7.012C13.6187 7.06825 13.7667 7.2685 13.7667 7.5C13.7667 7.7315 13.6197 7.93225 13.4092 7.987C9.8266 8.8895 7.84444 12.1435 7.63024 12.5118C7.54624 12.656 7.39084 12.7415 7.23334 12.7448Z"
+                                            fill="currentColor"
+                                        />
+                                    </svg>
+                                </div>
+                            </Link>
+                        </div>
+                    </div>
+
+                    {/* RIGHT CONTENT */}
+                    <div className="w-full lg:w-[calc(100%-240px)] xl:w-[calc(100%-300px)] 2xl:w-[calc(100%-400px)] 3xl:w-[calc(100%-450px)] max-lg:px-[35px] lg:pr-[60px] overflow-hidden">
+                        <Swiper
+                            modules={[Autoplay]}
+                            autoplay={{ delay: 0, disableOnInteraction: false }}
+                            speed={2500}
+                            loop={true}
+                            slidesPerView={2}
+                            spaceBetween={25}
+                            breakpoints={{
+                                640: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 10,
+                                },
+                                768: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 15,
+                                },
+                                1024: {
+                                    slidesPerView: 1.4,
+                                    spaceBetween: 30,
+                                },
+                                1280: {
+                                    slidesPerView: 1.5,
+                                    spaceBetween: 40,
+
+                                },
+                                1920: {
+                                    slidesPerView: 1.5,
+                                    spaceBetween: 50, 
+                                },
+                            }} 
+                        >
+                            {VENTURE_SLIDES.map((item, index) => (
+                                <SwiperSlide key={index}>
+                                    <VentureCard item={item} />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    </div> 
+                </div>
+            </div>
+             {/* venture section end*/}
         </section>
-    )
+    );
 }

@@ -124,7 +124,7 @@ export default function HeritageSection({ data }) {
       ref={sectionRef}
       className="[--gradient:80px] sm:[--gradient:120px] lg:[--gradient:200px] 2xl:[--gradient:250px] 3xl:[--gradient:320px] w-full h-auto py-[40px_20px] sm:py-[40px_50px] lg:py-[60px_70px] 2xl:py-[70px_100px] 3xl:py-[90px_125px] block relative z-0"
     >
-      <div className="w-[var(--gradient)] h-[var(--gradient)] bg-[#2FDDC3] my-auto rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] block absolute -z-1 inset-[0_auto_0_-7%]"></div>
+      <div className="w-[var(--gradient)] h-[var(--gradient)] bg-[#2FDDC3] my-auto rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] block absolute -z-1 inset-[0_auto_0_-7%] animate-float"></div>
       <div className="w-[var(--gradient)] h-[var(--gradient)] bg-[#1A9BF5] my-auto rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] opacity-45 block absolute -z-1 inset-[0_-7%_0_auto]"></div>
       <div className="container">
         <Heading
