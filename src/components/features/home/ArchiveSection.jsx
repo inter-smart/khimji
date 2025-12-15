@@ -1,10 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/autoplay";
+import { useState, useEffect, useRef } from "react";  
 import Image from "next/image";
 import { Heading } from "@/components/layout/Heading";
 
@@ -149,9 +145,9 @@ export default function ArchiveSection() {
         </svg>
     `)}`;
 
-    const textcontent = `text-[18px] text-[#000000] font-medium`
-    const icons = `w-[45px] h-[45px] rounded-full flex items-center justify-center overflow-hidden bg-[linear-gradient(#299a8b45_0%,#0c456b30_78%)] [&>svg]:max-w-[18px]`
-    const iconBlock = `w-[calc(100%-45px)] px-[15px]`
+    const textcontent = `text-[11px] xl:text-[13px] 2xl:text-[15px] 3xl:text-[18px] text-[#000000] font-medium`
+    const icons = `w-[22px] lg:w-[30px] 2xl:w-[35px] 3xl:w-[45px] h-[22px] lg:h-[30px] 2xl:h-[35px] 3xl:h-[45px] rounded-full flex items-center justify-center overflow-hidden bg-[linear-gradient(#299a8b45_0%,#0c456b30_78%)] [&>svg]:max-w-[10px] lg:[&>svg]:max-w-[15px] [&>svg]:3xl:max-w-[18px]`
+    const iconBlock = `w-[calc(100%-20px)] lg:w-[calc(100%-30px)] 2xl:w-[calc(100%-35px)] 3xl:w-[calc(100%-45px)] px-[10px] xl:px-[15px]`
 
     // Initialize globe
     useEffect(() => {
@@ -278,7 +274,7 @@ export default function ArchiveSection() {
 
 
     return (
-        <section className="by-white py-[80px_120px] relative">
+        <section className="by-white py-[40px_50px] 2xl:py-[60px_80px] 3xl:py-[80px_100px] relative">
             <div className="container">
                 {/* Header */}
                 <div className="text-center">
@@ -290,7 +286,7 @@ export default function ArchiveSection() {
                         Archives
                     </Heading>
 
-                    <div className="flex justify-center flex-wrap gap-8">
+                    <div className="flex justify-center flex-wrap gap-5 xl:gap-6 2xl:gap-7 3xl:gap-8">
                         {categories.map((cat) => (
                             <button
                                 key={cat}
@@ -298,7 +294,7 @@ export default function ArchiveSection() {
                                     setActiveCategory(cat);
                                     setCurrentIndex(0);
                                 }}
-                                className={`text-[18px] tracking-wide transition-colors cursor-pointer ${activeCategory === cat
+                                className={`text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[18px] tracking-wide transition-colors cursor-pointer ${activeCategory === cat
                                     ? "text-[#289989] font-medium"
                                     : "text-[#000000] hover:text-[#289989]"
                                     }`}
@@ -311,7 +307,8 @@ export default function ArchiveSection() {
 
                 {/* Globe */}
                 <div className="relative">
-                    <div className="relative mb-8 w-full max-w-[650px] !h-[650px] m-auto bg-white after:absolute after:content-[''] after:bottom-0 after:left-0 after:right-0 after:bg-white after:w-full after:h-[270px]">
+                    <div className="relative mb-8 w-full  max-w-[650px]  !h-[650px] m-auto bg-white after:absolute after:content-[''] 
+                    after:bottom-0 after:left-0 after:right-0 after:bg-white after:w-full  after:h-[265px] after:3xl:h-[270px]">
                         {isLoading && (
                             <div className="absolute inset-0 flex items-center justify-center z-10">
                                 <div className="text-lg text-teal-600 font-medium">Loading globe...</div>
@@ -325,7 +322,7 @@ export default function ArchiveSection() {
                                 style={{
                                     transform: 'translate(-50%, -100%)',
                                     left: '50%',
-                                    top: '50%',
+                                    top: '48%',
                                     animation: 'pulse 2s infinite'
                                 }}
                             >
@@ -338,18 +335,18 @@ export default function ArchiveSection() {
                         <div
                             ref={globeContainerRef}
                             className="w-full mx-auto"
-                            style={{ height: "650px", minHeight: "650px" }}
+                            style={{ height: "550px", minHeight: "550px" }}
                         />
                     </div>
 
                     {/* Card Navigation */}
-                    <div className="absolute bottom-[-70px] left-0 right-0 m-auto w-full max-w-[80%] max-h-[340px] h-full
+                    <div className="absolute bottom-[90px] xl:bottom-[50px] 2xl:bottom-[0px] 3xl:bottom-[-70px] left-0 right-0 m-auto w-full max-w-[80%] md:max-h-[175px] xl:max-h-[210px] 2xl:max-h-[265px] 3xl:max-h-[340px] h-full
                         flex items-center justify-center  ">
                         {currentItem && (
-                            <div className="rounded-3xl shadow-2xl overflow-hidden w-full h-full rounded-[10px] p-[30px] border border-white bg-transparent
+                            <div className="rounded-3xl shadow-2xl overflow-hidden w-full h-full rounded-[10px] p-[15px] lg:p-[20px] 2xl:p-[25px] 3xl:p-[30px] border border-white bg-transparent
                                 backdrop-blur-[20px] backdrop-saturate-[180%] 
-                                shadow-[inset_5px_1px_33px_#f1f1f1,inset_3px_-3px_5px_#fafafa] flex flex-col md:flex-row">
-                                <div className="w-[375px] 2xl:w-[475px] 3xl:w-[600px]">
+                                shadow-[inset_5px_1px_33px_#f1f1f1,inset_3px_-3px_5px_#fafafa] flex flex-wrap flex-row">
+                                <div className="w-full md:w-[200px] lg:w-[280px] xl:w-[350px] 2xl:w-[475px] 3xl:w-[600px] h-full">
                                     <div className="w-full h-full rounded-[10px] overflow-hidden group aspect-[600/280]">
                                         <Image
                                             src={currentItem.image}
@@ -360,7 +357,7 @@ export default function ArchiveSection() {
                                         />
                                     </div>
                                 </div>
-                                <div className="w-[calc(100%-375px)] 2xl:w-[calc(100%-475px)] 3xl:w-[calc(100%-600px)] flex items-center p-[40px] relative">
+                                <div className="w-full md:w-[calc(100%-200px)] lg:w-[calc(100%-280px)] xl:w-[calc(100%-330px)] 2xl:w-[calc(100%-475px)] 3xl:w-[calc(100%-600px)] flex items-center p-[15px] xl:p-[20px] 2xl:p-[25px] 3xl:p-[40px] relative">
                                     <div className="w-full">
                                         <div className="absolute top-0 right-0 flex items-center gap-3 ml-auto w-fit has-[button:disabled]:hidden">
                                             <button
@@ -368,10 +365,14 @@ export default function ArchiveSection() {
                                                     setCurrentIndex((i) => (i === 0 ? currentData.length - 1 : i - 1))
                                                 }
                                                 disabled={currentData.length <= 1}
-                                                className="p-3 bg-[#defaf670] border border-white rounded-full w-[44px] h-[44px] not-visited:transition-all"
+                                                className="p-3 bg-[#defaf670] border border-white rounded-full w-[35px] 3xl:w-[44px] h-[35px] 3xl:h-[44px]
+                                                 transition-all cursor-pointer hover:bg-[#299A8B] group [&>svg]:fill-[#299A8B]"
                                             >
-                                                <svg viewBox="0 0 18 17" >
-                                                    <path d="M0.320356 8.82784C-0.10678 8.40071 -0.10678 7.70818 0.320356 7.28105L7.28094 0.320463C7.70807 -0.106673 8.4006 -0.106673 8.82773 0.320463C9.25487 0.747599 9.25487 1.44012 8.82773 1.86726L2.64055 8.05444L8.82773 14.2416C9.25487 14.6688 9.25487 15.3613 8.82773 15.7884C8.4006 16.2156 7.70807 16.2156 7.28094 15.7884L0.320356 8.82784ZM17.8146 8.05444V9.14819H1.09375V8.05444V6.96069H17.8146V8.05444Z" fill="#299A8B" />
+                                                <svg viewBox="0 0 18 17" className="group-hover:fill-white transition-all">
+                                                    <path d="M0.320356 8.82784C-0.10678 8.40071 -0.10678 7.70818 0.320356 7.28105L7.28094 0.320463C7.70807 -0.106673 8.4006 -0.106673 
+                                                    8.82773 0.320463C9.25487 0.747599 9.25487 1.44012 8.82773 1.86726L2.64055 8.05444L8.82773 14.2416C9.25487 14.6688 9.25487 15.3613 8.82773 
+                                                    15.7884C8.4006 16.2156 7.70807 16.2156 7.28094 15.7884L0.320356 8.82784ZM17.8146 8.05444V9.14819H1.09375V8.05444V6.96069H17.8146V8.05444Z"
+                                                    />
                                                 </svg>
                                             </button>
 
@@ -380,17 +381,19 @@ export default function ArchiveSection() {
                                                     setCurrentIndex((i) => (i === currentData.length - 1 ? 0 : i + 1))
                                                 }
                                                 disabled={currentData.length <= 1}
-                                                className="p-3 bg-[#defaf670] border border-white rounded-full w-[44px] h-[44px] transition-all"
+                                                className="p-3 bg-[#defaf670] border border-white rounded-full w-[35px] 3xl:w-[44px] h-[35px] 3xl:h-[44px]
+                                                 transition-all cursor-pointer hover:bg-[#299A8B] group [&>svg]:fill-[#299A8B]"
                                             >
-                                                <svg viewBox="0 0 18 17" >
-                                                    <path d="M17.4943 8.82784C17.9214 8.40071 17.9214 7.70818 17.4943 7.28105L10.5337 0.320463C10.1066 -0.106673 9.41404 -0.106673 8.9869 0.320463C8.55977 0.747599 8.55977 1.44012 8.9869 1.86726L15.1741 8.05444L8.9869 14.2416C8.55977 14.6688 8.55977 15.3613 8.9869 15.7884C9.41404 16.2156 10.1066 16.2156 10.5337 15.7884L17.4943 8.82784ZM0 8.05444V9.14819H16.7209V8.05444V6.96069H0V8.05444Z" fill="#299A8B" />
+                                                <svg viewBox="0 0 18 17" className="group-hover:fill-white transition-all">
+                                                    <path d="M17.4943 8.82784C17.9214 8.40071 17.9214 7.70818 17.4943 7.28105L10.5337 0.320463C10.1066 -0.106673 9.41404 -0.106673 8.9869 0.320463C8.55977 0.747599 8.55977 1.44012 8.9869 1.86726L15.1741 8.05444L8.9869 14.2416C8.55977 14.6688 8.55977 15.3613 8.9869 15.7884C9.41404 16.2156 10.1066 16.2156 10.5337 15.7884L17.4943 8.82784ZM0
+                                                     8.05444V9.14819H16.7209V8.05444V6.96069H0V8.05444Z"   />
                                                 </svg>
                                             </button>
                                         </div>
 
-                                        <div className="text-[18px] font-medium text-[#000000] mb-[20px]"> {currentItem.category}</div>
+                                        <div className="text-[14px] 2xl:text-[15px] 3xl:text-[18px] font-medium text-[#000000] mb-[15px] xl:mb-[20px]"> {currentItem.category}</div>
                                         <div className="flex flex-wrap -m-[8px]">
-                                            <div className="w-2/5 p-[8px]">
+                                            <div className="w-1/2 lg:w-2/5 p-[8px]">
                                                 <div className="flex items-center">
                                                     <div className={icons}>
                                                         <svg className="max-w-[22px]" viewBox="0 0 22 22" fill="none" >
@@ -421,7 +424,7 @@ export default function ArchiveSection() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="w-3/5 p-[8px]">
+                                            <div className="w-1/2 lg:w-2/5  p-[8px]">
                                                 <div className="flex items-center">
                                                     <div className={icons}>
                                                         <svg viewBox="0 0 32 32"  >
@@ -443,7 +446,7 @@ export default function ArchiveSection() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="w-2/5 p-[8px]">
+                                            <div className="w-1/2 lg:w-2/5  p-[8px]">
                                                 <div className="flex items-center">
                                                     <div className={icons}>
                                                         <svg viewBox="0 0 29 29"  >
@@ -463,7 +466,7 @@ export default function ArchiveSection() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="w-3/5 p-[8px]">
+                                            <div className="w-1/2 lg:w-3/5 p-[8px]">
                                                 <div className="flex items-center">
                                                     <div className={icons}>
                                                         <svg viewBox="0 0 18 18"  >

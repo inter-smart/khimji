@@ -155,6 +155,7 @@ body {
     @apply bg-base2 hover:bg-base1 hover:border-base1;
   }
 
+  
   p {
     @apply text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-black font-medium
   }
