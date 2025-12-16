@@ -1,4 +1,4 @@
-import "./globals.css";
+import "../globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Barlow } from "next/font/google";
@@ -33,7 +33,7 @@ const Nobel = localFont({
 export default async function RootLayout({ children }) {
   
   return (
-    <html lang="ar">
+    <html lang="en">
        <body className={`${Nobel.className}`}>
         {/* <LoadingProvider>
           <LoadingWrapper> */}
