@@ -12,7 +12,7 @@ const Nobel = localFont({
   src: [
      
     {
-      path: "../../public/fonts/Nobel-Book.woff2",
+      path: "../../../public/fonts/Nobel-Book.woff2",
       weight: "500",
       style: "normal",
     },
@@ -33,13 +33,13 @@ const Nobel = localFont({
 export default async function RootLayout({ children }) {
   
   return (
-    <html lang="en">
+    <html lang="ar">
        <body className={`${Nobel.className}`}>
         {/* <LoadingProvider>
           <LoadingWrapper> */}
             <Header />
             <main className="flex-grow">{children}</main>
-            <WidgetSection />
+            {/* <WidgetSection /> */}
             <Footer /> 
           {/* </LoadingWrapper>
         </LoadingProvider> */}

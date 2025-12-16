@@ -12,6 +12,7 @@ const brands = [
     "/images/brand-2.png",
     "/images/brand-3.png",
     "/images/brand-4.png",
+    "/images/brand-1.png",
     "/images/brand-5.png",
     "/images/brand-6.png",
     "/images/brand-7.png",
@@ -32,31 +33,22 @@ export default function Footer() {
             <div className="container">
 
                 {/* BRAND SLIDER */}
-                <div className="flex flex-wrap pb-[30px] border-b border-white/20 mb-[65px]">
-
-                    {/* BRANDS BOX */}
-                    <div className="w-[100px] xl:w-[115px] 2xl:w-[150px] 3xl:w-[185px]">
-                        <div className="text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-white font-medium w-full h-[40px] xl:h-[50px] 2xl:h-[65px] 3xl:h-[80px] flex items-center justify-center rounded-[10px] border border-white">
-                            BRANDS
-                        </div>
-                    </div>
-
-                    {/* SLIDER */}
-                    <div className="w-[calc(100%-100px)] xl:w-[calc(100%-115px)] 2xl:w-[calc(100%-150px)] 3xl:w-[calc(100%-185px)] pl-[60px]">
+                <div className="flex flex-wrap pb-[30px] border-b border-white/20 mb-[65px]">                     
+                    <div className="w-full">
                         <Swiper
                             modules={[Autoplay]}
                             autoplay={{ delay: 0, disableOnInteraction: false }}
                             speed={2500}
                             loop={true}
                             slidesPerView={2}
-                            spaceBetween={40}
+                            spaceBetween={10}
                             breakpoints={{
-                                640: { slidesPerView: 3 },
-                                768: { slidesPerView: 5 },
-                                1024: { slidesPerView: 7 },
-                                1280: { slidesPerView: 9 },
+                                640: { slidesPerView: 5 },
+                                768: { slidesPerView: 8 },
+                                1024: { slidesPerView: 10 },
+                                1280: { slidesPerView: 10 },
                             }}
-                            className="w-full h-[40px] xl:h-[75px] 3xl:h-[80px]"
+                            className="w-full h-[50px] xl:h-[75px] 3xl:h-[80px]"
                         >
                             {brands.map((logo, index) => (
                                 <SwiperSlide key={index}>
@@ -66,7 +58,7 @@ export default function Footer() {
                                             alt="Brand Logo"
                                             width={140}
                                             height={65}
-                                            className="w-auto object-contain max-w-[65px] 2xl:max-w-[70px] min-w-[65px] 2xl:min-w-[70px]"
+                                            className="w-auto object-contain max-w-[75px] 2xl:max-w-[80px] min-w-[45px] xl:min-w-[65px] 2xl:min-w-[75px]"
                                         />
                                     </div>
                                 </SwiperSlide>
@@ -150,7 +142,7 @@ export default function Footer() {
                         <div className="flex flex-col items-end text-right max-w-[175px] xl:max-w-[200px] 2xl:max-w-[265px] 3xl:max-w-[320px] ml-auto">
                             <div className="max-w-[130px] xl:max-w-[165px] 2xl:max-w-[210px] 3xl:max-w-[250px] w-full mb-[25px] xl:mb-[30px] 2xl:mb-[35px] 3xl:mb-[50px]">
                                 <Image
-                                    src="/images/Logo-white.png"
+                                    src="/images/Logo-white-footer.png"
                                     width={150}
                                     height={80}
                                     alt="KR Logo"
@@ -192,9 +184,9 @@ export default function Footer() {
                                         <Link href="#" className={SOCIAL_ICON_CLASS}>
                                             <div className="w-[15px] 2xl:w-[20px] 3xl:w-[30px] h-[15px] 2xl:h-[20px] 3xl:h-[25px] flex items-center justify-center">
                                                 <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M5.95996 0.0743256H16.0586C19.3042 0.0743256 21.9451 2.71446 21.9453 5.96007V16.0587C21.9453 19.3043 19.3042 21.9454 16.0586 21.9454H5.95996C2.71435 21.9452 0.0742188 19.3042 0.0742188 16.0587V5.96007C0.0744187 2.71459 2.71448 0.0745255 5.95996 0.0743256ZM5.95996 1.2169C3.34464 1.2171 1.217 3.34475 1.2168 5.96007V16.0587C1.2168 18.674 3.34452 20.8017 5.95996 20.8019H16.0586C18.6742 20.8019 20.8018 18.6741 20.8018 16.0587V5.96007C20.8016 3.34463 18.6739 1.2169 16.0586 1.2169H5.95996Z" fill="white" stroke="#313232" stroke-width="0.147775" />
-                                                    <path d="M11.0093 5.06331C14.2883 5.06331 16.9565 7.73062 16.9566 11.0096C16.9566 14.2886 14.2884 16.9569 11.0093 16.9569C7.73036 16.9568 5.06305 14.2886 5.06305 11.0096C5.06312 7.73067 7.73041 5.06338 11.0093 5.06331ZM11.0093 6.20589C8.36074 6.20596 6.2057 8.361 6.20563 11.0096C6.20563 13.6584 8.3607 15.8132 11.0093 15.8133C13.6582 15.8133 15.813 13.6585 15.813 11.0096C15.813 8.36096 13.6582 6.20589 11.0093 6.20589Z" fill="white" stroke="#313232" stroke-width="0.147775" />
-                                                    <path d="M17.1743 2.92533C18.1145 2.92548 18.8794 3.69025 18.8794 4.63041C18.8792 5.57046 18.1144 6.33534 17.1743 6.33549C16.2342 6.33549 15.4694 5.57056 15.4692 4.63041C15.4692 3.69031 16.2341 2.92533 17.1743 2.92533ZM17.1743 4.06791C16.8644 4.06791 16.6118 4.3203 16.6118 4.63041C16.612 4.94021 16.8645 5.19193 17.1743 5.19193C17.4842 5.19179 17.7357 4.94014 17.7358 4.63041C17.7358 4.32037 17.4843 4.06806 17.1743 4.06791Z" fill="white" stroke="#313232" stroke-width="0.147775" />
+                                                    <path d="M5.95996 0.0743256H16.0586C19.3042 0.0743256 21.9451 2.71446 21.9453 5.96007V16.0587C21.9453 19.3043 19.3042 21.9454 16.0586 21.9454H5.95996C2.71435 21.9452 0.0742188 19.3042 0.0742188 16.0587V5.96007C0.0744187 2.71459 2.71448 0.0745255 5.95996 0.0743256ZM5.95996 1.2169C3.34464 1.2171 1.217 3.34475 1.2168 5.96007V16.0587C1.2168 18.674 3.34452 20.8017 5.95996 20.8019H16.0586C18.6742 20.8019 20.8018 18.6741 20.8018 16.0587V5.96007C20.8016 3.34463 18.6739 1.2169 16.0586 1.2169H5.95996Z" fill="white" stroke="#313232" strokeWidth="0.147775" />
+                                                    <path d="M11.0093 5.06331C14.2883 5.06331 16.9565 7.73062 16.9566 11.0096C16.9566 14.2886 14.2884 16.9569 11.0093 16.9569C7.73036 16.9568 5.06305 14.2886 5.06305 11.0096C5.06312 7.73067 7.73041 5.06338 11.0093 5.06331ZM11.0093 6.20589C8.36074 6.20596 6.2057 8.361 6.20563 11.0096C6.20563 13.6584 8.3607 15.8132 11.0093 15.8133C13.6582 15.8133 15.813 13.6585 15.813 11.0096C15.813 8.36096 13.6582 6.20589 11.0093 6.20589Z" fill="white" stroke="#313232" strokeWidth="0.147775" />
+                                                    <path d="M17.1743 2.92533C18.1145 2.92548 18.8794 3.69025 18.8794 4.63041C18.8792 5.57046 18.1144 6.33534 17.1743 6.33549C16.2342 6.33549 15.4694 5.57056 15.4692 4.63041C15.4692 3.69031 16.2341 2.92533 17.1743 2.92533ZM17.1743 4.06791C16.8644 4.06791 16.6118 4.3203 16.6118 4.63041C16.612 4.94021 16.8645 5.19193 17.1743 5.19193C17.4842 5.19179 17.7357 4.94014 17.7358 4.63041C17.7358 4.32037 17.4843 4.06806 17.1743 4.06791Z" fill="white" stroke="#313232" strokeWidth="0.147775" />
                                                 </svg>
                                             </div>
                                         </Link>
@@ -203,8 +195,8 @@ export default function Footer() {
                                         <Link href="#" className={SOCIAL_ICON_CLASS}>
                                             <div className="w-[15px] 2xl:w-[20px] 3xl:w-[30px] h-[15px] 2xl:h-[20px] 3xl:h-[25px] flex items-center justify-center">
                                                 <svg width="30" height="23" viewBox="0 0 30 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M5.9668 0.074585H24.0381C27.2871 0.0746317 29.9307 2.72644 29.9307 5.98572V16.059C29.9307 19.3182 27.2871 21.97 24.0381 21.9701H5.9668C2.71772 21.9701 0.0742188 19.3189 0.0742188 16.059V5.98572C0.0742188 2.72641 2.71772 0.074585 5.9668 0.074585ZM5.9668 1.15076C3.31103 1.15076 1.15039 3.3207 1.15039 5.98572V16.0599C1.15058 18.7248 3.31114 20.8939 5.9668 20.8939H24.0381C26.6937 20.8939 28.8533 18.7254 28.8535 16.0599V5.98572C28.8535 3.32073 26.6938 1.1508 24.0381 1.15076H5.9668Z" fill="white" stroke="#313232" stroke-width="0.147775" />
-                                                    <path d="M11.3668 5.89282C11.534 5.79719 11.7401 5.79906 11.9059 5.89575L20.3903 10.8645V10.8655C20.5553 10.9618 20.6569 11.139 20.6569 11.3303C20.6568 11.4976 20.5788 11.6541 20.4489 11.7551L20.3903 11.7952L11.9059 16.7629C11.8219 16.8118 11.7284 16.8362 11.6344 16.8362C11.5417 16.8362 11.4487 16.8132 11.3658 16.7659C11.1991 16.67 11.0963 16.4908 11.0963 16.2981V6.3606C11.0963 6.16724 11.1994 5.98865 11.3668 5.89282ZM12.1725 15.3586L12.2838 15.2932L18.944 11.3938L19.0524 11.3293L18.944 11.2659L12.2838 7.3645L12.1725 7.29907V15.3586Z" fill="white" stroke="#313232" stroke-width="0.147775" />
+                                                    <path d="M5.9668 0.074585H24.0381C27.2871 0.0746317 29.9307 2.72644 29.9307 5.98572V16.059C29.9307 19.3182 27.2871 21.97 24.0381 21.9701H5.9668C2.71772 21.9701 0.0742188 19.3189 0.0742188 16.059V5.98572C0.0742188 2.72641 2.71772 0.074585 5.9668 0.074585ZM5.9668 1.15076C3.31103 1.15076 1.15039 3.3207 1.15039 5.98572V16.0599C1.15058 18.7248 3.31114 20.8939 5.9668 20.8939H24.0381C26.6937 20.8939 28.8533 18.7254 28.8535 16.0599V5.98572C28.8535 3.32073 26.6938 1.1508 24.0381 1.15076H5.9668Z" fill="white" stroke="#313232" strokeWidth="0.147775" />
+                                                    <path d="M11.3668 5.89282C11.534 5.79719 11.7401 5.79906 11.9059 5.89575L20.3903 10.8645V10.8655C20.5553 10.9618 20.6569 11.139 20.6569 11.3303C20.6568 11.4976 20.5788 11.6541 20.4489 11.7551L20.3903 11.7952L11.9059 16.7629C11.8219 16.8118 11.7284 16.8362 11.6344 16.8362C11.5417 16.8362 11.4487 16.8132 11.3658 16.7659C11.1991 16.67 11.0963 16.4908 11.0963 16.2981V6.3606C11.0963 6.16724 11.1994 5.98865 11.3668 5.89282ZM12.1725 15.3586L12.2838 15.2932L18.944 11.3938L19.0524 11.3293L18.944 11.2659L12.2838 7.3645L12.1725 7.29907V15.3586Z" fill="white" stroke="#313232" strokeWidth="0.147775" />
                                                 </svg>
                                             </div>
                                         </Link>
@@ -217,7 +209,7 @@ export default function Footer() {
                 </div>
 
                 {/* BOTTOM LINE */}
-                <div className="border-t border-white/20 py-5 flex items-center justify-between text-white/60 text-sm">
+                <div className="text-[12px] 2xl:text-[14px] 3xl:text-[16px] text-white border-t border-white/20 py-5 flex items-center justify-between">
 
                     <span>Copyright © 2025 Khimji Ramdas. All Rights Reserved.</span>
 

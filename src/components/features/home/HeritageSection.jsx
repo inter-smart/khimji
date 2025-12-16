@@ -64,16 +64,16 @@ const Counter = ({ end, suffix = "" }) => {
 
 export default function HeritageSection() {
     return (
-        <section className="py-[60px_90px] bg-[#F9F9F9]">
+        <section className="py-[60px_120px] bg-[#F9F9F9] relative">
             <div className="container">
                 <div className="flex flex-wrap">
                     <div className="lg:w-1/2">
-                        <div className="max-w-[560px] w-full">
+                        <div className="lg:max-w-[350px] 2xl:max-w-[450px] 3xl:max-w-[560px] w-full">
                             <Heading size="heading1" as="div">
                                 Heritage
                             </Heading>
 
-                            <p className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px]">
+                            <p className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px] line-clamp-3">
                                 For over 150 years, Khimji Ramdas has driven Oman’s progress, blending tradition with innovation and connecting
                                 global brands to local markets. Guided by strong values, we create opportunities, empower lives, and foster sustainable growth
                             </p>
@@ -89,9 +89,10 @@ export default function HeritageSection() {
                                     </svg>
                                 </div>
                             </Link>
-                            <div className="w-full relative">
-                                <CircularSwiper />
-                            </div>
+                        </div>
+                        <div className="w-full relative  lg:absolute left-[-180px]  lg:left-[-190px] xl:left-[-200px] 2xl:left-[-260px] 3xl:left-[-280px] bottom-[60px] 
+                        before:absolute before:content-[''] before:bg-[#F9F9F9] before:left-0 xs:before:w-[33%] sm:before:w-[30%] before:md:w-[25%] before:top-0 before:h-full before:z-1 lg:before:hidden">
+                            <CircularSwiper />
                         </div>
                     </div>
 
@@ -122,14 +123,14 @@ export default function HeritageSection() {
                                         <p className="uppercase mb-0 leading-none ">BRANDS</p>
                                     </div>
 
-                                     <div className="h-1/4 flex flex-col justify-center">
+                                    <div className="h-1/4 flex flex-col justify-center">
                                         <Heading size="heading1" as="div" className="!mb-[8px] leading-none ">
                                             <Counter end={5} suffix="K+" />
                                         </Heading>
                                         <p className="uppercase mb-0">Employees</p>
                                     </div>
 
-                                  <div className="h-1/4 flex flex-col justify-center">
+                                    <div className="h-1/4 flex flex-col justify-center">
                                         <Heading size="heading1" as="div" className="!mb-[8px] leading-none ">
                                             <Counter end={40} suffix="+" />
                                         </Heading>

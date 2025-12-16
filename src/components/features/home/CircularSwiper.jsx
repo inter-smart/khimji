@@ -1,111 +1,168 @@
 "use client";
 
-import { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Mousewheel } from "swiper/modules";
-import "swiper/css";
+import { useState, useEffect, useRef } from "react";
 
 const timeline = [
-  {
-    year: "1870",
-    title: "Founded in Muscat trading house",
-    desc: "Oman's earliest trusted business",
-  },
-  {
-    year: "1895",
-    title: "Expanded trade to India & Africa",
-    desc: "Recognized for fair trade",
-  },
-  {
-    year: "1920",
-    title: "Expanded into construction & essential",
-    desc: "Trusted supplier to Oman.",
-  },
+  { year: "1870", title: "Founded in Muscat trading house", desc: "Oman's earliest trusted business" },
+  { year: "1895", title: "Expanded trade to India & Africa", desc: "Recognized for fair trade" },
+  { year: "1920", title: "Expanded into construction & essential", desc: "Trusted supplier to Oman." }, 
+  { year: "1920", title: "Expanded into construction & essential", desc: "Trusted supplier to Oman." }, 
+  { year: "1920", title: "Expanded into construction & essential", desc: "Trusted supplier to Oman." }, 
 ];
 
-// fixed visual angles exactly like the reference image
-// circular movement config
-const RADIUS = 205;
-const ANGLE_STEP = 40; // spacing between dots
-const CENTER_ANGLE = 0; // center mode lock
+const widthCir = `w-[300px] xl:w-[360px] 2xl:w-[400px] 3xl:w-[420px]`;
+const highCir = `h-[300px] xl:h-[360px] 2xl:h-[400px] 3xl:h-[420px]`;
 
-export default function CircularSwiper() {
-  const [activeIndex, setActiveIndex] = useState(1); // center item active
+export default function CircularTimeline() {
+  const [activeIndex, setActiveIndex] = useState(1);
+
+  const circleRef = useRef(null);
+  const contentRef = useRef(null);
+
+  const [radius, setRadius] = useState(0);
+  const [stepY, setStepY] = useState(0);
+
+ /* Auto slide */
+useEffect(() => {
+  if (timeline.length > 3) {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % timeline.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }
+}, []);
+
+  /* Circle radius */
+  useEffect(() => {
+    const updateRadius = () => {
+      if (circleRef.current) {
+        setRadius(circleRef.current.offsetWidth / 2 - 20);
+      }
+    };
+    updateRadius();
+    window.addEventListener("resize", updateRadius);
+    return () => window.removeEventListener("resize", updateRadius);
+  }, []);
+
+  /* Right content step */
+  useEffect(() => {
+    const updateStep = () => {
+      if (contentRef.current) {
+        setStepY(contentRef.current.offsetHeight / 3);
+      }
+    };
+    updateStep();
+    window.addEventListener("resize", updateStep);
+    return () => window.removeEventListener("resize", updateStep);
+  }, []);
 
   return (
-    <section className="w-full min-h-screen flex items-center justify-center bg-[#f6f8f7]">
-      <div className="relative w-full max-w-6xl flex items-center gap-20">
+    <div className="w-full flex items-center justify-center">
+      <div className="w-full flex items-center relative">
 
-        {/* LEFT STATIC CIRCLE */}
-        <div className="relative w-[420px] h-[420px] flex items-center justify-center">
-          {/* outer arc */}
-          <div className="absolute inset-0 rounded-full border border-teal-200/60" />
-
-          {/* filled inner circle */}
-          <div className="absolute w-[300px] h-[300px] rounded-full bg-[#1f9c8b]" />
-
-          {/* dots aligned to text (static like image) */}
-          {/* CIRCULAR MOVING DOTS – CENTER MODE */}
-          <div
-            className="absolute inset-0 transition-transform duration-700 ease-in-out"
-            style={{ transform: `rotate(${-activeIndex * ANGLE_STEP}deg)` }}
+        {/* LEFT CIRCLE */}
+        <div
+          ref={circleRef}
+          className={`${widthCir} ${highCir} relative flex-shrink-0`}
+        >
+          <svg
+            className="absolute inset-0 w-full h-full -rotate-90"
+            viewBox="0 0 100 100"
           >
-            {[-1, 0, 1].map((offset, i) => {
-              const angle = CENTER_ANGLE + offset * ANGLE_STEP;
+            <circle
+              cx="50"
+              cy="50"
+              r="45"
+              fill="none"
+              stroke="#d1e5e0"
+              strokeWidth="0.5"
+              strokeDasharray="141 282"
+            />
+          </svg>
+
+          <div className="absolute inset-[78px] rounded-full bg-[#1a8c7a]" />
+
+          {/* DOTS */}
+          <div
+            className="absolute inset-0 transition-transform duration-[900ms] ease-[cubic-bezier(0.4,0,0.2,1)] will-change-transform"
+            style={{ transform: `rotate(${-activeIndex * 45}deg)` }}
+          >
+            {timeline.map((_, i) => {
+              const angle = i * 45;
+              const isActive = i === activeIndex;
+
               return (
-                <span
+                <div
                   key={i}
-                  className={`absolute rounded-full transition-all duration-300 ${
-                    offset === 0
-                      ? "w-3.5 h-3.5 bg-[#1f9c8b]"
-                      : "w-2.5 h-2.5 bg-teal-300"
+                  className={`absolute top-1/2 left-1/2 transition-all duration-500 ease-out ${
+                    isActive ? "w-3.5 h-3.5" : "w-2 h-2"
                   }`}
                   style={{
-                    top: "50%",
-                    left: "50%",
-                    transform: `rotate(${angle}deg) translate(${RADIUS}px)`,
+                    transform: `
+                      rotate(${angle}deg)
+                      translate(${radius}px)
+                      rotate(-${angle}deg)
+                      translate(-50%, -50%)
+                    `,
                   }}
-                />
+                >
+                  <div
+                    className={`w-full h-full rounded-full transition-all duration-500 ease-out ${
+                      isActive
+                        ? "bg-gradient-to-r from-[#0B436A] to-[#299B8A]"
+                        : "bg-[#289889]"
+                    }`}
+                  />
+                </div>
               );
             })}
           </div>
         </div>
 
-        {/* RIGHT CONTENT – EXACTLY 3 ITEMS VISIBLE */}
-        <div className="flex-1">
-          <Swiper
-            direction="vertical"
-            slidesPerView={3}
-            centeredSlides
-            loop
-            speed={600}
-            mousewheel={{ forceToAxis: true }}
-            modules={[Mousewheel]}
-            onSlideChange={(s) => setActiveIndex(s.realIndex)}
-            className="h-[420px]"
+        {/* RIGHT CONTENT */}
+        <div className="w-[calc(100%-200px)] flex-1 relative h-[300px] xl:h-[320px] 2xl:h-[400px] 3xl:h-[480px]">
+          <div
+            ref={contentRef}
+            className="relative h-full overflow-hidden flex items-center"
           >
-            {timeline.map((item, i) => (
-              <SwiperSlide key={i}>
+            {timeline.map((item, i) => {
+              let offset = i - activeIndex;
+              if (offset > timeline.length / 2) offset -= timeline.length;
+              if (offset < -timeline.length / 2) offset += timeline.length;
+
+              const isActive = offset === 0;
+
+              return (
                 <div
-                  className={`space-y-3 transition-all duration-300 ${
-                    i === activeIndex ? "opacity-100" : "opacity-60"
-                  }`}
+                  key={i}
+                  className="absolute w-full transition-all duration-[800ms] ease-[cubic-bezier(0.4,0,0.2,1)] will-change-transform"
+                  style={{
+                    transform: `translateY(${offset * stepY}px)`,
+                    opacity: Math.abs(offset) > 1 ? 0 : isActive ? 1 : 0.9,
+                    pointerEvents: isActive ? "auto" : "none",
+                    paddingLeft: isActive ? "40px" : "0px",
+                    transition:
+                      "transform 0.8s cubic-bezier(0.4,0,0.2,1), opacity 0.6s ease, padding-left 0.6s ease",
+                  }}
                 >
-                  <h2 className="text-[40px] font-light text-black">
-                    {item.year}
-                  </h2>
-                  <p className="text-lg text-black font-medium">
-                    {item.title}
-                  </p>
-                  <p className="text-base text-gray-600 max-w-md">
-                    {item.desc}
-                  </p>
+                  <div className="space-y-1">
+                    <div className="text-[16px] xl:text-[18px] 2xl:text-[23px] 3xl:text-[30px] font-light mb-[3px] transition-all duration-500">
+                      {item.year}
+                    </div>
+                    <p className="text-[10px] xl:text-[12px] 2xl:text-[15px] 3xl:text-[20px] mb-[3px] transition-all duration-500">
+                      {item.title}
+                    </p>
+                    <p className="text-[13px] xl:text-[15px] 2xl:text-[19px] 3xl:text-[25px] transition-all duration-500">
+                      {item.desc}
+                    </p>
+                  </div>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+              );
+            })}
+          </div>
         </div>
+
       </div>
-    </section>
+    </div>
   );
 }
