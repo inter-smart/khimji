@@ -7,10 +7,10 @@ import "swiper/css/autoplay";
 import Image from "next/image";
 import { Heading } from "@/components/layout/Heading";
 import { motion } from "framer-motion";
+import ICVinitiativeMobile from "./home-mobile/ICVinitiativeMobile";
 
 export default function ICVSection() {
-
-    // ✅ ARRAY OF VIDEO ITEMS
+ 
     const icvVideos = [
         { src: "/videos/icv-1.mp4", title: "Business" },
         { src: "/videos/icv-2.mp4", title: "Infrastructure" },
@@ -20,7 +20,8 @@ export default function ICVSection() {
     ];
 
     return (
-        <section className='relative z-0 py-[45px] 2xl:py-[80px_50px] 3xl:py-[100px_70px] bg-[#FAFAFA] overflow-hidden 
+       <>
+        <section className='relative z-0 py-[45px] 2xl:py-[80px_50px] 3xl:py-[100px_70px] bg-[#FAFAFA] overflow-hidden max-sm:hidden
         after:absolute after:content-[""] after:left-0 after:top-0 after:w-full after:h-[150px] after:xl:h-[180px] after:2xl:h-[240px] after:3xl:h-[300px] after:rounded-[0_0_100%_100%] after:scale-[1.35] after:bg-[#FAFAFA] after:z-10
         before:absolute before:content-[""] before:left-0 before:bottom-0 before:w-full before:h-[100px] before:xl:h-[140px] before:2xl:h-[160px] before:3xl:h-[180px] before:rounded-[100%_100%_0_0] before:scale-[1.25] before:bg-[#FAFAFA] before:z-10
         '>
@@ -90,5 +91,8 @@ export default function ICVSection() {
                 </Swiper>
             </motion.div>
         </section>
+
+        <ICVinitiativeMobile />
+       </>
     );
 }

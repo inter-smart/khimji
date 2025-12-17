@@ -6,6 +6,7 @@ import { Heading } from "@/components/layout/Heading";
 import Link from "next/link";
 import Image from "next/image";
 import CircularSwiper from "./CircularSwiper";
+import HeritageMobile from "./home-mobile/HeritageMobile";
 
 const CONTACT_BUTTON_CLASS = `
   text-[12px] 2xl:text-[16px] 3xl:text-[18px]
@@ -58,7 +59,7 @@ const Counter = ({ end, suffix = "" }) => {
     }, [end]);
 
     return (
-        <motion.span 
+        <motion.span
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -88,9 +89,9 @@ export default function HeritageSection() {
     };
 
     const slideInFromLeft = {
-        hidden: { 
-            opacity: 0, 
-            x: -50 
+        hidden: {
+            opacity: 0,
+            x: -50
         },
         visible: {
             opacity: 1,
@@ -103,9 +104,9 @@ export default function HeritageSection() {
     };
 
     const slideInFromRight = {
-        hidden: { 
-            opacity: 0, 
-            x: 50 
+        hidden: {
+            opacity: 0,
+            x: 50
         },
         visible: {
             opacity: 1,
@@ -118,9 +119,9 @@ export default function HeritageSection() {
     };
 
     const fadeInUp = {
-        hidden: { 
-            opacity: 0, 
-            y: 30 
+        hidden: {
+            opacity: 0,
+            y: 30
         },
         visible: {
             opacity: 1,
@@ -133,9 +134,9 @@ export default function HeritageSection() {
     };
 
     const scaleIn = {
-        hidden: { 
-            opacity: 0, 
-            scale: 0.9 
+        hidden: {
+            opacity: 0,
+            scale: 0.9
         },
         visible: {
             opacity: 1,
@@ -148,7 +149,7 @@ export default function HeritageSection() {
     };
 
     const imageFrameVariants = {
-        hidden: { 
+        hidden: {
             opacity: 0,
             rotateY: -5,
             rotateX: 5
@@ -166,9 +167,9 @@ export default function HeritageSection() {
     };
 
     const buttonVariants = {
-        hidden: { 
-            opacity: 0, 
-            x: -20 
+        hidden: {
+            opacity: 0,
+            x: -20
         },
         visible: {
             opacity: 1,
@@ -206,9 +207,9 @@ export default function HeritageSection() {
     };
 
     const counterItemVariants = {
-        hidden: { 
-            opacity: 0, 
-            y: 20 
+        hidden: {
+            opacity: 0,
+            y: 20
         },
         visible: (i) => ({
             opacity: 1,
@@ -222,180 +223,184 @@ export default function HeritageSection() {
     };
 
     return (
-        <section className="py-[60px_120px] bg-[#F9F9F9] relative overflow-hidden">
-            <div className="container">
-                <motion.div 
-                    className="flex flex-wrap"
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, amount: 0.3 }}
-                >
-                    <div className="lg:w-1/2">
-                        <motion.div 
-                            className="lg:max-w-[350px] 2xl:max-w-[450px] 3xl:max-w-[560px] w-full"
-                            variants={slideInFromLeft}
-                        >
-                            <motion.div variants={fadeInUp}>
-                                <Heading size="heading1" as="div">
-                                    Heritage
-                                </Heading>
-                            </motion.div>
-
-                            <motion.p 
-                                className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px] line-clamp-3"
-                                variants={fadeInUp}
+        <>
+            <section className="py-[60px_120px] bg-[#F9F9F9] relative overflow-hidden max-lg:hidden">
+                <div className="container">
+                    <motion.div
+                        className="flex flex-wrap"
+                        variants={containerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
+                    >
+                        <div className="w-full lg:w-1/2">
+                            <motion.div
+                                className="lg:max-w-[350px] 2xl:max-w-[450px] 3xl:max-w-[560px] w-full"
+                                variants={slideInFromLeft}
                             >
-                                For over 150 years, Khimji Ramdas has driven Oman's progress, blending tradition with innovation and connecting
-                                global brands to local markets. Guided by strong values, we create opportunities, empower lives, and foster sustainable growth
-                            </motion.p>
+                                <motion.div variants={fadeInUp}>
+                                    <Heading size="heading1" as="div">
+                                        Heritage
+                                    </Heading>
+                                </motion.div>
+
+                                <motion.p
+                                    className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px] line-clamp-3"
+                                    variants={fadeInUp}
+                                >
+                                    For over 150 years, Khimji Ramdas has driven Oman's progress, blending tradition with innovation and connecting
+                                    global brands to local markets. Guided by strong values, we create opportunities, empower lives, and foster sustainable growth
+                                </motion.p>
+
+                                <motion.div
+                                    variants={buttonVariants}
+                                    whileHover="hover"
+                                    initial="rest"
+                                    animate="rest"
+                                >
+                                    <Link href="#!" className={CONTACT_BUTTON_CLASS}>
+                                        <span>Discover More</span>
+                                        <motion.div
+                                            className={ARROW_ICON_CLASS}
+                                            variants={arrowVariants}
+                                        >
+                                            <svg className="w-full h-full" viewBox="0 0 14 15">
+                                                <path
+                                                    d="M7.23334 12.7448C7.14887 12.7465 7.0637 12.7245 6.98857 12.6748C6.7718 12.5318 6.70577 12.2213 6.8362 11.9893C6.84717 11.9688 8.2096 9.53275 10.8103 7.99975H0.700004C0.442637 7.99975 0.233337 7.7755 0.233337 7.49975C0.233337 7.224 0.442637 6.99975 0.700004 6.99975H10.8103C8.22407 5.4755 6.84624 3.02875 6.8327 3.00425C6.70507 2.77075 6.77577 2.46 6.99347 2.32175C7.2142 2.1815 7.50494 2.26275 7.63677 2.5005C7.84887 2.863 9.8378 6.11275 13.4052 7.012C13.6187 7.06825 13.7667 7.2685 13.7667 7.5C13.7667 7.7315 13.6197 7.93225 13.4092 7.987C9.8266 8.8895 7.84444 12.1435 7.63024 12.5118C7.54624 12.656 7.39084 12.7415 7.23334 12.7448Z"
+                                                    fill="currentColor"
+                                                />
+                                            </svg>
+                                        </motion.div>
+                                    </Link>
+                                </motion.div>
+                            </motion.div>
 
                             <motion.div
-                                variants={buttonVariants}
-                                whileHover="hover"
-                                initial="rest"
-                                animate="rest"
-                            >
-                                <Link href="#!" className={CONTACT_BUTTON_CLASS}>
-                                    <span>Discover More</span>
-                                    <motion.div 
-                                        className={ARROW_ICON_CLASS}
-                                        variants={arrowVariants}
-                                    >
-                                        <svg className="w-full h-full" viewBox="0 0 14 15">
-                                            <path
-                                                d="M7.23334 12.7448C7.14887 12.7465 7.0637 12.7245 6.98857 12.6748C6.7718 12.5318 6.70577 12.2213 6.8362 11.9893C6.84717 11.9688 8.2096 9.53275 10.8103 7.99975H0.700004C0.442637 7.99975 0.233337 7.7755 0.233337 7.49975C0.233337 7.224 0.442637 6.99975 0.700004 6.99975H10.8103C8.22407 5.4755 6.84624 3.02875 6.8327 3.00425C6.70507 2.77075 6.77577 2.46 6.99347 2.32175C7.2142 2.1815 7.50494 2.26275 7.63677 2.5005C7.84887 2.863 9.8378 6.11275 13.4052 7.012C13.6187 7.06825 13.7667 7.2685 13.7667 7.5C13.7667 7.7315 13.6197 7.93225 13.4092 7.987C9.8266 8.8895 7.84444 12.1435 7.63024 12.5118C7.54624 12.656 7.39084 12.7415 7.23334 12.7448Z"
-                                                fill="currentColor"
-                                            />
-                                        </svg>
-                                    </motion.div>
-                                </Link>
-                            </motion.div>
-                        </motion.div>
-                        
-                        <motion.div 
-                            className="w-full relative lg:absolute left-[-180px] lg:left-[-190px] xl:left-[-200px] 2xl:left-[-260px] 3xl:left-[-280px] bottom-[60px] 
+                                className="w-full relative lg:absolute left-[-180px] lg:left-[-190px] xl:left-[-200px] 2xl:left-[-260px] 3xl:left-[-280px] lg:bottom-[60px] 
                             before:absolute before:content-[''] before:bg-[#F9F9F9] before:left-0 xs:before:w-[33%] sm:before:w-[30%] before:md:w-[25%] before:top-0 before:h-full before:z-1 lg:before:hidden"
-                            variants={scaleIn}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true, amount: 0.3 }}
-                        >
-                            <CircularSwiper />
-                        </motion.div>
-                    </div>
+                                variants={scaleIn}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, amount: 0.3 }}
+                            >
+                                <CircularSwiper />
+                            </motion.div>
+                        </div>
 
-                    <div className="lg:w-1/2">
-                        <motion.div 
-                            className="flex flex-wrap"
-                            variants={slideInFromRight}
-                        >
-                            <div className="w-[320px] xl:w-[375px] 2xl:w-[475px] 3xl:w-[600px]">
-                                <motion.div 
-                                    className="w-full h-full p-[15px] xl:p-[25px] 2xl:p-[30px] 3xl:p-[40px] rounded-[10px] overflow-hidden max-h-[750px] aspect-[530/660]
+                        <div className="w-full lg:w-1/2">
+                            <motion.div
+                                className="flex flex-wrap"
+                                variants={slideInFromRight}
+                            >
+                                <div className="w-[320px] xl:w-[375px] 2xl:w-[475px] 3xl:w-[600px]">
+                                    <motion.div
+                                        className="w-full h-full p-[15px] xl:p-[25px] 2xl:p-[30px] 3xl:p-[40px] rounded-[10px] overflow-hidden max-h-[750px] aspect-[530/660]
                                         border border-white bg-transparent
                                         backdrop-blur-[20px] backdrop-saturate-[180%]
                                         shadow-[inset_5px_1px_33px_#f1f1f1,inset_3px_-3px_5px_#fafafa]"
-                                    variants={imageFrameVariants}
-                                >
-                                    <motion.div
-                                        initial={{ opacity: 0, scale: 1.1 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ duration: 1, delay: 0.8 }}
+                                        variants={imageFrameVariants}
                                     >
-                                        <Image
-                                            src="/images/heritageImg.jpg"
-                                            className="w-full h-full rounded-[10px]"
-                                            width={285}
-                                            height={350}
-                                            alt="heritageImg"
-                                        />
-                                    </motion.div>
-                                </motion.div>
-                            </div>
-
-                            <div 
-                                className="w-[calc(100%-320px)] xl:w-[calc(100%-375px)] 2xl:w-[calc(100%-475px)] 3xl:w-[calc(100%-600px)] pl-[45px] xl:pl-[55px] 2xl:pl-[65px] 3xl:pl-[85px]"
-                                ref={counterContainerRef}
-                            >
-                                <div className="flex flex-col h-full justify-between">
-                                    <motion.div 
-                                        className="h-1/4 flex flex-col justify-center"
-                                        custom={0}
-                                        variants={counterItemVariants}
-                                    >
-                                        <Heading size="heading1" as="div" className="leading-none !mb-[8px]">
-                                            <Counter end={400} suffix="+" />
-                                        </Heading>
-                                        <motion.p 
-                                            className="uppercase mb-0 leading-none"
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            transition={{ delay: 0.4, duration: 0.6 }}
+                                        <motion.div
+                                            initial={{ opacity: 0, scale: 1.1 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            transition={{ duration: 1, delay: 0.8 }}
                                         >
-                                            BRANDS
-                                        </motion.p>
-                                    </motion.div>
-
-                                    <motion.div 
-                                        className="h-1/4 flex flex-col justify-center"
-                                        custom={1}
-                                        variants={counterItemVariants}
-                                    >
-                                        <Heading size="heading1" as="div" className="!mb-[8px] leading-none">
-                                            <Counter end={5} suffix="K+" />
-                                        </Heading>
-                                        <motion.p 
-                                            className="uppercase mb-0"
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            transition={{ delay: 0.6, duration: 0.6 }}
-                                        >
-                                            Employees
-                                        </motion.p>
-                                    </motion.div>
-
-                                    <motion.div 
-                                        className="h-1/4 flex flex-col justify-center"
-                                        custom={2}
-                                        variants={counterItemVariants}
-                                    >
-                                        <Heading size="heading1" as="div" className="!mb-[8px] leading-none">
-                                            <Counter end={40} suffix="+" />
-                                        </Heading>
-                                        <motion.p 
-                                            className="uppercase mb-0"
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            transition={{ delay: 0.8, duration: 0.6 }}
-                                        >
-                                            Verticals
-                                        </motion.p>
-                                    </motion.div>
-
-                                    <motion.div 
-                                        className="h-1/4 flex flex-col justify-center"
-                                        custom={3}
-                                        variants={counterItemVariants}
-                                    >
-                                        <Heading size="heading1" as="div" className="!mb-[8px] leading-none">
-                                            <Counter end={150} suffix="+" />
-                                        </Heading>
-                                        <motion.p 
-                                            className="uppercase mb-0"
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            transition={{ delay: 1.0, duration: 0.6 }}
-                                        >
-                                            YEARS
-                                        </motion.p>
+                                            <Image
+                                                src="/images/heritageImg.jpg"
+                                                className="w-full h-full rounded-[10px]"
+                                                width={285}
+                                                height={350}
+                                                alt="heritageImg"
+                                            />
+                                        </motion.div>
                                     </motion.div>
                                 </div>
-                            </div>
-                        </motion.div>
-                    </div>
-                </motion.div>
-            </div>
-        </section>
+
+                                <div
+                                    className="w-[calc(100%-320px)] xl:w-[calc(100%-375px)] 2xl:w-[calc(100%-475px)] 3xl:w-[calc(100%-600px)] pl-[45px] xl:pl-[55px] 2xl:pl-[65px] 3xl:pl-[85px]"
+                                    ref={counterContainerRef}
+                                >
+                                    <div className="flex flex-wrap lg:flex-col h-full justify-between">
+                                        <motion.div
+                                            className="max-lg:w-1/2 lg:h-1/4 flex flex-col justify-center"
+                                            custom={0}
+                                            variants={counterItemVariants}
+                                        >
+                                            <Heading size="heading1" as="div" className="leading-none !mb-[8px]">
+                                                <Counter end={400} suffix="+" />
+                                            </Heading>
+                                            <motion.p
+                                                className="uppercase mb-0 leading-none"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ delay: 0.4, duration: 0.6 }}
+                                            >
+                                                BRANDS
+                                            </motion.p>
+                                        </motion.div>
+
+                                        <motion.div
+                                            className="max-lg:w-1/2 lg:h-1/4 flex flex-col justify-center"
+                                            custom={1}
+                                            variants={counterItemVariants}
+                                        >
+                                            <Heading size="heading1" as="div" className="!mb-[8px] leading-none">
+                                                <Counter end={5} suffix="K+" />
+                                            </Heading>
+                                            <motion.p
+                                                className="uppercase mb-0"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ delay: 0.6, duration: 0.6 }}
+                                            >
+                                                Employees
+                                            </motion.p>
+                                        </motion.div>
+
+                                        <motion.div
+                                            className="max-lg:w-1/2 lg:h-1/4  flex flex-col justify-center"
+                                            custom={2}
+                                            variants={counterItemVariants}
+                                        >
+                                            <Heading size="heading1" as="div" className="!mb-[8px] leading-none">
+                                                <Counter end={40} suffix="+" />
+                                            </Heading>
+                                            <motion.p
+                                                className="uppercase mb-0"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ delay: 0.8, duration: 0.6 }}
+                                            >
+                                                Verticals
+                                            </motion.p>
+                                        </motion.div>
+
+                                        <motion.div
+                                            className="max-lg:w-1/2 lg:h-1/4  flex flex-col justify-center"
+                                            custom={3}
+                                            variants={counterItemVariants}
+                                        >
+                                            <Heading size="heading1" as="div" className="!mb-[8px] leading-none">
+                                                <Counter end={150} suffix="+" />
+                                            </Heading>
+                                            <motion.p
+                                                className="uppercase mb-0"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ delay: 1.0, duration: 0.6 }}
+                                            >
+                                                YEARS
+                                            </motion.p>
+                                        </motion.div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+
+            <HeritageMobile />
+        </>
     );
 }

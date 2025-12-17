@@ -42,9 +42,9 @@
   --color-base3: #1d0a44;
 
   /* 320px */
-  --breakpoint-4xs: 20rem;
+  --breakpoint-4xs: 22rem;
   /* 384px */
-  --breakpoint-3xs: 24rem;
+  --breakpoint-3xs: 26rem;
   /* 448px */
   --breakpoint-2xs: 28rem;
   /* 576px */
@@ -157,7 +157,7 @@ body {
 
   
   p {
-    @apply text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-black font-medium
+    @apply text-[18px] xs:text-[20px] sm:text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-black font-medium
   }
 
   .typography {
@@ -167,7 +167,7 @@ body {
 
     p,
     & {
-      @apply 3xl:text-[20px] 2xl:text-[16px] xl:text-[13px] lg:text-[12px] text-[12px] xl:mb-[30px] mb-[25px] font-normal leading-normal text-[#4B4B4B];
+      @apply text-[20px] sm:text-[12px] lg:text-[12px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] xl:mb-[30px] mb-[25px] font-normal leading-normal text-white sm:text-[#4B4B4B];
     }
 
     h1 {
@@ -340,4 +340,8 @@ body[data-scroll-locked] {
 
 .animate-float {
     animation: float 10s ease-in-out infinite;
+}
+
+section{
+  overflow: hidden;
 }
