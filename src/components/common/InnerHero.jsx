@@ -18,8 +18,8 @@ export default function InnerHero({
   breadCrumb_data,
 }) {
   return (
-    <section className="w-full h-[220px] sm:h-[250px] lg:h-[350px] 2xl:h-[420px] 3xl:h-[530px] block relative z-0 before:content-[''] before:w-full before:h-full before:bg-gradient-to-t before:from-black before:to-transparent before:opacity-80 before:absolute before:z-1 before:inset-0">
-      <div className="w-full h-full block">
+    <section className="w-full h-[220px] sm:h-[250px] lg:h-[350px] 2xl:h-[420px] 3xl:h-[530px] flex items-end relative z-0 before:content-[''] before:w-full before:h-full before:bg-gradient-to-t before:from-black before:to-transparent before:opacity-80 before:absolute before:z-1 before:inset-0">
+      <div className="w-full h-full block absolute -z-1 inset-0">
         <picture className="w-full h-full">
           <source media="(max-width: 640px)" srcSet={coverImageMobile}></source>
           <Image
@@ -31,10 +31,10 @@ export default function InnerHero({
           />
         </picture>
       </div>
-      <div className="container py-[20px] sm:py-[30px] lg:py-[40px] 2xl:py-[50px] 3xl:py-[60px] absolute z-1 inset-[auto_auto_0_0]">
+      <div className="container py-[20px] sm:py-[30px] lg:py-[40px] 2xl:py-[50px] 3xl:py-[60px] relative z-2">
         <div
           dangerouslySetInnerHTML={{ __html: title }}
-          className="text-[22px] sm:text-[28px] md:text-[34px] lg:text-[45px] 2xl:text-[55px] 3xl:text-[70px] leading-[1.3] font-normal text-white uppercase mb-[10px] sm:mb-[15px] lg:mb-[20px] 2xl:mb-[30px] 3xl:mb-[35px]"
+          className="text-[22px] sm:text-[28px] md:text-[34px] lg:text-[45px] 2xl:text-[55px] 3xl:text-[70px] leading-[1.3] font-normal text-white uppercase mb-2.5 sm:mb-[15px] lg:mb-[20px] 2xl:mb-[30px] 3xl:mb-[35px]"
         ></div>
         <BreadCrumb items={breadCrumb_data} />
       </div>

@@ -237,5 +237,5 @@ export default function page() {
         <BoardDirectorSection data={local_data?.board_directors_section_data} />
       </div>
     </>
-  );
+  ); 
 }
