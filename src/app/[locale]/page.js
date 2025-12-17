@@ -14,7 +14,7 @@ export default function Page() {
       <BannerSection />
       <VentureSection />
        <HeritageSection />
-     {/* <ArchiveSection />*/}
+     <ArchiveSection />
      <ICVSection /> 
      <ParnerSectionMobile />
     </>
