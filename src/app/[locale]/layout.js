@@ -33,19 +33,11 @@ export default async function RootLayout({ children }) {
       <body className={`${Nobel.className}`}>
         {/* <LoadingProvider>
           <LoadingWrapper> */}
-<<<<<<< HEAD:src/app/[locale]/layout.js
-            <Header />
-            <main className="flex-grow">{children}</main>
-            {/* <WidgetSection /> */}
-            <Footer /> 
-          {/* </LoadingWrapper>
-=======
         <Header />
         <main className="flex-grow">{children}</main>
         <WidgetSection />
         <Footer />
         {/* </LoadingWrapper>
->>>>>>> 3bad92e0d81a97dc774f6afac39f14f79539033c:src/app/layout.js
         </LoadingProvider> */}
       </body>
     </html>

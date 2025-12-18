@@ -158,13 +158,8 @@ body {
     @apply bg-base2 hover:bg-base1 hover:border-base1;
   }
 
-  
   p {
-<<<<<<< HEAD
-    @apply text-[18px] xs:text-[20px] sm:text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-black font-medium
-=======
     @apply text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-black font-medium;
->>>>>>> 3bad92e0d81a97dc774f6afac39f14f79539033c
   }
 
   .typography {
@@ -344,14 +339,5 @@ body[data-scroll-locked] {
 }
 
 .animate-float {
-<<<<<<< HEAD
-    animation: float 10s ease-in-out infinite;
-}
-
-section{
-  overflow: hidden;
-}
-=======
   animation: float 10s ease-in-out infinite;
 }
->>>>>>> 3bad92e0d81a97dc774f6afac39f14f79539033c
