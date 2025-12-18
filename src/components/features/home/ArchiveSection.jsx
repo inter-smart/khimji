@@ -566,9 +566,9 @@ export default function ArchiveSection() {
                     {/* Card Navigation */}
 
                     <motion.div
-                        className="relative md:absolute bottom-[80px] lg:bottom-[160px] xl:bottom-[120px] 2xl:bottom-[70px] 3xl:bottom-[0px] left-0 right-0 m-auto w-full 
+                        className="relative md:absolute md:bottom-[80px] lg:bottom-[160px] xl:bottom-[120px] 2xl:bottom-[70px] 3xl:bottom-[0px] left-0 right-0 m-auto w-full 
                           lg:max-w-[80%] md:max-h-[175px] xl:max-h-[210px] 2xl:max-h-[265px] 3xl:max-h-[340px] h-full
-                          flex items-center justify-center max-lg:mt-[-5px]"
+                          flex items-center justify-center max-lg:mt-[-45px]"
                         variants={cardVariants}
                         initial="hidden"
                         whileInView="visible"
