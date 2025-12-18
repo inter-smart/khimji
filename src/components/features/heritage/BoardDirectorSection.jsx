@@ -61,8 +61,8 @@ export default function BoardDirectorSection({ data }) {
               >
                 {item?.directors_list?.map((item, index) => (
                   <SwiperSlide key={index}>
-                    <div className="w-full h-full block">
-                      <div className="w-full h-auto aspect-[280/325] mb-[10px] 2xl:mb-[15px] 3xl:mb-[20px] rounded-full select-none overflow-hidden flex items-center justify-center relative z-0 before:content-[''] before:w-full before:h-[80%] before:bg-linear-to-t before:from-white before:to-[#C0E7E9] before:rounded-full before:absolute before:z-[-1] before:inset-[auto_0_0_0]">
+                    <div className="group w-full h-full block">
+                      <div className="w-full h-auto aspect-[280/325] mb-[10px] 2xl:mb-[15px] 3xl:mb-[20px] rounded-full select-none overflow-hidden flex items-center justify-center relative z-0 before:content-[''] before:w-full before:h-[80%] before:bg-linear-to-t before:from-white before:to-[#C0E7E9] before:rounded-full before:absolute before:z-[-1] before:inset-[auto_0_0_0] group-hover:translate-y-[-10px] transition-transform duration-500 ease-in-out">
                         <Image
                           src={item?.media?.path || "/images/placeholder.png"}
                           alt={item?.media?.alt || "Image"}

@@ -62,16 +62,14 @@ export default function ArchiveListingSection() {
         <section className="w-full py-[140px]">
             <div className="container">
                 <Tabs defaultValue={archive_list[0]?.value}>
-                    <TabsList className="flex flex-wrap gap-3 mb-12">
+                    <TabsList className="gap-[10px] mb-[60px] flex flex-wrap">
                         {archive_list.map(item => (
                             <TabsTrigger
                                 key={item.value}
                                 value={item.value}
-                                className="relative bg-white p-[2px] rounded-none border-0 data-[state=active]:p-0 data-[state=active]:bg-gradient-to-r data-[state=active]:from-teal-600 data-[state=active]:to-teal-400 before:absolute before:inset-0 before:bg-gradient-to-r before:from-teal-600 before:to-teal-400 before:rounded-none data-[state=active]:before:hidden"
+                                className="h-[40px] px-[25px]"
                             >
-                                <span className="relative z-10 block bg-white px-[15px] py-[10px] text-[18px] leading-[1] font-normal text-black data-[state=active]:bg-transparent data-[state=active]:text-white">
-                                    {item?.label}
-                                </span>
+                                {item?.label}
                             </TabsTrigger>
                         ))}
                     </TabsList>
