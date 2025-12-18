@@ -13,7 +13,7 @@ const brands = [
 
 export default function ParnerSectionMobile() {
     return (
-        <section className="py-[0_40px]">
+        <section className="py-[0_40px] sm:hidden">
             <div className="container">
                 <div className="flex flex-wrap -m-[5px]">
                     {brands.map((logo, index) => (

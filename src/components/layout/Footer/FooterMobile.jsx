@@ -7,7 +7,7 @@ const SOCIAL_ICON_CLASS = "transition-all duration-300 hover:text-white/70 hover
 
 export default function FooterMobile() {
     return (
-        <section className="bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[45px_30px]">
+        <section className="bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[45px_30px] sm:hidden">
             <div className="container">
                 <Link href="#" className="block w-full max-w-[205px] m-auto mb-[25px]">
                     <Image src="/images/Logo-white-footer.png" width="205" height="45" className="w-full h-full object-contain" alt="foter_img" />

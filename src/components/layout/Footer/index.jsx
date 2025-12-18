@@ -31,9 +31,7 @@ export default function Footer() {
     return (
         <>
             <section className="w-full relative bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[30px] overflow-hidden max-sm:hidden">
-
-                <div className="container">
-
+                <div className="container"> 
                     {/* BRAND SLIDER */}
                     <div className="flex flex-wrap pb-[30px] border-b border-white/20 mb-[65px] ">
                         <div className="w-full">

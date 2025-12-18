@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";  
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Heading } from "@/components/layout/Heading";
@@ -140,7 +140,7 @@ export default function ArchiveSection() {
     const currentData = archivesData[activeCategory] || [];
     const currentItem = currentData[currentIndex] || currentData[0];
 
-    const textcontent = `text-[11px] xl:text-[13px] 2xl:text-[15px] 3xl:text-[18px] text-[#000000] font-medium`
+    const textcontent = `text-[16px] xs:text-[20px] md:text-[12px] xl:text-[13px] 2xl:text-[15px] 3xl:text-[18px] text-[#000000] font-medium`
     const icons = `w-[22px] lg:w-[30px] 2xl:w-[35px] 3xl:w-[45px] h-[22px] lg:h-[30px] 2xl:h-[35px] 3xl:h-[45px] rounded-full flex items-center justify-center overflow-hidden bg-[linear-gradient(#299a8b45_0%,#0c456b30_78%)] [&>svg]:max-w-[10px] lg:[&>svg]:max-w-[15px] [&>svg]:3xl:max-w-[18px]`
     const iconBlock = `w-[calc(100%-20px)] lg:w-[calc(100%-30px)] 2xl:w-[calc(100%-35px)] 3xl:w-[calc(100%-45px)] px-[10px] xl:px-[15px]`
 
@@ -167,6 +167,11 @@ export default function ArchiveSection() {
                 // Clear any existing content
                 globeContainerRef.current.innerHTML = '';
 
+                // Set responsive dimensions
+                const isMobile = window.innerWidth < 1024; // lg breakpoint
+                const globeWidth = isMobile ? 350 : globeContainerRef.current.offsetWidth;
+                const globeHeight = isMobile ? 350 : 650;
+
                 const globe = Globe()(globeContainerRef.current)
                     .globeImageUrl(
                         "https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
@@ -175,8 +180,8 @@ export default function ArchiveSection() {
                         "https://unpkg.com/three-globe/example/img/earth-topology.png"
                     )
                     .backgroundColor("rgba(220,245,255,0.0)")
-                    .width(globeContainerRef.current.offsetWidth)
-                    .height(650);
+                    .width(globeWidth)
+                    .height(globeHeight);
 
                 globe
                     .pointsData([])
@@ -278,9 +283,9 @@ export default function ArchiveSection() {
     };
 
     const fadeInUp = {
-        hidden: { 
-            opacity: 0, 
-            y: 30 
+        hidden: {
+            opacity: 0,
+            y: 30
         },
         visible: {
             opacity: 1,
@@ -293,9 +298,9 @@ export default function ArchiveSection() {
     };
 
     const fadeInScale = {
-        hidden: { 
-            opacity: 0, 
-            scale: 0.9 
+        hidden: {
+            opacity: 0,
+            scale: 0.9
         },
         visible: {
             opacity: 1,
@@ -308,9 +313,9 @@ export default function ArchiveSection() {
     };
 
     const slideInFromLeft = {
-        hidden: { 
-            opacity: 0, 
-            x: -50 
+        hidden: {
+            opacity: 0,
+            x: -50
         },
         visible: {
             opacity: 1,
@@ -323,9 +328,9 @@ export default function ArchiveSection() {
     };
 
     const slideInFromRight = {
-        hidden: { 
-            opacity: 0, 
-            x: 50 
+        hidden: {
+            opacity: 0,
+            x: 50
         },
         visible: {
             opacity: 1,
@@ -338,8 +343,8 @@ export default function ArchiveSection() {
     };
 
     const cardVariants = {
-        hidden: { 
-            opacity: 0, 
+        hidden: {
+            opacity: 0,
             y: 40,
             scale: 0.95
         },
@@ -356,9 +361,9 @@ export default function ArchiveSection() {
     };
 
     const imageVariants = {
-        hidden: { 
-            opacity: 0, 
-            scale: 1.1 
+        hidden: {
+            opacity: 0,
+            scale: 1.1
         },
         visible: {
             opacity: 1,
@@ -371,9 +376,9 @@ export default function ArchiveSection() {
     };
 
     const iconItemVariants = {
-        hidden: { 
-            opacity: 0, 
-            x: -20 
+        hidden: {
+            opacity: 0,
+            x: -20
         },
         visible: (i) => ({
             opacity: 1,
@@ -387,8 +392,8 @@ export default function ArchiveSection() {
     };
 
     const globeContainerVariants = {
-        hidden: { 
-            opacity: 0, 
+        hidden: {
+            opacity: 0,
             scale: 0.95,
             rotateX: 5
         },
@@ -419,9 +424,9 @@ export default function ArchiveSection() {
     };
 
     const categoryButtonVariants = {
-        hidden: { 
-            opacity: 0, 
-            y: 20 
+        hidden: {
+            opacity: 0,
+            y: 20
         },
         visible: (i) => ({
             opacity: 1,
@@ -449,10 +454,10 @@ export default function ArchiveSection() {
     };
 
     return (
-        <section className="by-white py-[40px_50px] 2xl:py-[60px_80px] 3xl:py-[80px_100px] relative overflow-hidden">
+        <section className="bg-[#E7F7F5] lg:bg-white py-[40px_50px] 2xl:py-[60px_80px] 3xl:py-[80px_100px] relative overflow-hidden">
             <div className="container">
                 {/* Header */}
-                <motion.div 
+                <motion.div
                     className="text-center"
                     variants={containerVariants}
                     initial="hidden"
@@ -463,13 +468,13 @@ export default function ArchiveSection() {
                         <Heading
                             size="heading1"
                             as="h2"
-                            className="mb-[30px] 2xl:mb-[40px] 3xl:mb-[50px]"
+                            className="max-sm:text-[35px] max-lg:text-[43px] mb-[20px] 2xl:mb-[40px] 3xl:mb-[50px]"
                         >
                             Archives
                         </Heading>
                     </motion.div>
 
-                    <div className="flex justify-center flex-wrap gap-5 xl:gap-6 2xl:gap-7 3xl:gap-8">
+                    <div className="flex justify-center flex-wrap gap-2 lg:gap-5 xl:gap-6 2xl:gap-7 3xl:gap-8 mb-[60px] lg:mb-[30px]">
                         {categories.map((cat, index) => (
                             <motion.button
                                 key={cat}
@@ -477,9 +482,10 @@ export default function ArchiveSection() {
                                     setActiveCategory(cat);
                                     setCurrentIndex(0);
                                 }}
-                                className={`text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[18px] tracking-wide transition-colors cursor-pointer ${activeCategory === cat
-                                    ? "text-[#289989] font-medium"
-                                    : "text-[#000000] hover:text-[#289989]"
+                                className={`text-[16px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[18px] max-lg:p-[10px_17px] tracking-wide transition-colors cursor-pointer
+                                     uppercase rounded-[40px] max-lg:border max-lg:border-[#0b426a22] max-lg:bg-white ${activeCategory === cat
+                                        ? " max-lg:bg-gradient-to-r from-[#0B436A] to-[#299B8A] lg:bg-transparent text-white lg:text-[#289989] font-medium"
+                                        : "text-[#000000] hover:text-[#289989]"
                                     }`}
                                 variants={categoryButtonVariants}
                                 custom={index}
@@ -494,9 +500,9 @@ export default function ArchiveSection() {
 
                 {/* Globe */}
                 <div className="relative">
-                    <motion.div 
-                        className="relative mb-8 w-full max-w-[650px] !h-[650px] m-auto bg-white after:absolute after:content-[''] 
-                        after:bottom-0 after:left-0 after:right-0 after:bg-white after:w-full after:h-[265px] after:3xl:h-[270px]"
+                    <motion.div
+                        className="relative mb-8 w-full max-w-[650px] !h-[200px] md:!h-[400px] lg:!h-[650px] m-auto lg:bg-white after:absolute after:content-[''] 
+                        after:bottom-0 after:left-0 after:right-0 after:bg-white after:w-full after:h-[265px] after:3xl:h-[270px] after:max-lg:hidden"
                         variants={globeContainerVariants}
                         initial="hidden"
                         whileInView="visible"
@@ -508,24 +514,24 @@ export default function ArchiveSection() {
                             </div>
                         )}
 
-                        {/* Animated SVG Marker */}
+                       {/* Animated SVG Marker */}
                         {globeReady && currentItem && (
                             <motion.div
                                 className="absolute z-20"
                                 style={{
-                                    transform: 'translate(-50%, -100%)',
-                                    left: '49%',
-                                    top: '44%',
+                                    transform: 'translate(-50%, -50%)',
+                                    left: '50%',
+                                    top: '35%',
                                 }}
-                                initial={{ 
-                                    opacity: 0, 
+                                initial={{
+                                    opacity: 0,
                                     scale: 0.5,
-                                    y: -20 
+                                    y: -20
                                 }}
-                                animate={{ 
-                                    opacity: 1, 
+                                animate={{
+                                    opacity: 1,
                                     scale: 1,
-                                    y: 0 
+                                    y: 0
                                 }}
                                 transition={{
                                     duration: 0.6,
@@ -533,13 +539,11 @@ export default function ArchiveSection() {
                                     ease: "easeOut"
                                 }}
                             >
-                                <motion.svg 
-                                    width="23" 
-                                    height="30" 
+                                <motion.svg
+                                    width="23"
+                                    height="30"
                                     viewBox="0 0 23 30" 
-                                    fill="none" 
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    animate={{ 
+                                    animate={{
                                         y: [0, -10, 0],
                                     }}
                                     transition={{
@@ -555,15 +559,16 @@ export default function ArchiveSection() {
 
                         <div
                             ref={globeContainerRef}
-                            className="w-full mx-auto"
-                            style={{ height: "550px", minHeight: "550px" }}
+                            className="flex items-center justify-center w-full mx-auto h-[250px] lg:h-[550px] min-h-[250px] lg:min-h-[550px]"
                         />
                     </motion.div>
 
                     {/* Card Navigation */}
-                    <motion.div 
-                        className="absolute bottom-[90px] xl:bottom-[50px] 2xl:bottom-[0px] 3xl:bottom-[-70px] left-0 right-0 m-auto w-full max-w-[80%] md:max-h-[175px] xl:max-h-[210px] 2xl:max-h-[265px] 3xl:max-h-[340px] h-full
-                            flex items-center justify-center"
+
+                    <motion.div
+                        className="relative md:absolute bottom-[80px] lg:bottom-[160px] xl:bottom-[120px] 2xl:bottom-[70px] 3xl:bottom-[0px] left-0 right-0 m-auto w-full 
+                          lg:max-w-[80%] md:max-h-[175px] xl:max-h-[210px] 2xl:max-h-[265px] 3xl:max-h-[340px] h-full
+                          flex items-center justify-center max-lg:mt-[-5px]"
                         variants={cardVariants}
                         initial="hidden"
                         whileInView="visible"
@@ -571,11 +576,12 @@ export default function ArchiveSection() {
                         key={`${activeCategory}-${currentIndex}`}
                     >
                         {currentItem && (
-                            <div className="rounded-3xl shadow-2xl overflow-hidden w-full h-full rounded-[10px] p-[15px] lg:p-[20px] 2xl:p-[25px] 3xl:p-[30px] border border-white bg-transparent
-                                backdrop-blur-[20px] backdrop-saturate-[180%] 
+                            <div className="shadow-2xl overflow-hidden w-full h-full md:rounded-[10px] p-[15px] lg:p-[20px] 2xl:p-[25px] 3xl:p-[30px] 
+                            border border-white bg-[#E7F7F5] lg:bg-transparent
+                                backdrop-blur-[20px] lg:backdrop-saturate-[180%] 
                                 shadow-[inset_5px_1px_33px_#f1f1f1,inset_3px_-3px_5px_#fafafa] flex flex-wrap flex-row">
-                                <div className="w-full md:w-[200px] lg:w-[280px] xl:w-[350px] 2xl:w-[475px] 3xl:w-[600px] h-full">
-                                    <motion.div 
+                                <div className="w-full md:w-[200px] lg:w-[280px] xl:w-[350px] 2xl:w-[475px] 3xl:w-[600px] max-md:h-full">
+                                    <motion.div
                                         className="w-full h-full rounded-[10px] overflow-hidden group aspect-[600/280]"
                                         variants={imageVariants}
                                     >
@@ -588,10 +594,11 @@ export default function ArchiveSection() {
                                         />
                                     </motion.div>
                                 </div>
-                                <div className="w-full md:w-[calc(100%-200px)] lg:w-[calc(100%-280px)] xl:w-[calc(100%-350px)] 2xl:w-[calc(100%-475px)] 3xl:w-[calc(100%-600px)] flex items-center p-[15px] xl:p-[20px] 2xl:p-[25px] 3xl:p-[40px] relative">
+                                <div className="w-full md:w-[calc(100%-200px)] lg:w-[calc(100%-280px)] xl:w-[calc(100%-350px)] 2xl:w-[calc(100%-475px)] 3xl:w-[calc(100%-600px)] 
+                                flex items-center py-[25px] md:p-[15px] xl:p-[20px] 2xl:p-[25px] 3xl:p-[40px] relative">
                                     <div className="w-full">
-                                        <motion.div 
-                                            className="absolute top-0 right-0 flex items-center gap-3 ml-auto w-fit has-[button:disabled]:hidden"
+                                        <motion.div
+                                            className="lg:absolute lg:top-0 lg:right-0 flex items-center gap-3 ml-auto w-fit has-[button:disabled]:hidden max-lg:hidden"
                                             initial={{ opacity: 0, y: -20 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ duration: 0.6, delay: 0.7 }}
@@ -631,8 +638,8 @@ export default function ArchiveSection() {
                                             </motion.button>
                                         </motion.div>
 
-                                        <motion.div 
-                                            className="text-[14px] 2xl:text-[15px] 3xl:text-[18px] font-medium text-[#000000] mb-[15px] xl:mb-[20px]"
+                                        <motion.div
+                                            className="text-[16px] xs:text-[20px] md:text-[14px] 2xl:text-[15px] 3xl:text-[18px] font-medium text-[#000000] mb-[25px] md:mb-[15px] xl:mb-[20px]"
                                             initial={{ opacity: 0, y: 10 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ duration: 0.6, delay: 0.4 }}
@@ -646,9 +653,9 @@ export default function ArchiveSection() {
                                                 { icon: "location", content: currentItem.location, index: 2 },
                                                 { icon: "link", content: currentItem.link, index: 3 }
                                             ].map((item, idx) => (
-                                                <motion.div 
+                                                <motion.div
                                                     key={idx}
-                                                    className={`w-1/2 ${idx === 3 ? 'lg:w-3/5' : 'lg:w-2/5'} p-[8px]`}
+                                                    className={`w-full md:w-1/2 ${idx === 3 ? 'md:w-3/5' : 'md:w-2/5'} p-[8px]`}
                                                     custom={idx}
                                                     variants={iconItemVariants}
                                                     initial="hidden"
@@ -734,6 +741,42 @@ export default function ArchiveSection() {
                                 </div>
                             </div>
                         )}
+                    </motion.div>
+                    <motion.div
+                        className="flex items-center gap-3 m-auto w-fit mt-[30px] has-[button:disabled]:hidden lg:hidden"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.7 }}
+                    >
+                        <motion.button
+                            onClick={() =>
+                                setCurrentIndex((i) => (i === 0 ? currentData.length - 1 : i - 1))
+                            }
+                            disabled={currentData.length <= 1}
+                            className="p-3 bg-[#defaf670] border border-[#0B436A] rounded-full w-[35px] 3xl:w-[44px] h-[35px] 3xl:h-[44px]
+                                    flex items-center justify-center transition-all cursor-pointer hover:bg-[#299A8B] group [&>svg]:fill-[#299A8B]"
+                            variants={buttonVariants}
+                            whileHover="hover"
+                        >
+                            <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.245461 6.76397C-0.0818138 6.4367 -0.0818138 5.90608 0.245461 5.5788L5.57871 0.245555C5.90598 -0.0817194 6.4366 -0.0817194 6.76388 0.245555C7.09115 0.57283 7.09115 1.10345 6.76388 1.43072L2.02321 6.17139L6.76388 10.9121C7.09115 11.2393 7.09115 11.7699 6.76388 12.0972C6.4366 12.4245 5.90598 12.4245 5.57871 12.0972L0.245461 6.76397ZM13.6497 6.17139V7.00943H0.838044V6.17139V5.33335H13.6497V6.17139Z" fill="#299A8B" />
+                            </svg>
+                        </motion.button>
+
+                        <motion.button
+                            onClick={() =>
+                                setCurrentIndex((i) => (i === currentData.length - 1 ? 0 : i + 1))
+                            }
+                            disabled={currentData.length <= 1}
+                            className="p-3 bg-[#defaf670] border border-[#0B436A] rounded-full w-[35px] 3xl:w-[44px] h-[35px] 3xl:h-[44px]
+                                     flex items-center justify-center transition-all cursor-pointer hover:bg-[#299A8B] group [&>svg]:fill-[#299A8B]"
+                            variants={buttonVariants}
+                            whileHover="hover"
+                        >
+                            <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.4042 6.76397C13.7315 6.4367 13.7315 5.90608 13.4042 5.5788L8.07099 0.245555C7.74372 -0.0817194 7.2131 -0.0817194 6.88583 0.245555C6.55855 0.57283 6.55855 1.10345 6.88583 1.43072L11.6265 6.17139L6.88583 10.9121C6.55855 11.2393 6.55855 11.7699 6.88583 12.0972C7.2131 12.4245 7.74372 12.4245 8.07099 12.0972L13.4042 6.76397ZM0 6.17139V7.00943H12.8117V6.17139V5.33335H0V6.17139Z" fill="#299A8B" />
+                            </svg>
+                        </motion.button>
                     </motion.div>
                 </div>
             </div>
