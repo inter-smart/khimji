@@ -58,7 +58,7 @@ export default function Footer() {
                                                 alt="Brand Logo"
                                                 width={140}
                                                 height={65}
-                                                className="w-auto object-contain max-w-[75px] 2xl:max-w-[80px] min-w-[45px] xl:min-w-[65px] 2xl:min-w-[75px]"
+                                                className="w-auto object-contain max-w-[75px] 2xl:max-w-[80px] min-w-[45px] xl:min-w-[65px] 2xl:min-w-[75px] transition-[0.5s] hover:scale-90"
                                             />
                                         </div>
                                     </SwiperSlide>
@@ -74,7 +74,7 @@ export default function Footer() {
 
                         {/* LEFT BIG TEXT */}
                         <div className="w-5/12">
-                            <div className="text-[35px] lg:text-[40px] xl:text-[50px] 2xl:text-[65px] 3xl:text-[80px] leading-[1.4] text-white font-light uppercase">
+                            <div className="text-[35px] lg:text-[35px] xl:text-[40px] 2xl:text-[55px] 3xl:text-[80px] leading-[1.4] text-white font-light uppercase">
                                 Innovative <br />
                                 Solutions, <br />
                                 Trusted <br />
@@ -141,7 +141,7 @@ export default function Footer() {
 
                             {/* LOGO */}
                             <div className="flex flex-col items-end text-right max-w-[175px] xl:max-w-[200px] 2xl:max-w-[265px] 3xl:max-w-[320px] ml-auto">
-                                <div className="max-w-[130px] xl:max-w-[165px] 2xl:max-w-[210px] 3xl:max-w-[250px] w-full mb-[25px] xl:mb-[30px] 2xl:mb-[35px] 3xl:mb-[50px]">
+                                <Link href="/" className="max-w-[130px] xl:max-w-[165px] 2xl:max-w-[210px] 3xl:max-w-[250px] w-full mb-[25px] xl:mb-[30px] 2xl:mb-[35px] 3xl:mb-[50px] block transition-[0.5s] hover:scale-90">
                                     <Image
                                         src="/images/Logo-white-footer.png"
                                         width={150}
@@ -149,7 +149,7 @@ export default function Footer() {
                                         alt="KR Logo"
                                         className="w-full object-contain"
                                     />
-                                </div>
+                                </Link>
 
                                 {/* TEXT */}
                                 <p className="text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-white font-medium">
@@ -214,7 +214,7 @@ export default function Footer() {
 
                         <span>Copyright © 2025 Khimji Ramdas. All Rights Reserved.</span>
 
-                        <span className="flex items-center gap-2">
+                        <Link href="/" className="flex items-center gap-2">
                             Designed & Developed By:
                             <Image
                                 src="/images/intersmart.png"
@@ -222,7 +222,7 @@ export default function Footer() {
                                 height={28}
                                 alt="InterSmart"
                             />
-                        </span>
+                        </Link>
 
                     </div>
 

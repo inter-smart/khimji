@@ -1,11 +1,10 @@
+// app/layout.jsx
 import "../globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { Barlow } from "next/font/google";
 import localFont from "next/font/local";
-import WidgetSection from "@/components/common/WidgetSection";
-
-// Function to fetch banner status
+// import WidgetSection from "@/components/common/WidgetSection";
+import PageLoader from "@/components/common/PageLoader";
 
 const Nobel = localFont({
   src: [
@@ -20,25 +19,15 @@ const Nobel = localFont({
   display: "swap",
 });
 
-// const barlow = Barlow({
-//   subsets: ["latin"],
-//   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-//   display: "swap",
-//   variable: "--font-barlow",
-// });
-
 export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${Nobel.className}`}>
-        {/* <LoadingProvider>
-          <LoadingWrapper> */}
+        <PageLoader />
         <Header />
         <main className="flex-grow">{children}</main>
-        <WidgetSection />
+        {/* <WidgetSection /> */}
         <Footer />
-        {/* </LoadingWrapper>
-        </LoadingProvider> */}
       </body>
     </html>
   );

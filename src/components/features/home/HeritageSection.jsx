@@ -304,10 +304,19 @@ export default function HeritageSection() {
                                             initial={{ opacity: 0, scale: 1.1 }}
                                             animate={{ opacity: 1, scale: 1 }}
                                             transition={{ duration: 1, delay: 0.8 }}
+                                            className="group overflow-hidden rounded-[10px] "
                                         >
                                             <Image
                                                 src="/images/heritageImg.jpg"
-                                                className="w-full h-full rounded-[10px]"
+                                                className="
+                                                    w-full
+                                                    h-full
+                                                    rounded-[10px]
+                                                    transition-transform
+                                                    duration-700
+                                                    ease-out
+                                                    group-hover:scale-110
+                                                "
                                                 width={285}
                                                 height={350}
                                                 alt="heritageImg"

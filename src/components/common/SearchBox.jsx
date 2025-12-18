@@ -1,26 +1,20 @@
 import { useState, useRef, useEffect } from "react";
-
 export default function SearchBox() {
-
     const [searchQuery, setSearchQuery] = useState("");
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const searchRef = useRef(null);
-
     const handleSearch = (e) => {
         e.preventDefault();
         console.log("Searching for:", searchQuery);
-    };
-
+    }; 
     const openSearch = (e) => {
         e.stopPropagation();
         setIsSearchOpen(true);
-    };
-
+    }; 
     const closeSearch = () => {
         setIsSearchOpen(false);
         setSearchQuery("");
-    };
-
+    }; 
     // Close search on outside click
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -28,11 +22,9 @@ export default function SearchBox() {
                 closeSearch();
             }
         };
-
         if (isSearchOpen) {
             document.addEventListener("mousedown", handleClickOutside);
         }
-
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
@@ -70,10 +62,9 @@ export default function SearchBox() {
                     />
                 </svg>
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" className="sm:hidden">
-                    <path d="M21.4739 21.474L17.036 17.036" stroke="white" stroke-width="2.58333" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M11.2482 19.4288C15.7662 19.4288 19.4288 15.7663 19.4288 11.2483C19.4288 6.73027 15.7662 3.06771 11.2482 3.06771C6.73022 3.06771 3.06766 6.73027 3.06766 11.2483C3.06766 15.7663 6.73022 19.4288 11.2482 19.4288Z" stroke="white" stroke-width="2.58333" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M21.4739 21.474L17.036 17.036" stroke="white" strokeWidth="2.58333" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M11.2482 19.4288C15.7662 19.4288 19.4288 15.7663 19.4288 11.2483C19.4288 6.73027 15.7662 3.06771 11.2482 3.06771C6.73022 3.06771 3.06766 6.73027 3.06766 11.2483C3.06766 15.7663 6.73022 19.4288 11.2482 19.4288Z" stroke="white" strokeWidth="2.58333" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-
             </button>
 
 
@@ -93,7 +84,7 @@ export default function SearchBox() {
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search here..."
                         className="
-                          w-full  h-[35px] 3xl:h-[45px] pl-5 pr-12
+                          w-full  h-[40px] 3xl:h-[45px] pl-5 pr-12
                           bg-white border-2 border-gray-200
                           rounded-full
                           outline-none transition-all duration-300
@@ -109,12 +100,11 @@ export default function SearchBox() {
                         className="
                           absolute right-1 top-1/2 -translate-y-1/2
                           flex items-center justify-center 
-                          w-[30px] 2xl:w-[35px] 3xl:w-[45px]  h-[30px] 2xl:h-[35px] 3xl:h-[45px] 
+                          w-[28px] 2xl:w-[35px] 3xl:w-[45px] h-[28px] 2xl:h-[35px] 3xl:h-[45px] 
                           bg-transparent
                           rounded-full
                           transition-all duration-200
-                          hover:scale-105 active:scale-95
-                          
+                          hover:scale-105 active:scale-95                          
                         "
                     >
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none">

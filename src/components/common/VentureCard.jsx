@@ -12,7 +12,7 @@ export default function VentureCard({ item }) {
                   ">
 
             <div className="w-full lg:w-[180px] xl:w-[200px] 2xl:w-[250px] 3xl:w-[350px]">
-                <div className="w-full h-full overflow-hidden rounded-[10px]">
+                <div className="w-full h-full overflow-hidden rounded-[10px] group">
                     <video
                         autoPlay loop muted playsInline
                         className="w-full h-full object-cover max-sm:hidden"
@@ -20,7 +20,10 @@ export default function VentureCard({ item }) {
                         <source src={item.video} type="video/mp4" />
                     </video>
 
-                    <Image src="/images/vetureCard-1.jpg" width="395" height="465" className="w-full h-full object-cover sm:hidden" />
+                    <Image src="/images/vetureCard-1.jpg" width="395" height="465" className="w-full h-full object-cover sm:hidden transition-transform
+                        duration-700
+                        ease-out
+                        group-hover:scale-110" alt="imgage1" />
                 </div>
             </div>
 

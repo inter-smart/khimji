@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Heading } from "@/components/layout/Heading";
 import { motion } from "framer-motion";
 import ICVinitiativeMobile from "./home-mobile/ICVinitiativeMobile";
+import Link from "next/link";
 
 export default function ICVSection() {
  
@@ -65,7 +66,7 @@ export default function ICVSection() {
 
                     {icvVideos.map((item, index) => (
                         <SwiperSlide key={index}>
-                            <div className="relative z-0 w-full h-full overflow-hidden">
+                            <Link href="#!" className="relative z-0 w-full h-full overflow-hidden">
                                 <video
                                     autoPlay
                                     loop
@@ -84,7 +85,7 @@ export default function ICVSection() {
                                 <div className="absolute bottom-0 left-0 p-[20px] pb-[90px] xl:pb-[130px] 2xl:pb-[140px] 3xl:pb-[170px] w-full z-10 flex items-end">
                                     <div className="2xl:text-[20px] 3xl:text-[30px] text-white font-medium uppercase">{item.title}</div>
                                 </div>
-                            </div>
+                            </Link>
                         </SwiperSlide>
                     ))}
 

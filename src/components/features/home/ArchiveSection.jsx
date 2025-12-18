@@ -454,7 +454,7 @@ export default function ArchiveSection() {
     };
 
     return (
-        <section className="bg-[#E7F7F5] lg:bg-white py-[40px_50px] 2xl:py-[60px_80px] 3xl:py-[80px_100px] relative overflow-hidden">
+        <section className="bg-[#E7F7F5] lg:bg-white py-[40px_20px] 2xl:py-[60px_10px] 3xl:py-[80px_20px] relative overflow-hidden">
             <div className="container">
                 {/* Header */}
                 <motion.div
@@ -474,35 +474,37 @@ export default function ArchiveSection() {
                         </Heading>
                     </motion.div>
 
+                       <motion.div
+                        className="absolute z-10  bottom-[5%] right-[70px] 2xl:right-[100px] 3xl:right-[150px] pointer-events-none  m-auto w-[110px] 2xl:w-[150px] 3xl:w-[205px] h-[110px] 2xl:h-[150px] 3xl:h-[205px] blur-[165px] round-full bg-[#2FDDC3] animate-float"
+                        
+                    />
+
                     <div className="flex justify-center flex-wrap gap-2 lg:gap-5 xl:gap-6 2xl:gap-7 3xl:gap-8 mb-[60px] lg:mb-[30px]">
                         {categories.map((cat, index) => (
-                            <motion.button
+                            <button
                                 key={cat}
                                 onClick={() => {
                                     setActiveCategory(cat);
                                     setCurrentIndex(0);
                                 }}
-                                className={`text-[16px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[18px] max-lg:p-[10px_17px] tracking-wide transition-colors cursor-pointer
+                                className={`text-[16px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[18px] max-lg:p-[10px_17px] tracking-wide transition-colors cursor-pointer 
                                      uppercase rounded-[40px] max-lg:border max-lg:border-[#0b426a22] max-lg:bg-white ${activeCategory === cat
                                         ? " max-lg:bg-gradient-to-r from-[#0B436A] to-[#299B8A] lg:bg-transparent text-white lg:text-[#289989] font-medium"
                                         : "text-[#000000] hover:text-[#289989]"
                                     }`}
-                                variants={categoryButtonVariants}
-                                custom={index}
-                                whileHover="hover"
-                                animate={activeCategory === cat ? "active" : ""}
+                                
                             >
                                 {cat}
-                            </motion.button>
+                            </button>
                         ))}
                     </div>
                 </motion.div>
 
                 {/* Globe */}
-                <div className="relative">
+                <div className="relative pointer-events-none">
                     <motion.div
-                        className="relative mb-8 w-full max-w-[650px] !h-[200px] md:!h-[400px] lg:!h-[650px] m-auto lg:bg-white after:absolute after:content-[''] 
-                        after:bottom-0 after:left-0 after:right-0 after:bg-white after:w-full after:h-[265px] after:3xl:h-[270px] after:max-lg:hidden"
+                        className="relative mb-8 w-full max-w-[650px] !h-[200px] md:!h-[400px] lg:!h-[650px] m-auto lg:bg-trnsparent after:absolute after:content-[''] 
+                        after:bottom-0 after:left-0 after:right-0 after:bg-white after:w-full after:h-[265px] after:3xl:h-[270px] after:hidden"
                         variants={globeContainerVariants}
                         initial="hidden"
                         whileInView="visible"
@@ -514,7 +516,7 @@ export default function ArchiveSection() {
                             </div>
                         )}
 
-                       {/* Animated SVG Marker */}
+                        {/* Animated SVG Marker */}
                         {globeReady && currentItem && (
                             <motion.div
                                 className="absolute z-20"
@@ -542,7 +544,7 @@ export default function ArchiveSection() {
                                 <motion.svg
                                     width="23"
                                     height="30"
-                                    viewBox="0 0 23 30" 
+                                    viewBox="0 0 23 30"
                                     animate={{
                                         y: [0, -10, 0],
                                     }}
@@ -572,12 +574,12 @@ export default function ArchiveSection() {
                         variants={cardVariants}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, amount: 0.3 }}
+                        viewport={{ once: true, amount: 0.2 }}
                         key={`${activeCategory}-${currentIndex}`}
                     >
                         {currentItem && (
                             <div className="shadow-2xl overflow-hidden w-full h-full md:rounded-[10px] p-[15px] lg:p-[20px] 2xl:p-[25px] 3xl:p-[30px] 
-                            border border-white bg-[#E7F7F5] lg:bg-transparent
+                            border border-white bg-[#E7F7F5] lg:bg-white
                                 backdrop-blur-[20px] lg:backdrop-saturate-[180%] 
                                 shadow-[inset_5px_1px_33px_#f1f1f1,inset_3px_-3px_5px_#fafafa] flex flex-wrap flex-row">
                                 <div className="w-full md:w-[200px] lg:w-[280px] xl:w-[350px] 2xl:w-[475px] 3xl:w-[600px] max-md:h-full">
@@ -601,7 +603,7 @@ export default function ArchiveSection() {
                                             className="lg:absolute lg:top-0 lg:right-0 flex items-center gap-3 ml-auto w-fit has-[button:disabled]:hidden max-lg:hidden"
                                             initial={{ opacity: 0, y: -20 }}
                                             animate={{ opacity: 1, y: 0 }}
-                                            transition={{ duration: 0.6, delay: 0.7 }}
+                                            transition={{ duration: 0.4, delay: 0.4 }}
                                         >
                                             <motion.button
                                                 onClick={() =>
@@ -655,7 +657,7 @@ export default function ArchiveSection() {
                                             ].map((item, idx) => (
                                                 <motion.div
                                                     key={idx}
-                                                    className={`w-full md:w-1/2 ${idx === 3 ? 'md:w-3/5' : 'md:w-2/5'} p-[8px]`}
+                                                    className={`w-full md:w-1/2 ${idx === 1 ? 'md:w-3/5' : 'md:w-2/5'} p-[8px]`}
                                                     custom={idx}
                                                     variants={iconItemVariants}
                                                     initial="hidden"

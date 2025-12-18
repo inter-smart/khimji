@@ -24,7 +24,7 @@ export default function ParnerSectionMobile() {
                                     alt="Brand Logo"
                                     width={140}
                                     height={65}
-                                    className="w-auto object-contain  max-w-[70px]  min-w-[42px]"
+                                    className="w-auto object-contain  max-w-[70px] min-w-[42px]  3xs:min-w-[50px]"
                                 />
                             </div>
                         </div>

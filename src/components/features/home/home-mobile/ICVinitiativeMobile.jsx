@@ -40,7 +40,7 @@ export default function ICVinitiativeMobile() {
                         <SwiperSlide>
                             <div className="w-full h-full overflow-hidden">
                                 <div className="w-full aspect-[400/370] overflow-hidden">
-                                    <Image src="/images/icv-1.jpg" width="400" height="370" className="w-full h-full object-cover" />
+                                    <Image src="/images/icv-1.jpg" width="400" height="370" className="w-full h-full object-cover" alt="ventureImg"/>
                                 </div>
                                 <div className="text-[20px] xs:text-[25px] text-[#0B436A] uppercase m-[15px_0] ">
                                     Partnered Omani SME for sewage treatment project
@@ -50,7 +50,7 @@ export default function ICVinitiativeMobile() {
                         <SwiperSlide>
                             <div className="w-full h-full overflow-hidden">
                                 <div className="w-full aspect-[400/370] overflow-hidden">
-                                    <Image src="/images/icv-1.jpg" width="400" height="370" className="w-full h-full object-cover" />
+                                    <Image src="/images/icv-1.jpg" width="400" height="370" className="w-full h-full object-cover" alt="ventureImg"/>
                                 </div>
                                 <div className="text-[20px] xs:text-[25px] text-[#0B436A] uppercase m-[15px_0] ">
                                     Another ICV Initiative Project

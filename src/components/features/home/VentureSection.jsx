@@ -41,6 +41,13 @@ const VENTURE_SLIDES = [
             "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
         logos: ["ship-1", "ship-2", "ship-3", "ship-4"],
     },
+    {
+        video: "/videos/venture-2.mp4",
+        title: "Logistics & Shipping",
+        description:
+            "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
+        logos: ["ship-1", "ship-2", "ship-3", "ship-4"],
+    },
 ];
 
 export default function VentureSection() {
@@ -258,7 +265,7 @@ export default function VentureSection() {
                                 <Swiper
                                     modules={[Autoplay]}
                                     autoplay={{ delay: 0, disableOnInteraction: false }}
-                                    speed={2500}
+                                    speed={3500}
                                     loop={true}
                                     slidesPerView={2}
                                     rewind={true}
@@ -377,7 +384,7 @@ export default function VentureSection() {
                                 <Swiper
                                     modules={[Autoplay]}
                                     autoplay={{ delay: 0, disableOnInteraction: false }}
-                                    speed={2500}
+                                    speed={5000}
                                     loop={true}
                                     slidesPerView={2}
                                     rewind={true}
