@@ -27,28 +27,34 @@ const ARROW_ICON_CLASS = `
 `;
 
 const VENTURE_SLIDES = [
-    {
-        video: "/videos/venture-1.mp4",
-        title: "Logistics & Shipping",
-        description:
-            "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-        logos: ["ship-1", "ship-2", "ship-3", "ship-4"],
-    },
-    {
-        video: "/videos/venture-2.mp4",
-        title: "Logistics & Shipping",
-        description:
-            "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-        logos: ["ship-1", "ship-2", "ship-3", "ship-4"],
-    },
-    {
-        video: "/videos/venture-2.mp4",
-        title: "Logistics & Shipping",
-        description:
-            "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-        logos: ["ship-1", "ship-2", "ship-3", "ship-4"],
-    },
+  {
+    video: "/videos/venture-1.mp4",
+    mobileImage: "/images/vetureCard-2.jpg",
+    title: "Logistics & Shipping",
+    description:
+      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
+    logos: [
+      "/images/ship-1.png",
+      "/images/ship-2.png",
+      "/images/ship-3.png",
+      "/images/ship-4.png",
+    ],
+  },
+  {
+    video: "/videos/venture-2.mp4",
+      mobileImage: "/images/vetureCard-2.jpg",
+    title: "Logistics & Shipping",
+    description:
+      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
+    logos: [
+      "/images/ship-1.png",
+      "/images/ship-2.png",
+      "/images/ship-3.png",
+      "/images/ship-4.png",
+    ],
+  },
 ];
+
 
 export default function VentureSection() {
     const sectionRef = useRef(null);
