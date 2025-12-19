@@ -269,8 +269,8 @@ export default function VentureSection() {
                                 viewport={{ once: true, amount: 0.3 }}
                             >
                                 <Swiper
-                                    modules={[Autoplay]}
-                                    autoplay={{ delay: 0, disableOnInteraction: false }}
+                                    // modules={[Autoplay]}
+                                    // autoplay={{ delay: 0, disableOnInteraction: false }}
                                     speed={3500}
                                     loop={true}
                                     slidesPerView={2}

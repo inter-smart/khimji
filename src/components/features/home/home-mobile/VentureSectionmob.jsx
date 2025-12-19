@@ -20,28 +20,28 @@ import VentureCard from "@/components/common/VentureCard";
 const VENTURE_SLIDES = [
   {
     video: "/videos/venture-1.mp4",
-    mobileImage: "/images/vetureCard-2.jpg",
+    mobileImage: "/images/vetureCard-1.jpg",
     title: "Logistics & Shipping",
     description:
       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
     logos: [
-      "/images/logos/ship-1.png",
-      "/images/logos/ship-2.png",
-      "/images/logos/ship-3.png",
-      "/images/logos/ship-4.png",
+      "/images/ship-1.png",
+      "/images/ship-2.png",
+      "/images/ship-3.png",
+      "/images/ship-4.png",
     ],
   },
   {
     video: "/videos/venture-2.mp4",
-      mobileImage: "/images/vetureCard-2.jpg",
+      mobileImage: "/images/vetureCard-1.jpg",
     title: "Logistics & Shipping",
     description:
       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
     logos: [
-      "/images/logos/ship-1.png",
-      "/images/logos/ship-2.png",
-      "/images/logos/ship-3.png",
-      "/images/logos/ship-4.png",
+      "/images/ship-1.png",
+      "/images/ship-2.png",
+      "/images/ship-3.png",
+      "/images/ship-4.png",
     ],
   },
 ];

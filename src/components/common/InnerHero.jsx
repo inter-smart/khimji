@@ -18,7 +18,7 @@ export default function InnerHero({
   breadCrumb_data,
 }) {
   return (
-    <section className="w-full h-[220px] sm:h-[250px] lg:h-[350px] 2xl:h-[420px] 3xl:h-[530px] flex items-end relative z-0 before:content-[''] before:w-full before:h-full before:bg-gradient-to-t before:from-black before:to-transparent before:opacity-80 before:absolute before:z-1 before:inset-0">
+    <section className="w-full h-[420px] sm:h-[450px] lg:h-[350px] 2xl:h-[420px] 3xl:h-[530px] flex items-end relative z-0 before:content-[''] before:w-full before:h-full before:bg-gradient-to-t before:from-black before:to-transparent before:opacity-80 before:absolute before:z-1 before:inset-0">
       <div className="w-full h-full block absolute -z-1 inset-0">
         <picture className="w-full h-full">
           <source media="(max-width: 640px)" srcSet={coverImageMobile}></source>
