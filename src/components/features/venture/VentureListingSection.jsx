@@ -85,7 +85,7 @@ const corporateVentures = [
     title: "Hospitality",
     description:
       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-   logos: [
+    logos: [
       "/images/ship-1.png",
       "/images/ship-2.png",
       "/images/ship-3.png",
@@ -128,13 +128,19 @@ const consumerVentures = [
 
 export default function VentureListingSection() {
   return (
-    <section className="py-[40px] xl:py-[60px] 2xl:py-[80px] 3xl:py-[140px]">
+    <section className="relative py-[40px] xl:py-[60px] 2xl:py-[80px] 3xl:py-[140px]">
+      {/* Animated Background Dot */}
+      <div
+        className="absolute top-0 bottom-0 left-[70px] 2xl:left-[100px] 3xl:left-[150px] m-auto w-[150px] 2xl:w-[200px] 3xl:w-[245px] h-[150px] 2xl:h-[200px] 3xl:h-[245px] blur-[165px] round-full bg-[#2FDDC3] animate-float"
+        
+      />
+
       <div className="container">
         <Tabs defaultValue="corporate" className="w-full mb-[35px ]">
-          <div className="flex flex-wrap justify-between items-center gap-2 mb-[20px] xl:mb-[50px] 2xl:mb-[80px] 3xl:mb-[130px]">
+          <div className="flex flex-wrap justify-between items-center gap-2 mb-[20px] xl:mb-[30px] 2xl:mb-[50px] 3xl:mb-[70px]">
             <Heading
               as="h2"
-              size="heading1" 
+              size="heading1"
               className="mb-[10px] sm:!mb-0"
             >Ventures</Heading>
 
@@ -186,7 +192,7 @@ export default function VentureListingSection() {
               </div>
               <p>Khimji Ramdas drives growth across Retail, Infrastructure, Logistics, Lifestyle, and Travel. Through strong joint ventures and international presence, we connect markets and enrich communities</p>
             </div>
-             <div className="flex flex-wrap -m-[5px] lg:-m-[10px] 3xl:-m-[15px]">
+            <div className="flex flex-wrap -m-[5px] lg:-m-[10px] 3xl:-m-[15px]">
               {corporateVentures.map((venture) => (
                 <div key={venture.id} className="w-full sm:w-1/2 p-[5px]  lg:p-[10px] 3xl:p-[15px]">
                   <VentureCard item={venture} />
@@ -196,7 +202,7 @@ export default function VentureListingSection() {
           </TabsContent>
 
           <TabsContent value="consumer" >
-              <div className="mb-[20px] 2xl:mb-[40px] 3xl:mb-[60px]">
+            <div className="mb-[20px] 2xl:mb-[40px] 3xl:mb-[60px]">
               <div className="text-[16px] md:text-[18px] lg:text-[25px] xl:text-[30px] 2xl:text-[35px] 3xl:text-[40px] font-medium bg-gradient-to-r from-[#0B436A]
                 to-[#299B8A] from-[30%] to-[100%] bg-clip-text text-transparent
                 uppercase tracking-wide !mb-[10px] 2xl:!mb-[10px] 3xl:!mb-[15px]">
