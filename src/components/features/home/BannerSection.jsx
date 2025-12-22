@@ -87,7 +87,7 @@ export default function BannerSection() {
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 1.2, delay: 0.8 }}
                   viewport={{ once: true }}
-                  className="absolute top-0 left-0 w-full h-full pointer-events-none bg-cover bg-no-repeat bg-center"
+                  className="absolute top-0 left-0 w-full h-full pointer-events-none bg-cover bg-no-repeat bg-center z-10"
                   style={{ backgroundImage: "url('/images/krBg.png')" }}
                 ></motion.div>
 
