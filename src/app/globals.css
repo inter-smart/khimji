@@ -151,11 +151,9 @@ body {
 
 /* Prevent white gap when shadcn Select / Sheet opens */
 html,
-body { 
+body {
   overflow-x: hidden;
 }
-
- 
 
 @layer components {
   .container {
@@ -171,7 +169,7 @@ body {
   }
 
   .typography {
-    &>* {
+    & > * {
       @apply my-[10px] lg:my-[15px];
     }
 
@@ -205,12 +203,12 @@ body {
       @apply pl-[20px] lg:pl-[30px];
     }
 
-    ul>li,
-    ol>li {
+    ul > li,
+    ol > li {
       @apply 3xl:text-[20px] 2xl:text-[16px] xl:text-[13px] lg:text-[12px] text-[12px] font-normal leading-normal text-[#4B4B4B] my-[10px] lg:my-[15px] list-decimal;
     }
 
-    ul>li {
+    ul > li {
       @apply list-disc;
     }
   }
@@ -341,7 +339,6 @@ body[data-scroll-locked] {
 
 /* Float Animation - Smooth organic movement */
 @keyframes float {
-
   0%,
   100% {
     transform: translate(0, 0);
@@ -388,4 +385,10 @@ body[data-scroll-locked] {
 section {
   position: relative;
   z-index: 0;
+}
+
+.gradient-border {
+  border: 1px solid transparent;
+  background: linear-gradient(#0b436a, #299b8a) padding-box,
+    linear-gradient(180deg, #0b436a 0%, #299b8a 100%) border-box;
 }

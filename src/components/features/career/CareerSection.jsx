@@ -19,9 +19,9 @@ import {
 export default function CareerSection({ data }) {
     return (
         <section className="w-full h-auto py-[40px] sm:py-[60px_50px] lg:py-[80px_70px] 2xl:py-[100px_80px] 3xl:py-[135px_100px] overflow-hidden block relative z-0">
-            <div className="w-[120px] sm:w-[180px] 2xl:w-[225px] 3xl:w-[280px] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] absolute -z-1 inset-[0_auto_auto_-2%]"></div>
-            <div className="w-[170px] sm:w-[220px] 2xl:w-[285px] 3xl:w-[370px] h-auto aspect-square bg-[#1A9BF5] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[150px] opacity-40 absolute -z-1 inset-[50%_-5%_auto_auto]"></div>
-            <div className="w-[170px] sm:w-[220px] 2xl:w-[285px] 3xl:w-[370px] h-auto aspect-square bg-[#1A9BF5] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[150px] opacity-40 absolute -z-1 inset-[auto_auto_2%_-15%]"></div>
+            <div className="w-[120px] sm:w-[180px] 2xl:w-[225px] 3xl:w-[280px] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] pointer-events-none absolute -z-1 inset-[0_auto_auto_-2%]"></div>
+            <div className="w-[170px] sm:w-[220px] 2xl:w-[285px] 3xl:w-[370px] h-auto aspect-square bg-[#1A9BF5] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[150px] opacity-40 pointer-events-none absolute -z-1 inset-[50%_-5%_auto_auto]"></div>
+            <div className="w-[170px] sm:w-[220px] 2xl:w-[285px] 3xl:w-[370px] h-auto aspect-square bg-[#1A9BF5] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[150px] opacity-40 pointer-events-none absolute -z-1 inset-[auto_auto_2%_-15%]"></div>
             <div className="container">
                 <div className="w-full h-auto mb-[25px] lg:mb-[40px] 2xl:mb-[50px] 3xl:mb-[60px] block">
                     <Heading
