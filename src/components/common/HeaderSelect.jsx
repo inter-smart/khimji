@@ -1,6 +1,13 @@
+"use client";
+
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { BorderBeam } from "@/components/ui/border-beam"
+import { useCountry } from "@/context/CountryContext";
+import { COUNTRIES, SUPPORTED_COUNTRIES } from "@/lib/countries";
+
 export default function HeaderSelect() {
+    const { country, setCountry } = useCountry();
+
     return (
         <div className="flex items-center -mx-[7px]">
             <div className="px-[7px] sm:px-[3px]">
@@ -46,7 +53,7 @@ export default function HeaderSelect() {
             {/* Location Select */}
             <div className="px-[7px] sm:px-[3px]">
                 <div className="relative inline-flex rounded-full">
-                    <Select modal={false}>
+                    <Select value={country} onValueChange={setCountry} modal={false}>
                         <SelectTrigger
                             className="
                           relative
@@ -62,9 +69,9 @@ export default function HeaderSelect() {
                             <SelectValue placeholder="Location" />
                         </SelectTrigger>
                         <SelectContent className="max-w-[110px] ">
-                            <SelectItem value="it">India</SelectItem>
-                            <SelectItem value="finance">Usa</SelectItem>
-                            <SelectItem value="marketing">Saudi</SelectItem>
+                            {SUPPORTED_COUNTRIES.map((c) => (
+                                <SelectItem key={c} value={c}>{COUNTRIES[c].name}</SelectItem>
+                            ))}
                         </SelectContent>
                     </Select>
                     <BorderBeam

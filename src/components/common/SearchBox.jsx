@@ -6,15 +6,15 @@ export default function SearchBox() {
     const handleSearch = (e) => {
         e.preventDefault();
         console.log("Searching for:", searchQuery);
-    }; 
+    };
     const openSearch = (e) => {
         e.stopPropagation();
         setIsSearchOpen(true);
-    }; 
+    };
     const closeSearch = () => {
         setIsSearchOpen(false);
         setSearchQuery("");
-    }; 
+    };
     // Close search on outside click
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -63,7 +63,7 @@ export default function SearchBox() {
                 </svg>
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" className="sm:hidden">
                     <path d="M21.4739 21.474L17.036 17.036" stroke="white" strokeWidth="2.58333" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M11.2482 19.4288C15.7662 19.4288 19.4288 15.7663 19.4288 11.2483C19.4288 6.73027 15.7662 3.06771 11.2482 3.06771C6.73022 3.06771 3.06766 6.73027 3.06766 11.2483C3.06766 15.7663 6.73022 19.4288 11.2482 19.4288Z" stroke="white" strokeWidth="2.58333" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M11.2482 19.4288C15.7662 19.4288 19.4288 15.7663 19.4288 11.2483C19.4288 6.73028 15.7662 3.06771 11.2482 3.06771C6.73022 3.06771 3.06766 6.73028 3.06766 11.2483C3.06766 15.7663 6.73022 19.4288 11.2482 19.4288Z" stroke="white" strokeWidth="2.58333" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
             </button>
 
@@ -74,7 +74,7 @@ export default function SearchBox() {
                 className={`
                       absolute right-0 flex items-center
                       transition-all duration-500 ease-out
-                      ${isSearchOpen ? 'w-[280px] opacity-100 translate-x-0' : 'w-0 opacity-0 pointer-events-none'}
+                      ${isSearchOpen ? 'w-[300px] sm:w-[280px] opacity-100 translate-x-0' : 'w-0 opacity-0 pointer-events-none'}
                     `}
             >
                 <div className="relative w-full">

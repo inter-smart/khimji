@@ -153,7 +153,10 @@ body {
 html,
 body {
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
+
+
 
 @layer components {
   .container {
@@ -165,7 +168,7 @@ body {
   }
 
   p {
-    @apply text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-black font-medium;
+    @apply text-[14px] xl:text-[16px] 2xl:text-[18px] 3xl:text-[20px] text-black font-medium;
   }
 
   .typography {

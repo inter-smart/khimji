@@ -1,6 +1,11 @@
+"use client";
 
 import Image from "next/image";
+import { useCountry } from "@/context/CountryContext";
+
 export default function HeritageMobile() {
+    const { countryData } = useCountry();
+
     return (
         <section className="relative py-[55px] before:absolute before:top-0 before:left-0 before:bg-black/20 before:content-[''] before:w-full before:h-full lg:hidden h-[820px]">
             <Image src="/images/heritageMob.jpg" width="450" height="820" className="w-full h-full object-cover absolute top-0 left-0" alt="heritage_img" />
@@ -8,7 +13,7 @@ export default function HeritageMobile() {
                 <div className="w-full">
                     <div className="text-[43px] text-white font-medium uppercase">Heritage</div>
                     <p className="text-white">
-                        For over 150 years, Khimji Ramdas has driven Oman’s progress, blending tradition with innovation and
+                        For over 150 years, Khimji Ramdas has driven {countryData.name}’s progress, blending tradition with innovation and
                         connecting global brands to local markets. Guided by strong values, we create opportunities, empower lives, and foster sustainable growth
                     </p>
 
@@ -29,7 +34,7 @@ export default function HeritageMobile() {
                                 </div>
                             </div>
                         </div>
-                       <div className="w-1/2 p-[4px] xs:p-[9px]">
+                        <div className="w-1/2 p-[4px] xs:p-[9px]">
                             <div className="
                                     w-full h-full
                                     backdrop-blur-[2px]
