@@ -6,9 +6,12 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import Image from "next/image";
+import { useCountry } from "@/context/CountryContext";
 import Link from "next/link";
 
 export default function ICVinitiativeMobile() {
+    const { countryData } = useCountry();
+
     return (
         <section className="pb-[75px] w-full sm:hidden">
             <div className="w-full h-[290px] relative before:absolute before:left-0 before:content-[''] before:bottom-0 before:w-full before:h-full before:bg-black/40 before:z-1">
@@ -21,7 +24,7 @@ export default function ICVinitiativeMobile() {
             </div>
             <div className="container">
                 <div className="py-[30px]">
-                    <p className="text-black">Khimji Ramdas ICT initiatives drive digital transformation through innovative solutions, smart technologies,
+                    <p className="text-black">Khimji Ramdas {countryData.name === 'Oman' ? 'ICT' : 'Value-Driven'} initiatives drive digital transformation through innovative solutions, smart technologies,
                         and enhanced connectivity</p>
                 </div>
                 <div className="relative">
@@ -40,17 +43,17 @@ export default function ICVinitiativeMobile() {
                         <SwiperSlide>
                             <div className="w-full h-full overflow-hidden">
                                 <div className="w-full aspect-[400/370] overflow-hidden">
-                                    <Image src="/images/icv-1.jpg" width="400" height="370" className="w-full h-full object-cover" alt="ventureImg"/>
+                                    <Image src="/images/icv-1.jpg" width="400" height="370" className="w-full h-full object-cover" alt="ventureImg" />
                                 </div>
                                 <div className="text-[20px] xs:text-[25px] text-[#0B436A] uppercase m-[15px_0] ">
-                                    Partnered Omani SME for sewage treatment project
+                                    Partnered {countryData.name === 'Oman' ? 'Omani' : countryData.name} SME for sewage treatment project
                                 </div>
                             </div>
                         </SwiperSlide>
                         <SwiperSlide>
                             <div className="w-full h-full overflow-hidden">
                                 <div className="w-full aspect-[400/370] overflow-hidden">
-                                    <Image src="/images/icv-1.jpg" width="400" height="370" className="w-full h-full object-cover" alt="ventureImg"/>
+                                    <Image src="/images/icv-1.jpg" width="400" height="370" className="w-full h-full object-cover" alt="ventureImg" />
                                 </div>
                                 <div className="text-[20px] xs:text-[25px] text-[#0B436A] uppercase m-[15px_0] ">
                                     Another ICV Initiative Project
@@ -63,7 +66,7 @@ export default function ICVinitiativeMobile() {
                     <button className="swiper-button-prev-icv absolute left-4 top-[calc(50%-60px)] -translate-y-1/2 z-10 w-[34px] h-[34px] flex items-center justify-center bg-white hover:bg-gray-100 rounded-full shadow-lg transition-all">
                         <svg width="14" height="13" viewBox="0 0 14 13" >
                             <path d="M0.245458 6.76397C-0.0818176 6.4367 -0.0818176 5.90608 0.245458 5.5788L5.57871 0.245555C5.90598 -0.0817194 6.4366 -0.0817194 6.76387 0.245555C7.09115 0.57283 7.09115 1.10345 6.76387 1.43072L2.02321 6.17139L6.76387 10.9121C7.09115 11.2393 7.09115 11.7699 6.76387 12.0972C6.4366 12.4245 5.90598 12.4245 5.57871 12.0972L0.245458 6.76397ZM13.6497 6.17139V7.00943H0.83804V6.17139V5.33335H13.6497V6.17139Z" fill="#299B8A" />
-                        </svg> 
+                        </svg>
                     </button>
                     <button className="swiper-button-next-icv absolute right-4 top-[calc(50%-60px)] -translate-y-1/2 z-10 w-[34px] h-[34px] flex items-center justify-center bg-white hover:bg-gray-100 rounded-full shadow-lg transition-all">
                         <svg width="14" height="13" viewBox="0 0 14 13"  >

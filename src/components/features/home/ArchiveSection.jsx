@@ -168,20 +168,20 @@ export default function ArchiveSection() {
                 globeContainerRef.current.innerHTML = '';
 
                 // Set responsive dimensions
-                const isMobile = window.innerWidth < 1024; // lg breakpoint
-                const globeWidth = isMobile ? 350 : globeContainerRef.current.offsetWidth;
-                const globeHeight = isMobile ? 350 : 650;
+                const isMobile = window.innerWidth < 1024;
+                const containerWidth = globeContainerRef.current.offsetWidth || (isMobile ? 350 : 600);
+                const containerHeight = isMobile ? 350 : 650;
 
                 const globe = Globe()(globeContainerRef.current)
                     .globeImageUrl(
-                        "https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
+                        "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
                     )
                     .bumpImageUrl(
-                        "https://unpkg.com/three-globe/example/img/earth-topology.png"
+                        "//unpkg.com/three-globe/example/img/earth-topology.png"
                     )
-                    .backgroundColor("rgba(220,245,255,0.0)")
-                    .width(globeWidth)
-                    .height(globeHeight);
+                    .backgroundColor("rgba(0,0,0,0)")
+                    .width(containerWidth)
+                    .height(containerHeight);
 
                 globe
                     .pointsData([])
@@ -213,6 +213,18 @@ export default function ArchiveSection() {
                     globeInstanceRef.current = globe;
                     setGlobeReady(true);
                     setIsLoading(false);
+
+                    // Handle window resize
+                    const handleResize = () => {
+                        if (globeInstanceRef.current && globeContainerRef.current) {
+                            const newWidth = globeContainerRef.current.offsetWidth;
+                            if (newWidth > 0) {
+                                globeInstanceRef.current.width(newWidth);
+                            }
+                        }
+                    };
+                    window.addEventListener('resize', handleResize);
+                    globe._resizeHandler = handleResize; // Store for cleanup
                 }
             } catch (err) {
                 console.error("Globe initialization error:", err);
@@ -227,11 +239,13 @@ export default function ArchiveSection() {
         return () => {
             isMounted = false;
             clearTimeout(timeoutId);
-            if (globeInstanceRef.current && typeof globeInstanceRef.current._destructor === 'function') {
-                try {
-                    globeInstanceRef.current._destructor();
-                } catch (e) {
-                    console.error("Globe cleanup error:", e);
+            if (globeInstanceRef.current) {
+                if (globeInstanceRef.current._resizeHandler) {
+                    window.removeEventListener('resize', globeInstanceRef.current._resizeHandler);
+                }
+                // Globe.gl destructor isn't always available, so we clear the container
+                if (globeContainerRef.current) {
+                    globeContainerRef.current.innerHTML = '';
                 }
             }
             globeInstanceRef.current = null;
@@ -474,9 +488,9 @@ export default function ArchiveSection() {
                         </Heading>
                     </motion.div>
 
-                       <motion.div
-                        className="absolute z-10  bottom-[5%] right-[70px] 2xl:right-[100px] 3xl:right-[150px] pointer-events-none  m-auto w-[110px] 2xl:w-[150px] 3xl:w-[205px] h-[110px] 2xl:h-[150px] 3xl:h-[205px] blur-[165px] round-full bg-[#2FDDC3] animate-float"
-                        
+                    <motion.div
+                        className="absolute z-10  bottom-[5%] right-[70px] 2xl:right-[100px] 3xl:right-[150px] pointer-events-none  m-auto w-[110px] 2xl:w-[150px] 3xl:w-[205px] h-[110px] 2xl:h-[150px] 3xl:h-[205px] blur-[165px] rounded-full bg-[#2FDDC3] animate-float"
+
                     />
 
                     <div className="flex justify-center flex-wrap gap-2 lg:gap-5 xl:gap-6 2xl:gap-7 3xl:gap-8 mb-[60px] lg:mb-[30px]">
@@ -492,7 +506,7 @@ export default function ArchiveSection() {
                                         ? " max-lg:bg-gradient-to-r from-[#0B436A] to-[#299B8A] lg:bg-transparent text-white lg:text-[#289989] font-medium"
                                         : "text-[#000000] hover:text-[#289989]"
                                     }`}
-                                
+
                             >
                                 {cat}
                             </button>
@@ -503,7 +517,7 @@ export default function ArchiveSection() {
                 {/* Globe */}
                 <div className="relative pointer-events-none">
                     <motion.div
-                        className="relative mb-8 w-full max-w-[650px] !h-[200px] md:!h-[400px] lg:!h-[650px] m-auto lg:bg-trnsparent after:absolute after:content-[''] 
+                        className="relative mb-8 w-full max-w-[650px] !h-[200px] md:!h-[400px] lg:!h-[650px] m-auto lg:bg-transparent after:absolute after:content-[''] 
                         after:bottom-0 after:left-0 after:right-0 after:bg-white after:w-full after:h-[265px] after:3xl:h-[270px] after:hidden"
                         variants={globeContainerVariants}
                         initial="hidden"
@@ -657,7 +671,7 @@ export default function ArchiveSection() {
                                             ].map((item, idx) => (
                                                 <motion.div
                                                     key={idx}
-                                                    className={`w-full md:w-1/2 ${idx === 1 ? 'md:w-3/5' : 'md:w-2/5'} p-[8px]`}
+                                                    className={`w-full ${idx === 1 ? 'md:w-3/5' : 'md:w-2/5'} p-[8px]`}
                                                     custom={idx}
                                                     variants={iconItemVariants}
                                                     initial="hidden"
@@ -733,7 +747,18 @@ export default function ArchiveSection() {
                                                             )}
                                                         </div>
                                                         <div className={iconBlock}>
-                                                            <div className={textcontent}>{item.content}</div>
+                                                            {item.icon === "link" ? (
+                                                                <a
+                                                                    href={item.content}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className={`${textcontent} hover:text-[#299B8A] transition-colors break-all`}
+                                                                >
+                                                                    {item.content}
+                                                                </a>
+                                                            ) : (
+                                                                <div className={textcontent}>{item.content}</div>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </motion.div>

@@ -27,32 +27,32 @@ const ARROW_ICON_CLASS = `
 `;
 
 const VENTURE_SLIDES = [
-  {
-    video: "/videos/venture-1.mp4",
-    mobileImage: "/images/vetureCard-2.jpg",
-    title: "Logistics & Shipping",
-    description:
-      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: [
-      "/images/ship-1.png",
-      "/images/ship-2.png",
-      "/images/ship-3.png",
-      "/images/ship-4.png",
-    ],
-  },
-  {
-    video: "/videos/venture-2.mp4",
-      mobileImage: "/images/vetureCard-2.jpg",
-    title: "Logistics & Shipping",
-    description:
-      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: [
-      "/images/ship-1.png",
-      "/images/ship-2.png",
-      "/images/ship-3.png",
-      "/images/ship-4.png",
-    ],
-  },
+    {
+        video: "/videos/venture-1.mp4",
+        mobileImage: "/images/vetureCard-2.jpg",
+        title: "Logistics & Shipping",
+        description:
+            "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
+        logos: [
+            "/images/ship-1.png",
+            "/images/ship-2.png",
+            "/images/ship-3.png",
+            "/images/ship-4.png",
+        ],
+    },
+    {
+        video: "/videos/venture-2.mp4",
+        mobileImage: "/images/vetureCard-2.jpg",
+        title: "Logistics & Shipping",
+        description:
+            "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
+        logos: [
+            "/images/ship-1.png",
+            "/images/ship-2.png",
+            "/images/ship-3.png",
+            "/images/ship-4.png",
+        ],
+    },
 ];
 
 
@@ -209,7 +209,7 @@ export default function VentureSection() {
                 >
                     {/* Animated Background Dot */}
                     <motion.div
-                        className="absolute top-0 bottom-0 right-[70px] 2xl:right-[100px] 3xl:right-[150px] m-auto w-[150px] 2xl:w-[200px] 3xl:w-[245px] h-[150px] 2xl:h-[200px] 3xl:h-[245px] blur-[165px] round-full bg-[#2FDDC3] animate-float"
+                        className="absolute top-0 bottom-0 right-[70px] 2xl:right-[100px] 3xl:right-[150px] m-auto w-[150px] 2xl:w-[200px] 3xl:w-[245px] h-[150px] 2xl:h-[200px] 3xl:h-[245px] blur-[165px] rounded-full bg-[#2FDDC3] animate-float"
                         variants={floatDotVariants}
                     />
 
@@ -328,7 +328,7 @@ export default function VentureSection() {
                 >
                     {/* Animated Background Dot */}
                     <motion.div
-                        className="absolute top-0 bottom-0 left-[70px] 2xl:left-[100px] 3xl:left-[150px] m-auto w-[150px] 2xl:w-[200px] 3xl:w-[245px] h-[150px] 2xl:h-[200px] 3xl:h-[245px] blur-[165px] round-full bg-[#0B436A] animate-float"
+                        className="absolute top-0 bottom-0 left-[70px] 2xl:left-[100px] 3xl:left-[150px] m-auto w-[150px] 2xl:w-[200px] 3xl:w-[245px] h-[150px] 2xl:h-[200px] 3xl:h-[245px] blur-[165px] rounded-full bg-[#0B436A] animate-float"
                         variants={floatDotVariants}
                     />
 

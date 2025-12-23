@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import CircularSwiper from "./CircularSwiper";
 import HeritageMobile from "./home-mobile/HeritageMobile";
+import { useCountry } from "@/context/CountryContext";
 
 const CONTACT_BUTTON_CLASS = `
   text-[12px] 2xl:text-[16px] 3xl:text-[18px]
@@ -72,6 +73,7 @@ const Counter = ({ end, suffix = "" }) => {
 };
 
 export default function HeritageSection() {
+    const { countryData } = useCountry();
     const counterContainerRef = useRef(null);
     const [counterVisible, setCounterVisible] = useState(false);
 
@@ -248,7 +250,7 @@ export default function HeritageSection() {
                                     className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px] line-clamp-3"
                                     variants={fadeInUp}
                                 >
-                                    For over 150 years, Khimji Ramdas has driven Oman's progress, blending tradition with innovation and connecting
+                                    For over 150 years, Khimji Ramdas has driven {countryData.name}'s progress, blending tradition with innovation and connecting
                                     global brands to local markets. Guided by strong values, we create opportunities, empower lives, and foster sustainable growth
                                 </motion.p>
 
