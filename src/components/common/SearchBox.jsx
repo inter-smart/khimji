@@ -74,7 +74,7 @@ export default function SearchBox() {
                 className={`
                       absolute right-0 flex items-center
                       transition-all duration-500 ease-out
-                      ${isSearchOpen ? 'w-[280px] opacity-100 translate-x-0' : 'w-0 opacity-0 pointer-events-none'}
+                      ${isSearchOpen ? 'w-[300px] sm:w-[280px] opacity-100 translate-x-0' : 'w-0 opacity-0 pointer-events-none'}
                     `}
             >
                 <div className="relative w-full">
