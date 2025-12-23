@@ -187,7 +187,7 @@ export default function VentureListingSection() {
             <div className="mb-[20px] 2xl:mb-[40px] 3xl:mb-[60px]">
               <div className="text-[16px] md:text-[18px] lg:text-[25px] xl:text-[30px] 2xl:text-[35px] 3xl:text-[40px] font-medium bg-gradient-to-r from-[#0B436A]
                 to-[#299B8A] from-[30%] to-[100%] bg-clip-text text-transparent
-                uppercase tracking-wide !mb-[10px] 2xl:!mb-[10px] 3xl:!mb-[15px]">
+                uppercase tracking-wide !mb-[10px] 2xl:!mb-[10px] 3xl:!mb-[15px] w-fit">
                 Corporate Oriented
               </div>
               <p>Khimji Ramdas drives growth across Retail, Infrastructure, Logistics, Lifestyle, and Travel. Through strong joint ventures and international presence, we connect markets and enrich communities</p>

@@ -8,8 +8,8 @@ import "swiper/css";
 export default function BoardDirectorSection({ data }) {
   return (
     <section className="[--gradient:70px] sm:[--gradient:100px] lg:[--gradient:120px] 2xl:[--gradient:140px] 3xl:[--gradient:180px] w-full h-auto py-[40px] sm:py-[60px_50px] lg:py-[80px_70px] 2xl:py-[100px_90px] 3xl:py-[125px_110px] relative z-0">
-      <div className="animate-float w-[var(--gradient)] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] absolute -z-1 inset-[auto_auto_30%_-2%]"></div>
-      <div className="animate-float w-[var(--gradient)] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] absolute -z-1 inset-[30%_0_auto_auto]"></div>
+      <div className="animate-float w-[var(--gradient)] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] pointer-events-none absolute -z-1 inset-[auto_auto_30%_-2%]"></div>
+      <div className="animate-float w-[var(--gradient)] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] pointer-events-none absolute -z-1 inset-[30%_0_auto_auto]"></div>
       <div className="container">
         <Heading
           as="h2"

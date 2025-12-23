@@ -1,7 +1,7 @@
 "use client";
-import { Heading } from "@/components/layout/Heading";
 import Image from "next/image";
 import CountUp from "react-countup";
+import { Heading } from "@/components/layout/Heading";
 
 export default function DrivenSection({ data }) {
   return (
@@ -37,17 +37,17 @@ export default function DrivenSection({ data }) {
                 />
               </div>
               <div className="w-full h-auto mx-[-5px] sm:mx-[-10px] flex items-center">
-                {data?.counterList.map((item, index) => (
+                {data?.counterList?.map((item, index) => (
                   <div key={index} className="w-1/4 px-[5px] sm:px-[10px]">
                     <div className="text-[24px] sm:text-[32px] lg:text-[38px] 2xl:text-[45px] 3xl:text-[58px] leading-[1.2] font-normal bg-gradient-to-r from-[#0B436A] to-[#299B8A] bg-clip-text text-transparent mb-[5px] lg:mb-[10px]">
-                      {/* <CountUp
+                      <CountUp
                         start={0}
                         end={item?.value || 0}
                         duration={2.5}
                         separator=","
                         suffix={item?.symbol || "+"}
                         enableScrollSpy={true}
-                      /> */}
+                      />
                     </div>
                     <div className="text-[10px] sm:text-[12px] lg:text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.1] font-normal text-[#013763]">
                       {item?.label}
