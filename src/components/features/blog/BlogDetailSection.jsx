@@ -7,7 +7,7 @@ export default function BlogDetailSection({ data }) {
             <div className="w-[170px] sm:w-[220px] 2xl:w-[285px] 3xl:w-[370px] h-auto aspect-square bg-[#1A9BF5] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[180px] pointer-events-none opacity-40 absolute -z-1 inset-[15%_0_auto_auto]"></div>
             <div className="w-[170px] sm:w-[220px] 2xl:w-[285px] 3xl:w-[370px] h-auto aspect-square bg-[#1A9BF5] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[150px] pointer-events-none opacity-40 absolute -z-1 inset-[35%_auto_auto_-10%]"></div>
             <div className="container">
-                <div className="text-[18px] sm:text-[24px] lg:text-[34px] 2xl:text-[40px] 3xl:text-[50px] leading-[1.5] font-normal text-[#0B436A] mb-[20px] sm:mb-[30px] 2xl:mb-[40px] 3xl:mb-[50px]">{data?.title}</div>
+                <h1 className="text-[18px] sm:text-[24px] lg:text-[34px] 2xl:text-[40px] 3xl:text-[50px] leading-[1.5] font-normal text-[#0B436A] mb-[20px] sm:mb-[30px] 2xl:mb-[40px] 3xl:mb-[50px]">{data?.title}</h1>
                 <div className="group w-full h-auto aspect-[1640/590] mb-[30px] sm:mb-[40px] lg:mb-[50px] 2xl:mb-[60px] 3xl:mb-[80px] rounded-[5px] sm:rounded-[7px] 2xl:rounded-[10px] overflow-hidden block">
                     <Image
                         src={data?.media?.path || "/images/placeholder.png"}

@@ -15,7 +15,7 @@ export default function VendordetailsSection({ breadCrumb_data, pageData }) {
   return (
     <section className="py-[40px] 2xl:py-[55px] 3xl:py-[75px] max-sm:pt-[170px]">
       <div className="container">
-        <Heading as="h2" size="heading1" className="mb-[15px]">
+        <Heading as="h1" size="heading1" className="mb-[15px]">
           {pageData.title}
         </Heading>
 
@@ -73,9 +73,9 @@ export default function VendordetailsSection({ breadCrumb_data, pageData }) {
           )}
         </div>
 
-        <div className="lg:text-[22px] xl:text-[30px] 2xl:text-[40px] 3xl:text-[50px] text-[#0B436A] font-normal uppercase mb-[10px] xl:mb-[15px] 2xl:mb-[25px] 3xl:mb-[30px]">
+        <h2 className="lg:text-[22px] xl:text-[30px] 2xl:text-[40px] 3xl:text-[50px] text-[#0B436A] font-normal uppercase mb-[10px] xl:mb-[15px] 2xl:mb-[25px] 3xl:mb-[30px]">
           {pageData.tagline}
-        </div>
+        </h2>
 
         <p>{pageData.description}</p>
 

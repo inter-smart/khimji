@@ -481,7 +481,7 @@ export default function ArchiveSection() {
                     <motion.div variants={fadeInUp}>
                         <Heading
                             size="heading1"
-                            as="h2"
+                            as="h3"
                             className="max-sm:text-[35px] max-lg:text-[43px] mb-[20px] 2xl:mb-[40px] 3xl:mb-[50px]"
                         >
                             Archives
@@ -490,7 +490,6 @@ export default function ArchiveSection() {
 
                     <motion.div
                         className="absolute z-10  bottom-[5%] right-[70px] 2xl:right-[100px] 3xl:right-[150px] pointer-events-none  m-auto w-[110px] 2xl:w-[150px] 3xl:w-[205px] h-[110px] 2xl:h-[150px] 3xl:h-[205px] blur-[165px] rounded-full bg-[#2FDDC3] animate-float"
-
                     />
 
                     <div className="flex justify-center flex-wrap gap-2 lg:gap-5 xl:gap-6 2xl:gap-7 3xl:gap-8 mb-[60px] lg:mb-[30px]">

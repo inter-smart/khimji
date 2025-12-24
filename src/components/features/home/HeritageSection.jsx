@@ -241,7 +241,7 @@ export default function HeritageSection() {
                                 variants={slideInFromLeft}
                             >
                                 <motion.div variants={fadeInUp}>
-                                    <Heading size="heading1" as="div">
+                                    <Heading size="heading1" as="h2">
                                         Heritage
                                     </Heading>
                                 </motion.div>

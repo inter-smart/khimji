@@ -20,6 +20,10 @@ const Nobel = localFont({
   display: "swap",
 });
 
+export const metadata = {
+  title: "Khimji Ramdas",
+  description: "Khimji Ramdas is a Ramdas company",
+};
 
 export default async function RootLayout({ children }) {
   return (

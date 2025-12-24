@@ -186,7 +186,7 @@ export default function VentureSection() {
                         transition={{ duration: 0.8 }}
                         viewport={{ once: true, amount: 0.3 }}
                     >
-                        <Heading size="heading1" as="h2" className="text-center">
+                        <Heading size="heading1" as="h1" className="text-center">
                             Ventures
                         </Heading>
                     </motion.div>
