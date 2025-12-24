@@ -13,7 +13,8 @@ export default function BannerSection() {
   const { countryData } = useCountry();
   return (
     <>
-      <section className="py-[60px_40px] xl:py-[60px_40px] 2xl:py-[80px_40px] 3xl:py-[145px_60px] overflow-hidden max-sm:hidden">
+      <section className="py-[60px_40px] xl:py-[60px_40px] 2xl:py-[80px_40px] 3xl:py-[145px_60px] max-sm:hidden relative z-0">
+        <div className="w-[120px] sm:w-[180px] 2xl:w-[225px] 3xl:w-[280px] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] pointer-events-none absolute -z-1 inset-[0_auto_auto_-2%]"></div>
         <div className="container">
           <div className="flex flex-wrap -m-[8px]">
             <div className="w-4/12 p-[8px] flex items-center">
