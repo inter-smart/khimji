@@ -2,6 +2,8 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import { isRTLLocale } from "@/lib/countries";
+import { useParams } from "next/navigation";
 import "swiper/css";
 import "swiper/css/autoplay";
 import Image from "next/image";
@@ -27,15 +29,21 @@ const CONTACT_BUTTON_CLASS = "text-[12px] 2xl:text-[16px] 3xl:text-[18px] text-w
 const ARROW_ICON_CLASS = "w-[14px] h-[14px] flex items-center mt-[5px] mx-[15px] transition-transform duration-300 group-hover:translate-x-1";
 const SOCIAL_ICON_CLASS = "transition-all duration-300 hover:text-white/70 hover:scale-125 group  ";
 
+
+
 export default function Footer() {
+    const { locale } = useParams();
+    const isRTL = isRTLLocale(locale);
+
     return (
         <>
             <section className="w-full relative bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[30px] overflow-hidden max-sm:hidden">
-                <div className="container"> 
+                <div className="container">
                     {/* BRAND SLIDER */}
                     <div className="flex flex-wrap pb-[30px] border-b border-white/20 mb-[65px] ">
                         <div className="w-full">
                             <Swiper
+                                dir={isRTL ? "rtl" : "ltr"}
                                 modules={[Autoplay]}
                                 autoplay={{ delay: 0, disableOnInteraction: false }}
                                 speed={2500}
@@ -140,7 +148,7 @@ export default function Footer() {
                         <div className="w-3/12">
 
                             {/* LOGO */}
-                            <div className="flex flex-col items-end text-right max-w-[175px] xl:max-w-[200px] 2xl:max-w-[265px] 3xl:max-w-[320px] ml-auto">
+                            <div className="flex flex-col items-end text-end max-w-[175px] xl:max-w-[200px] 2xl:max-w-[265px] 3xl:max-w-[320px] ms-auto">
                                 <Link href="/" className="max-w-[130px] xl:max-w-[165px] 2xl:max-w-[210px] 3xl:max-w-[250px] w-full mb-[25px] xl:mb-[30px] 2xl:mb-[35px] 3xl:mb-[50px] block transition-[0.5s] hover:scale-90">
                                     <Image
                                         src="/images/Logo-white-footer.png"

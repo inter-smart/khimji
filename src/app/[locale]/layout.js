@@ -21,9 +21,14 @@ const Nobel = localFont({
 });
 
 
-export default async function RootLayout({ children }) {
+import { isRTLLocale } from "@/lib/countries";
+
+export default async function RootLayout({ children, params }) {
+  const { locale } = await params;
+  const direction = isRTLLocale(locale) ? "rtl" : "ltr";
+
   return (
-    <html lang="en">
+    <html lang={locale} dir={direction}>
       <body className={`${Nobel.className}`}>
         <CountryProvider>
           <PageLoader />

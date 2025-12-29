@@ -203,7 +203,7 @@ body {
 
     ul,
     ol {
-      @apply pl-[20px] lg:pl-[30px];
+      @apply ps-[20px] lg:ps-[30px];
     }
 
     ul>li,

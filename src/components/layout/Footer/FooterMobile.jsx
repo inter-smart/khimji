@@ -17,13 +17,13 @@ export default function FooterMobile() {
                 <div className="w-full h-full border border-[#d9d9d93a] p-[15px] text-center rounded-[10px] bg-transparent backdrop-blur-[2px] mb-[30px]">
                     <div className="text-[16px] text-white uppercase mb-[10px]">Countries</div>
                     <div className="flex flex-wrap justify-center items-center gap-4">
-                        <div className="text-[14px] text-white pl-[10px] relative before:absolute before:top-0 before:left-0
+                        <div className="text-[14px] text-white ps-[10px] relative before:absolute before:top-0 before:start-0
                             before:bottom-0 before:content-[''] before:m-auto before:bg-[#D9D9D9] before:w-[5px] before:h-[5px] before:rounded-full ">India</div>
-                        <div className="text-[14px] text-white pl-[10px] relative before:absolute before:top-0 before:left-0
+                        <div className="text-[14px] text-white ps-[10px] relative before:absolute before:top-0 before:start-0
                             before:bottom-0 before:content-[''] before:m-auto before:bg-[#D9D9D9] before:w-[5px] before:h-[5px] before:rounded-full ">UAE</div>
-                        <div className="text-[14px] text-white pl-[10px] relative before:absolute before:top-0 before:left-0
+                        <div className="text-[14px] text-white ps-[10px] relative before:absolute before:top-0 before:start-0
                             before:bottom-0 before:content-[''] before:m-auto before:bg-[#D9D9D9] before:w-[5px] before:h-[5px] before:rounded-full ">Oman</div>
-                        <div className="text-[14px] text-white pl-[10px] relative before:absolute before:top-0 before:left-0
+                        <div className="text-[14px] text-white ps-[10px] relative before:absolute before:top-0 before:start-0
                             before:bottom-0 before:content-[''] before:m-auto before:bg-[#D9D9D9] before:w-[5px] before:h-[5px] before:rounded-full ">Saudi Arabia</div>
                     </div>
                 </div>

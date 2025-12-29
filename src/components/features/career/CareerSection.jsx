@@ -40,7 +40,7 @@ export default function CareerSection({ data }) {
                         className="text-[14px] lg:text-[16px] 2xl:text-[18px] 3xl:text-[20px] leading-[1] font-normal text-[#00416B] w-fit underline flex items-center hover:opacity-70 transition-opacity duration-300"
                     >
                         {data?.button?.label}
-                        <span className="w-[15px] 3xl:w-[20px] h-auto aspect-square ml-[8px] sm:ml-[10px] 3xl:ml-[15px] mb-[-5px] flex items-center justify-center">
+                        <span className="w-[15px] 3xl:w-[20px] h-auto aspect-square ms-[8px] sm:ms-[10px] 3xl:ms-[15px] mb-[-5px] flex items-center justify-center">
                             <Image
                                 src="/images/career_arrow.svg"
                                 alt="Arrow"
@@ -70,7 +70,7 @@ export default function CareerSection({ data }) {
                                             </div>
                                             <div
                                                 onClick={(e) => e.stopPropagation()}
-                                                className="w-full sm:w-[20%] flex sm:justify-end sm:pl-[10px]  ">
+                                                className="w-full sm:w-[20%] flex sm:justify-end sm:ps-[10px]  ">
                                                 <Dialog className="w-full">
                                                     <DialogTrigger asChild>
                                                         <div className="text-[12px] 2xl:text-[15px] 3xl:text-[18px] leading-[1.2] font-normal text-black p-[10px_15px] 2xl:p-[15px_20px] 3xl:p-[15px_25px] rounded-[5px] border-1 border-black hover:bg-black hover:text-white transition-all duration-300">Apply Now</div>
@@ -86,7 +86,7 @@ export default function CareerSection({ data }) {
                                 </AccordionTrigger>
                                 <AccordionContent>
                                     <div className="w-full h-auto py-[10px] sm:py-[20px] 2xl:py-[20px_30px] 3xl:py-[20px_40px] flex flex-wrap">
-                                        <div className="w-full sm:w-[35%] sm:mr-10 max-sm:mb-[20px]">
+                                        <div className="w-full sm:w-[35%] sm:me-10 max-sm:mb-[20px]">
                                             <div className="text-[16px] 3xl:text-[20px] leading-[1] font-normal text-[#00416B] mb-[15px] sm:mb-[25px]">
                                                 Responsibilities:
                                             </div>

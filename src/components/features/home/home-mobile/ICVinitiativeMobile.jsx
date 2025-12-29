@@ -8,9 +8,13 @@ import "swiper/css/navigation";
 import Image from "next/image";
 import { useCountry } from "@/context/CountryContext";
 import Link from "next/link";
+import { useParams } from "next/navigation";
+import { isRTLLocale } from "@/lib/countries";
 
 export default function ICVinitiativeMobile() {
     const { countryData } = useCountry();
+    const { locale } = useParams();
+    const isRTL = isRTLLocale(locale);
 
     return (
         <section className="pb-[75px] w-full sm:hidden">
@@ -29,6 +33,7 @@ export default function ICVinitiativeMobile() {
                 </div>
                 <div className="relative">
                     <Swiper
+                        dir={isRTL ? "rtl" : "ltr"}
                         modules={[Navigation]}
                         navigation={{
                             nextEl: '.swiper-button-next-icv',
