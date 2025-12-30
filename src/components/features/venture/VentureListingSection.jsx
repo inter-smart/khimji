@@ -1,10 +1,12 @@
-"use client"
+"use client";
 
 import { Heading } from "@/components/layout/Heading";
 import Link from "next/link";
-import { Tabs, TabsContent, TabsList, TabsTrigger, } from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import VentureCard from "@/components/common/VentureCard";
+import { useState, useEffect } from "react";
+import { renderHtml } from "@/lib/helper";
 
 // Ventures data array
 const corporateVentures = [
@@ -126,30 +128,68 @@ const consumerVentures = [
   // Add consumer ventures data here if needed
 ];
 
-export default function VentureListingSection() {
+export default function VentureListingSection({ data, title }) {
+  const [activeSlug, setActiveSlug] = useState(null);
+  const [ventures, setVentures] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const API_BASE_URL =
+    process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
+
+  const fetchVentures = async (slug) => {
+    if (!slug) return;
+
+    setLoading(true);
+
+    try {
+      const res = await fetch(
+        `${API_BASE_URL}/api/venture-list?category_slug=${slug}&per_page=8&page=1`,
+        {
+          method: "GET",
+          headers: {
+            "Accept-Language": "en",
+            "Location-Slug": "united-arab-emirates",
+            "Business-Slug": "b2b",
+          },
+        }
+      );
+
+      const json = await res.json();
+      setVentures(json?.data || []);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchVentures(activeSlug);
+  }, [activeSlug]);
+
   return (
     <section className="relative py-[40px] xl:py-[60px] 2xl:py-[80px] 3xl:py-[140px]">
       {/* Animated Background Dot */}
-      <div
-        className="absolute top-0 bottom-0 left-[70px] 2xl:left-[100px] 3xl:left-[150px] m-auto w-[150px] 2xl:w-[200px] 3xl:w-[245px] h-[150px] 2xl:h-[200px] 3xl:h-[245px] blur-[165px] rounded-full bg-[#2FDDC3] animate-float"
-
-      />
+      <div className="absolute top-0 bottom-0 left-[70px] 2xl:left-[100px] 3xl:left-[150px] m-auto w-[150px] 2xl:w-[200px] 3xl:w-[245px] h-[150px] 2xl:h-[200px] 3xl:h-[245px] blur-[165px] rounded-full bg-[#2FDDC3] animate-float" />
 
       <div className="container">
-        <Tabs defaultValue="corporate" className="w-full mb-[35px ]">
+        <Tabs
+          defaultValue={data[0]?.slug}
+          onValueChange={(value) => setActiveSlug(value)}
+          className="w-full mb-[35px ]"
+        >
           <div className="flex flex-wrap justify-between items-center gap-2 mb-[20px] xl:mb-[30px] 2xl:mb-[50px] 3xl:mb-[70px]">
-            <Heading
-              as="h2"
-              size="heading1"
-              className="mb-[10px] sm:!mb-0"
-            >Ventures</Heading>
+            <Heading as="h2" size="heading1" className="mb-[10px] sm:!mb-0">
+              {title}
+            </Heading>
 
             {/* Tabs Header */}
             <TabsList className="flex items-center  bg-transparent -m-[3px] max-sm:w-full">
-              <div className="w-1/2 px-[3px]">
-                <TabsTrigger
-                  value="corporate"
-                  className=" w-full
+              {data?.map((item, index) => (
+                <div key={index} className="w-1/2 px-[3px]">
+                  <TabsTrigger
+                    value={item?.slug}
+                    onClick={() => setActiveSlug(item.slug)}
+                    className=" w-full
                   text-[11px] xs:text-[16px]
                   border border-[#2E8B8B]
                   cursor-pointer
@@ -158,11 +198,14 @@ export default function VentureListingSection() {
                   data-[state=active]:to-[#299B8A]
                   data-[state=active]:text-white
                   data-[state=inactive]:text-[#000000]
-                  rounded-none py-2 px-3 font-medium"  >
-                  CORPORATE ORIENTED
-                </TabsTrigger>
-              </div>
+                  rounded-none py-2 px-3 font-medium"
+                  >
+                    {item?.title}
+                  </TabsTrigger>
+                </div>
+              ))}
 
+              {/* 
               <div className="w-1/2 px-[3px]">
                 <TabsTrigger
                   value="consumer"
@@ -178,29 +221,36 @@ export default function VentureListingSection() {
                   rounded-none py-2 px-3  font-medium "  >
                   CONSUMER ORIENTED
                 </TabsTrigger>
-              </div>
+              </div> */}
             </TabsList>
           </div>
 
-          {/* Content */}
-          <TabsContent value="corporate" >
-            <div className="mb-[20px] 2xl:mb-[40px] 3xl:mb-[60px]">
-              <div className="text-[16px] md:text-[18px] lg:text-[25px] xl:text-[30px] 2xl:text-[35px] 3xl:text-[40px] font-medium bg-gradient-to-r from-[#0B436A]
+          {data?.map((item, index) => (
+            <TabsContent key={index} value={item?.slug}>
+              <div className="mb-[20px] 2xl:mb-[40px] 3xl:mb-[60px]">
+                <div
+                  className="text-[16px] md:text-[18px] lg:text-[25px] xl:text-[30px] 2xl:text-[35px] 3xl:text-[40px] font-medium bg-gradient-to-r from-[#0B436A]
                 to-[#299B8A] from-[30%] to-[100%] bg-clip-text text-transparent
-                uppercase tracking-wide !mb-[10px] 2xl:!mb-[10px] 3xl:!mb-[15px] w-fit">
-                Corporate Oriented
-              </div>
-              <p>Khimji Ramdas drives growth across Retail, Infrastructure, Logistics, Lifestyle, and Travel. Through strong joint ventures and international presence, we connect markets and enrich communities</p>
-            </div>
-            <div className="flex flex-wrap -m-[5px] lg:-m-[10px] 3xl:-m-[15px]">
-              {corporateVentures.map((venture) => (
-                <div key={venture.id} className="w-full sm:w-1/2 p-[5px]  lg:p-[10px] 3xl:p-[15px]">
-                  <VentureCard item={venture} />
+                uppercase tracking-wide !mb-[10px] 2xl:!mb-[10px] 3xl:!mb-[15px] w-fit"
+                >
+                  {item?.title}
                 </div>
-              ))}
-            </div>
-          </TabsContent>
+                {renderHtml(item?.description)}
+              </div>
+              <div className="flex flex-wrap -m-[5px] lg:-m-[10px] 3xl:-m-[15px]">
+                {ventures?.ventures?.map((venture) => (
+                  <div
+                    key={venture?.id}
+                    className="w-full sm:w-1/2 p-[5px]  lg:p-[10px] 3xl:p-[15px]"
+                  >
+                    <VentureCard item={venture} />
+                  </div>
+                ))}
+              </div>
+            </TabsContent>
+          ))}
 
+          {/* 
           <TabsContent value="consumer" >
             <div className="mb-[20px] 2xl:mb-[40px] 3xl:mb-[60px]">
               <div className="text-[16px] md:text-[18px] lg:text-[25px] xl:text-[30px] 2xl:text-[35px] 3xl:text-[40px] font-medium bg-gradient-to-r from-[#0B436A]
@@ -217,11 +267,9 @@ export default function VentureListingSection() {
                 </div>
               ))}
             </div>
-          </TabsContent>
-
+          </TabsContent> */}
         </Tabs>
-
       </div>
-    </section >
-  )
-}  
+    </section>
+  );
+}
