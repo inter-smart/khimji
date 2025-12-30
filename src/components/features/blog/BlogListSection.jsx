@@ -15,6 +15,9 @@ const pagination = {
 }
 
 export default function BlogListSection({ data }) {
+
+    console.log(data);
+
     return (
         <section className="w-full h-auto py-[40px] sm:py-[50px] lg:py-[60px_70px] 2xl:py-[70px_90px] 3xl:py-[90px_115px] overflow-hidden block relative z-0">
             <div className="w-[120px] sm:w-[180px] 2xl:w-[225px] 3xl:w-[280px] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] pointer-events-none absolute -z-1 inset-[0_auto_auto_-2%]"></div>
@@ -23,14 +26,17 @@ export default function BlogListSection({ data }) {
             <div className="container">
                 <div className="w-full h-auto mb-[40px] sm:mb-[60px] lg:mb-[80px] 2xl:mb-[110px] 3xl:mb-[140px]">
                     <div className='w-full mx-[-5px] sm:mx-[-7px] 2xl:mx-[-10px] flex flex-wrap'>
-                        {data?.blogList?.map((item, index) => (
+                        {data?.blogs?.map((item, index) => (
                             <div key={index} className="w-full sm:w-1/2 lg:w-1/3 p-[5px] sm:p-[7px] 2xl:p-[10px]">
                                 <BlogCard item={item} />
                             </div>
                         ))}
                     </div>
                 </div>
+
+                {data?.length>12 &&
                 <CustomPagination data={pagination} />
+            }
             </div>
         </section>
     )

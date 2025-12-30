@@ -1,5 +1,6 @@
 import InnerHero from "@/components/common/InnerHero";
 import BlogListSection from "@/components/features/blog/BlogListSection";
+import { getAPI } from "@/lib/api";
 
 const local_data = {
   blogdata: {
@@ -176,20 +177,26 @@ const local_data = {
   },
 };
 
-export default function page() {
+export default async function page() {
+
+  const {data:cms} = await getAPI("blogs");
+  const {data:blogs} = await getAPI("blog-list");
+
+  const bannerData = cms?.banner;
+
   return (
     <>
       <InnerHero
-        coverImage="/images/blog_innerbanner.jpg"
-        coverImageMobile="/images/blog_innerbanner.jpg"
-        alt="Blog Banner"
-        title="Blogs"
+        coverImage={bannerData?.banner}
+        coverImageMobile={bannerData?.banner_mobile}
+        alt={bannerData?.banner_alt_text}
+        title={bannerData?.banner_title}
         breadCrumb_data={[
           { link: { href: "/", label: "Home" } },
           { link: { href: "/blog", label: "Blogs" } },
         ]}
       />
-      <BlogListSection data={local_data?.blogdata} />
+      <BlogListSection data={blogs} />
     </>
   );
 }
