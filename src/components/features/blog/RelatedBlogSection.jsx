@@ -6,6 +6,9 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
 export default function RelatedBlogSection({ data }) {
+
+    console.log(data)
+
     return (
         <section className="w-full h-auto py-[5px_40px] sm:py-[10px_60px] lg:py-[10px_80px] 2xl:py-[10px_100px] 3xl:py-[10px_125px] block">
             <div className="container">
@@ -43,7 +46,7 @@ export default function RelatedBlogSection({ data }) {
                     }}
                     className="related_blog_Slider"
                 >
-                    {data?.related_blogs?.map((item, index) => (
+                    {data?.map((item, index) => (
                         <SwiperSlide key={index}>
                             <BlogCard item={item} />
                         </SwiperSlide>

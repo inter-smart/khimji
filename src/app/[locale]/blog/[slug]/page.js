@@ -1,5 +1,6 @@
 import BlogDetailSection from "@/components/features/blog/BlogDetailSection";
 import RelatedBlogSection from "@/components/features/blog/RelatedBlogSection";
+import { getAPI } from "@/lib/api";
 
 const local_data = {
   blog_detail_section_data: {
@@ -83,11 +84,19 @@ const local_data = {
   },
 };
 
-export default function page() {
+export default async function page({params}) {
+
+ const resolvedParams = await Promise.resolve(params);
+const { slug } = resolvedParams;
+
+  const {data, error} = await getAPI(`blog-details?slug=${slug}`);
+  const local_data = data?.status ? data?.data : null
+
+
   return (
     <>
-      <BlogDetailSection data={local_data?.blog_detail_section_data} />
-      <RelatedBlogSection data={local_data?.related_blog_section_data} />
+      <BlogDetailSection data={data} />
+      <RelatedBlogSection data={data?.related_blogs} />
     </>
   );
 }
