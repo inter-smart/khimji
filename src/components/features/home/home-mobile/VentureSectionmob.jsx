@@ -6,7 +6,8 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import Link from "next/link";
-
+import { useParams } from "next/navigation";
+import { isRTLLocale } from "@/lib/countries";
 import {
     Tabs,
     TabsContent,
@@ -18,36 +19,39 @@ import VentureCard from "@/components/common/VentureCard";
 
 
 const VENTURE_SLIDES = [
-  {
-    video: "/videos/venture-1.mp4",
-    mobileImage: "/images/vetureCard-1.jpg",
-    title: "Logistics & Shipping",
-    description:
-      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: [
-      "/images/ship-1.png",
-      "/images/ship-2.png",
-      "/images/ship-3.png",
-      "/images/ship-4.png",
-    ],
-  },
-  {
-    video: "/videos/venture-2.mp4",
-      mobileImage: "/images/vetureCard-1.jpg",
-    title: "Logistics & Shipping",
-    description:
-      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: [
-      "/images/ship-1.png",
-      "/images/ship-2.png",
-      "/images/ship-3.png",
-      "/images/ship-4.png",
-    ],
-  },
+    {
+        video: "/videos/venture-1.mp4",
+        mobileImage: "/images/vetureCard-1.jpg",
+        title: "Logistics & Shipping",
+        description:
+            "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
+        logos: [
+            "/images/ship-1.png",
+            "/images/ship-2.png",
+            "/images/ship-3.png",
+            "/images/ship-4.png",
+        ],
+    },
+    {
+        video: "/videos/venture-2.mp4",
+        mobileImage: "/images/vetureCard-1.jpg",
+        title: "Logistics & Shipping",
+        description:
+            "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
+        logos: [
+            "/images/ship-1.png",
+            "/images/ship-2.png",
+            "/images/ship-3.png",
+            "/images/ship-4.png",
+        ],
+    },
 ];
 
 
 export default function VentureSectionmob() {
+    const { locale } = useParams();
+    const isRTL = isRTLLocale(locale);
+
     return (
         <section className="sm:hidden mt-[3px]">
             <div className="w-full h-[290px] relative before:absolute before:left-0 before:content-[''] before:bottom-0 before:w-full before:h-full before:bg-black/40 before:z-1">
@@ -109,6 +113,7 @@ export default function VentureSectionmob() {
 
                         <div className="relative mt-[20px]">
                             <Swiper
+                                dir={isRTL ? "rtl" : "ltr"}
                                 modules={[Navigation]}
                                 navigation={{
                                     nextEl: '.swiper-button-next-custom',

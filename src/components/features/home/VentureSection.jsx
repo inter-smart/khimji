@@ -2,6 +2,8 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import { isRTLLocale } from "@/lib/countries";
+import { useParams } from "next/navigation";
 import "swiper/css";
 import "swiper/css/autoplay";
 import { motion } from "framer-motion";
@@ -56,7 +58,11 @@ const VENTURE_SLIDES = [
 ];
 
 
+
+
 export default function VentureSection() {
+    const { locale } = useParams();
+    const isRTL = isRTLLocale(locale);
     const sectionRef = useRef(null);
 
     // Animation variants
@@ -90,7 +96,7 @@ export default function VentureSection() {
     const slideInFromLeft = {
         hidden: {
             opacity: 0,
-            x: -50
+            x: isRTL ? 50 : -50
         },
         visible: {
             opacity: 1,
@@ -105,7 +111,7 @@ export default function VentureSection() {
     const slideInFromRight = {
         hidden: {
             opacity: 0,
-            x: 50
+            x: isRTL ? -50 : 50
         },
         visible: {
             opacity: 1,
@@ -135,7 +141,7 @@ export default function VentureSection() {
     const buttonVariants = {
         hidden: {
             opacity: 0,
-            x: -20
+            x: isRTL ? 20 : -20
         },
         visible: {
             opacity: 1,
@@ -196,10 +202,10 @@ export default function VentureSection() {
                 <motion.div
                     className="
                     relative 
-                    lg:!pl-[calc(((100%-var(--breakpoint-lg))/2)+var(--breakpoint-gap-lg))]
-                    xl:!pl-[calc(((100%-var(--breakpoint-xl))/2)+var(--breakpoint-gap-xl))]
-                    2xl:!pl-[calc(((100%-var(--breakpoint-2xl))/2)+var(--breakpoint-gap-2xl))]
-                    3xl:!pl-[calc(((100%-var(--breakpoint-3xl))/2)+var(--breakpoint-gap-3xl)/2)]
+                    lg:!ps-[calc(((100%-var(--breakpoint-lg))/2)+var(--breakpoint-gap-lg))]
+                    xl:!ps-[calc(((100%-var(--breakpoint-xl))/2)+var(--breakpoint-gap-xl))]
+                    2xl:!ps-[calc(((100%-var(--breakpoint-2xl))/2)+var(--breakpoint-gap-2xl))]
+                    3xl:!ps-[calc(((100%-var(--breakpoint-3xl))/2)+var(--breakpoint-gap-3xl)/2)]
                     not-last-of-type:mb-[20px] not-last-of-type:xl:mb-[60px] not-last-of-type:2xl:mb-[100px] not-last-of-type:3xl:mb-[140px]
                 "
                     variants={containerVariants}
@@ -261,7 +267,7 @@ export default function VentureSection() {
                         </div>
 
                         {/* RIGHT CONTENT - Swiper */}
-                        <div className="w-full lg:w-[calc(100%-240px)] xl:w-[calc(100%-300px)] 2xl:w-[calc(100%-400px)] 3xl:w-[calc(100%-450px)] max-lg:px-[35px] lg:pl-[60px] overflow-hidden">
+                        <div className="w-full lg:w-[calc(100%-240px)] xl:w-[calc(100%-300px)] 2xl:w-[calc(100%-400px)] 3xl:w-[calc(100%-450px)] max-lg:px-[35px] lg:ps-[60px] overflow-hidden">
                             <motion.div
                                 variants={slideInFromRight}
                                 initial="hidden"
@@ -269,6 +275,7 @@ export default function VentureSection() {
                                 viewport={{ once: true, amount: 0.3 }}
                             >
                                 <Swiper
+                                    dir={isRTL ? "rtl" : "ltr"}
                                     // modules={[Autoplay]}
                                     // autoplay={{ delay: 0, disableOnInteraction: false }}
                                     speed={3500}
@@ -316,10 +323,10 @@ export default function VentureSection() {
                 <motion.div
                     className="
                     relative 
-                    lg:!pr-[calc(((100%-var(--breakpoint-lg))/2)+var(--breakpoint-gap-lg))]
-                    xl:!pr-[calc(((100%-var(--breakpoint-xl))/2)+var(--breakpoint-gap-xl))]
-                    2xl:!pr-[calc(((100%-var(--breakpoint-2xl))/2)+var(--breakpoint-gap-2xl))]
-                    3xl:!pr-[calc(((100%-var(--breakpoint-3xl))/2)+var(--breakpoint-gap-3xl)/2)]
+                    lg:!pe-[calc(((100%-var(--breakpoint-lg))/2)+var(--breakpoint-gap-lg))]
+                    xl:!pe-[calc(((100%-var(--breakpoint-xl))/2)+var(--breakpoint-gap-xl))]
+                    2xl:!pe-[calc(((100%-var(--breakpoint-2xl))/2)+var(--breakpoint-gap-2xl))]
+                    3xl:!pe-[calc(((100%-var(--breakpoint-3xl))/2)+var(--breakpoint-gap-3xl)/2)]
                 "
                     variants={containerVariants}
                     initial="hidden"
@@ -380,7 +387,7 @@ export default function VentureSection() {
                         </div>
 
                         {/* RIGHT CONTENT - Swiper */}
-                        <div className="w-full lg:w-[calc(100%-240px)] xl:w-[calc(100%-300px)] 2xl:w-[calc(100%-400px)] 3xl:w-[calc(100%-450px)] max-lg:px-[35px] lg:pr-[60px] overflow-hidden">
+                        <div className="w-full lg:w-[calc(100%-240px)] xl:w-[calc(100%-300px)] 2xl:w-[calc(100%-400px)] 3xl:w-[calc(100%-450px)] max-lg:px-[35px] lg:pe-[60px] overflow-hidden">
                             <motion.div
                                 variants={slideInFromLeft}
                                 initial="hidden"
@@ -388,6 +395,7 @@ export default function VentureSection() {
                                 viewport={{ once: true, amount: 0.3 }}
                             >
                                 <Swiper
+                                    dir={isRTL ? "rtl" : "ltr"}
                                     modules={[Autoplay]}
                                     autoplay={{ delay: 0, disableOnInteraction: false }}
                                     speed={5000}

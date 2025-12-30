@@ -21,7 +21,7 @@ export default function BlogCard({ item }) {
                     href={`blog/${item?.slug}` || "#"}
                     target={"_self"}
                     className="text-[13px] sm:text-[14px] 2xl:text-[15px] 3xl:text-[18px] leading-[1.5] font-normal text-black w-fit flex items-center hover:text-[#0B436A] transition-colors duration-300">View All
-                    <span className="w-[15px] 3xl:w-[20px] h-auto aspect-square ml-[8px] sm:ml-[10px] 3xl:ml-[15px] flex items-center justify-center">
+                    <span className="w-[15px] 3xl:w-[20px] h-auto aspect-square ms-[8px] sm:ms-[10px] 3xl:ms-[15px] flex items-center justify-center">
                         <Image
                             src="/images/blog_arrow.svg"
                             alt="Arrow"

@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Heading } from "@/components/layout/Heading";
+import { useParams } from "next/navigation";
+import { isRTLLocale } from "@/lib/countries";
 
 export default function ArchiveSection() {
     const globeContainerRef = useRef(null);
@@ -13,6 +15,8 @@ export default function ArchiveSection() {
     const [isLoading, setIsLoading] = useState(true);
     const [globeReady, setGlobeReady] = useState(false);
     const [sectionVisible, setSectionVisible] = useState(false);
+    const { locale } = useParams();
+    const isRTL = isRTLLocale(locale);
 
     const categories = [
         "CORPORATE",
@@ -329,7 +333,7 @@ export default function ArchiveSection() {
     const slideInFromLeft = {
         hidden: {
             opacity: 0,
-            x: -50
+            x: isRTL ? 50 : -50
         },
         visible: {
             opacity: 1,
@@ -344,7 +348,7 @@ export default function ArchiveSection() {
     const slideInFromRight = {
         hidden: {
             opacity: 0,
-            x: 50
+            x: isRTL ? -50 : 50
         },
         visible: {
             opacity: 1,
@@ -489,7 +493,8 @@ export default function ArchiveSection() {
                     </motion.div>
 
                     <motion.div
-                        className="absolute z-10  bottom-[5%] right-[70px] 2xl:right-[100px] 3xl:right-[150px] pointer-events-none  m-auto w-[110px] 2xl:w-[150px] 3xl:w-[205px] h-[110px] 2xl:h-[150px] 3xl:h-[205px] blur-[165px] rounded-full bg-[#2FDDC3] animate-float"
+                        className="absolute z-10  bottom-[5%] end-[70px] 2xl:end-[100px] 3xl:end-[150px] pointer-events-none  m-auto w-[110px] 2xl:w-[150px] 3xl:w-[205px] h-[110px] 2xl:h-[150px] 3xl:h-[205px] blur-[165px] rounded-full bg-[#2FDDC3] animate-float"
+
                     />
 
                     <div className="flex justify-center flex-wrap gap-2 lg:gap-5 xl:gap-6 2xl:gap-7 3xl:gap-8 mb-[60px] lg:mb-[30px]">
@@ -514,7 +519,7 @@ export default function ArchiveSection() {
                 </motion.div>
 
                 {/* Globe */}
-                <div className="relative pointer-events-none">
+                <div className="relative">
                     <motion.div
                         className="relative mb-8 w-full max-w-[650px] !h-[200px] md:!h-[400px] lg:!h-[650px] m-auto lg:bg-transparent after:absolute after:content-[''] 
                         after:bottom-0 after:left-0 after:right-0 after:bg-white after:w-full after:h-[265px] after:3xl:h-[270px] after:hidden"
@@ -574,7 +579,7 @@ export default function ArchiveSection() {
 
                         <div
                             ref={globeContainerRef}
-                            className="flex items-center justify-center w-full mx-auto h-[250px] lg:h-[550px] min-h-[250px] lg:min-h-[550px]"
+                            className="flex items-center justify-center w-full mx-auto h-[250px] lg:h-[550px] min-h-[250px] lg:min-h-[550px] pointer-events-none"
                         />
                     </motion.div>
 
@@ -613,15 +618,19 @@ export default function ArchiveSection() {
                                 flex items-center py-[25px] md:p-[15px] xl:p-[20px] 2xl:p-[25px] 3xl:p-[40px] relative">
                                     <div className="w-full">
                                         <motion.div
-                                            className="lg:absolute lg:top-0 lg:right-0 flex items-center gap-3 ml-auto w-fit has-[button:disabled]:hidden max-lg:hidden"
+                                            className="lg:absolute lg:top-0 lg:end-0 flex items-center gap-3 ms-auto w-fit has-[button:disabled]:hidden max-lg:hidden"
                                             initial={{ opacity: 0, y: -20 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ duration: 0.4, delay: 0.4 }}
                                         >
                                             <motion.button
-                                                onClick={() =>
-                                                    setCurrentIndex((i) => (i === 0 ? currentData.length - 1 : i - 1))
-                                                }
+                                                onClick={() => {
+                                                    if (isRTL) {
+                                                        setCurrentIndex((i) => (i === currentData.length - 1 ? 0 : i + 1));
+                                                    } else {
+                                                        setCurrentIndex((i) => (i === 0 ? currentData.length - 1 : i - 1));
+                                                    }
+                                                }}
                                                 disabled={currentData.length <= 1}
                                                 className="p-3 bg-[#defaf670] border border-white rounded-full w-[35px] 3xl:w-[44px] h-[35px] 3xl:h-[44px]
                                                  transition-all cursor-pointer hover:bg-[#299A8B] group [&>svg]:fill-[#299A8B]"
@@ -637,9 +646,13 @@ export default function ArchiveSection() {
                                             </motion.button>
 
                                             <motion.button
-                                                onClick={() =>
-                                                    setCurrentIndex((i) => (i === currentData.length - 1 ? 0 : i + 1))
-                                                }
+                                                onClick={() => {
+                                                    if (isRTL) {
+                                                        setCurrentIndex((i) => (i === 0 ? currentData.length - 1 : i - 1));
+                                                    } else {
+                                                        setCurrentIndex((i) => (i === currentData.length - 1 ? 0 : i + 1));
+                                                    }
+                                                }}
                                                 disabled={currentData.length <= 1}
                                                 className="p-3 bg-[#defaf670] border border-white rounded-full w-[35px] 3xl:w-[44px] h-[35px] 3xl:h-[44px]
                                                  transition-all cursor-pointer hover:bg-[#299A8B] group [&>svg]:fill-[#299A8B]"
@@ -775,9 +788,13 @@ export default function ArchiveSection() {
                         transition={{ duration: 0.6, delay: 0.7 }}
                     >
                         <motion.button
-                            onClick={() =>
-                                setCurrentIndex((i) => (i === 0 ? currentData.length - 1 : i - 1))
-                            }
+                            onClick={() => {
+                                if (isRTL) {
+                                    setCurrentIndex((i) => (i === currentData.length - 1 ? 0 : i + 1));
+                                } else {
+                                    setCurrentIndex((i) => (i === 0 ? currentData.length - 1 : i - 1));
+                                }
+                            }}
                             disabled={currentData.length <= 1}
                             className="p-3 bg-[#defaf670] border border-[#0B436A] rounded-full w-[35px] 3xl:w-[44px] h-[35px] 3xl:h-[44px]
                                     flex items-center justify-center transition-all cursor-pointer hover:bg-[#299A8B] group [&>svg]:fill-[#299A8B]"
@@ -790,9 +807,13 @@ export default function ArchiveSection() {
                         </motion.button>
 
                         <motion.button
-                            onClick={() =>
-                                setCurrentIndex((i) => (i === currentData.length - 1 ? 0 : i + 1))
-                            }
+                            onClick={() => {
+                                if (isRTL) {
+                                    setCurrentIndex((i) => (i === 0 ? currentData.length - 1 : i - 1));
+                                } else {
+                                    setCurrentIndex((i) => (i === currentData.length - 1 ? 0 : i + 1));
+                                }
+                            }}
                             disabled={currentData.length <= 1}
                             className="p-3 bg-[#defaf670] border border-[#0B436A] rounded-full w-[35px] 3xl:w-[44px] h-[35px] 3xl:h-[44px]
                                      flex items-center justify-center transition-all cursor-pointer hover:bg-[#299A8B] group [&>svg]:fill-[#299A8B]"

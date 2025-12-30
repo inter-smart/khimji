@@ -2,6 +2,7 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import { isRTLLocale } from "@/lib/countries";
 import "swiper/css";
 import "swiper/css/autoplay";
 import Image from "next/image";
@@ -10,9 +11,12 @@ import { motion } from "framer-motion";
 import ICVinitiativeMobile from "./home-mobile/ICVinitiativeMobile";
 import Link from "next/link";
 import { useCountry } from "@/context/CountryContext";
+import { useParams } from "next/navigation";
 
 export default function ICVSection() {
     const { countryData } = useCountry();
+    const { locale } = useParams();
+    const isRTL = isRTLLocale(locale);
 
     const icvVideos = [
         { src: "/videos/icv-1.mp4", title: "Business" },
@@ -51,6 +55,7 @@ export default function ICVSection() {
                     className="relative z-0"
                 >
                     <Swiper
+                        dir={isRTL ? "rtl" : "ltr"}
                         modules={[Autoplay]}
                         autoplay={{ delay: 0, disableOnInteraction: false }}
                         speed={2500}

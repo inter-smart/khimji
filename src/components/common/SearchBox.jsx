@@ -1,20 +1,29 @@
 import { useState, useRef, useEffect } from "react";
+import { useParams } from "next/navigation";
+import { isRTLLocale } from "@/lib/countries";
+
 export default function SearchBox() {
+    const { locale } = useParams();
+    const isRTL = isRTLLocale(locale);
     const [searchQuery, setSearchQuery] = useState("");
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const searchRef = useRef(null);
+
     const handleSearch = (e) => {
         e.preventDefault();
         console.log("Searching for:", searchQuery);
     };
+
     const openSearch = (e) => {
         e.stopPropagation();
         setIsSearchOpen(true);
     };
+
     const closeSearch = () => {
         setIsSearchOpen(false);
         setSearchQuery("");
     };
+
     // Close search on outside click
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -83,22 +92,23 @@ export default function SearchBox() {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search here..."
-                        className="
-                          w-full  h-[40px] 3xl:h-[45px] pl-5 pr-12
+                        className={`
+                          w-full h-[40px] 3xl:h-[45px] ps-5 pe-12
                           bg-white border-2 border-gray-200
                           rounded-full
                           outline-none transition-all duration-300
                           focus:border-blue 
                           text-gray-700 text-sm
                           placeholder:text-gray-400
-                        "
+                          ${isRTL ? "text-right" : "text-left"}
+                        `}
                         autoFocus={isSearchOpen}
                     />
                     {/* Submit Button Inside Input */}
                     <button
                         type="submit"
                         className="
-                          absolute right-1 top-1/2 -translate-y-1/2
+                          absolute end-1 top-1/2 -translate-y-1/2
                           flex items-center justify-center 
                           w-[28px] 2xl:w-[35px] 3xl:w-[45px] h-[28px] 2xl:h-[35px] 3xl:h-[45px] 
                           bg-transparent
@@ -118,7 +128,7 @@ export default function SearchBox() {
                             type="button"
                             onClick={() => setSearchQuery("")}
                             className="
-                            absolute right-12 top-1/2 -translate-y-1/2
+                            absolute end-12 top-1/2 -translate-y-1/2
                             flex items-center justify-center
                             w-[24px] h-[24px]
                             text-gray-400 hover:text-gray-600
@@ -134,5 +144,5 @@ export default function SearchBox() {
                 </div>
             </form>
         </div>
-    )
+    );
 }

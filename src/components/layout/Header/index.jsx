@@ -100,17 +100,17 @@ export default function Header() {
       <Sheet open={open} onOpenChange={setOpen}  >
 
         <div className={`sm:hidden relative z-1
-            ${isScrolled ? "stickyHeader w-full" : " before:content-[''] before:block before:absolute before:top-0 before:left-0 before:w-full before:h-[250px] before:bg-gradient-to-b before:from-black before:to-black/0"}`}>
+            ${isScrolled ? "stickyHeader w-full" : " before:content-[''] before:block before:absolute before:top-0 before:start-0 before:w-full before:h-[250px] before:bg-gradient-to-b before:from-black before:to-black/0"}`}>
           <div
-            className={`w-full  ${isScrolled ? "stickyHeader pt-[10px] w-full !bg-[#279689ed] backdrop-blur-[5px]" : "absolute top-0 left-0  pt-[30px]"}`}
+            className={`w-full  ${isScrolled ? "stickyHeader pt-[10px] w-full !bg-[#279689ed] backdrop-blur-[5px]" : "absolute top-0 start-0  pt-[30px]"}`}
           >
             <div className="container relative ">
-              <div className="flex items-center justify-between w-full pb-[15px] relative after:absolute after:bottom-0 after:content-[''] after:left-0 after:w-full after:h-[1px] after:bg-white/20 ">
+              <div className="flex items-center justify-between w-full pb-[15px] relative after:absolute after:bottom-0 after:content-[''] after:start-0 after:w-full after:h-[1px] after:bg-white/20 ">
                 <Link href="/" className="w-[130px] xs:w-[140px] sm:w-[170px] p-[10px_0]">
                   <Image src="/images/Logo-white-footer.png" width="200" height="115" className="object-contain" alt="logo" />
                 </Link>
                 <div className="flex items-center">
-                  <div className="mr-[5px] sm:mr-[20px]">
+                  <div className="me-[5px] sm:me-[20px]">
                     <div className="relative inline-flex rounded-full max-w-[130px]">
                       <Select value={country} onValueChange={setCountry} modal={false}>
                         <SelectTrigger
@@ -133,7 +133,7 @@ export default function Header() {
                             alt={countryData.name}
                             width={17}
                             height={17}
-                            className="rounded-full mr-1 object-cover w-[17px] h-[17px]"
+                            className="rounded-full me-1 object-cover w-[17px] h-[17px]"
                           />
 
                           <SelectValue placeholder="Select Country" />
@@ -167,7 +167,7 @@ export default function Header() {
                     </div>
 
                   </div>
-                  <div className="mr-[5px] sm:mr-[20px]">
+                  <div className="me-[5px] sm:me-[20px]">
                     <SearchBox />
                   </div>
                   <SheetTrigger className="w-[25px] h-[25px] flex items-center justify-center">

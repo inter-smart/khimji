@@ -9,7 +9,7 @@ export default function DrivenSection({ data }) {
       <div className="container relative z-0">
         <div className="w-[80px] sm:w-[100px] lg:w-[120px] 2xl:w-[140px] 3xl:w-[180px] h-auto aspect-square mx-auto bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[60px] lg:blur-[80px] 2xl:blur-[120px] absolute -z-1 inset-[0_0_auto_0]"></div>
         <div className="flex flex-wrap items-center">
-          <div className="w-full lg:w-[calc(100%-440px)] 2xl:w-[calc(100%-530px)] 3xl:w-[calc(100%-670px)] pr-[40px] mb-[20px] sm:mb-[30px] lg:mb-0">
+          <div className="w-full lg:w-[calc(100%-440px)] 2xl:w-[calc(100%-530px)] 3xl:w-[calc(100%-670px)] pe-[40px] mb-[20px] sm:mb-[30px] lg:mb-0">
             <div className="w-full h-auto lg:max-w-[490px] 2xl:max-w-[590px] 3xl:max-w-[750px]">
               <Heading
                 as="h2"

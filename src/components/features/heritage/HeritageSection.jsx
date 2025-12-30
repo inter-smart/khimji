@@ -5,7 +5,13 @@ import { useCallback, useEffect, useState, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
+import { useParams } from "next/navigation";
+import { isRTLLocale } from "@/lib/countries";
+
 export default function HeritageSection({ data }) {
+  const { locale } = useParams();
+  const isRTL = isRTLLocale(locale);
+
   const getPointOnQuadraticBezier = (t, p0, p1, p2) => {
     const x =
       Math.pow(1 - t, 2) * p0.x +
@@ -41,6 +47,7 @@ export default function HeritageSection({ data }) {
       skipSnaps: false,
       dragFree: false,
       speed: 1.2,
+      direction: isRTL ? "rtl" : "ltr",
     },
     [Autoplay(autoplayOptions)]
   );
@@ -204,9 +211,8 @@ export default function HeritageSection({ data }) {
                 className="flex-[0_0_100%] sm:flex-[0_0_33.333%] px-4"
               >
                 <motion.div
-                  className={`w-full h-full flex flex-col text-center select-none ${
-                    index === selectedIndex ? "" : "mt-0"
-                  }`}
+                  className={`w-full h-full flex flex-col text-center select-none ${index === selectedIndex ? "" : "mt-0"
+                    }`}
                   animate={{
                     opacity: index === selectedIndex && 1,
                   }}

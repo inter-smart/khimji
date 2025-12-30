@@ -8,6 +8,8 @@ import Image from "next/image";
 import CircularSwiper from "./CircularSwiper";
 import HeritageMobile from "./home-mobile/HeritageMobile";
 import { useCountry } from "@/context/CountryContext";
+import { useParams } from "next/navigation";
+import { isRTLLocale } from "@/lib/countries";
 
 const CONTACT_BUTTON_CLASS = `
   text-[12px] 2xl:text-[16px] 3xl:text-[18px]
@@ -76,6 +78,8 @@ export default function HeritageSection() {
     const { countryData } = useCountry();
     const counterContainerRef = useRef(null);
     const [counterVisible, setCounterVisible] = useState(false);
+    const { locale } = useParams();
+    const isRTL = isRTLLocale(locale);
 
     // Animation variants
     const containerVariants = {
@@ -93,7 +97,7 @@ export default function HeritageSection() {
     const slideInFromLeft = {
         hidden: {
             opacity: 0,
-            x: -50
+            x: isRTL ? 50 : -50
         },
         visible: {
             opacity: 1,
@@ -108,7 +112,7 @@ export default function HeritageSection() {
     const slideInFromRight = {
         hidden: {
             opacity: 0,
-            x: 50
+            x: isRTL ? -50 : 50
         },
         visible: {
             opacity: 1,
@@ -171,7 +175,7 @@ export default function HeritageSection() {
     const buttonVariants = {
         hidden: {
             opacity: 0,
-            x: -20
+            x: isRTL ? 20 : -20
         },
         visible: {
             opacity: 1,
@@ -183,7 +187,7 @@ export default function HeritageSection() {
             }
         },
         hover: {
-            x: 10,
+            x: isRTL ? -10 : 10,
             transition: {
                 duration: 0.3,
                 ease: "easeInOut"
@@ -200,7 +204,7 @@ export default function HeritageSection() {
             }
         },
         hover: {
-            x: 5,
+            x: isRTL ? -5 : 5,
             transition: {
                 duration: 0.3,
                 ease: "easeInOut"
@@ -278,8 +282,8 @@ export default function HeritageSection() {
                             </motion.div>
 
                             <motion.div
-                                className="w-full relative lg:absolute left-[-180px] lg:left-[-190px] xl:left-[-200px] 2xl:left-[-260px] 3xl:left-[-280px] lg:bottom-[60px] 
-                            before:absolute before:content-[''] before:bg-[#F9F9F9] before:left-0 xs:before:w-[33%] sm:before:w-[30%] before:md:w-[25%] before:top-0 before:h-full before:z-1 lg:before:hidden"
+                                className="w-full relative lg:absolute start-[-180px] lg:start-[-190px] xl:start-[-200px] 2xl:start-[-260px] 3xl:start-[-280px] lg:bottom-[60px] z-10 
+                            before:absolute before:content-[''] before:bg-[#F9F9F9] before:start-0 xs:before:w-[33%] sm:before:w-[30%] before:md:w-[25%] before:top-0 before:h-full before:z-1 lg:before:hidden"
                                 variants={scaleIn}
                                 initial="hidden"
                                 whileInView="visible"
@@ -328,7 +332,7 @@ export default function HeritageSection() {
                                 </div>
 
                                 <div
-                                    className="w-[calc(100%-320px)] xl:w-[calc(100%-375px)] 2xl:w-[calc(100%-475px)] 3xl:w-[calc(100%-600px)] pl-[45px] xl:pl-[55px] 2xl:pl-[65px] 3xl:pl-[85px]"
+                                    className="w-[calc(100%-320px)] xl:w-[calc(100%-375px)] 2xl:w-[calc(100%-475px)] 3xl:w-[calc(100%-600px)] ps-[45px] xl:ps-[55px] 2xl:ps-[65px] 3xl:ps-[85px]"
                                     ref={counterContainerRef}
                                 >
                                     <div className="flex flex-wrap lg:flex-col h-full justify-between">
