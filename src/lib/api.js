@@ -61,7 +61,6 @@ export async function fetchFromAPI(endpoint, options = {}) {
   }
 
   try {
-    console.log(`Fetching: ${url}`);
     
     const response = await fetch(url, requestOptions);
 

@@ -15,7 +15,7 @@ const timeline = [
 const widthCir = `w-[300px] xl:w-[360px] 2xl:w-[400px] 3xl:w-[420px]`;
 const highCir = `h-[300px] xl:h-[360px] 2xl:h-[400px] 3xl:h-[420px]`;
 
-export default function CircularTimeline() {
+export default function CircularTimeline({timeline}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const { locale } = useParams();
   const isRTL = isRTLLocale(locale);
@@ -157,7 +157,7 @@ export default function CircularTimeline() {
                       {item.title}
                     </p>
                     <p className="text-[13px] xl:text-[15px] 2xl:text-[19px] 3xl:text-[25px] transition-all duration-500">
-                      {item.desc}
+                      {item.subtitle}
                     </p>
                   </div>
                 </div>

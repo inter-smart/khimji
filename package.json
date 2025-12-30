@@ -28,6 +28,7 @@
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.25",
     "globe.gl": "^2.45.0",
+    "html-react-parser": "^5.2.11",
     "lucide-react": "^0.556.0",
     "motion": "^12.23.26",
     "next": "^16.1.1",

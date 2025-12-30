@@ -13,6 +13,8 @@ import { Heading } from "@/components/layout/Heading";
 import Link from "next/link";
 import VentureCard from "@/components/common/VentureCard";
 import VentureSectionmob from "./home-mobile/VentureSectionmob";
+import parse from "html-react-parser";
+import { renderHtml } from "@/lib/helper";
 
 const CONTACT_BUTTON_CLASS = `
   text-[12px] 2xl:text-[16px] 3xl:text-[18px]
@@ -60,7 +62,7 @@ const VENTURE_SLIDES = [
 
 
 
-export default function VentureSection() {
+export default function VentureSection({title, ventures, banner, banner_alt_text}) {
     const { locale } = useParams();
     const isRTL = isRTLLocale(locale);
     const sectionRef = useRef(null);
@@ -193,7 +195,7 @@ export default function VentureSection() {
                         viewport={{ once: true, amount: 0.3 }}
                     >
                         <Heading size="heading1" as="h1" className="text-center">
-                            Ventures
+                            {title}
                         </Heading>
                     </motion.div>
                 </div>
@@ -228,7 +230,7 @@ export default function VentureSection() {
                             >
                                 <motion.div variants={itemVariants}>
                                     <Heading size="heading2" as="div">
-                                        Corporate Oriented
+                                        {ventures[0]?.title}
                                     </Heading>
                                 </motion.div>
 
@@ -236,10 +238,7 @@ export default function VentureSection() {
                                     className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px]"
                                     variants={itemVariants}
                                 >
-                                    Khimji Ramdas drives growth across Retail, Infrastructure,
-                                    Logistics, Lifestyle, and Travel. Through strong joint ventures
-                                    and international presence, we connect markets and enrich
-                                    communities
+                                   {renderHtml(ventures[0]?.description)}
                                 </motion.p>
 
                                 <motion.div
@@ -248,7 +247,7 @@ export default function VentureSection() {
                                     initial="rest"
                                     animate="rest"
                                 >
-                                    <Link href="#!" className={CONTACT_BUTTON_CLASS}>
+                                    <Link href={`${locale}/venture`} className={CONTACT_BUTTON_CLASS}>
                                         <span>View All</span>
                                         <motion.div
                                             className={ARROW_ICON_CLASS}
@@ -307,7 +306,7 @@ export default function VentureSection() {
                                     }}
                                     className="overflow-hidden"
                                 >
-                                    {VENTURE_SLIDES.map((item, index) => (
+                                    {ventures[0]?.ventures?.map((item, index) => (
                                         <SwiperSlide key={index}>
                                             <VentureCard item={item} />
                                         </SwiperSlide>
@@ -348,7 +347,7 @@ export default function VentureSection() {
                             >
                                 <motion.div variants={itemVariants}>
                                     <Heading size="heading2" as="div">
-                                        Corporate Oriented
+                                        {ventures[1]?.title}
                                     </Heading>
                                 </motion.div>
 
@@ -356,10 +355,7 @@ export default function VentureSection() {
                                     className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px]"
                                     variants={itemVariants}
                                 >
-                                    Khimji Ramdas drives growth across Retail, Infrastructure,
-                                    Logistics, Lifestyle, and Travel. Through strong joint ventures
-                                    and international presence, we connect markets and enrich
-                                    communities
+                                    {renderHtml(ventures[1]?.description)}
                                 </motion.p>
 
                                 <motion.div
@@ -368,7 +364,7 @@ export default function VentureSection() {
                                     initial="rest"
                                     animate="rest"
                                 >
-                                    <Link href="#!" className={CONTACT_BUTTON_CLASS}>
+                                    <Link href={`${locale}/venture`} className={CONTACT_BUTTON_CLASS}>
                                         <span>View All</span>
                                         <motion.div
                                             className={ARROW_ICON_CLASS}
@@ -427,7 +423,7 @@ export default function VentureSection() {
                                     }}
                                     className="overflow-hidden"
                                 >
-                                    {VENTURE_SLIDES.map((item, index) => (
+                                    {ventures[1]?.ventures?.map((item, index) => (
                                         <SwiperSlide key={index}>
                                             <VentureCard item={item} />
                                         </SwiperSlide>
@@ -440,7 +436,12 @@ export default function VentureSection() {
                 {/* Second Venture Section End */}
             </section>
 
-            <VentureSectionmob />
+            <VentureSectionmob
+            title={title}
+            banner={banner}
+            banner_alt_text={banner_alt_text}
+            ventureSlider={ventures}
+            />
         </>
     );
 }

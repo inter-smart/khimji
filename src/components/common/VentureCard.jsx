@@ -1,3 +1,4 @@
+import { renderHtml } from "@/lib/helper";
 import Image from "next/image";
 
 export default function VentureCard({ item }) {
@@ -31,10 +32,10 @@ export default function VentureCard({ item }) {
 
           {/* MOBILE IMAGE ONLY */}
           <Image
-            src={item.mobileImage}
+            src={item.image_mobile}
             width={395}
             height={465}
-            alt={item.title}
+            alt={item?.image_mobile_alt_text}
             className="block sm:hidden w-full h-full object-cover"
           />
 
@@ -98,7 +99,7 @@ export default function VentureCard({ item }) {
                 p-[12px_8px] xs:p-[12px] sm:p-0
               "
             >
-              <p className="max-sm:text-white">{item.description}</p>
+              <p className="max-sm:text-white">{renderHtml(item.description)}</p>
             </div>
 
             {/* LOGOS */}
@@ -112,7 +113,7 @@ export default function VentureCard({ item }) {
               "
             >
               <div className="flex flex-wrap items-center justify-center gap-1 3xl:gap-4 max-sm:w-[85%] mx-auto p-[10px]">
-                {item.logos.map((logo, i) => (
+                {item?.partners?.map((partner, i) => (
                   <div
                     key={i}
                     className="
@@ -124,8 +125,8 @@ export default function VentureCard({ item }) {
                     "
                   >
                     <Image
-                      src={logo}
-                      alt={logo}
+                      src={partner?.logo}
+                      alt={partner?.logo_alt_text}
                       width={80}
                       height={40}
                       className="object-contain  min-w-[38px] max-w-[38px] 3xl:min-width-[50px] 3xl:max-w-[50px]"

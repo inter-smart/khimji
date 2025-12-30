@@ -12,8 +12,11 @@ import ICVinitiativeMobile from "./home-mobile/ICVinitiativeMobile";
 import Link from "next/link";
 import { useCountry } from "@/context/CountryContext";
 import { useParams } from "next/navigation";
+import { renderHtml } from "@/lib/helper";
 
-export default function ICVSection() {
+export default function ICVSection({
+    title, description, banner, banner_alt_text, initiatives
+}) {
     const { countryData } = useCountry();
     const { locale } = useParams();
     const isRTL = isRTLLocale(locale);
@@ -39,11 +42,10 @@ export default function ICVSection() {
                             as="h2"
                             className="mb-[30px]"
                         >
-                            ICV Initiatives
+                            {title}
                         </Heading>
                         <p>
-                            Khimji Ramdas {countryData.name === 'Oman' ? 'ICV' : 'Value-Driven'} initiatives drive digital transformation through
-                            innovative solutions, smart technologies, and enhanced connectivity
+                            {renderHtml(description)}
                         </p>
                     </div>
                 </div>
@@ -71,7 +73,7 @@ export default function ICVSection() {
                         className="h-[450px] xl:h-[500px] 2xl:h-[560px] 3xl:h-[700px] relative z-20"
                     >
 
-                        {icvVideos.map((item, index) => (
+                        {initiatives?.map((item, index) => (
                             <SwiperSlide key={index}>
                                 <Link href="#!" className="relative z-0 w-full h-full overflow-hidden">
                                     <video
@@ -81,7 +83,7 @@ export default function ICVSection() {
                                         playsInline
                                         className="w-full h-full object-cover"
                                     >
-                                        <source src={item.src} type="video/mp4" />
+                                        <source src={item.video} type="video/mp4" />
                                         Your browser does not support the video tag.
                                     </video>
 
@@ -100,7 +102,7 @@ export default function ICVSection() {
                 </motion.div>
             </section>
 
-            <ICVinitiativeMobile />
+            <ICVinitiativeMobile title={title} description={description} banner={banner} banner_alt_text={banner_alt_text} data={initiatives} />
         </>
     );
 }

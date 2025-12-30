@@ -10,6 +10,7 @@ import HeritageMobile from "./home-mobile/HeritageMobile";
 import { useCountry } from "@/context/CountryContext";
 import { useParams } from "next/navigation";
 import { isRTLLocale } from "@/lib/countries";
+import { renderHtml } from "@/lib/helper";
 
 const CONTACT_BUTTON_CLASS = `
   text-[12px] 2xl:text-[16px] 3xl:text-[18px]
@@ -74,7 +75,10 @@ const Counter = ({ end, suffix = "" }) => {
     );
 };
 
-export default function HeritageSection() {
+export default function HeritageSection({
+    title, description, banner, banner_alt_text, metrics,timelines,
+    image, image_alt
+}) {
     const { countryData } = useCountry();
     const counterContainerRef = useRef(null);
     const [counterVisible, setCounterVisible] = useState(false);
@@ -246,7 +250,7 @@ export default function HeritageSection() {
                             >
                                 <motion.div variants={fadeInUp}>
                                     <Heading size="heading1" as="h2">
-                                        Heritage
+                                        {title}
                                     </Heading>
                                 </motion.div>
 
@@ -254,8 +258,7 @@ export default function HeritageSection() {
                                     className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px] line-clamp-3"
                                     variants={fadeInUp}
                                 >
-                                    For over 150 years, Khimji Ramdas has driven {countryData.name}'s progress, blending tradition with innovation and connecting
-                                    global brands to local markets. Guided by strong values, we create opportunities, empower lives, and foster sustainable growth
+                                    {renderHtml(description)}
                                 </motion.p>
 
                                 <motion.div
@@ -264,7 +267,7 @@ export default function HeritageSection() {
                                     initial="rest"
                                     animate="rest"
                                 >
-                                    <Link href="#!" className={CONTACT_BUTTON_CLASS}>
+                                    <Link href={`/${locale}/heritage`} className={CONTACT_BUTTON_CLASS}>
                                         <span>Discover More</span>
                                         <motion.div
                                             className={ARROW_ICON_CLASS}
@@ -289,7 +292,7 @@ export default function HeritageSection() {
                                 whileInView="visible"
                                 viewport={{ once: true, amount: 0.3 }}
                             >
-                                <CircularSwiper />
+                                <CircularSwiper timeline={timelines} />
                             </motion.div>
                         </div>
 
@@ -313,7 +316,7 @@ export default function HeritageSection() {
                                             className="group overflow-hidden rounded-[10px] "
                                         >
                                             <Image
-                                                src="/images/heritageImg.jpg"
+                                                src={image}
                                                 className="
                                                     w-full
                                                     h-full
@@ -325,7 +328,7 @@ export default function HeritageSection() {
                                                 "
                                                 width={285}
                                                 height={350}
-                                                alt="heritageImg"
+                                                alt={image_alt}
                                             />
                                         </motion.div>
                                     </motion.div>
@@ -342,7 +345,7 @@ export default function HeritageSection() {
                                             variants={counterItemVariants}
                                         >
                                             <Heading size="heading1" as="div" className="leading-none !mb-[8px]">
-                                                <Counter end={400} suffix="+" />
+                                                <Counter end={metrics?.value_1} suffix="+" />
                                             </Heading>
                                             <motion.p
                                                 className="uppercase mb-0 leading-none"
@@ -350,7 +353,7 @@ export default function HeritageSection() {
                                                 animate={{ opacity: 1 }}
                                                 transition={{ delay: 0.4, duration: 0.6 }}
                                             >
-                                                BRANDS
+                                                {metrics?.label_1}
                                             </motion.p>
                                         </motion.div>
 
@@ -360,7 +363,7 @@ export default function HeritageSection() {
                                             variants={counterItemVariants}
                                         >
                                             <Heading size="heading1" as="div" className="!mb-[8px] leading-none">
-                                                <Counter end={5} suffix="K+" />
+                                                <Counter end={metrics?.value_2} suffix="K+" />
                                             </Heading>
                                             <motion.p
                                                 className="uppercase mb-0"
@@ -368,7 +371,7 @@ export default function HeritageSection() {
                                                 animate={{ opacity: 1 }}
                                                 transition={{ delay: 0.6, duration: 0.6 }}
                                             >
-                                                Employees
+                                                {metrics?.label_2}
                                             </motion.p>
                                         </motion.div>
 
@@ -378,7 +381,7 @@ export default function HeritageSection() {
                                             variants={counterItemVariants}
                                         >
                                             <Heading size="heading1" as="div" className="!mb-[8px] leading-none">
-                                                <Counter end={40} suffix="+" />
+                                                <Counter end={metrics?.value_3} suffix="+" />
                                             </Heading>
                                             <motion.p
                                                 className="uppercase mb-0"
@@ -386,7 +389,7 @@ export default function HeritageSection() {
                                                 animate={{ opacity: 1 }}
                                                 transition={{ delay: 0.8, duration: 0.6 }}
                                             >
-                                                Verticals
+                                                {metrics?.label_3}
                                             </motion.p>
                                         </motion.div>
 
@@ -396,7 +399,7 @@ export default function HeritageSection() {
                                             variants={counterItemVariants}
                                         >
                                             <Heading size="heading1" as="div" className="!mb-[8px] leading-none">
-                                                <Counter end={150} suffix="+" />
+                                                <Counter end={metrics?.value_4} suffix="+" />
                                             </Heading>
                                             <motion.p
                                                 className="uppercase mb-0"
@@ -404,7 +407,7 @@ export default function HeritageSection() {
                                                 animate={{ opacity: 1 }}
                                                 transition={{ delay: 1.0, duration: 0.6 }}
                                             >
-                                                YEARS
+                                                {metrics?.label_4}
                                             </motion.p>
                                         </motion.div>
                                     </div>
@@ -415,7 +418,13 @@ export default function HeritageSection() {
                 </div>
             </section>
 
-            <HeritageMobile />
+            <HeritageMobile 
+                title={title}
+                description={description}
+                banner={banner}
+                banner_alt_text={banner_alt_text}
+                metrics={metrics}
+            />
         </>
     );
 }
