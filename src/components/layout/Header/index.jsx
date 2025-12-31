@@ -6,5 +6,5 @@ export default async function Header() {
   const { data: locations } = await getAPI("get-locations");
   const { data: languages } = await getAPI("get-locales");
 
-  return <HeaderClient businessType={businessType} locations={locations} languages={languages} />;
+  return <HeaderClient businessType={businessType} countries={locations} languages={languages} />;
 }

@@ -1,19 +1,12 @@
 "use client";
 
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { useCountry } from "@/context/CountryContext";
 import { COUNTRIES, SUPPORTED_COUNTRIES } from "@/lib/countries";
 
 export default function HeaderSelect({ data, countries }) {
   const { country, setCountry } = useCountry();
-
 
   return (
     <div className="flex items-center -mx-[7px]">
@@ -44,17 +37,8 @@ export default function HeaderSelect({ data, countries }) {
               ))}
             </SelectContent>
           </Select>
-          <BorderBeam
-            duration={10}
-            size={50}
-            className="from-transparent via-white/70 to-transparent"
-          />
-          <BorderBeam
-            duration={11}
-            size={50}
-            reverse
-            className="from-transparent via-white/70 to-transparent"
-          />
+          <BorderBeam duration={10} size={50} className="from-transparent via-white/70 to-transparent" />
+          <BorderBeam duration={11} size={50} reverse className="from-transparent via-white/70 to-transparent" />
         </div>
       </div>
 
@@ -79,22 +63,13 @@ export default function HeaderSelect({ data, countries }) {
             <SelectContent className="max-w-[110px] ">
               {SUPPORTED_COUNTRIES.map((c) => (
                 <SelectItem key={c} value={c}>
-                  {COUNTRIES[c].name}
+                  {COUNTRIES[c]?.name}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
-          <BorderBeam
-            duration={15}
-            size={60}
-            reverse
-            className="from-transparent via-white/70 to-transparent"
-          />
-          <BorderBeam
-            duration={13}
-            size={70}
-            className="from-transparent via-white/70 to-transparent"
-          />
+          <BorderBeam duration={15} size={60} reverse className="from-transparent via-white/70 to-transparent" />
+          <BorderBeam duration={13} size={70} className="from-transparent via-white/70 to-transparent" />
         </div>
       </div>
     </div>

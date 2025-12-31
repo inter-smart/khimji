@@ -1,5 +1,6 @@
 import InnerHero from "@/components/common/InnerHero";
 import FaqSection from "@/components/features/faq/FaqSection";
+import { getAPI } from "@/lib/api";
 
 const local_data = {
   faq_section_data: {
@@ -99,20 +100,25 @@ const local_data = {
   },
 };
 
-export default function page() {
+export default async function Page() {
+  const result = await getAPI("faq");
+  const data = result.data;
+
+  if (!data) {
+    return <div>Error loading data</div>;
+  }
+  const { banner, faq, faq_cms } = data;
+
   return (
     <>
       <InnerHero
-        coverImage="/images/faq_innerbanner.jpg"
-        coverImageMobile="/images/faq_innerbanner.jpg"
-        alt="Faq Banner"
-        title="FAQ"
-        breadCrumb_data={[
-          { link: { href: "/", label: "Home" } },
-          { link: { href: "/heritage", label: "Faq" } },
-        ]}
+        coverImage={banner?.banner || "/images/faq_innerbanner.jpg"}
+        coverImageMobile={banner?.banner_mobile || "/images/faq_innerbanner.jpg"}
+        alt={banner?.banner_alt_text || "Faq Banner"}
+        title={banner?.banner_title || "FAQ"}
+        breadCrumb_data={[{ link: { href: "/", label: "Home" } }, { link: { href: "/heritage", label: "Faq" } }]}
       />
-      <FaqSection data={local_data?.faq_section_data} />
+      <FaqSection cms={faq_cms} data={faq} />
     </>
   );
 }

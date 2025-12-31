@@ -14,8 +14,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { BorderBeam } from "@/components/ui/border-beam";
 import { useCountry } from "@/context/CountryContext";
 import { COUNTRIES, COUNTRY_SLUG_MAP, SUPPORTED_COUNTRIES } from "@/lib/countries";
+import LangDropDown from "./LangDropDowns";
 
-export default function HeaderClient({ businessType, countries, languages }) {
+export default function Header({ businessType, countries, languages }) {
   const { country, setCountry, countryData } = useCountry();
   const [isScrolled, setIsScrolled] = useState(false);
   const currentPath = usePathname();
@@ -73,29 +74,7 @@ export default function HeaderClient({ businessType, countries, languages }) {
 
                 {/* country Dropdown */}
 
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="flex items-center gap-2 px-2 cursor-pointer focus:outline-none">
-                    <Image
-                      src={countryData?.flag}
-                      alt={countryData?.name}
-                      width={28}
-                      height={20}
-                      className="rounded-sm object-cover w-[28px] h-[20px]"
-                    />
-                    <span className="font-medium text-[16px] uppercase">{countryData?.name}</span>
-                  </DropdownMenuTrigger>
-
-                  <DropdownMenuContent align="end">
-                    {countriesForUI.map((c) => (
-                      <DropdownMenuItem key={c?.id} onClick={() => setCountry(c.slug)} className="cursor-pointer">
-                        <div className="flex items-center gap-2 w-full">
-                          <Image src={c?.flag} alt={c?.name} width={20} height={20} className="rounded-full object-cover w-[20px] h-[20px]" />
-                          <span>{c?.backendName}</span>
-                        </div>
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                <LangDropDown changeCountry={setCountry} />
               </div>
             </div>
           </div>
@@ -142,8 +121,8 @@ export default function HeaderClient({ businessType, countries, languages }) {
                         >
                           {/* Globe Icon or Country Flag */}
                           <Image
-                            src={countryData.flag}
-                            alt={countryData.name}
+                            src={countryData?.flag}
+                            alt={countryData?.name}
                             width={17}
                             height={17}
                             className="rounded-full me-1 object-cover w-[17px] h-[17px]"
@@ -155,7 +134,7 @@ export default function HeaderClient({ businessType, countries, languages }) {
                         <SelectContent className=" min-w-[120px] rounded-xl bg-white text-black shadow-lg  ">
                           {SUPPORTED_COUNTRIES.map((c) => (
                             <SelectItem key={c} value={c}>
-                              {COUNTRIES[c].name}
+                              {COUNTRIES[c]?.name}
                             </SelectItem>
                           ))}
                         </SelectContent>

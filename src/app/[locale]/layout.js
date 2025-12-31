@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import localFont from "next/font/local";
 import { CountryProvider } from "@/context/CountryContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 // import WidgetSection from "@/components/common/WidgetSection";
 import PageLoader from "@/components/common/PageLoader";
 import { getAPI } from "@/lib/api";
@@ -28,15 +29,15 @@ export const metadata = {
 };
 
 import { isRTLLocale } from "@/lib/countries";
+import { cookies } from "next/headers";
 
 export default async function RootLayout({ children, params }) {
-  const { locale } = await params;
-  const direction = isRTLLocale(locale) ? "rtl" : "ltr";
-
+  const cookieStore = await cookies();
+  const lang = cookieStore?.get("lang")?.value || "en";
   return (
-    <html lang={locale} dir={direction}>
+    <html>
       <body className={`${Nobel.className}`}>
-        <HeaderProvider>
+        <LanguageProvider initialLanguage={lang}>
           <CountryProvider>
             <PageLoader />
             <Header />
@@ -44,7 +45,7 @@ export default async function RootLayout({ children, params }) {
             {/* <WidgetSection /> */}
             <Footer />
           </CountryProvider>
-        </HeaderProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

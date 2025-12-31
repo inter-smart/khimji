@@ -14,16 +14,7 @@ export default async function Page() {
   if (!data) {
     return <div>Error loading data</div>;
   }
-  const {
-    sliders,
-    home_cms,
-    ventures,
-    metrics,
-    timelines,
-    archives,
-    initiatives,
-    brands
-  } = data;
+  const { sliders, home_cms, ventures, metrics, timelines, archives, initiatives, brands } = data;
 
   return (
     <>
@@ -45,7 +36,7 @@ export default async function Page() {
         timelines={timelines}
       />
       <ArchiveSection title={home_cms?.section3_title} archives={archives} />
-      <ICVSection 
+      <ICVSection
         title={home_cms?.section4_title}
         description={home_cms?.section4_description}
         banner={home_cms?.section4_banner}
