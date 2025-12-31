@@ -7,6 +7,7 @@ import Image from "next/image";
 import VentureCard from "@/components/common/VentureCard";
 import { useState, useEffect } from "react";
 import { renderHtml } from "@/lib/helper";
+import { useParams } from "next/navigation";
 
 // Ventures data array
 const corporateVentures = [
@@ -135,6 +136,9 @@ export default function VentureListingSection({ data, title }) {
   const API_BASE_URL =
     process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
 
+
+    const {locale} = useParams();
+
   const fetchVentures = async (slug) => {
     if (!slug) return;
 
@@ -239,12 +243,13 @@ export default function VentureListingSection({ data, title }) {
               </div>
               <div className="flex flex-wrap -m-[5px] lg:-m-[10px] 3xl:-m-[15px]">
                 {ventures?.ventures?.map((venture) => (
-                  <div
+                  <Link
+                    href={`/${locale}/venture/${venture?.slug}`}
                     key={venture?.id}
                     className="w-full sm:w-1/2 p-[5px]  lg:p-[10px] 3xl:p-[15px]"
                   >
                     <VentureCard item={venture} />
-                  </div>
+                  </Link>
                 ))}
               </div>
             </TabsContent>
