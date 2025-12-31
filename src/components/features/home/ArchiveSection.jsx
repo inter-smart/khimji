@@ -176,16 +176,17 @@ export default function ArchiveSection({ archives, title }) {
 
     return frontendData;
   };
+const archivesData = transformArchivesToFrontend(archives);
+
+
 
   // Usage
-  const archivesData = transformArchivesToFrontend(archives);
-
+  
   // Get categories
   const categories = Object.keys(archivesData);
 
   const currentData = archivesData[activeCategory] || [];
-
-  const currentItem = currentData[currentIndex] || currentData[0];
+  const currentItem = currentData.length > 0 ? currentData[currentIndex] : null;
 
   console.log(archivesData);
 
@@ -313,11 +314,16 @@ export default function ArchiveSection({ archives, title }) {
     try {
       const data = [
         {
-          lat: Number(currentItem.coordinates.lat),
-          lng: Number(currentItem.coordinates.lng),
+          lat: Number(currentItem?.coordinates?.lat),
+          lng: Number(currentItem?.coordinates?.lng),
           location: currentItem.location,
         },
       ];
+
+      console.log(
+        Number(currentItem.coordinates.lat),
+        Number(currentItem.coordinates.lng)
+      );
 
       globeInstanceRef.current.pointsData(data);
       globeInstanceRef.current.labelsData(data);

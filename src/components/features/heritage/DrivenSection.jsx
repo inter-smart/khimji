@@ -2,8 +2,9 @@
 import Image from "next/image";
 import CountUp from "react-countup";
 import { Heading } from "@/components/layout/Heading";
+import { renderHtml } from "@/lib/helper";
 
-export default function DrivenSection({ data }) {
+export default function DrivenSection({ title, description, image, image_alt_text, metrics, data }) {
   return (
     <section className="w-full h-auto py-[40px_30px] sm:py-[70px_50px] lg:py-[100px_60px] 2xl:py-[120px_70px] 3xl:py-[150px_90px] block">
       <div className="container relative z-0">
@@ -15,10 +16,10 @@ export default function DrivenSection({ data }) {
                 as="h2"
                 size="heading1"
                 className="mb-[35px]"
-                dangerouslySetInnerHTML={{ __html: data?.title }}
+                dangerouslySetInnerHTML={{ __html: title }}
               ></Heading>
               <div className="text-[14px] 2xl:text-[16px] 3xl:text-[20px] leading-[1.5] font-normal text-black">
-                {data?.description}
+                {renderHtml(description)}
               </div>
             </div>
           </div>
@@ -29,15 +30,15 @@ export default function DrivenSection({ data }) {
                     backdrop-blur-[20px] backdrop-saturate-[180%] shadow-[inset_5px_1px_33px_#f1f1f1,inset_3px_-3px_5px_#fafafa] overflow-hidden block"
               >
                 <Image
-                  src={data?.media?.path || "/images/placeholder.png"}
-                  alt={data?.media?.alt || "Image"}
+                  src={image || "/images/placeholder.png"}
+                  alt={image_alt_text || "Image"}
                   width={620}
                   height={300}
                   className="w-full h-full rounded-[7px] 2xl:rounded-[10px] object-cover"
                 />
               </div>
               <div className="w-full h-auto mx-[-5px] sm:mx-[-10px] flex items-center">
-                {data?.counterList?.map((item, index) => (
+                {metrics?.map((item, index) => (
                   <div key={index} className="w-1/4 px-[5px] sm:px-[10px]">
                     <div className="text-[24px] sm:text-[32px] lg:text-[38px] 2xl:text-[45px] 3xl:text-[58px] leading-[1.2] font-normal bg-gradient-to-r from-[#0B436A] to-[#299B8A] bg-clip-text text-transparent mb-[5px] lg:mb-[10px]">
                       <CountUp

@@ -2,6 +2,7 @@ import InnerHero from "@/components/common/InnerHero";
 import BoardDirectorSection from "@/components/features/heritage/BoardDirectorSection";
 import DrivenSection from "@/components/features/heritage/DrivenSection";
 import HeritageSection from "@/components/features/heritage/HeritageSection";
+import { getAPI } from "@/lib/api";
 
 const local_data = {
   driven_section_data: {
@@ -218,21 +219,43 @@ const local_data = {
   },
 };
 
-export default function page() {
+export default async function page() {
+
+  const result = await getAPI("heritage");
+  const data = result.data;
+
+  if (!data) {
+    return <div>Error loading data</div>;
+  }
+  const {
+   banner,
+   about_cms,
+   metrics,
+   timelines,
+   directors
+  } = data;
+
+
   return (
     <>
       <div className="overflow-hidden">
         <InnerHero
-          coverImage="/images/heritage_Inner_banner.webp"
-          coverImageMobile="/images/heritage_Inner_banner.webp"
-          alt="Heritage Banner"
-          title="Oman’s Leading Business <br> Conglomerate"
+          coverImage={banner?.banner}
+          coverImageMobile={banner?.banner_mobile}
+          alt={banner?.banner_alt_text}
+          title={banner?.banner_title}
           breadCrumb_data={[
             { link: { href: "/", label: "Home" } },
             { link: { href: "/heritage", label: "Heritage" } },
           ]}
         />
-        <DrivenSection data={local_data?.driven_section_data} />
+        <DrivenSection 
+          title={about_cms?.section1_title}
+          description={about_cms?.section1_description}
+          image={about_cms?.section1_image}
+          image_alt_text={about_cms?.section1_image_alt_text}
+          metrics={metrics}
+        data={local_data?.driven_section_data} />
         <HeritageSection data={local_data?.heritage_Section_data} />
         <BoardDirectorSection data={local_data?.board_directors_section_data} />
       </div>

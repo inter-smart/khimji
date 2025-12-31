@@ -112,7 +112,7 @@ export default function VendordetailsSection({ breadCrumb_data, pageData }) {
                   </div>
 
                   <div className="text-[14px] lg:text-[16px] 2xl:text-[20px] 3xl:text-[26px] mb-[10px]">
-                    {/* {item?.subtitle} */}
+                    {item?.subtitle}
                   </div>
 
                   <div className="flex">

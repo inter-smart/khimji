@@ -33,6 +33,13 @@ export const COUNTRIES = {
     language: 'Arabic',
     isRTL: true
   },
+  Bahrain: {
+    code: 'bh',
+    name: 'Bahrain',
+    flag: 'https://flagcdn.com/w40/bh.png',
+    currency: 'BHD',
+    language: 'Arabic'
+  },
   kuwait: {
     code: 'kw',
     name: 'Kuwait',
@@ -40,6 +47,7 @@ export const COUNTRIES = {
     currency: 'KWD',
     language: 'Arabic'
   },
+
   india: {
     code: 'in',
     name: 'India',
@@ -49,6 +57,16 @@ export const COUNTRIES = {
     isRTL: false
   }
 };
+
+export const COUNTRY_SLUG_MAP = {
+  "united-arab-emirates": "uae",
+  "saudi-arabia": "saudi",
+  "qatar": "qatar",
+  "kuwait": "kuwait",
+  "oman": "oman",
+  "india": "india",
+};
+
 
 export const SUPPORTED_COUNTRIES = ['uae', 'oman', 'saudi', 'qatar', 'kuwait', 'india'];
 export const RTL_COUNTRIES = ['uae', 'oman', 'saudi', 'qatar', 'kuwait'];

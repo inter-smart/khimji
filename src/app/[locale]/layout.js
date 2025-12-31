@@ -6,6 +6,8 @@ import localFont from "next/font/local";
 import { CountryProvider } from "@/context/CountryContext";
 // import WidgetSection from "@/components/common/WidgetSection";
 import PageLoader from "@/components/common/PageLoader";
+import { getAPI } from "@/lib/api";
+import { HeaderProvider } from "@/context/HeaderContext";
 
 const Nobel = localFont({
   src: [
@@ -31,16 +33,26 @@ export default async function RootLayout({ children, params }) {
   const { locale } = await params;
   const direction = isRTLLocale(locale) ? "rtl" : "ltr";
 
+  const { data: businessType } = await getAPI("get-businesses");
+  const { data: locations } = await getAPI("get-locations");
+  const { data: languages } = await getAPI("get-locales");
+
   return (
     <html lang={locale} dir={direction}>
       <body className={`${Nobel.className}`}>
-        <CountryProvider>
-          <PageLoader />
-          <Header />
-          <main className="flex-grow">{children}</main>
-          {/* <WidgetSection /> */}
-          <Footer />
-        </CountryProvider>
+        <HeaderProvider>
+          <CountryProvider>
+            <PageLoader />
+            <Header
+              businessType={businessType}
+              countries={locations}
+              languages={languages}
+            />
+            <main className="flex-grow">{children}</main>
+            {/* <WidgetSection /> */}
+            <Footer />
+          </CountryProvider>
+        </HeaderProvider>
       </body>
     </html>
   );
