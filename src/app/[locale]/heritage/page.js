@@ -254,10 +254,17 @@ export default async function page() {
           description={about_cms?.section1_description}
           image={about_cms?.section1_image}
           image_alt_text={about_cms?.section1_image_alt_text}
-          metrics={metrics}
-        data={local_data?.driven_section_data} />
-        <HeritageSection data={local_data?.heritage_Section_data} />
-        <BoardDirectorSection data={local_data?.board_directors_section_data} />
+          metrics={metrics} />
+        <HeritageSection
+          title={about_cms?.section2_title}
+          timelines={timelines}
+         />
+        <BoardDirectorSection
+          title={about_cms?.section4_title}
+          description={about_cms?.section4_description}
+          form_title={about_cms?.section4_form_title}
+          directors={directors}
+         />
       </div>
     </>
   ); 
