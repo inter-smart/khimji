@@ -8,7 +8,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { useParams } from "next/navigation";
 import { isRTLLocale } from "@/lib/countries";
 
-export default function HeritageSection({ data }) {
+export default function HeritageSection({title,timelines, data }) {
   const { locale } = useParams();
   const isRTL = isRTLLocale(locale);
 
@@ -139,7 +139,7 @@ export default function HeritageSection({ data }) {
           size="heading1"
           className="text-center !mb-[50px] sm:!mb-[40px] 2xl:!mb-[60px] 3xl:!mb-[80px]"
         >
-          Heritage
+          {title}
         </Heading>
       </div>
       <div className="w-full translate-y-[30px] sm:translate-y-[0px] lg:translate-y-[40px] 2xl:translate-y-[30px] pointer-events-none absolute z-1 inset-0">
@@ -205,7 +205,7 @@ export default function HeritageSection({ data }) {
           ref={emblaRef}
         >
           <div className="flex">
-            {data?.timelineList?.map((item, index) => (
+            {timelines?.map((item, index) => (
               <div
                 key={index}
                 className="flex-[0_0_100%] sm:flex-[0_0_33.333%] px-4"
@@ -228,7 +228,7 @@ export default function HeritageSection({ data }) {
                     {item?.title}
                   </div>
                   <div className="text-[14px] sm:text-[16px] 2xl:text-[20px] 3xl:text-[25px] leading-[1.2] font-normal text-black">
-                    {item?.description}
+                    {item?.subtitle}
                   </div>
                 </motion.div>
               </div>
