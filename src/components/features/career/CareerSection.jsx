@@ -15,6 +15,7 @@ import {
     DialogTrigger,
     DialogTitle
 } from "@/components/ui/dialog";
+import HtmlRenderer from "@/lib/helper";
 
 export default function CareerSection({ data }) {
     return (
@@ -35,11 +36,11 @@ export default function CareerSection({ data }) {
                         {data?.description}
                     </div>
                     <Link
-                        href={data?.button?.link || "#"}
+                        href={`mailto:${data?.email}` || "#"}
                         target={data?.button?.target ? "_self" : "_blank"}
                         className="text-[14px] lg:text-[16px] 2xl:text-[18px] 3xl:text-[20px] leading-[1] font-normal text-[#00416B] w-fit underline flex items-center hover:opacity-70 transition-opacity duration-300"
                     >
-                        {data?.button?.label}
+                        {data?.email}
                         <span className="w-[15px] 3xl:w-[20px] h-auto aspect-square ms-[8px] sm:ms-[10px] 3xl:ms-[15px] mb-[-5px] flex items-center justify-center">
                             <Image
                                 src="/images/career_arrow.svg"
@@ -59,14 +60,14 @@ export default function CareerSection({ data }) {
                                     <div className="w-full h-auto xl:h-full flex flex-wrap items-center">
                                         <div className="w-full xl:w-1/2 mb-[15px] sm:mb-[25px] xl:mb-0">
                                             <div className="text-[16px] 2xl:text-[20px] 3xl:text-[24px] leading-[1.2] font-normal text-[#1C2222] mb-[5px]">{item?.title}</div>
-                                            <div className="text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.2] font-normal text-[#1E1E1E]">{item?.description}</div>
+                                            <div className="text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.2] font-normal text-[#1E1E1E]">{item?.summary}</div>
                                         </div>
                                         <div className="w-full xl:w-1/2 h-full flex flex-wrap [&>*]:flex [&>*]:items-center sm:[&>*]:justify-center max-sm:[&>*]:mb-[10px]">
                                             <div className="w-full sm:w-[30%] h-auto xl:h-full sm:px-[10px] relative z-0 before:content-[''] before:w-[2px] before:h-full before:bg-gradient-to-b before:from-[#F8F8F8] before:via-[#D0D0D0] before:to-[#F8F8F8] before:absolute before:z-1 before:inset-[0_auto_0_0] after:content-[''] after:w-[2px] after:h-full after:bg-gradient-to-b after:from-[#F8F8F8] after:via-[#D0D0D0] after:to-[#F8F8F8] after:absolute after:z-1 after:inset-[0_0_0_auto] max-sm:before:hidden max-sm:after:hidden">
-                                                <div className="text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.2] font-normal text-[#1C2222]">Job Type: {item?.jobType}</div>
+                                                <div className="text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.2] font-normal text-[#1C2222]">Job Type: {item?.job_type}</div>
                                             </div>
                                             <div className="text-center w-full sm:w-[50%] sm:px-[10px]">
-                                                <div className="text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.2] font-normal text-[#1C2222]">Requirements: {item?.requirements}</div>
+                                                <div className="text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.2] font-normal text-[#1C2222]">Requirements: {item?.experience}</div>
                                             </div>
                                             <div
                                                 onClick={(e) => e.stopPropagation()}
@@ -90,31 +91,27 @@ export default function CareerSection({ data }) {
                                             <div className="text-[16px] 3xl:text-[20px] leading-[1] font-normal text-[#00416B] mb-[15px] sm:mb-[25px]">
                                                 Responsibilities:
                                             </div>
-                                            <ul>
-                                                {item?.responsibilities?.map((item, index) => (
-                                                    <li
+                                                {/* {item?.responsibilities?.map((item, index) => ( */}
+                                                    <HtmlRenderer
                                                         key={index}
-                                                        className="text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.2] font-normal text-[#1E1E1E] mb-[15px] list-disc list-inside"
-                                                    >
-                                                        {item}
-                                                    </li>
-                                                ))}
-                                            </ul>
+                                                        className="text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.2] font-normal text-[#1E1E1E] mb-[15px]"
+                                                        htmlString={item?.responsibilities}
+                                                    />
+                                             
                                         </div>
                                         <div className="w-full sm:w-[35%]">
                                             <div className="text-[16px] 3xl:text-[20px] leading-[1] font-normal text-[#00416B] mb-[15px] sm:mb-[25px]">
                                                 Required Skills:
                                             </div>
-                                            <ul>
-                                                {item?.skills?.map((item, index) => (
-                                                    <li
+                                            {/* <ul> */}
+                                                {/* {item?.skills?.map((item, index) => ( */}
+                                                    <HtmlRenderer
                                                         key={index}
-                                                        className="text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.2] font-normal text-[#1E1E1E] mb-[15px] list-disc list-inside"
-                                                    >
-                                                        {item}
-                                                    </li>
-                                                ))}
-                                            </ul>
+                                                        htmlString={item?.required_skills}
+                                                        className="text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.2] font-normal text-[#1E1E1E] mb-[15px]"
+                                                    />
+                                                {/* ))} */}
+                                            {/* </ul> */}
                                         </div>
                                     </div>
                                 </AccordionContent>

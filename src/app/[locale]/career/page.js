@@ -1,5 +1,6 @@
 import InnerHero from "@/components/common/InnerHero";
 import CareerSection from "@/components/features/career/CareerSection";
+import { getAPI } from "@/lib/api";
 
 const local_data = {
   career_section_data: {
@@ -142,20 +143,32 @@ const local_data = {
   },
 };
 
-export default function page() {
+export default async function page() {
+
+  const {data, error}= await getAPI("careers")
+
+  const {banner, career_cms, careers} = data
+
+  const career_section_data ={
+    ...career_cms, 
+    careerList: careers
+  }
+
+
+  console.log("career_section_data", career_section_data)
   return (
     <>
       <InnerHero
-        coverImage="/images/career_innerbanner.jpg"
-        coverImageMobile="/images/career_innerbanner.jpg"
-        alt="Career Banner"
-        title="CAREERS"
+        coverImage={banner?.banner}
+        coverImageMobile={banner?.banner_mobile}
+        alt={banner?.banner_alt_text}
+        title={banner?.banner_title}
         breadCrumb_data={[
           { link: { href: "/", label: "Home" } },
           { link: { href: "/career", label: "Careers" } },
         ]}
       />
-      <CareerSection data={local_data?.career_section_data} />
+      <CareerSection  data={career_section_data} />
     </>
   );
 }
