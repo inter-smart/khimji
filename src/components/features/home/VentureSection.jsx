@@ -425,7 +425,9 @@ export default function VentureSection({title, ventures, banner, banner_alt_text
                                 >
                                     {ventures[1]?.ventures?.map((item, index) => (
                                         <SwiperSlide key={index}>
+                                            <Link href={`${locale}/venture/${item?.slug}`}>
                                             <VentureCard item={item} />
+                                            </Link>
                                         </SwiperSlide>
                                     ))}
                                 </Swiper>
