@@ -33,22 +33,14 @@ export default async function RootLayout({ children, params }) {
   const { locale } = await params;
   const direction = isRTLLocale(locale) ? "rtl" : "ltr";
 
-  const { data: businessType } = await getAPI("get-businesses");
-  const { data: locations } = await getAPI("get-locations");
-  const { data: languages } = await getAPI("get-locales");
-
   return (
     <html lang={locale} dir={direction}>
       <body className={`${Nobel.className}`}>
         <HeaderProvider>
           <CountryProvider>
             <PageLoader />
-            <Header
-              businessType={businessType}
-              countries={locations}
-              languages={languages}
-            />
-            <main className="flex-grow">{children}</main>
+            <Header />
+            <main className="grow">{children}</main>
             {/* <WidgetSection /> */}
             <Footer />
           </CountryProvider>
