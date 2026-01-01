@@ -12,33 +12,30 @@ import SearchBox from "@/components/common/SearchBox";
 import HeaderSelect from "@/components/common/HeaderSelect";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { BorderBeam } from "@/components/ui/border-beam";
-import { useCountry } from "@/context/CountryContext";
-import { COUNTRIES, COUNTRY_SLUG_MAP, SUPPORTED_COUNTRIES } from "@/lib/countries";
-import LangDropDown from "./LangDropDowns";
+import { useRouter } from "next/navigation";
 
-export default function Header({ businessType, countries, languages }) {
-  const { country, setCountry, countryData } = useCountry();
+export const LANGUAGES = {
+  en: {
+    code: "en",
+    name: "EN",
+    fullName: "English",
+    flag: "https://flagcdn.com/w40/gb.png",
+    isRTL: false,
+  },
+  ar: {
+    code: "ar",
+    name: "AR",
+    fullName: "Arabic",
+    flag: "https://flagcdn.com/w40/sa.png",
+    isRTL: true,
+  },
+};
+
+export default function Header({ businessType, lang }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const currentPath = usePathname();
   const [open, setOpen] = useState(false);
-  const pathname = usePathname();
-  const { locale } = useParams();
-  const isHome = pathname === `/${locale}`;
-
-  const countriesForUI = countries
-    .map((c) => {
-      const key = COUNTRY_SLUG_MAP[c.slug];
-      if (!key || !COUNTRIES[key]) return null;
-
-      return {
-        ...COUNTRIES[key],
-        id: c.id,
-        slug: c.slug,
-        backendName: c.name,
-        key,
-      };
-    })
-    .filter(Boolean);
+  const router = useRouter();
 
   // scroll sticky
   useEffect(() => {
@@ -50,6 +47,16 @@ export default function Header({ businessType, countries, languages }) {
     window?.addEventListener("scroll", handleScroll);
     return () => window?.removeEventListener("scroll", handleScroll);
   }, [currentPath]);
+
+  const languageData = LANGUAGES[lang];
+  const languages = Object.values(LANGUAGES);
+
+  const changeLanguage = (newLang) => {
+    const segments = currentPath.split("/");
+    segments[1] = newLang; // replace "en" → "ar"
+    const newPath = segments.join("/");
+    router.push(newPath);
+  };
 
   return (
     <header>
@@ -70,11 +77,37 @@ export default function Header({ businessType, countries, languages }) {
 
                 {/* Business Select */}
 
-                <HeaderSelect data={businessType} countries={countries} />
+                <HeaderSelect data={businessType} />
 
                 {/* country Dropdown */}
 
-                <LangDropDown changeCountry={setCountry} />
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="flex items-center gap-2 px-2 cursor-pointer focus:outline-none">
+                    <Image
+                      src={languageData?.flag}
+                      alt={languageData?.fullName}
+                      width={28}
+                      height={20}
+                      className="rounded-sm object-cover w-[28px] h-[20px]"
+                    />
+                    <span className="font-medium text-[16px] uppercase">{languageData?.name}</span>
+                  </DropdownMenuTrigger>
+
+                  <DropdownMenuContent align="end">
+                    {languages.map((lang) => (
+                      <DropdownMenuItem
+                        key={lang.code}
+                        onClick={() => changeLanguage(lang.code)}
+                        className={`cursor-pointer ${lang.code === lang.code ? "bg-accent" : ""}`}
+                      >
+                        <div className="flex items-center gap-2 w-full">
+                          <Image src={lang.flag} alt={lang.fullName} width={20} height={20} className="rounded-sm object-cover w-[20px] h-[20px]" />
+                          <span>{lang.fullName}</span>
+                        </div>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             </div>
           </div>
@@ -104,7 +137,7 @@ export default function Header({ businessType, countries, languages }) {
                 <div className="flex items-center">
                   <div className="me-[5px] sm:me-[20px]">
                     <div className="relative inline-flex rounded-full max-w-[130px]">
-                      <Select value={country} onValueChange={setCountry} modal={false}>
+                      <Select value={languageData?.code} onValueChange={(lang) => changeLanguage(lang)} modal={false}>
                         <SelectTrigger
                           className="
                             h-[27px]
@@ -121,8 +154,8 @@ export default function Header({ businessType, countries, languages }) {
                         >
                           {/* Globe Icon or Country Flag */}
                           <Image
-                            src={countryData?.flag}
-                            alt={countryData?.name}
+                            src={languageData?.flag}
+                            alt={languageData?.fullName}
                             width={17}
                             height={17}
                             className="rounded-full me-1 object-cover w-[17px] h-[17px]"
@@ -132,9 +165,9 @@ export default function Header({ businessType, countries, languages }) {
                         </SelectTrigger>
 
                         <SelectContent className=" min-w-[120px] rounded-xl bg-white text-black shadow-lg  ">
-                          {SUPPORTED_COUNTRIES.map((c) => (
-                            <SelectItem key={c} value={c}>
-                              {COUNTRIES[c]?.name}
+                          {languages.map((lang) => (
+                            <SelectItem key={lang.code} value={lang.code}>
+                              {lang.fullName}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -159,7 +192,7 @@ export default function Header({ businessType, countries, languages }) {
               </div>
               <div className={`flex items-center gap-3 max-w-1/2 pt-[15px] ${isScrolled ? "opacity-0 h-0" : ""}`}>
                 <div className="w-1/2">
-                  <HeaderSelect />
+                  <HeaderSelect data={businessType} />
                 </div>
               </div>
             </div>

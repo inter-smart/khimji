@@ -1,6 +1,7 @@
 import InnerHero from "@/components/common/InnerHero";
 import ContactSection from "@/components/features/contact/ContactSection";
 import { fetchFromAPIII, getAPI } from "@/lib/api";
+import { getData } from "@/lib/server/api";
 import { cookies } from "next/headers";
 
 const local_data = {
@@ -380,22 +381,18 @@ const local_data = {
   },
 };
 
-export default async function Page() {
-  const cookieStore = await cookies();
-  const lang = cookieStore?.get("lang")?.value || "en";
+export default async function Page({ params }) {
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang;
 
-  // Fetch only the language you need
-  const result = await fetchFromAPIII("/api/contact", {
-    headers: { "Accept-Language": lang },
-  });
+  const { data, error } = await getData("contact", lang);
 
-  const data = result?.data;
-
-  if (!data) {
+  if (!data || error) {
     return <div>Error loading data</div>;
   }
-
   const { banner, contact_cms, contact_sectors } = data;
+
+  console.log("Contact Data:", data);
 
   return (
     <>

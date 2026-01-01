@@ -12,39 +12,23 @@ import { useParams } from "next/navigation";
 import { isRTLLocale } from "@/lib/countries";
 import { renderHtml } from "@/lib/helper";
 
-export default function ICVinitiativeMobile({
-  title,
-  description,
-  banner,
-  banner_alt_text,
-  data,
-}) {
-  const { countryData } = useCountry();
+export default function ICVinitiativeMobile({ title, description, banner, banner_alt_text, data }) {
+  // const { countryData } = useCountry();
   const { locale } = useParams();
   const isRTL = isRTLLocale(locale);
 
   return (
     <section className="pb-[75px] w-full sm:hidden">
       <div className="w-full h-[290px] relative before:absolute before:left-0 before:content-[''] before:bottom-0 before:w-full before:h-full before:bg-black/40 before:z-1">
-        <Image
-          src={banner}
-          width="441"
-          height="290"
-          className="absolute top-0 left-0 w-full h-full object-cover"
-          alt={banner_alt_text}
-        />
+        <Image src={banner} width="441" height="290" className="absolute top-0 left-0 w-full h-full object-cover" alt={banner_alt_text} />
         <div className="container flex items-end h-full">
           <div className="relative w-full py-[25px] z-1">
-            <div className="text-[43px] text-white font-medium uppercase">
-              {title}
-            </div>
+            <div className="text-[43px] text-white font-medium uppercase">{title}</div>
           </div>
         </div>
       </div>
       <div className="container">
-        <div className="py-[30px]">
-          {renderHtml(description, "text-black")}
-          </div>
+        <div className="py-[30px]">{renderHtml(description, "text-black")}</div>
         <div className="relative">
           <Swiper
             dir={isRTL ? "rtl" : "ltr"}
@@ -71,9 +55,7 @@ export default function ICVinitiativeMobile({
                       alt={item?.image_mobile_alt_text}
                     />
                   </div>
-                  <div className="text-[20px] xs:text-[25px] text-[#0B436A] uppercase m-[15px_0] ">
-                    {item?.title}
-                  </div>
+                  <div className="text-[20px] xs:text-[25px] text-[#0B436A] uppercase m-[15px_0] ">{item?.title}</div>
                 </div>
               </SwiperSlide>
             ))}

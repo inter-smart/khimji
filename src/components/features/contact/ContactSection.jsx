@@ -18,7 +18,7 @@ export default function ContactSection({ sectors, cms }) {
           </div>
           <div className="w-full lg:w-1/4 sm:px-[15px] lg:flex items-center justify-center relative z-0 before:content-[''] before:w-[1px] before:h-[50%] before:my-auto before:bg-gradient-to-b before:from-[#F8F8F8] before:via-[#D0D0D0] before:to-[#F8F8F8] before:absolute before:z-1 before:inset-[0_auto_0_0] max-lg:before:hidden">
             <div
-              dangerouslySetInnerHTML={{ __html: cms?.address }}
+              dangerouslySetInnerHTML={{ __html: cms?.address ? cms.address : "" }}
               className="text-[14px] 2xl:text-[16px] 3xl:text-[20px] leading-[1.4] font-normal text-black"
             />
           </div>
