@@ -1,7 +1,7 @@
 // app/layout.jsx
 import "../globals.css";
 import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import Footer from "@/components/layout/Footer/Footer";
 import localFont from "next/font/local";
 import CountryProvider from "@/context/CountryDataProvider";
 
@@ -26,14 +26,14 @@ export const metadata = {
 export default async function RootLayout({ children, params }) {
   const paramsResolved = await params;
   const { lang } = paramsResolved || { lang: "en" };
-
+  
   return (
     <html lang={lang} dir={lang == "ar" ? "rtl" : "ltr"}>
       <body className={`${Nobel.className}`}>
         <CountryProvider>
           <Header lang={lang} />
           <main className="grow">{children}</main>
-          <Footer />
+          <Footer lang={lang} />
         </CountryProvider>
       </body>
     </html>

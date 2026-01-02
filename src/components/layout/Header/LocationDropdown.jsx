@@ -1,11 +1,17 @@
 "use client";
 
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function LocationDropdown() {
+export default function LocationDropdown({ countries: allCountries }) {
   const [countries, setCountries] = useState([]);
   const router = useRouter();
 
@@ -30,7 +36,11 @@ export default function LocationDropdown() {
   return (
     <div className="px-[7px] sm:px-[3px]">
       <div className="relative inline-flex rounded-full">
-        <Select value={selectedCountry} onValueChange={changeCountry} modal={false}>
+        <Select
+          value={selectedCountry}
+          onValueChange={changeCountry}
+          modal={false}
+        >
           <SelectTrigger className="relative text-white sm:text-black min-w-[115px] rounded-[40px] sm:rounded-[5px]">
             <SelectValue placeholder="Location" />
           </SelectTrigger>
@@ -44,8 +54,17 @@ export default function LocationDropdown() {
           </SelectContent>
         </Select>
 
-        <BorderBeam duration={15} size={60} reverse className="from-transparent via-white/70 to-transparent" />
-        <BorderBeam duration={13} size={70} className="from-transparent via-white/70 to-transparent" />
+        <BorderBeam
+          duration={15}
+          size={60}
+          reverse
+          className="from-transparent via-white/70 to-transparent"
+        />
+        <BorderBeam
+          duration={13}
+          size={70}
+          className="from-transparent via-white/70 to-transparent"
+        />
       </div>
     </div>
   );

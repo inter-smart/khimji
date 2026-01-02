@@ -31,7 +31,7 @@ export const LANGUAGES = {
   },
 };
 
-export default function Header({ businessType, lang }) {
+export default function Header({ businessType, lang, countries }) {
 
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -79,10 +79,9 @@ export default function Header({ businessType, lang }) {
 
                 {/* Business Select */}
 
-                <HeaderSelect data={businessType} />
+                <HeaderSelect data={businessType} countries={countries} />
 
                 {/* country Dropdown */}
-
                 <DropdownMenu>
                   <DropdownMenuTrigger className="flex items-center gap-2 px-2 cursor-pointer focus:outline-none">
                     <Image

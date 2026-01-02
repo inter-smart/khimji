@@ -41,7 +41,7 @@ export default function HeaderSelect({ data, countries }) {
 
       {/* Location Select */}
 
-      <LocationDropdown />
+      <LocationDropdown allCountries={countries} />
     </div>
   );
 }
