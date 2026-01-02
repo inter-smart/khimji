@@ -136,7 +136,7 @@ export default function VentureListingSection({ data, title, context }) {
     process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
   const { country, business_type } = context;
 
-  console.log("country: ", context)
+  console.log("country: ", context);
   const { lang } = useParams();
 
   const fetchVentures = async (slug) => {
@@ -151,17 +151,17 @@ export default function VentureListingSection({ data, title, context }) {
           method: "GET",
           headers: {
             "Accept-Language": lang,
-            "country": country,
-            "business_type": business_type,
+            country: country,
+            business_type: business_type,
           },
         }
       );
 
       // if (result?.status && result.data) {
-        const data = await result.json();
-        setVentures(data?.data || []);
+      const data = await result.json();
+      setVentures(data?.data || []);
 
-        console.log("venture data =>",data?.data)
+      console.log("venture data =>", data?.data);
 
       // }
     } catch (err) {
@@ -171,8 +171,7 @@ export default function VentureListingSection({ data, title, context }) {
     }
   };
 
-
-  console.log("active data > ", ventures)
+  console.log("active data > ", ventures);
   useEffect(() => {
     fetchVentures(activeSlug);
   }, [activeSlug]);
@@ -246,7 +245,7 @@ export default function VentureListingSection({ data, title, context }) {
                 >
                   {item?.title}
                 </div>
-                {renderHtml(item?.description)}
+                <div>{renderHtml(item?.description)}</div>
               </div>
               <div className="flex flex-wrap -m-[5px] lg:-m-[10px] 3xl:-m-[15px]">
                 {ventures?.ventures?.map((venture) => (
