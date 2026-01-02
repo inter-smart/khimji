@@ -20,12 +20,10 @@ export default function LocationDropdown({ locationsPromise }) {
 
     // Listen for country changes from other components (e.g., footer)
     const handleCountryChange = (event) => {
-      console.log("[LocationDropdown] countryChanged event received:", event);
       setSelectedCountry(event.detail.country);
     };
 
     window.addEventListener("countryChanged", handleCountryChange);
-    console.log("[LocationDropdown] countryChanged listener attached");
 
     return () => {
       window.removeEventListener("countryChanged", handleCountryChange);
