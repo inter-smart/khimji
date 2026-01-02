@@ -6,6 +6,7 @@ import SocialLinks from "./SocialLinks";
 import Links from "./Links";
 import Brands from "./Brands";
 import { use } from "react";
+import { useRouter } from "next/navigation";
 
 const brands = [
   "/images/brand-1.png",
@@ -22,7 +23,17 @@ const brands = [
 
 export default function FooterClient({ siteSettingPromise, lang }) {
   const siteSettings = use(siteSettingPromise);
-  const { brands, site_settings, social_links, locations } = siteSettings?.data || {};
+  const { brands, site_settings, social_links, locations, policies } = siteSettings?.data || {};
+
+   const router = useRouter();
+
+  function changeCountry(slug) {
+    document.cookie = `country=${slug}; path=/`;
+    // Dispatch custom event to notify other components
+    window.dispatchEvent(new CustomEvent('countryChanged', { detail: { country: slug } }));
+    router.refresh();
+  }
+
 
   return (
     <>
@@ -31,14 +42,14 @@ export default function FooterClient({ siteSettingPromise, lang }) {
           <Brands brands={brands} lang={lang} />
 
           <div className="flex flex-wrap pb-[80px]">
-            <Links locations={locations} lang={lang} site_settings={site_settings} />
+            <Links locations={locations} lang={lang} site_settings={site_settings} changeCountry={changeCountry} policies={policies} />
             <SocialLinks social_links={social_links} site_settings={site_settings} lang={lang} />
           </div>
           <BottomLine lang={lang} />
         </div>
       </section>
 
-      <FooterMobile />
+      <FooterMobile data={siteSettings?.data} changeCountry={changeCountry} lang={lang} />
     </>
   );
 }

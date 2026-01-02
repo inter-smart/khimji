@@ -1,23 +1,20 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 const FOOTER_LINK_CLASS =
   "text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-white font-medium mb-[4px] xl:mb-[7px] 3xl:mb-[10px] inline-block transition-all duration-300 hover:text-white/80 hover:translate-x-1 cursor-pointer";
 const CONTACT_BUTTON_CLASS =
   "text-[12px] 2xl:text-[16px] 3xl:text-[18px] text-white capitalize font-medium flex items-center group transition-all duration-300 hover:text-white/90";
-const ARROW_ICON_CLASS = "w-[14px] h-[14px] flex items-center mt-[5px] mx-[15px] transition-transform duration-300 group-hover:translate-x-1";
+const ARROW_ICON_CLASS =
+  "w-[14px] h-[14px] flex items-center mt-[5px] mx-[15px] transition-transform duration-300 group-hover:translate-x-1";
 
-export default function Links({ locations, lang, site_settings }) {
-  const router = useRouter();
-
-  function changeCountry(slug) {
-    document.cookie = `country=${slug}; path=/`;
-    // Dispatch custom event to notify other components
-    window.dispatchEvent(new CustomEvent('countryChanged', { detail: { country: slug } }));
-    router.refresh();
-  }
-
+export default function Links({
+  locations,
+  lang,
+  site_settings,
+  changeCountry,
+  policies,
+}) {
   return (
     <>
       <div className="w-5/12">
@@ -36,7 +33,10 @@ export default function Links({ locations, lang, site_settings }) {
             <ul>
               {locations?.map((item, index) => (
                 <li key={index}>
-                  <div onClick={() => changeCountry(item?.slug)} className={FOOTER_LINK_CLASS}>
+                  <div
+                    onClick={() => changeCountry(item?.slug)}
+                    className={FOOTER_LINK_CLASS}
+                  >
                     {item?.name}
                   </div>
                 </li>
@@ -51,26 +51,13 @@ export default function Links({ locations, lang, site_settings }) {
             </div>
 
             <ul>
-              <li>
-                <Link href="#" className={FOOTER_LINK_CLASS}>
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className={FOOTER_LINK_CLASS}>
-                  Terms Of Use
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className={FOOTER_LINK_CLASS}>
-                  Sitemap
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className={FOOTER_LINK_CLASS}>
-                  Responsible Disclosure
-                </Link>
-              </li>
+              {policies?.map((item, index) => (
+                <li key={index}>
+                  <Link href={item?.slug} className={FOOTER_LINK_CLASS}>
+                    {item?.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div className="w-full p-[15px]">
