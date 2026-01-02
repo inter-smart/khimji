@@ -5,14 +5,14 @@ import Link from "next/link";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "@/components/ui/pagination";
 
-export default function ArchiveListingSection({ categories }) {
+export default function ArchiveListingSection({ categories, lang, country }) {
   const [activeCategory, setActiveCategory] = useState(categories?.[0]?.id || null);
   const [archiveData, setArchiveData] = useState([]);
   const [paginationData, setPaginationData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const perPage = 10;
+  const perPage = 2;
 
   // Fetch archive data
   const fetchArchiveData = async (categoryId, page) => {
@@ -21,7 +21,13 @@ export default function ArchiveListingSection({ categories }) {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/archive-list?category_id=${categoryId}&per_page=${perPage}&page=${page}`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/archive-list?category_id=${categoryId}&per_page=${perPage}&page=${page}`,
+        {
+          headers: {
+            "Accept-Language": lang,
+            "Location-Slug": country,
+          },
+        }
       );
 
       if (!response.ok) {
@@ -59,7 +65,7 @@ export default function ArchiveListingSection({ categories }) {
   // Handle page change
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // Generate page numbers for pagination

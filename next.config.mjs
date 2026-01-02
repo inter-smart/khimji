@@ -13,6 +13,11 @@ const nextConfig = {
         hostname: "www.khimji-ramdas.dev5.intersmarthosting.in",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
     ],
   },
 };

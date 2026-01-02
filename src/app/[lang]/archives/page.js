@@ -1,6 +1,7 @@
 import InnerHero from "@/components/common/InnerHero";
 import ArchiveListingSection from "@/components/features/archives/ArchiveListingSection";
-import { getAPI } from "@/lib/api";
+import { getData } from "@/lib/server/api";
+import { getRequestContext } from "@/lib/server/getCookieData";
 
 const local_data = {
   archive_listing_section_data: {
@@ -521,12 +522,15 @@ export default async function Page({ params }) {
   const resolvedParams = await params;
   const lang = resolvedParams.lang;
 
-  const result = await getAPI("archives", lang);
-  const data = result.data;
+  const { country } = await getRequestContext();
 
-  if (!data) {
+  const { data, error } = await getData("archives", lang);
+
+  if (error || !data) {
+    // Fallback to local data in case of error
     return <div>Error loading data</div>;
   }
+
   const { banner, archive_categories } = data;
 
   return (
@@ -538,7 +542,7 @@ export default async function Page({ params }) {
         title={banner?.banner_title || "Archives"}
         breadCrumb_data={[{ link: { href: "/", label: "Home" } }, { link: { href: "/heritage", label: "Archives" } }]}
       />
-      <ArchiveListingSection categories={archive_categories} />
+      <ArchiveListingSection key={country} categories={archive_categories} lang={lang} country={country} />
     </>
   );
 }
