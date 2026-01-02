@@ -15,7 +15,7 @@ export default function BlogListSection({ lang, country }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const perPage = 2;
+  const perPage = 12;
 
   const fetchBlogs = async (page) => {
     setIsLoading(true);
@@ -110,7 +110,7 @@ export default function BlogListSection({ lang, country }) {
           ) : (
             <div className="w-full mx-[-5px] sm:mx-[-7px] 2xl:mx-[-10px] flex flex-wrap">
               {blogs?.length > 0 ? (
-                blogs.slice(0, 2).map((item, index) => (
+                blogs?.map((item, index) => (
                   <div
                     key={index}
                     className="w-full sm:w-1/2 lg:w-1/3 p-[5px] sm:p-[7px] 2xl:p-[10px]"
@@ -301,7 +301,7 @@ function NoDataState() {
           No Blogs Found
         </p>
         <p className="text-[14px] 2xl:text-[16px] text-[#999]">
-          There are no blogs available for this category.
+          There are no blogs available.
         </p>
       </div>
     </div>
