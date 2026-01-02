@@ -1,6 +1,7 @@
 import { getRequestContext } from "./getCookieData";
 
 const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/` || "http://localhost:3001";
+const DEFAULT_COUNTRY = "united-arab-emirates";
 
 export class APIError extends Error {
   constructor(message, status) {
@@ -18,7 +19,7 @@ export async function getData(endpoint, lang, options = {}) {
   const defaultOptions = {
     headers: {
       "Content-Type": "application/json",
-      "Location-Slug": country,
+      "Location-Slug": country || DEFAULT_COUNTRY,
       "Accept-Language": lang,
       "Business-Type": business_type,
       ...options.headers,

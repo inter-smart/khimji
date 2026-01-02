@@ -1,37 +1,29 @@
 "use client";
-
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 
-export default function LocationDropdown({ countries: allCountries }) {
-  const [countries, setCountries] = useState([]);
+export default function LocationDropdown({ locationsPromise }) {
   const router = useRouter();
+  const locations = use(locationsPromise);
+  const countries = locations?.data || [];
+  const [selectedCountry, setSelectedCountry] = useState("");
 
-  // Load countries from localStorage
+  // Read cookie only on client side
   useEffect(() => {
-    const stored = localStorage.getItem("countries");
-    if (stored) {
-      setCountries(JSON.parse(stored));
-    }
+    const country = document.cookie
+      .split("; ")
+      .find((c) => c.startsWith("country="))
+      ?.split("=")[1];
+    setSelectedCountry(country || "");
   }, []);
 
   function changeCountry(slug) {
     document.cookie = `country=${slug}; path=/`;
+    setSelectedCountry(slug);
     router.refresh();
   }
-
-  const selectedCountry = document.cookie
-    .split("; ")
-    .find((c) => c.startsWith("country="))
-    ?.split("=")[1];
 
   return (
     <div className="px-[7px] sm:px-[3px]">
@@ -44,7 +36,6 @@ export default function LocationDropdown({ countries: allCountries }) {
           <SelectTrigger className="relative text-white sm:text-black min-w-[115px] rounded-[40px] sm:rounded-[5px]">
             <SelectValue placeholder="Location" />
           </SelectTrigger>
-
           <SelectContent className="max-w-[180px]">
             {countries.map((c) => (
               <SelectItem key={c.id} value={c.slug}>
@@ -53,18 +44,8 @@ export default function LocationDropdown({ countries: allCountries }) {
             ))}
           </SelectContent>
         </Select>
-
-        <BorderBeam
-          duration={15}
-          size={60}
-          reverse
-          className="from-transparent via-white/70 to-transparent"
-        />
-        <BorderBeam
-          duration={13}
-          size={70}
-          className="from-transparent via-white/70 to-transparent"
-        />
+        <BorderBeam duration={15} size={60} reverse className="from-transparent via-white/70 to-transparent" />
+        <BorderBeam duration={13} size={70} className="from-transparent via-white/70 to-transparent" />
       </div>
     </div>
   );

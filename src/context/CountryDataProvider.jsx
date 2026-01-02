@@ -43,7 +43,7 @@ export default function CountryProvider({ children }) {
     initCountry();
   }, []);
 
-  if (!ready) return <GlobalLoader />;
+  // if (!ready) return <GlobalLoader />;
 
   return children;
 }
