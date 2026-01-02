@@ -1,6 +1,8 @@
 import InnerHero from "@/components/common/InnerHero";
 import ContactSection from "@/components/features/contact/ContactSection";
 import { getData } from "@/lib/server/api";
+import { getRequestContext } from "@/lib/server/getCookieData";
+import { cookies } from "next/headers";
 
 const local_data = {
   contact_section_data: {
@@ -381,8 +383,8 @@ const local_data = {
 
 export default async function Page({ params }) {
   const resolvedParams = await params;
+  const { country } = await getRequestContext();
   const lang = resolvedParams.lang;
-
   const { data, error } = await getData("contact", lang);
 
   if (!data || error) {
@@ -401,7 +403,7 @@ export default async function Page({ params }) {
         title={banner?.banner_title || "CONTACT"}
         breadCrumb_data={[{ link: { href: "/", label: "Home" } }, { link: { href: "/Contact", label: "Contact" } }]}
       />
-      <ContactSection sectors={contact_sectors} cms={contact_cms} />
+      <ContactSection sectors={contact_sectors} cms={contact_cms} lang={lang} key={country} />
     </>
   );
 }
