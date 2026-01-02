@@ -25,7 +25,14 @@ export function renderHtml(htmlString, className="") {
 
   return (
     <p className={className}>
-      {parse(htmlString)}
+      {parse(htmlString, {
+        replace: (domNode) => {
+          if (domNode.attribs) {
+            // Remove ALL attributes from incoming HTML
+            delete domNode.attribs.class;
+          }
+        },
+      })}
     </p>
   );
 }

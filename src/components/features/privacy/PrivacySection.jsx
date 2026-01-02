@@ -15,7 +15,7 @@ export default function PrivacySection({ data }) {
                 </div>
                 <div
                     className="typography sm:[&_img]:float-left [&_img]:w-full sm:[&_img]:w-[240px] lg:[&_img]:w-[320px] 2xl:[&_img]:w-[385px] 3xl:[&_img]:w-[485px] sm:[&_img]:m-[0_30px_20px_0] lg:[&_img]:m-[0_40px_30px_0] 2xl:[&_img]:m-[0_50px_30px_0] 3xl:[&_img]:m-[0_70px_40px_0] [&_p]:text-[14px] 2xl:[&_p]:text-[16px] 3xl:[&_p]:text-[20px] [&_p]:leading-[1.5] [&_p]:font-normal [&_p]:text-black [&_ul]:pl-0 [&_li]:text-[14px] 2xl:[&_li]:text-[16px] 3xl:[&_li]:text-[20px] [&_h2]:text-[18px] lg:[&_h2]:text-[20px] 2xl:[&_h2]:text-[24px] 3xl:[&_h2]:text-[30px] [&_h2]:text-[#0B436A] [&_li]:text-black [&_h2]:mb-[10px] [&_li]:pl-[20px] 2xl:[&_li]:pl-[25px] [&_li]:relative [&_li]:z-0 [&_li]:list-none [&_li::before]:content-[''] [&_li::before]:w-[7px] 2xl:[&_li::before]:w-[10px] [&_li::before]:h-[7px] 2xl:[&_li::before]:h-[10px] [&_li::before]:bg-linear-to-r [&_li::before]:from-[#0B436A] [&_li::before]:to-[#299B8A] [&_li::before]:rounded-full [&_li::before]:absolute [&_li::before]:z-1 [&_li::before]:inset-[7px_auto_auto_0] 3xl:[&_li::before]:inset-[10px_auto_auto_0] [&_p]:mb-[20px] lg:[&_p]:mb-[30px] 3xl:[&_p]:mb-[50px]"
-                    dangerouslySetInnerHTML={{ __html: data?.text_editor_content }}
+                    dangerouslySetInnerHTML={{ __html: data?.content }}
                 />
             </div>
         </section>
