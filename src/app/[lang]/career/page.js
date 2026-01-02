@@ -1,6 +1,6 @@
 import InnerHero from "@/components/common/InnerHero";
 import CareerSection from "@/components/features/career/CareerSection";
-import { getAPI } from "@/lib/api";
+import { getData } from "@/lib/server/api";
 
 const local_data = {
   career_section_data: {
@@ -143,10 +143,19 @@ const local_data = {
   },
 };
 
-export default async function page() {
+export default async function page({params}) {
 
-  const {data, error}= await getAPI("careers")
+  const resolvedParams = await params;
+  const {lang} = resolvedParams
 
+  const {data, error}= await getData("careers", lang)
+
+
+  if(error || !data){
+    // Fallback to local data in case of error
+    return <div>Error loading data</div>;
+  }
+  
   const {banner, career_cms, careers} = data
 
   const career_section_data ={

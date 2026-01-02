@@ -1,6 +1,7 @@
 import InnerHero from "@/components/common/InnerHero";
 import BlogListSection from "@/components/features/blog/BlogListSection";
-import { getAPI } from "@/lib/api";
+import { getData } from "@/lib/server/api";
+import { getRequestContext } from "@/lib/server/getCookieData";
 
 const local_data = {
   blogdata: {
@@ -177,10 +178,16 @@ const local_data = {
   },
 };
 
-export default async function page() {
+export default async function page({params}) {
 
-  const {data:cms} = await getAPI("blogs");
-  const {data:blogs} = await getAPI("blog-list");
+  const resolvedParams = await params;
+  const {lang} = resolvedParams;
+
+
+  const { country } = await getRequestContext();
+  
+
+  const {data:cms} = await getData("blogs", lang);
 
   const bannerData = cms?.banner;
 
@@ -196,7 +203,7 @@ export default async function page() {
           { link: { href: "/blog", label: "Blogs" } },
         ]}
       />
-      <BlogListSection data={blogs} />
+      <BlogListSection lang={lang} country={country}  />
     </>
   );
 }
