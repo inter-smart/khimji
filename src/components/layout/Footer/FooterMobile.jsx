@@ -63,7 +63,7 @@ export default function FooterMobile({ data, changeCountry, lang }) {
             <ul>
               {data?.policies?.map((item, index) => (
                 <li key={index}>
-                  <Link href={item?.slug} className={FOOTER_LINK_CLASS}>
+                  <Link href={`/${lang}/${item?.slug}`} className={FOOTER_LINK_CLASS}>
                     {item?.title}
                   </Link>
                 </li>
