@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ContactDetail from "./ContactDetail";
 
-export default function ContactSection({ sectors, cms }) {
+export default function ContactSection({ sectors, cms, lang, country }) {
   return (
     <section className="w-full h-auto py-[40px] sm:py-[50px_60px] lg:py-[70px_80px] 2xl:py-[85px_100px] 3xl:py-[110px_130px] bg-[#f9fbfb] overflow-hidden block relative z-0">
       <div className="w-[120px] sm:w-[180px] 2xl:w-[225px] 3xl:w-[280px] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] pointer-events-none absolute -z-1 inset-[0_auto_auto_-2%]"></div>
@@ -57,7 +57,7 @@ export default function ContactSection({ sectors, cms }) {
             </Link>
           </div>
         </div>
-        <ContactDetail sectors={sectors} />
+        <ContactDetail sectors={sectors} lang={lang} country={country} />
       </div>
     </section>
   );

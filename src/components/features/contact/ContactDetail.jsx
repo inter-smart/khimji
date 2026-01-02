@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
-export default function ContactDetail({ sectors, cms }) {
+export default function ContactDetail({ sectors, cms, lang, country }) {
   const [activeTab, setActiveTab] = useState(sectors?.[0]?.id);
   const [contactData, setContactData] = useState({});
   const [loading, setLoading] = useState(false);
@@ -14,7 +14,12 @@ export default function ContactDetail({ sectors, cms }) {
     setError(null);
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/contact-list?sector_id=${sectorId}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/contact-list?sector_id=${sectorId}`, {
+        headers: {
+          "Accept-Language": lang,
+          "Location-Slug": country,
+        },
+      });
 
       if (!response.ok) {
         throw new Error("Failed to fetch contact data");
