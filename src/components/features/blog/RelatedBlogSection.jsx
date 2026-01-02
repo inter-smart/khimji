@@ -48,7 +48,7 @@ export default function RelatedBlogSection({ data }) {
                 >
                     {data?.map((item, index) => (
                         <SwiperSlide key={index}>
-                            <BlogCard item={item} />
+                            <BlogCard page={"blog_details"} item={item} />
                         </SwiperSlide>
                     ))}
                 </Swiper>
