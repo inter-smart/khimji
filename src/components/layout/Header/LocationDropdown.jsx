@@ -17,6 +17,19 @@ export default function LocationDropdown({ locationsPromise }) {
       .find((c) => c.startsWith("country="))
       ?.split("=")[1];
     setSelectedCountry(country || "");
+
+    // Listen for country changes from other components (e.g., footer)
+    const handleCountryChange = (event) => {
+      console.log("[LocationDropdown] countryChanged event received:", event);
+      setSelectedCountry(event.detail.country);
+    };
+
+    window.addEventListener("countryChanged", handleCountryChange);
+    console.log("[LocationDropdown] countryChanged listener attached");
+
+    return () => {
+      window.removeEventListener("countryChanged", handleCountryChange);
+    };
   }, []);
 
   function changeCountry(slug) {
@@ -28,11 +41,7 @@ export default function LocationDropdown({ locationsPromise }) {
   return (
     <div className="px-[7px] sm:px-[3px]">
       <div className="relative inline-flex rounded-full">
-        <Select
-          value={selectedCountry}
-          onValueChange={changeCountry}
-          modal={false}
-        >
+        <Select value={selectedCountry} onValueChange={changeCountry} modal={false}>
           <SelectTrigger className="relative text-white sm:text-black min-w-[115px] rounded-[40px] sm:rounded-[5px]">
             <SelectValue placeholder="Location" />
           </SelectTrigger>

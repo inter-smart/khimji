@@ -13,6 +13,8 @@ export default function Links({ locations, lang, site_settings }) {
 
   function changeCountry(slug) {
     document.cookie = `country=${slug}; path=/`;
+    // Dispatch custom event to notify other components
+    window.dispatchEvent(new CustomEvent('countryChanged', { detail: { country: slug } }));
     router.refresh();
   }
 
