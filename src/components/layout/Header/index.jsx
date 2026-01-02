@@ -1,8 +1,9 @@
 import { getAPI } from "@/lib/api";
 import HeaderClient from "./HeaderClient";
 
-export default async function Header({ lang }) {
-  const { data: businessType } = await getAPI("get-businesses");
+export default function Header({ lang }) {
+  const businessTypePromise = getAPI("get-businesses");
+  const locationsPromise = getAPI("get-locations");
 
-  return <HeaderClient businessType={businessType} lang={lang} />;
+  return <HeaderClient businessTypePromise={businessTypePromise} locationsPromise={locationsPromise} lang={lang} />;
 }

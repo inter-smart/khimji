@@ -1,30 +1,17 @@
 "use client";
 
+import { use } from "react";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { BorderBeam } from "@/components/ui/border-beam";
-import { useRouter } from "next/navigation";
-import { useEffect, useState, use } from "react";
 
-export default function LocationDropdown({ locationsPromise }) {
-  const router = useRouter();
-
-  const locations = use(locationsPromise);
-  const countries = locations?.data || [];
-
-  function changeCountry(slug) {
-    document.cookie = `country=${slug}; path=/`;
-    router.refresh();
-  }
-
-  const selectedCountry = document.cookie
-    .split("; ")
-    .find((c) => c.startsWith("country="))
-    ?.split("=")[1];
+export default function BusinessTypeDropDown({ businessTypePromise }) {
+  const businessType = use(businessTypePromise);
+  const data = businessType?.data || [];
 
   return (
     <div className="px-[7px] sm:px-[3px]">
       <div className="relative inline-flex rounded-full">
-        <Select value={selectedCountry} onValueChange={changeCountry} modal={false}>
+        <Select modal={false}>
           <SelectTrigger
             className="
                           relative
@@ -39,12 +26,12 @@ export default function LocationDropdown({ locationsPromise }) {
                            after:bg-[url('/images/arrow.svg')] after:max-sm:invert-100 after:max-sm:brightness-100 after:bg-no-repeat after:bg-center
                         "
           >
-            <SelectValue placeholder="Location" />
+            <SelectValue placeholder="Business" />
           </SelectTrigger>
-          <SelectContent className="max-w-[180px]">
-            {countries.map((c) => (
-              <SelectItem key={c.id} value={c.slug}>
-                {c.name}
+          <SelectContent className="max-w-[110px] ">
+            {data?.map((item) => (
+              <SelectItem key={item.id} value={item.id}>
+                {item.name}
               </SelectItem>
             ))}
           </SelectContent>

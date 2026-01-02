@@ -4,6 +4,8 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import localFont from "next/font/local";
 import CountryProvider from "@/context/CountryDataProvider";
+import { Suspense } from "react";
+import HeaderSkeleton from "@/components/layout/Skeletons/HeaderSkeleton";
 
 const Nobel = localFont({
   src: [
@@ -31,7 +33,9 @@ export default async function RootLayout({ children, params }) {
     <html lang={lang} dir={lang == "ar" ? "rtl" : "ltr"}>
       <body className={`${Nobel.className}`}>
         <CountryProvider>
-          <Header lang={lang} />
+          <Suspense fallback={<HeaderSkeleton />}>
+            <Header lang={lang} />
+          </Suspense>
           <main className="grow">{children}</main>
           <Footer />
         </CountryProvider>

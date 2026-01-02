@@ -31,7 +31,7 @@ export const LANGUAGES = {
   },
 };
 
-export default function Header({ businessType, lang }) {
+export default function Header({ businessTypePromise, locationsPromise, lang }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const currentPath = usePathname();
   const [open, setOpen] = useState(false);
@@ -77,7 +77,7 @@ export default function Header({ businessType, lang }) {
 
                 {/* Business Select */}
 
-                <HeaderSelect data={businessType} />
+                <HeaderSelect businessTypePromise={businessTypePromise} locationsPromise={locationsPromise} />
 
                 {/* country Dropdown */}
 
@@ -113,8 +113,6 @@ export default function Header({ businessType, lang }) {
           </div>
         </div>
       </div>
-
-      {/* mobile menu */}
       <Sheet open={open} onOpenChange={setOpen}>
         <div
           className={`sm:hidden relative z-1
@@ -192,7 +190,7 @@ export default function Header({ businessType, lang }) {
               </div>
               <div className={`flex items-center gap-3 max-w-1/2 pt-[15px] ${isScrolled ? "opacity-0 h-0" : ""}`}>
                 <div className="w-1/2">
-                  <HeaderSelect data={businessType} />
+                  <HeaderSelect businessTypePromise={businessTypePromise} locationsPromise={locationsPromise} />
                 </div>
               </div>
             </div>
