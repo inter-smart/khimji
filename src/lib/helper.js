@@ -8,8 +8,7 @@ export function formatDate(dateStr) {
   });
 }
 
-
-export function renderHtml(htmlString, className="") {
+export function renderHtml(htmlString, className = "") {
   if (!htmlString) return null;
 
   return (
