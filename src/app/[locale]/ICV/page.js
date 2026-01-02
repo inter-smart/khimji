@@ -2,23 +2,41 @@ import InnerHero from "@/components/common/InnerHero";
 import NationSection from "@/components/features/ICV-initiative/NationSection";
 import ProcurementSection from "@/components/features/ICV-initiative/ProcurementSection";
 import QuestionSection from "@/components/features/ICV-initiative/QuestionSection";
+import { getAPI } from "@/lib/api";
 
-export default function Page() {
-    return (
-        <>
-            <InnerHero
-                coverImage="/images/icv-banner.jpg"
-                coverImageMobile="/images/icv-banner.jpg"
-                alt="ICV Banner"
-                title="ICV Intiatives"
-                breadCrumb_data={[
-                    { link: { href: "/", label: "Home" } },
-                    { link: { href: "/ICV", label: "ICV Initiatives" } },
-                ]}
-            />
-            <NationSection />
-            <ProcurementSection />
-            <QuestionSection />
-        </>
-    )
+export default async function Page() {
+  // Simple GET request
+  const { data } = await getAPI("icv-intiatives");
+
+  if (!data) {
+    return <div>Error loading data</div>;
+  }
+  const { banner, intiatives_cms, initiatives } = data;
+
+  return (
+    <>
+      <InnerHero
+        coverImage={banner?.banner}
+        coverImageMobile={banner?.banner_mobile}
+        alt={banner?.banner_alt_text}
+        title={banner?.banner_title}
+        breadCrumb_data={[
+          { link: { href: "/", label: "Home" } },
+          { link: { href: "/ICV", label: "ICV Initiatives" } },
+        ]}
+      />
+      <NationSection
+        title={intiatives_cms?.section1_title}
+        description={intiatives_cms?.section1_description}
+        image={intiatives_cms?.section1_image}
+        image_alt_text={intiatives_cms?.section1_image_alt_text}
+      />
+      <ProcurementSection initiatives={initiatives} />
+      <QuestionSection
+        title={intiatives_cms?.section2_title}
+        description={intiatives_cms?.section2_description}
+        form_title={intiatives_cms?.section2_form_title}
+      />
+    </>
+  );
 }
