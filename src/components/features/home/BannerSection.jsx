@@ -13,7 +13,7 @@ const ARROW_ICON_CLASS =
 
 export default function BannerSection({ data }) {
 
-  const { countryData } = useCountry();
+  // const { countryData } = useCountry();
   return (
     <div>
       {data?.map((item, index) => (

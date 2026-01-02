@@ -1,5 +1,8 @@
 import InnerHero from "@/components/common/InnerHero";
 import ContactSection from "@/components/features/contact/ContactSection";
+import { fetchFromAPIII, getAPI } from "@/lib/api";
+import { getData } from "@/lib/server/api";
+import { cookies } from "next/headers";
 
 const local_data = {
   contact_section_data: {
@@ -378,20 +381,29 @@ const local_data = {
   },
 };
 
-export default function page() {
+export default async function Page({ params }) {
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang;
+
+  const { data, error } = await getData("contact", lang);
+
+  if (!data || error) {
+    return <div>Error loading data</div>;
+  }
+  const { banner, contact_cms, contact_sectors } = data;
+
+  console.log("Contact Data:", data);
+
   return (
     <>
       <InnerHero
-        coverImage="/images/contact_innerbanner.jpg"
-        coverImageMobile="/images/contact_innerbanner.jpg"
-        alt="Contact Banner"
-        title="CONTACT"
-        breadCrumb_data={[
-          { link: { href: "/", label: "Home" } },
-          { link: { href: "/Contact", label: "Contact" } },
-        ]}
+        coverImage={banner?.banner || "/images/contact_innerbanner.jpg"}
+        coverImageMobile={banner?.banner_mobile || "/images/contact_innerbanner.jpg"}
+        alt={banner?.banner_alt_text || "Contact Banner"}
+        title={banner?.banner_title || "CONTACT"}
+        breadCrumb_data={[{ link: { href: "/", label: "Home" } }, { link: { href: "/Contact", label: "Contact" } }]}
       />
-      <ContactSection data={local_data?.contact_section_data} />
+      <ContactSection sectors={contact_sectors} cms={contact_cms} />
     </>
   );
 }

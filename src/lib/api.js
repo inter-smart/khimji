@@ -1,13 +1,72 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
 import { COUNTRIES, DEFAULT_COUNTRY } from "@/lib/countries";
 
-
 export class APIError extends Error {
   constructor(message, status, data = null) {
     super(message);
     this.name = "APIError";
     this.status = status;
     this.data = data;
+  }
+}
+
+export async function fetchFromAPIII(endpoint, options = {}) {
+  const url = `${API_BASE_URL}${endpoint}`;
+
+  const defaultOptions = {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      "Location-Slug": "united-arab-emirates",
+      ...options.headers,
+    },
+  };
+
+  // 🔍 REQUEST LOG
+  console.log("API REQUEST →", {
+    url,
+    method: defaultOptions.method || "GET",
+    headers: defaultOptions.headers,
+    body: defaultOptions.body,
+  });
+
+  try {
+    const response = await fetch(url, defaultOptions);
+
+    // 🔍 RESPONSE META LOG
+    console.log("API RESPONSE ←", {
+      url,
+      status: response.status,
+      ok: response.ok,
+    });
+
+    if (!response.ok) {
+      return {
+        data: null,
+        error: true,
+      };
+    }
+
+    const data = await response.json();
+
+    // 🔍 RESPONSE BODY LOG (optional)
+    console.log("API RESPONSE DATA ←", data);
+
+    return {
+      error: !data?.status,
+      data: data?.status ? data?.data : null,
+    };
+  } catch (error) {
+    // 🔴 ERROR LOG
+    console.error("API ERROR ✖", {
+      url,
+      error,
+    });
+
+    return {
+      data: null,
+      error: true,
+    };
   }
 }
 
@@ -22,26 +81,20 @@ export class APIError extends Error {
  * @returns {Promise<object>} - Response data with error handling
  */
 export async function fetchFromAPI(endpoint, options = {}) {
-  const {
-    method = "GET",
-    body = null,
-    headers = {},
-    language,
-    ...otherOptions
-  } = options;
+  const { method = "GET", body = null, headers = {}, language, ...otherOptions } = options;
 
   // Construct URL
-  const base = API_BASE_URL.replace(/\/$/, '');
-  const path = endpoint.replace(/^\//, '');
+  const base = API_BASE_URL.replace(/\/$/, "");
+  const path = endpoint.replace(/^\//, "");
   const url = `${base}/api/${path}`;
 
   // Setup headers
   const myHeaders = new Headers();
   myHeaders.append("Accept-Language", language);
   myHeaders.append("Business-Slug", "b2b"),
-  myHeaders.append("Location-Slug", "united-arab-emirates"),
-  myHeaders.append("Content-Type", "application/json");
-  
+    myHeaders.append("Location-Slug", "united-arab-emirates"),
+    myHeaders.append("Content-Type", "application/json");
+
   // Add custom headers
   Object.entries(headers).forEach(([key, value]) => {
     myHeaders.append(key, value);
@@ -61,17 +114,12 @@ export async function fetchFromAPI(endpoint, options = {}) {
   }
 
   try {
-    
     const response = await fetch(url, requestOptions);
 
     // Handle non-OK responses
     if (!response.ok) {
       const errorData = await response.text();
-      throw new APIError(
-        `API Error: ${response.statusText}`,
-        response.status,
-        errorData
-      );
+      throw new APIError(`API Error: ${response.statusText}`, response.status, errorData);
     }
 
     // Parse JSON response
@@ -94,10 +142,9 @@ export async function fetchFromAPI(endpoint, options = {}) {
       status: response.status,
       error: null,
     };
-
   } catch (error) {
     console.error(`API Error [${url}]:`, error);
-    
+
     return {
       success: false,
       data: null,
@@ -164,11 +211,11 @@ export async function deleteAPI(endpoint, options = {}) {
 // Example 5: Using in React Server Component
 // export default async function Page() {
 //   const { success, data, error } = await getAPI("get-businesses");
-//   
+//
 //   if (!success) {
 //     return <div>Error: {error.message}</div>;
 //   }
-//   
+//
 //   return <div>{JSON.stringify(data)}</div>;
 // }
 

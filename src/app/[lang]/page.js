@@ -4,26 +4,18 @@ import HeritageSection from "@/components/features/home/HeritageSection";
 import ParnerSectionMobile from "@/components/features/home/home-mobile/ParnerSectionMobile";
 import ICVSection from "@/components/features/home/ICVSection";
 import VentureSection from "@/components/features/home/VentureSection";
-import { fetchFromAPI, getAPI } from "@/lib/api";
+import { getData } from "@/lib/server/api";
 
-export default async function Page() {
-  // Simple GET request
-  const result = await getAPI("home");
-  const data = result.data;
+export default async function Page({ params }) {
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang;
 
-  if (!data) {
+  const { data, error } = await getData("home", lang);
+
+  if (!data || error) {
     return <div>Error loading data</div>;
   }
-  const {
-    sliders,
-    home_cms,
-    ventures,
-    metrics,
-    timelines,
-    archives,
-    initiatives,
-    brands
-  } = data;
+  const { sliders, home_cms, ventures, metrics, timelines, archives, initiatives, brands } = data;
 
   return (
     <>
@@ -45,7 +37,7 @@ export default async function Page() {
         timelines={timelines}
       />
       <ArchiveSection title={home_cms?.section3_title} archives={archives} />
-      <ICVSection 
+      <ICVSection
         title={home_cms?.section4_title}
         description={home_cms?.section4_description}
         banner={home_cms?.section4_banner}
