@@ -14,8 +14,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/layout/Heading";
+import { renderHtml } from "@/lib/helper";
 
-export default function QuestionSection() {
+export default function QuestionSection({
+    title, 
+    description,
+    form_title
+}) {
     const form = useForm({
         defaultValues: {
             fullName: "",
@@ -46,13 +51,9 @@ export default function QuestionSection() {
                                 size="heading1"
                                 className="!mb-[20px] 2xl:!mb-[30px] 3xl:!mb-[45px] font-light leading-[1.1]"
                             >
-                                HAVE QUESTIONS <br /> ABOUT OUR <br /> LEGACY?
+                                {title}
                             </Heading>
-                            <p className="text-[14px] 2xl:text-[16px] 3xl:text-[20px] leading-[1.6] text-black/70">
-                                Discover more about our story, milestones, and commitment to excellence.
-                                If you'd like to learn about how our journey began or how we've grown over
-                                the years, send us your questions — we'd love to share our story with you.
-                            </p>
+                                {renderHtml(description,"[&_*]:text-[14px] [&_*]:2xl:text-[16px] [&_*]:3xl:text-[20px] [&_*]:leading-[1.6] [&_*]:text-black/70")}
                         </div>
                     </div>
 
@@ -63,7 +64,7 @@ export default function QuestionSection() {
                                 size="heading5"
                                 className="!mb-[30px] 2xl:!mb-[40px] 3xl:!mb-[55px] font-normal"
                             >
-                                FILL THE FORM BELOW
+                                {form_title}
                             </Heading>
 
                             <Form {...form}>

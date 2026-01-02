@@ -1,5 +1,5 @@
 import VendordetailsSection from "@/components/features/venture/VendordetailsSection";
-import { getAPI } from "@/lib/api";
+import { getData } from "@/lib/server/api";
 
 const logisticsDetailData = {
   title: "Logistics & Shipping",
@@ -120,10 +120,13 @@ const logisticsDetailData = {
 
 export default async function Page({ params }) {
   const resolvedParams = await Promise.resolve(params);
-  const { slug } = resolvedParams;
+  const { slug, lang } = resolvedParams;
 
-  const { data, error } = await getAPI(`venture-details?slug=${slug}`);
+  const { data } = await getData(`venture-details?slug=${slug}`, lang);
 
+    if (!data) {
+     return <div>Error loading data</div>;
+   }
   return (
     <VendordetailsSection
       breadCrumb_data={[

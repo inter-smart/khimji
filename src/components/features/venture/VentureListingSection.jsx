@@ -3,141 +3,141 @@
 import { Heading } from "@/components/layout/Heading";
 import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Image from "next/image";
 import VentureCard from "@/components/common/VentureCard";
 import { useState, useEffect } from "react";
 import { renderHtml } from "@/lib/helper";
 import { useParams } from "next/navigation";
 
 // Ventures data array
-const corporateVentures = [
-  {
-    id: 1,
-    video: "/videos/venture-1.mp4",
-    mobileImage: "/images/vetureCard-1.jpg",
-    title: "Logistics & Shipping",
-    description:
-      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: [
-      "/images/ship-1.png",
-      "/images/ship-2.png",
-      "/images/ship-3.png",
-      "/images/ship-4.png",
-    ],
-  },
-  {
-    id: 2,
-    video: "/videos/venture-2.mp4",
-    mobileImage: "/images/vetureCard-1.jpg",
-    title: "Construction & Building Solutions",
-    description:
-      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: [
-      "/images/ship-1.png",
-      "/images/ship-2.png",
-      "/images/ship-3.png",
-      "/images/ship-4.png",
-    ],
-  },
-  {
-    id: 3,
-    video: "/videos/venture-1.mp4",
-    mobileImage: "/images/vetureCard-1.jpg",
-    title: "Engineering & Energy Solutions",
-    description:
-      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: [
-      "/images/ship-1.png",
-      "/images/ship-2.png",
-      "/images/ship-3.png",
-      "/images/ship-4.png",
-    ],
-  },
-  {
-    id: 4,
-    video: "/videos/venture-2.mp4",
-    mobileImage: "/images/vetureCard-1.jpg",
-    title: "Marine Services & Equipment",
-    description:
-      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: [
-      "/images/ship-1.png",
-      "/images/ship-2.png",
-      "/images/ship-3.png",
-      "/images/ship-4.png",
-    ],
-  },
-  {
-    id: 5,
-    video: "/videos/venture-1.mp4",
-    mobileImage: "/images/vetureCard-1.jpg",
-    title: "Special Projects",
-    description:
-      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: [
-      "/images/ship-1.png",
-      "/images/ship-2.png",
-      "/images/ship-3.png",
-      "/images/ship-4.png",
-    ],
-  },
-  {
-    id: 6,
-    video: "/videos/venture-2.mp4",
-    mobileImage: "/images/vetureCard-1.jpg",
-    title: "Hospitality",
-    description:
-      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: [
-      "/images/ship-1.png",
-      "/images/ship-2.png",
-      "/images/ship-3.png",
-      "/images/ship-4.png",
-    ],
-  },
-  {
-    id: 7,
-    video: "/videos/venture-1.mp4",
-    mobileImage: "/images/vetureCard-1.jpg",
-    title: "Information Technology",
-    description:
-      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: [
-      "/images/ship-1.png",
-      "/images/ship-2.png",
-      "/images/ship-3.png",
-      "/images/ship-4.png",
-    ],
-  },
-  {
-    id: 8,
-    video: "/videos/venture-2.mp4",
-    mobileImage: "/images/vetureCard-1.jpg",
-    title: "Warehousing & Distribution",
-    description:
-      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: [
-      "/images/ship-1.png",
-      "/images/ship-2.png",
-      "/images/ship-3.png",
-      "/images/ship-4.png",
-    ],
-  },
-];
+// const corporateVentures = [
+//   {
+//     id: 1,
+//     video: "/videos/venture-1.mp4",
+//     mobileImage: "/images/vetureCard-1.jpg",
+//     title: "Logistics & Shipping",
+//     description:
+//       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
+//     logos: [
+//       "/images/ship-1.png",
+//       "/images/ship-2.png",
+//       "/images/ship-3.png",
+//       "/images/ship-4.png",
+//     ],
+//   },
+//   {
+//     id: 2,
+//     video: "/videos/venture-2.mp4",
+//     mobileImage: "/images/vetureCard-1.jpg",
+//     title: "Construction & Building Solutions",
+//     description:
+//       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
+//     logos: [
+//       "/images/ship-1.png",
+//       "/images/ship-2.png",
+//       "/images/ship-3.png",
+//       "/images/ship-4.png",
+//     ],
+//   },
+//   {
+//     id: 3,
+//     video: "/videos/venture-1.mp4",
+//     mobileImage: "/images/vetureCard-1.jpg",
+//     title: "Engineering & Energy Solutions",
+//     description:
+//       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
+//     logos: [
+//       "/images/ship-1.png",
+//       "/images/ship-2.png",
+//       "/images/ship-3.png",
+//       "/images/ship-4.png",
+//     ],
+//   },
+//   {
+//     id: 4,
+//     video: "/videos/venture-2.mp4",
+//     mobileImage: "/images/vetureCard-1.jpg",
+//     title: "Marine Services & Equipment",
+//     description:
+//       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
+//     logos: [
+//       "/images/ship-1.png",
+//       "/images/ship-2.png",
+//       "/images/ship-3.png",
+//       "/images/ship-4.png",
+//     ],
+//   },
+//   {
+//     id: 5,
+//     video: "/videos/venture-1.mp4",
+//     mobileImage: "/images/vetureCard-1.jpg",
+//     title: "Special Projects",
+//     description:
+//       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
+//     logos: [
+//       "/images/ship-1.png",
+//       "/images/ship-2.png",
+//       "/images/ship-3.png",
+//       "/images/ship-4.png",
+//     ],
+//   },
+//   {
+//     id: 6,
+//     video: "/videos/venture-2.mp4",
+//     mobileImage: "/images/vetureCard-1.jpg",
+//     title: "Hospitality",
+//     description:
+//       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
+//     logos: [
+//       "/images/ship-1.png",
+//       "/images/ship-2.png",
+//       "/images/ship-3.png",
+//       "/images/ship-4.png",
+//     ],
+//   },
+//   {
+//     id: 7,
+//     video: "/videos/venture-1.mp4",
+//     mobileImage: "/images/vetureCard-1.jpg",
+//     title: "Information Technology",
+//     description:
+//       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
+//     logos: [
+//       "/images/ship-1.png",
+//       "/images/ship-2.png",
+//       "/images/ship-3.png",
+//       "/images/ship-4.png",
+//     ],
+//   },
+//   {
+//     id: 8,
+//     video: "/videos/venture-2.mp4",
+//     mobileImage: "/images/vetureCard-1.jpg",
+//     title: "Warehousing & Distribution",
+//     description:
+//       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
+//     logos: [
+//       "/images/ship-1.png",
+//       "/images/ship-2.png",
+//       "/images/ship-3.png",
+//       "/images/ship-4.png",
+//     ],
+//   },
+// ];
 
-const consumerVentures = [
-  // Add consumer ventures data here if needed
-];
+// const consumerVentures = [
+//   // Add consumer ventures data here if needed
+// ];
 
-export default function VentureListingSection({ data, title }) {
-  const [activeSlug, setActiveSlug] = useState(null);
+export default function VentureListingSection({ data, title, context }) {
+  const [activeSlug, setActiveSlug] = useState(data?.[0]?.slug);
   const [ventures, setVentures] = useState([]);
   const [loading, setLoading] = useState(false);
   const API_BASE_URL =
     process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
+  const { country, business_type } = context;
 
-
-    const {locale} = useParams();
+  console.log("country: ", context);
+  const { lang } = useParams();
 
   const fetchVentures = async (slug) => {
     if (!slug) return;
@@ -145,20 +145,25 @@ export default function VentureListingSection({ data, title }) {
     setLoading(true);
 
     try {
-      const res = await fetch(
+      const result = await fetch(
         `${API_BASE_URL}/api/venture-list?category_slug=${slug}&per_page=8&page=1`,
         {
           method: "GET",
           headers: {
-            "Accept-Language": "en",
-            "Location-Slug": "united-arab-emirates",
-            "Business-Slug": "b2b",
+            "Accept-Language": lang,
+            country: country,
+            business_type: business_type,
           },
         }
       );
 
-      const json = await res.json();
-      setVentures(json?.data || []);
+      // if (result?.status && result.data) {
+      const data = await result.json();
+      setVentures(data?.data || []);
+
+      console.log("venture data =>", data?.data);
+
+      // }
     } catch (err) {
       console.error(err);
     } finally {
@@ -166,6 +171,7 @@ export default function VentureListingSection({ data, title }) {
     }
   };
 
+  console.log("active data > ", ventures);
   useEffect(() => {
     fetchVentures(activeSlug);
   }, [activeSlug]);
@@ -239,12 +245,12 @@ export default function VentureListingSection({ data, title }) {
                 >
                   {item?.title}
                 </div>
-                {renderHtml(item?.description)}
+                <div>{renderHtml(item?.description)}</div>
               </div>
               <div className="flex flex-wrap -m-[5px] lg:-m-[10px] 3xl:-m-[15px]">
                 {ventures?.ventures?.map((venture) => (
                   <Link
-                    href={`/${locale}/venture/${venture?.slug}`}
+                    href={`/${lang}/venture/${venture?.slug}`}
                     key={venture?.id}
                     className="w-full sm:w-1/2 p-[5px]  lg:p-[10px] 3xl:p-[15px]"
                   >

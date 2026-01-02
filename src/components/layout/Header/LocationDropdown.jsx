@@ -28,7 +28,11 @@ export default function LocationDropdown({ locationsPromise }) {
   return (
     <div className="px-[7px] sm:px-[3px]">
       <div className="relative inline-flex rounded-full">
-        <Select value={selectedCountry} onValueChange={changeCountry} modal={false}>
+        <Select
+          value={selectedCountry}
+          onValueChange={changeCountry}
+          modal={false}
+        >
           <SelectTrigger className="relative text-white sm:text-black min-w-[115px] rounded-[40px] sm:rounded-[5px]">
             <SelectValue placeholder="Location" />
           </SelectTrigger>

@@ -1,6 +1,5 @@
 import InnerHero from "@/components/common/InnerHero";
 import ContactSection from "@/components/features/contact/ContactSection";
-import { fetchFromAPIII, getAPI } from "@/lib/api";
 import { getData } from "@/lib/server/api";
 import { getRequestContext } from "@/lib/server/getCookieData";
 import { cookies } from "next/headers";

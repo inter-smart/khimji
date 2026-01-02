@@ -65,7 +65,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang }) 
           <div className="w-full flex flex-wrap items-center justify-between p-[15px_0] border-[rgba(0,0,0,0.1)] border-b ">
             {/* logo */}
             <Link
-              href="#!"
+              href={`/${lang}`}
               className="flex items-center justify-center max-w-[125px] lg:max-w-[145px] xl:max-w-[175px] 2xl:max-w-[225px] 3xl:max-w-[275px] w-full"
             >
               <Image src="/images/logo.png" width="275" height="75" alt="logo" />
@@ -80,7 +80,6 @@ export default function Header({ businessTypePromise, locationsPromise, lang }) 
                 <HeaderSelect businessTypePromise={businessTypePromise} locationsPromise={locationsPromise} />
 
                 {/* country Dropdown */}
-
                 <DropdownMenu>
                   <DropdownMenuTrigger className="flex items-center gap-2 px-2 cursor-pointer focus:outline-none">
                     <Image

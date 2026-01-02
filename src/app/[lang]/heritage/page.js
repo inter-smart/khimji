@@ -3,6 +3,7 @@ import BoardDirectorSection from "@/components/features/heritage/BoardDirectorSe
 import DrivenSection from "@/components/features/heritage/DrivenSection";
 import HeritageSection from "@/components/features/heritage/HeritageSection";
 import { getAPI } from "@/lib/api";
+import { getData } from "@/lib/server/api";
 
 const local_data = {
   driven_section_data: {
@@ -219,11 +220,13 @@ const local_data = {
   },
 };
 
-export default async function page() {
+export default async function page({params}) {
+const resolvedParams = await params;
+  const lang = resolvedParams.lang;
 
-  const result = await getAPI("heritage");
-  const data = result.data;
-
+    
+ // Simple GET request
+   const {data} = await getData("heritage", lang);
   if (!data) {
     return <div>Error loading data</div>;
   }

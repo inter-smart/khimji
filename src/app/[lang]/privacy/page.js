@@ -1,4 +1,5 @@
 import PrivacySection from "@/components/features/privacy/PrivacySection";
+import { getData } from "@/lib/server/api";
 
 const local_data = {
   privacy_section_data: {
@@ -32,6 +33,16 @@ const local_data = {
   },
 };
 
-export default function page() {
-  return <PrivacySection data={local_data?.privacy_section_data} />;
+export default async function page({params}) {
+
+  const resolvedParams = await params;
+  const {lang} = resolvedParams;
+
+  const {data, error} = await getData("policy?slug=privacy-policy", lang);
+
+  if (error) {
+    return <div>Error loading data</div>;
+  }
+
+  return <PrivacySection data={data} />;
 }

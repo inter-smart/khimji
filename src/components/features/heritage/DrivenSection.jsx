@@ -7,14 +7,7 @@ import { renderHtml } from "@/lib/helper";
 export default function DrivenSection({ title, description, image, image_alt_text, metrics }) {
 
 
-  const metricsArray = metrics
-  ? [
-      { label: metrics.label_1, value: metrics.value_1 },
-      { label: metrics.label_2, value: metrics.value_2 },
-      { label: metrics.label_3, value: metrics.value_3 },
-      { label: metrics.label_4, value: metrics.value_4 },
-    ]
-  : [];
+ console.log("metrics", metrics)
 
 
 
@@ -29,7 +22,7 @@ export default function DrivenSection({ title, description, image, image_alt_tex
                 as="h2"
                 size="heading1"
                 className="mb-[35px]"
-                dangerouslySetInnerHTML={{ __html: title }}
+                dangerouslySetInnerHimageTML={{ __html: title }}
               ></Heading>
               <div className="text-[14px] 2xl:text-[16px] 3xl:text-[20px] leading-[1.5] font-normal text-black">
                 {renderHtml(description)}
@@ -51,7 +44,7 @@ export default function DrivenSection({ title, description, image, image_alt_tex
                 />
               </div>
               <div className="w-full h-auto mx-[-5px] sm:mx-[-10px] flex items-center">
-                {metricsArray?.map((item, index) => (
+                {metrics?.metrics?.map((item, index) => (
                   <div key={index} className="w-1/4 px-[5px] sm:px-[10px]">
                     <div className="text-[24px] sm:text-[32px] lg:text-[38px] 2xl:text-[45px] 3xl:text-[58px] leading-[1.2] font-normal bg-gradient-to-r from-[#0B436A] to-[#299B8A] bg-clip-text text-transparent mb-[5px] lg:mb-[10px]">
                       <CountUp
@@ -64,7 +57,7 @@ export default function DrivenSection({ title, description, image, image_alt_tex
                       />
                     </div>
                     <div className="text-[10px] sm:text-[12px] lg:text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.1] uppercase font-normal text-[#013763]">
-                      {item?.label}
+                      {item?.key || ""}
                     </div>
                   </div>
                 ))}

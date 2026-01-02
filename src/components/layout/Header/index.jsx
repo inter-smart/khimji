@@ -1,5 +1,6 @@
 import { getAPI } from "@/lib/api";
 import HeaderClient from "./HeaderClient";
+import { getData } from "@/lib/server/api";
 
 export default function Header({ lang }) {
   const businessTypePromise = getAPI("get-businesses");
