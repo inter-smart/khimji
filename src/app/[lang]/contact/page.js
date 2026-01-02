@@ -1,8 +1,6 @@
 import InnerHero from "@/components/common/InnerHero";
 import ContactSection from "@/components/features/contact/ContactSection";
-import { fetchFromAPIII, getAPI } from "@/lib/api";
 import { getData } from "@/lib/server/api";
-import { cookies } from "next/headers";
 
 const local_data = {
   contact_section_data: {

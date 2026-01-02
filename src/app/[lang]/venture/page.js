@@ -1,13 +1,19 @@
 import InnerHero from "@/components/common/InnerHero";
 import VentureListingSection from "@/components/features/venture/VentureListingSection";
 import { getAPI } from "@/lib/api";
+import { getData } from "@/lib/server/api";
+import { getRequestContext } from "@/lib/server/getCookieData";
 
-export default async function Page() {
+export default async function Page({params}) {
+   const resolvedParams = await params;
+  const lang = resolvedParams.lang;
+
+  const context = await getRequestContext();
+    
  // Simple GET request
-   const result = await getAPI("ventures");
-   const data = result.data;
+   const {data, error} = await getData("ventures", lang);
  
-   if (!data) {
+   if (!data|| error) {
      return <div>Error loading data</div>;
    }
    const {
@@ -29,7 +35,7 @@ export default async function Page() {
                         { link: { href: "/venture", label: "Ventures" } },
                     ]}
                 />
-                <VentureListingSection data={venture_categories} title={venture_cms?.title} />
+                <VentureListingSection data={venture_categories} title={venture_cms?.title} context={context} />
             </div>
         </>
     )

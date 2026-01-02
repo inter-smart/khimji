@@ -4,13 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import { isRTLLocale } from "@/lib/countries";
 
-const timeline = [
-  { year: "1870", title: "Founded in Muscat trading house", desc: "Oman's earliest trusted business" },
-  { year: "1895", title: "Expanded trade to India & Africa", desc: "Recognized for fair trade" },
-  { year: "1920", title: "Expanded into construction & essential", desc: "Trusted supplier to Oman." },
-  { year: "1920", title: "Expanded into construction & essential", desc: "Trusted supplier to Oman." },
-  { year: "1920", title: "Expanded into construction & essential", desc: "Trusted supplier to Oman." },
-];
 
 const widthCir = `w-[300px] xl:w-[360px] 2xl:w-[400px] 3xl:w-[420px]`;
 const highCir = `h-[300px] xl:h-[360px] 2xl:h-[400px] 3xl:h-[420px]`;

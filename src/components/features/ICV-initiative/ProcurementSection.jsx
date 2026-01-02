@@ -150,7 +150,8 @@ export default function ProcurementSection({ initiatives }) {
       <div className="container">
         <div className="flex flex-wrap -m-[8px] mb-[25px] 2xl:mb-[35px] 3xl:mb-[50px]">
           {initiatives?.map((item, index) => (
-            <div key={index} className="p-[8px]">
+            <div
+             key={index} className="p-[8px]">
               <Link
                 href={`#${item?.title}`}
                 className="text-[14px] 2xl:text-[16px] 3xl:text-[18px] text-[#000000] uppercase w-full h-[35px] 2xl:h-[40px] p-[1px] flex items-center justify-center 
@@ -167,7 +168,7 @@ export default function ProcurementSection({ initiatives }) {
         {/* procurement */}
         <div
           className="w-full pb-[50px] xl:pb-[60px] 2xl:pb-[80px] 3xl:pb-[100px] relative"
-          id="procurement"
+          id={initiatives[0]?.title}
         >
           <div className="lg:text-[22px] xl:text-[30px] 2xl:text-[40px] 3xl:text-[50px] text-[#0B436A] font-normal uppercase mb-[20px] xl:mb-[25px] 2xl:mb-[45px] 3xl:mb-[65px]">
             {initiatives[0]?.title}
@@ -273,7 +274,7 @@ export default function ProcurementSection({ initiatives }) {
         {/* buildingData */}
         <div
           className="w-full py-[20px] xl:py-[40px] 2xl:py-[60px] 3xl:py-[80px_50px] relative before:absolute before:top-0 before:content-[''] before:bg-[url(/images/border-line.png)] before:bg-cover before:bg-no-repeat before:left-0 before:w-full before:h-[8px]"
-          id="Building"
+          id={initiatives[1]?.title}
         >
           <div className="text-[22px] xl:text-[30px] 2xl:text-[40px] 3xl:text-[50px] text-[#0B436A] font-normal uppercase mb-[20px] xl:mb-[25px] 2xl:mb-[45px] 3xl:mb-[65px]">
             {initiatives[1]?.title}
