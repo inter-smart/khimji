@@ -1,6 +1,7 @@
 import InnerHero from "@/components/common/InnerHero";
 import FaqSection from "@/components/features/faq/FaqSection";
 import { getAPI } from "@/lib/api";
+import { getData } from "@/lib/server/api";
 
 const local_data = {
   faq_section_data: {
@@ -100,13 +101,15 @@ const local_data = {
   },
 };
 
-export default async function Page() {
-  const result = await getAPI("faq");
-  const data = result.data;
+export default async function Page({ params }) {
+  const resolvedParams = await params;
+  const { lang } = resolvedParams;
+  const { data, error } = await getData("faq", lang);
 
-  if (!data) {
+  if (error || !data) {
     return <div>Error loading data</div>;
   }
+
   const { banner, faq, faq_cms } = data;
 
   return (

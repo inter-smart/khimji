@@ -16,7 +16,7 @@ export default function LocationDropdown({ locationsPromise }) {
       .split("; ")
       .find((c) => c.startsWith("country="))
       ?.split("=")[1];
-    setSelectedCountry(country || "");
+    setSelectedCountry(country || "united-arab-emirates");
 
     // Listen for country changes from other components (e.g., footer)
     const handleCountryChange = (event) => {

@@ -5,14 +5,14 @@ import { Heading } from "@/components/layout/Heading";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import CareerForm from "./CareerForm";
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
-import renderHtml from "@/lib/helper";
+import { renderHtml } from "@/lib/helper";
 import { useState } from "react";
 
 export default function CareerSection({ data }) {
   const [openDialog, setOpenDialog] = useState({});
 
   const handleCloseDialog = (careerId) => {
-    setOpenDialog(prev => ({ ...prev, [careerId]: false }));
+    setOpenDialog((prev) => ({ ...prev, [careerId]: false }));
   };
 
   return (
@@ -63,7 +63,11 @@ export default function CareerSection({ data }) {
                         </div>
                       </div>
                       <div onClick={(e) => e.stopPropagation()} className="w-full sm:w-[20%] flex sm:justify-end sm:ps-[10px]  ">
-                        <Dialog open={openDialog[item?.id]} onOpenChange={(open) => setOpenDialog(prev => ({ ...prev, [item?.id]: open }))} className="w-full">
+                        <Dialog
+                          open={openDialog[item?.id]}
+                          onOpenChange={(open) => setOpenDialog((prev) => ({ ...prev, [item?.id]: open }))}
+                          className="w-full"
+                        >
                           <DialogTrigger asChild>
                             <div className="text-[12px] 2xl:text-[15px] 3xl:text-[18px] leading-[1.2] font-normal text-black p-[10px_15px] 2xl:p-[15px_20px] 3xl:p-[15px_25px] rounded-[5px] border-1 border-black hover:bg-black hover:text-white transition-all duration-300">
                               Apply Now
@@ -86,26 +90,19 @@ export default function CareerSection({ data }) {
                       <div className="text-[16px] 3xl:text-[20px] leading-[1] font-normal text-[#00416B] mb-[15px] sm:mb-[25px]">
                         Responsibilities:
                       </div>
-                      {/* {item?.responsibilities?.map((item, index) => ( */}
-                      <renderHtml
-                        key={index}
-                        className="text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.2] font-normal text-[#1E1E1E] mb-[15px]"
-                        htmlString={item?.responsibilities}
-                      />
+                      {renderHtml(
+                        item?.responsibilities,
+                        "[&_li]:text-[13px] 2xl:[&_li]:text-[14px] 3xl:[&_li]:text-[16px] [&_li]:leading-[1.2] [&_li]:font-normal [&_li]:text-[#1E1E1E] [&_li]:mb-[15px] [&_ul]:list-disc [&_ul]:list-inside"
+                      )}
                     </div>
                     <div className="w-full sm:w-[35%]">
                       <div className="text-[16px] 3xl:text-[20px] leading-[1] font-normal text-[#00416B] mb-[15px] sm:mb-[25px]">
                         Required Skills:
                       </div>
-                      {/* <ul> */}
-                      {/* {item?.skills?.map((item, index) => ( */}
-                      <renderHtml
-                        key={index}
-                        htmlString={item?.required_skills}
-                        className="text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.2] font-normal text-[#1E1E1E] mb-[15px]"
-                      />
-                      {/* ))} */}
-                      {/* </ul> */}
+                      {renderHtml(
+                        item?.required_skills,
+                        "[&_li]:text-[13px] 2xl:[&_li]:text-[14px] 3xl:[&_li]:text-[16px] [&_li]:leading-[1.2] [&_li]:font-normal [&_li]:text-[#1E1E1E] [&_li]:mb-[15px] [&_ul]:list-disc [&_ul]:list-inside"
+                      )}
                     </div>
                   </div>
                 </AccordionContent>

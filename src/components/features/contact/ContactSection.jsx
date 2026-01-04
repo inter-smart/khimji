@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import ContactDetail from "./ContactDetail";
+import Contacts from "./Contacts";
 
 export default function ContactSection({ sectors, cms, lang, country }) {
   return (
@@ -57,7 +57,7 @@ export default function ContactSection({ sectors, cms, lang, country }) {
             </Link>
           </div>
         </div>
-        <ContactDetail sectors={sectors} lang={lang} country={country} />
+        <Contacts sectors={sectors} />
       </div>
     </section>
   );
