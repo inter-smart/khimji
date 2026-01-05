@@ -64,10 +64,23 @@ export default function ICVSection({ title, description, banner, banner_alt_text
             {initiatives?.map((item, index) => (
               <SwiperSlide key={index}>
                 <Link href="#!" className="relative z-0 w-full h-full overflow-hidden">
+                {item?.media_type ==="video" ? (
                   <video autoPlay loop muted playsInline className="w-full h-full object-cover">
                     <source src={item.video} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
+):(
+
+  <Image
+                    src={item?.image}
+                    alt={item?.image_alt_text}
+                    width={500}
+                    height={500}
+                    className="w-full h-full object-cover"
+                  />
+)}
+
+
 
                   {/* Gradient overlay */}
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
