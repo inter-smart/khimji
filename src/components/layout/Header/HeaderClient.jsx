@@ -73,7 +73,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang }) 
             <div className="flex items-center justify-end">
               <div className="flex items-center gap-4  p-4 rounded-xl">
                 {/* Search Box*/}
-                <SearchBox />
+                <SearchBox lang={lang} />
 
                 {/* Business Select */}
 
@@ -176,7 +176,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang }) 
                     </div>
                   </div>
                   <div className="me-[5px] sm:me-[20px]">
-                    <SearchBox />
+                    <SearchBox lang={lang} />
                   </div>
                   <SheetTrigger className="w-[25px] h-[25px] flex items-center justify-center">
                     <svg width="24" height="18" viewBox="0 0 24 18">

@@ -1,12 +1,10 @@
 import BlogDetailSection from "@/components/features/blog/BlogDetailSection";
 import RelatedBlogSection from "@/components/features/blog/RelatedBlogSection";
-import { getAPI } from "@/lib/api";
 import { getData } from "@/lib/server/api";
 
 const local_data = {
   blog_detail_section_data: {
-    title:
-      "SPAR OMAN OPENS IN AL AMERAT - SPECIAL LAUNCH OFFERS AVAILABLE UNTIL 6TH SEPTEMBER",
+    title: "SPAR OMAN OPENS IN AL AMERAT - SPECIAL LAUNCH OFFERS AVAILABLE UNTIL 6TH SEPTEMBER",
     media: {
       type: "image",
       path: "/images/blog_detail.jpg",
@@ -32,8 +30,7 @@ const local_data = {
           alt: "Blog",
         },
         date: "April 9, 2025",
-        title:
-          "SPAR Oman concludes successful ‘SPAR 24 Karat Ramadan: Win Everyday’ campaign",
+        title: "SPAR Oman concludes successful ‘SPAR 24 Karat Ramadan: Win Everyday’ campaign",
         button: {
           link: "/",
           target: true,
@@ -46,8 +43,7 @@ const local_data = {
           alt: "Blog",
         },
         date: "June 2, 2025",
-        title:
-          "Khimji Ramdas Special Projects delivers world-class Indoor Shooting Range ‘Action Point’",
+        title: "Khimji Ramdas Special Projects delivers world-class Indoor Shooting Range ‘Action Point’",
         button: {
           link: "/",
           target: true,
@@ -60,8 +56,7 @@ const local_data = {
           alt: "Blog",
         },
         date: "May 5, 2025",
-        title:
-          "SPAR Oman opens in Al Amerat- Special launch offers available until 6th September",
+        title: "SPAR Oman opens in Al Amerat- Special launch offers available until 6th September",
         button: {
           link: "/",
           target: true,
@@ -74,8 +69,7 @@ const local_data = {
           alt: "Blog",
         },
         date: "March 10 , 2025",
-        title:
-          "KR Shipping successfully manages Costa Smeralda’s maiden season",
+        title: "KR Shipping successfully manages Costa Smeralda’s maiden season",
         button: {
           link: "/",
           target: true,
@@ -85,13 +79,10 @@ const local_data = {
   },
 };
 
-export default async function page({params}) {
-
- const resolvedParams = await Promise.resolve(params);
-const { slug, lang } = resolvedParams;
-  const {data, error} = await getData(`blog-details?slug=${slug}`, lang);
-  
-
+export default async function page({ params }) {
+  const resolvedParams = await Promise.resolve(params);
+  const { slug, lang } = resolvedParams;
+  const { data, error } = await getData(`blog-details?slug=${slug}`, lang);
 
   return (
     <>

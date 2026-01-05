@@ -4,10 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Heading } from "@/components/layout/Heading";
-import { useParams } from "next/navigation";
-import { isRTLLocale } from "@/lib/countries";
 
-export default function ArchiveSection({ archives, title }) {
+export default function ArchiveSection({ archives, title, lang }) {
   const globeContainerRef = useRef(null);
   const globeInstanceRef = useRef(null);
   const [activeCategory, setActiveCategory] = useState("CORPORATE");
@@ -15,8 +13,7 @@ export default function ArchiveSection({ archives, title }) {
   const [isLoading, setIsLoading] = useState(true);
   const [globeReady, setGlobeReady] = useState(false);
   const [sectionVisible, setSectionVisible] = useState(false);
-  const { locale } = useParams();
-  const isRTL = isRTLLocale(locale);
+  const isRTL = lang == " ar";
 
   // const categories = [
   //     "CORPORATE",
@@ -149,10 +146,7 @@ export default function ArchiveSection({ archives, title }) {
 
       frontendData[categoryName] = categoryGroup.archives.map((archive) => ({
         id: archive.id,
-        image:
-          archive.media_type === "image"
-            ? archive.image
-            : archive.video_thumbnail_image,
+        image: archive.media_type === "image" ? archive.image : archive.video_thumbnail_image,
         category: categoryName,
         date: new Date(archive.event_date).toLocaleDateString("en-GB", {
           day: "numeric",
@@ -176,12 +170,10 @@ export default function ArchiveSection({ archives, title }) {
 
     return frontendData;
   };
-const archivesData = transformArchivesToFrontend(archives);
-
-
+  const archivesData = transformArchivesToFrontend(archives);
 
   // Usage
-  
+
   // Get categories
   const categories = Object.keys(archivesData);
 
@@ -219,17 +211,12 @@ const archivesData = transformArchivesToFrontend(archives);
 
         // Set responsive dimensions
         const isMobile = window.innerWidth < 1024;
-        const containerWidth =
-          globeContainerRef.current.offsetWidth || (isMobile ? 350 : 600);
+        const containerWidth = globeContainerRef.current.offsetWidth || (isMobile ? 350 : 600);
         const containerHeight = isMobile ? 350 : 650;
 
         const globe = Globe()(globeContainerRef.current)
-          .globeImageUrl(
-            "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
-          )
-          .bumpImageUrl(
-            "//unpkg.com/three-globe/example/img/earth-topology.png"
-          )
+          .globeImageUrl("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg")
+          .bumpImageUrl("//unpkg.com/three-globe/example/img/earth-topology.png")
           .backgroundColor("rgba(0,0,0,0)")
           .width(containerWidth)
           .height(containerHeight);
@@ -292,10 +279,7 @@ const archivesData = transformArchivesToFrontend(archives);
       clearTimeout(timeoutId);
       if (globeInstanceRef.current) {
         if (globeInstanceRef.current._resizeHandler) {
-          window.removeEventListener(
-            "resize",
-            globeInstanceRef.current._resizeHandler
-          );
+          window.removeEventListener("resize", globeInstanceRef.current._resizeHandler);
         }
         // Globe.gl destructor isn't always available, so we clear the container
         if (globeContainerRef.current) {
@@ -320,10 +304,7 @@ const archivesData = transformArchivesToFrontend(archives);
         },
       ];
 
-      console.log(
-        Number(currentItem.coordinates.lat),
-        Number(currentItem.coordinates.lng)
-      );
+      console.log(Number(currentItem.coordinates.lat), Number(currentItem.coordinates.lng));
 
       globeInstanceRef.current.pointsData(data);
       globeInstanceRef.current.labelsData(data);
@@ -538,11 +519,7 @@ const archivesData = transformArchivesToFrontend(archives);
           viewport={{ once: true, amount: 0.3 }}
         >
           <motion.div variants={fadeInUp}>
-            <Heading
-              size="heading1"
-              as="h3"
-              className="max-sm:text-[35px] max-lg:text-[43px] mb-[20px] 2xl:mb-[40px] 3xl:mb-[50px]"
-            >
+            <Heading size="heading1" as="h3" className="max-sm:text-[35px] max-lg:text-[43px] mb-[20px] 2xl:mb-[40px] 3xl:mb-[50px]">
               {title}
             </Heading>
           </motion.div>
@@ -582,9 +559,7 @@ const archivesData = transformArchivesToFrontend(archives);
           >
             {isLoading && (
               <div className="absolute inset-0 flex items-center justify-center z-10">
-                <div className="text-lg text-teal-600 font-medium">
-                  Loading globe...
-                </div>
+                <div className="text-lg text-teal-600 font-medium">Loading globe...</div>
               </div>
             )}
 
@@ -660,10 +635,7 @@ const archivesData = transformArchivesToFrontend(archives);
                                 shadow-[inset_5px_1px_33px_#f1f1f1,inset_3px_-3px_5px_#fafafa] flex flex-wrap flex-row"
               >
                 <div className="w-full md:w-[200px] lg:w-[280px] xl:w-[350px] 2xl:w-[475px] 3xl:w-[600px] max-md:h-full">
-                  <motion.div
-                    className="w-full h-full rounded-[10px] overflow-hidden group aspect-[600/280]"
-                    variants={imageVariants}
-                  >
+                  <motion.div className="w-full h-full rounded-[10px] overflow-hidden group aspect-[600/280]" variants={imageVariants}>
                     <Image
                       src={currentItem.image}
                       alt={currentItem.title}
@@ -687,13 +659,9 @@ const archivesData = transformArchivesToFrontend(archives);
                       <motion.button
                         onClick={() => {
                           if (isRTL) {
-                            setCurrentIndex((i) =>
-                              i === currentData.length - 1 ? 0 : i + 1
-                            );
+                            setCurrentIndex((i) => (i === currentData.length - 1 ? 0 : i + 1));
                           } else {
-                            setCurrentIndex((i) =>
-                              i === 0 ? currentData.length - 1 : i - 1
-                            );
+                            setCurrentIndex((i) => (i === 0 ? currentData.length - 1 : i - 1));
                           }
                         }}
                         disabled={currentData.length <= 1}
@@ -702,10 +670,7 @@ const archivesData = transformArchivesToFrontend(archives);
                         variants={buttonVariants}
                         whileHover="hover"
                       >
-                        <svg
-                          viewBox="0 0 18 17"
-                          className="group-hover:fill-white transition-all"
-                        >
+                        <svg viewBox="0 0 18 17" className="group-hover:fill-white transition-all">
                           <path
                             d="M0.320356 8.82784C-0.10678 8.40071 -0.10678 7.70818 0.320356 7.28105L7.28094 0.320463C7.70807 -0.106673 8.4006 -0.106673 
                                                     8.82773 0.320463C9.25487 0.747599 9.25487 1.44012 8.82773 1.86726L2.64055 8.05444L8.82773 14.2416C9.25487 14.6688 9.25487 15.3613 8.82773 
@@ -717,13 +682,9 @@ const archivesData = transformArchivesToFrontend(archives);
                       <motion.button
                         onClick={() => {
                           if (isRTL) {
-                            setCurrentIndex((i) =>
-                              i === 0 ? currentData.length - 1 : i - 1
-                            );
+                            setCurrentIndex((i) => (i === 0 ? currentData.length - 1 : i - 1));
                           } else {
-                            setCurrentIndex((i) =>
-                              i === currentData.length - 1 ? 0 : i + 1
-                            );
+                            setCurrentIndex((i) => (i === currentData.length - 1 ? 0 : i + 1));
                           }
                         }}
                         disabled={currentData.length <= 1}
@@ -732,10 +693,7 @@ const archivesData = transformArchivesToFrontend(archives);
                         variants={buttonVariants}
                         whileHover="hover"
                       >
-                        <svg
-                          viewBox="0 0 18 17"
-                          className="group-hover:fill-white transition-all"
-                        >
+                        <svg viewBox="0 0 18 17" className="group-hover:fill-white transition-all">
                           <path
                             d="M17.4943 8.82784C17.9214 8.40071 17.9214 7.70818 17.4943 7.28105L10.5337 0.320463C10.1066 -0.106673 9.41404 -0.106673 8.9869 0.320463C8.55977 0.747599 8.55977 1.44012 8.9869 1.86726L15.1741 8.05444L8.9869 14.2416C8.55977 14.6688 8.55977 15.3613 8.9869 15.7884C9.41404 16.2156 10.1066 16.2156 10.5337 15.7884L17.4943 8.82784ZM0
                                                      8.05444V9.14819H16.7209V8.05444V6.96069H0V8.05444Z"
@@ -765,9 +723,7 @@ const archivesData = transformArchivesToFrontend(archives);
                       ].map((item, idx) => (
                         <motion.div
                           key={idx}
-                          className={`w-full ${
-                            idx === 1 ? "md:w-3/5" : "md:w-2/5"
-                          } p-[8px]`}
+                          className={`w-full ${idx === 1 ? "md:w-3/5" : "md:w-2/5"} p-[8px]`}
                           custom={idx}
                           variants={iconItemVariants}
                           initial="hidden"
@@ -776,72 +732,28 @@ const archivesData = transformArchivesToFrontend(archives);
                           <div className="flex items-center">
                             <div className={icons}>
                               {item.icon === "date" && (
-                                <svg
-                                  className="max-w-[22px]"
-                                  viewBox="0 0 22 22"
-                                  fill="none"
-                                >
+                                <svg className="max-w-[22px]" viewBox="0 0 22 22" fill="none">
                                   <g clipPath="url(#clip0_1342_3911)">
                                     <path
                                       d="M22 6.61036V5.52754V1.52973H19.2053V0.271606H18.1225V1.52973H14.0972V0.271606H13.0144V1.52973H8.98562V0.271606H7.90281V1.52973H3.8775V0.271606H2.79469V1.52973H0V5.53098V6.61379V21.7319H22V6.61036ZM1.08281 2.60911H2.79469V3.83973H3.8775V2.60911H7.90625V3.83973H8.98906V2.60911H13.0178V3.83973H14.1006V2.60911H18.1294V3.83973H19.2122V2.60911H20.9241V5.52754H1.08281V2.60911ZM20.9172 20.6491H1.08281V6.61036H20.9172V20.6491Z"
                                       fill="black"
                                     />
-                                    <path
-                                      d="M12.3853 8.54907H14.2209V9.63188H12.3853V8.54907Z"
-                                      fill="black"
-                                    />
-                                    <path
-                                      d="M16.9916 8.54907H18.8272V9.63188H16.9916V8.54907Z"
-                                      fill="black"
-                                    />
-                                    <path
-                                      d="M3.17625 11.5845H5.01187V12.6673H3.17625V11.5845Z"
-                                      fill="black"
-                                    />
-                                    <path
-                                      d="M7.77906 11.5845H9.61469V12.6673H7.77906V11.5845Z"
-                                      fill="black"
-                                    />
-                                    <path
-                                      d="M12.3853 11.5845H14.2209V12.6673H12.3853V11.5845Z"
-                                      fill="black"
-                                    />
-                                    <path
-                                      d="M16.9916 11.5845H18.8272V12.6673H16.9916V11.5845Z"
-                                      fill="black"
-                                    />
-                                    <path
-                                      d="M3.17625 14.6198H5.01187V15.7026H3.17625V14.6198Z"
-                                      fill="black"
-                                    />
-                                    <path
-                                      d="M7.77906 14.6198H9.61469V15.7026H7.77906V14.6198Z"
-                                      fill="black"
-                                    />
-                                    <path
-                                      d="M12.3853 14.6198H14.2209V15.7026H12.3853V14.6198Z"
-                                      fill="black"
-                                    />
-                                    <path
-                                      d="M16.9916 14.6198H18.8272V15.7026H16.9916V14.6198Z"
-                                      fill="black"
-                                    />
-                                    <path
-                                      d="M3.17625 17.655H5.01187V18.7378H3.17625V17.655Z"
-                                      fill="black"
-                                    />
-                                    <path
-                                      d="M7.77906 17.655H9.61469V18.7378H7.77906V17.655Z"
-                                      fill="black"
-                                    />
+                                    <path d="M12.3853 8.54907H14.2209V9.63188H12.3853V8.54907Z" fill="black" />
+                                    <path d="M16.9916 8.54907H18.8272V9.63188H16.9916V8.54907Z" fill="black" />
+                                    <path d="M3.17625 11.5845H5.01187V12.6673H3.17625V11.5845Z" fill="black" />
+                                    <path d="M7.77906 11.5845H9.61469V12.6673H7.77906V11.5845Z" fill="black" />
+                                    <path d="M12.3853 11.5845H14.2209V12.6673H12.3853V11.5845Z" fill="black" />
+                                    <path d="M16.9916 11.5845H18.8272V12.6673H16.9916V11.5845Z" fill="black" />
+                                    <path d="M3.17625 14.6198H5.01187V15.7026H3.17625V14.6198Z" fill="black" />
+                                    <path d="M7.77906 14.6198H9.61469V15.7026H7.77906V14.6198Z" fill="black" />
+                                    <path d="M12.3853 14.6198H14.2209V15.7026H12.3853V14.6198Z" fill="black" />
+                                    <path d="M16.9916 14.6198H18.8272V15.7026H16.9916V14.6198Z" fill="black" />
+                                    <path d="M3.17625 17.655H5.01187V18.7378H3.17625V17.655Z" fill="black" />
+                                    <path d="M7.77906 17.655H9.61469V18.7378H7.77906V17.655Z" fill="black" />
                                   </g>
                                   <defs>
                                     <clipPath id="clip0_1342_3911">
-                                      <rect
-                                        width="22"
-                                        height="22"
-                                        fill="white"
-                                      />
+                                      <rect width="22" height="22" fill="white" />
                                     </clipPath>
                                   </defs>
                                 </svg>
@@ -868,11 +780,7 @@ const archivesData = transformArchivesToFrontend(archives);
                                   </g>
                                   <defs>
                                     <clipPath id="clip0_1342_3936">
-                                      <rect
-                                        width="32"
-                                        height="32"
-                                        fill="white"
-                                      />
+                                      <rect width="32" height="32" fill="white" />
                                     </clipPath>
                                   </defs>
                                 </svg>
@@ -891,11 +799,7 @@ const archivesData = transformArchivesToFrontend(archives);
                                   </g>
                                   <defs>
                                     <clipPath id="clip0_1342_3928">
-                                      <rect
-                                        width="29"
-                                        height="29"
-                                        fill="white"
-                                      />
+                                      <rect width="29" height="29" fill="white" />
                                     </clipPath>
                                   </defs>
                                 </svg>
@@ -918,11 +822,7 @@ const archivesData = transformArchivesToFrontend(archives);
                                   </g>
                                   <defs>
                                     <clipPath id="clip0_1342_3946">
-                                      <rect
-                                        width="18"
-                                        height="18"
-                                        fill="white"
-                                      />
+                                      <rect width="18" height="18" fill="white" />
                                     </clipPath>
                                   </defs>
                                 </svg>
@@ -939,9 +839,7 @@ const archivesData = transformArchivesToFrontend(archives);
                                   {item.content}
                                 </a>
                               ) : (
-                                <div className={textcontent}>
-                                  {item.content}
-                                </div>
+                                <div className={textcontent}>{item.content}</div>
                               )}
                             </div>
                           </div>
@@ -962,13 +860,9 @@ const archivesData = transformArchivesToFrontend(archives);
             <motion.button
               onClick={() => {
                 if (isRTL) {
-                  setCurrentIndex((i) =>
-                    i === currentData.length - 1 ? 0 : i + 1
-                  );
+                  setCurrentIndex((i) => (i === currentData.length - 1 ? 0 : i + 1));
                 } else {
-                  setCurrentIndex((i) =>
-                    i === 0 ? currentData.length - 1 : i - 1
-                  );
+                  setCurrentIndex((i) => (i === 0 ? currentData.length - 1 : i - 1));
                 }
               }}
               disabled={currentData.length <= 1}
@@ -977,13 +871,7 @@ const archivesData = transformArchivesToFrontend(archives);
               variants={buttonVariants}
               whileHover="hover"
             >
-              <svg
-                width="14"
-                height="13"
-                viewBox="0 0 14 13"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M0.245461 6.76397C-0.0818138 6.4367 -0.0818138 5.90608 0.245461 5.5788L5.57871 0.245555C5.90598 -0.0817194 6.4366 -0.0817194 6.76388 0.245555C7.09115 0.57283 7.09115 1.10345 6.76388 1.43072L2.02321 6.17139L6.76388 10.9121C7.09115 11.2393 7.09115 11.7699 6.76388 12.0972C6.4366 12.4245 5.90598 12.4245 5.57871 12.0972L0.245461 6.76397ZM13.6497 6.17139V7.00943H0.838044V6.17139V5.33335H13.6497V6.17139Z"
                   fill="#299A8B"
@@ -994,13 +882,9 @@ const archivesData = transformArchivesToFrontend(archives);
             <motion.button
               onClick={() => {
                 if (isRTL) {
-                  setCurrentIndex((i) =>
-                    i === 0 ? currentData.length - 1 : i - 1
-                  );
+                  setCurrentIndex((i) => (i === 0 ? currentData.length - 1 : i - 1));
                 } else {
-                  setCurrentIndex((i) =>
-                    i === currentData.length - 1 ? 0 : i + 1
-                  );
+                  setCurrentIndex((i) => (i === currentData.length - 1 ? 0 : i + 1));
                 }
               }}
               disabled={currentData.length <= 1}
@@ -1009,13 +893,7 @@ const archivesData = transformArchivesToFrontend(archives);
               variants={buttonVariants}
               whileHover="hover"
             >
-              <svg
-                width="14"
-                height="13"
-                viewBox="0 0 14 13"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M13.4042 6.76397C13.7315 6.4367 13.7315 5.90608 13.4042 5.5788L8.07099 0.245555C7.74372 -0.0817194 7.2131 -0.0817194 6.88583 0.245555C6.55855 0.57283 6.55855 1.10345 6.88583 1.43072L11.6265 6.17139L6.88583 10.9121C6.55855 11.2393 6.55855 11.7699 6.88583 12.0972C7.2131 12.4245 7.74372 12.4245 8.07099 12.0972L13.4042 6.76397ZM0 6.17139V7.00943H12.8117V6.17139V5.33335H0V6.17139Z"
                   fill="#299A8B"

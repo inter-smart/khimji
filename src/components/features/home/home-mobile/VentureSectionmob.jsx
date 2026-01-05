@@ -7,7 +7,6 @@ import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { isRTLLocale } from "@/lib/countries";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import VentureCard from "@/components/common/VentureCard";
@@ -20,12 +19,7 @@ const VENTURE_SLIDES = [
     title: "Logistics & Shipping",
     description:
       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: [
-      "/images/ship-1.png",
-      "/images/ship-2.png",
-      "/images/ship-3.png",
-      "/images/ship-4.png",
-    ],
+    logos: ["/images/ship-1.png", "/images/ship-2.png", "/images/ship-3.png", "/images/ship-4.png"],
   },
   {
     video: "/videos/venture-2.mp4",
@@ -33,53 +27,31 @@ const VENTURE_SLIDES = [
     title: "Logistics & Shipping",
     description:
       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: [
-      "/images/ship-1.png",
-      "/images/ship-2.png",
-      "/images/ship-3.png",
-      "/images/ship-4.png",
-    ],
+    logos: ["/images/ship-1.png", "/images/ship-2.png", "/images/ship-3.png", "/images/ship-4.png"],
   },
 ];
 
-export default function VentureSectionmob({
-  title,
-  banner,
-  banner_alt_text,
-  ventureSlider,
-}) {
-  const { locale } = useParams();
-  const isRTL = isRTLLocale(locale);
+export default function VentureSectionmob({ title, banner, banner_alt_text, ventureSlider, lang }) {
+  const isRTL = lang == "ar";
 
   return (
     <section className="sm:hidden mt-[3px]">
       <div className="w-full h-[290px] relative before:absolute before:left-0 before:content-[''] before:bottom-0 before:w-full before:h-full before:bg-black/40 before:z-1">
-        <Image
-          src={banner}
-          width="441"
-          height="290"
-          className="absolute top-0 left-0 w-full h-full object-cover"
-          alt={banner_alt_text}
-        />
+        <Image src={banner} width="441" height="290" className="absolute top-0 left-0 w-full h-full object-cover" alt={banner_alt_text} />
         <div className="container flex items-end h-full">
           <div className="relative w-full py-[25px] z-1">
-            <div className="text-[43px] text-white font-medium uppercase">
-              {title}
-            </div>
+            <div className="text-[43px] text-white font-medium uppercase">{title}</div>
           </div>
         </div>
       </div>
       <div className="container">
-        <Tabs
-          defaultValue={ventureSlider?.[0]?.slug}
-          className="w-full m-[35px_0px]"
-        >
+        <Tabs defaultValue={ventureSlider?.[0]?.slug} className="w-full m-[35px_0px]">
           {/* Tabs Header */}
           <TabsList className="flex items-center w-full bg-transparent -m-[3px]">
             {ventureSlider?.map((venture) => (
               <div key={venture.id} className="w-1/2 px-[3px]">
                 <TabsTrigger
-                value={venture.slug}
+                  value={venture.slug}
                   className=" w-full
                                 text-[11px] xs:text-[16px]
                                 border border-[#2E8B8B]
@@ -97,16 +69,10 @@ export default function VentureSectionmob({
           </TabsList>
 
           {ventureSlider?.map((venture) => (
-            <TabsContent
-              key={venture.id}
-              value={venture.slug}
-              className="mt-6 text-center"
-            >
+            <TabsContent key={venture.id} value={venture.slug} className="mt-6 text-center">
               {" "}
-              <h3 className="text-[22px] text-[#0B436A] font-medium mb-3">
-                {venture?.title}
-              </h3>
-                {renderHtml(venture?.description, "[&_*]:text-[#000000] leading-relaxed")}
+              <h3 className="text-[22px] text-[#0B436A] font-medium mb-3">{venture?.title}</h3>
+              {renderHtml(venture?.description, "[&_*]:text-[#000000] leading-relaxed")}
               <div className="relative mt-[20px]">
                 <Swiper
                   dir={isRTL ? "rtl" : "ltr"}
@@ -161,10 +127,7 @@ export default function VentureSectionmob({
               >
                 View All
                 <div className="w-[14px] xs:w-[17px] h-[14px] flex items-center mx-[10px]">
-                  <svg
-                    className="w-full h-full object-contain"
-                    viewBox="0 0 18 14"
-                  >
+                  <svg className="w-full h-full object-contain" viewBox="0 0 18 14">
                     <g clipPath="url(#clip0_1342_4984)">
                       <path
                         d="M9.38156 13.4279C9.27201 13.43 9.16155 13.4034 9.0641 13.3431C8.78295 13.17 8.69731 12.7942 8.86648 12.5133C8.8807 12.4885 10.6478 9.53965 14.0209 7.68392H0.907875C0.574073 7.68392 0.302612 7.41246 0.302612 7.07865C0.302612 

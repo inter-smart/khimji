@@ -11,7 +11,7 @@ export class APIError extends Error {
   }
 }
 
-export async function getData(endpoint, lang, options = {}) {
+export async function getData(endpoint, lang = "en", options = {}) {
   const url = `${API_BASE_URL}${endpoint}`;
 
   const { country, business_type } = await getRequestContext();
