@@ -5,22 +5,12 @@ import { useCallback, useEffect, useState, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
-import { useParams } from "next/navigation";
-import { isRTLLocale } from "@/lib/countries";
-
-export default function HeritageSection({title,timelines, data }) {
-  const { locale } = useParams();
-  const isRTL = isRTLLocale(locale);
+export default function HeritageSection({ title, timelines, data, lang }) {
+  const isRTL = lang == " ar";
 
   const getPointOnQuadraticBezier = (t, p0, p1, p2) => {
-    const x =
-      Math.pow(1 - t, 2) * p0.x +
-      2 * (1 - t) * t * p1.x +
-      Math.pow(t, 2) * p2.x;
-    const y =
-      Math.pow(1 - t, 2) * p0.y +
-      2 * (1 - t) * t * p1.y +
-      Math.pow(t, 2) * p2.y;
+    const x = Math.pow(1 - t, 2) * p0.x + 2 * (1 - t) * t * p1.x + Math.pow(t, 2) * p2.x;
+    const y = Math.pow(1 - t, 2) * p0.y + 2 * (1 - t) * t * p1.y + Math.pow(t, 2) * p2.y;
     return { x, y };
   };
 
@@ -134,41 +124,20 @@ export default function HeritageSection({title,timelines, data }) {
       <div className="w-[var(--gradient)] h-[var(--gradient)] bg-[#2FDDC3] my-auto rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] block absolute -z-1 inset-[0_auto_0_-7%] animate-float"></div>
       <div className="w-[var(--gradient)] h-[var(--gradient)] bg-[#1A9BF5] my-auto rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] opacity-45 block absolute -z-1 inset-[0_-7%_0_auto]"></div>
       <div className="container">
-        <Heading
-          as="h2"
-          size="heading1"
-          className="text-center !mb-[50px] sm:!mb-[40px] 2xl:!mb-[60px] 3xl:!mb-[80px]"
-        >
+        <Heading as="h2" size="heading1" className="text-center !mb-[50px] sm:!mb-[40px] 2xl:!mb-[60px] 3xl:!mb-[80px]">
           {title}
         </Heading>
       </div>
       <div className="w-full translate-y-[30px] sm:translate-y-[0px] lg:translate-y-[40px] 2xl:translate-y-[30px] pointer-events-none absolute z-1 inset-0">
-        <svg
-          className="w-full h-full"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient
-              id="curveGradient"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="0%"
-            >
+            <linearGradient id="curveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#29998A" />
               <stop offset="50%" stopColor="#29998A" />
               <stop offset="100%" stopColor="#29998A" />
             </linearGradient>
           </defs>
-          <path
-            d="M 0,60 Q 50,15 100,60"
-            fill="none"
-            stroke="url(#curveGradient)"
-            strokeWidth="0.4"
-            opacity="0.1"
-          />
+          <path d="M 0,60 Q 50,15 100,60" fill="none" stroke="url(#curveGradient)" strokeWidth="0.4" opacity="0.1" />
         </svg>
       </div>
       <div className="translate-y-[30px] sm:translate-y-[0px] lg:translate-y-[40px] 2xl:translate-y-[30px] overflow-hidden pointer-events-none absolute z-2 inset-0">
@@ -183,8 +152,7 @@ export default function HeritageSection({title,timelines, data }) {
               width: item?.isCenter ? "20px" : "10px",
               height: item?.isCenter ? "20px" : "10px",
               opacity: item?.visible ? 1 : 0,
-              transition:
-                "width 0.4s ease, height 0.4s ease, opacity 0.3s ease",
+              transition: "width 0.4s ease, height 0.4s ease, opacity 0.3s ease",
             }}
           >
             <div className="absolute inset-0 bg-[#289889]" />
@@ -200,19 +168,12 @@ export default function HeritageSection({title,timelines, data }) {
         ))}
       </div>
       <div className="container">
-        <div
-          className="w-full h-auto pt-[50px] sm:pt-[70px] lg:pt-[70px] 2xl:pt-[100px] overflow-hidden relative z-2"
-          ref={emblaRef}
-        >
+        <div className="w-full h-auto pt-[50px] sm:pt-[70px] lg:pt-[70px] 2xl:pt-[100px] overflow-hidden relative z-2" ref={emblaRef}>
           <div className="flex">
             {timelines?.map((item, index) => (
-              <div
-                key={index}
-                className="flex-[0_0_100%] sm:flex-[0_0_33.333%] px-4"
-              >
+              <div key={index} className="flex-[0_0_100%] sm:flex-[0_0_33.333%] px-4">
                 <motion.div
-                  className={`w-full h-full flex flex-col text-center select-none ${index === selectedIndex ? "" : "mt-0"
-                    }`}
+                  className={`w-full h-full flex flex-col text-center select-none ${index === selectedIndex ? "" : "mt-0"}`}
                   animate={{
                     opacity: index === selectedIndex && 1,
                   }}

@@ -6,16 +6,11 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import Image from "next/image";
-import { useCountry } from "@/context/CountryContext";
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { isRTLLocale } from "@/lib/countries";
 import { renderHtml } from "@/lib/helper";
 
-export default function ICVinitiativeMobile({ title, description, banner, banner_alt_text, data }) {
-  // const { countryData } = useCountry();
-  const { locale } = useParams();
-  const isRTL = isRTLLocale(locale);
+export default function ICVinitiativeMobile({ title, description, banner, banner_alt_text, data, lang }) {
+  const isRTL = lang == "ar";
 
   return (
     <section className="pb-[75px] w-full sm:hidden">

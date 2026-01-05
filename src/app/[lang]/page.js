@@ -38,13 +38,14 @@ export default async function Page({ params }) {
         timelines={timelines}
         lang={lang}
       />
-      <ArchiveSection title={home_cms?.section3_title} archives={archives} />
+      <ArchiveSection title={home_cms?.section3_title} archives={archives} lang={lang} />
       <ICVSection
         title={home_cms?.section4_title}
         description={home_cms?.section4_description}
         banner={home_cms?.section4_banner}
         banner_alt_text={home_cms?.section4_banner_alt_text}
         initiatives={initiatives}
+        lang={lang}
       />
       <ParnerSectionMobile brands={brands} />
     </>

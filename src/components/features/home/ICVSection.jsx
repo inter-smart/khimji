@@ -2,7 +2,6 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import { isRTLLocale } from "@/lib/countries";
 import "swiper/css";
 import "swiper/css/autoplay";
 import Image from "next/image";
@@ -10,14 +9,10 @@ import { Heading } from "@/components/layout/Heading";
 import { motion } from "framer-motion";
 import ICVinitiativeMobile from "./home-mobile/ICVinitiativeMobile";
 import Link from "next/link";
-import { useCountry } from "@/context/CountryContext";
-import { useParams } from "next/navigation";
 import { renderHtml } from "@/lib/helper";
 
-export default function ICVSection({ title, description, banner, banner_alt_text, initiatives }) {
-  // const { countryData } = useCountry();
-  const { locale } = useParams();
-  const isRTL = isRTLLocale(locale);
+export default function ICVSection({ title, description, banner, banner_alt_text, initiatives, lang }) {
+  const isRTL = lang == " ar";
 
   const icvVideos = [
     { src: "/videos/icv-1.mp4", title: "Business" },
@@ -88,7 +83,7 @@ export default function ICVSection({ title, description, banner, banner_alt_text
         </motion.div>
       </section>
 
-      <ICVinitiativeMobile title={title} description={description} banner={banner} banner_alt_text={banner_alt_text} data={initiatives} />
+      <ICVinitiativeMobile title={title} description={description} banner={banner} banner_alt_text={banner_alt_text} data={initiatives} lang={lang} />
     </>
   );
 }

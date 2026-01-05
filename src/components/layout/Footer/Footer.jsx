@@ -1,4 +1,3 @@
-import { getAPI } from "@/lib/api";
 import FooterClient from "./FooterClient";
 import { getData } from "@/lib/server/api";
 

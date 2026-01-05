@@ -7,9 +7,6 @@ import Link from "next/link";
 import Image from "next/image";
 import CircularSwiper from "./CircularSwiper";
 import HeritageMobile from "./home-mobile/HeritageMobile";
-import { useCountry } from "@/context/CountryContext";
-import { useParams } from "next/navigation";
-import { isRTLLocale } from "@/lib/countries";
 import { renderHtml } from "@/lib/helper";
 
 const CONTACT_BUTTON_CLASS = `
@@ -76,11 +73,8 @@ const Counter = ({ end, suffix = "" }) => {
 };
 
 export default function HeritageSection({ title, description, banner, banner_alt_text, metrics, timelines, image, image_alt, lang }) {
-  // const { countryData } = useCountry();
   const counterContainerRef = useRef(null);
-  const [counterVisible, setCounterVisible] = useState(false);
-  const { locale } = useParams();
-  const isRTL = isRTLLocale(locale);
+  const isRTL = lang == " ar";
 
   // Animation variants
   const containerVariants = {
@@ -253,7 +247,7 @@ export default function HeritageSection({ title, description, banner, banner_alt
                 </motion.p>
 
                 <motion.div variants={buttonVariants} whileHover="hover" initial="rest" animate="rest">
-                  <Link href={`/${locale}/heritage`} className={CONTACT_BUTTON_CLASS}>
+                  <Link href={`/heritage`} className={CONTACT_BUTTON_CLASS}>
                     <span>{lang==="ar"? "اكتشف المزيد" : "Discover More"}</span>
                     <motion.div className={ARROW_ICON_CLASS} variants={arrowVariants}>
                       <svg className="w-full h-full" viewBox="0 0 14 15">

@@ -1,6 +1,5 @@
 import InnerHero from "@/components/common/InnerHero";
 import FaqSection from "@/components/features/faq/FaqSection";
-import { getAPI } from "@/lib/api";
 import { getData } from "@/lib/server/api";
 
 const local_data = {
