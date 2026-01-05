@@ -2,7 +2,22 @@ import InnerHero from "@/components/common/InnerHero";
 import ContactSection from "@/components/features/contact/ContactSection";
 import { getData } from "@/lib/server/api";
 import { getRequestContext } from "@/lib/server/getCookieData";
+import { getMetaData } from "@/lib/server/metaApi";
 
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang;
+  const { title, description, keywords, twitter, openGraph, alternates } = await getMetaData("contact", lang, "contact");
+
+  return {
+    title,
+    description,
+    keywords,
+    twitter,
+    openGraph,
+    alternates,
+  };
+}
 
 export default async function Page({ params }) {
   const resolvedParams = await params;

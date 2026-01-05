@@ -2,8 +2,22 @@ import InnerHero from "@/components/common/InnerHero";
 import ArchiveListingSection from "@/components/features/archives/ArchiveListingSection";
 import { getData } from "@/lib/server/api";
 import { getRequestContext } from "@/lib/server/getCookieData";
+import { getMetaData } from "@/lib/server/metaApi";
 
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang;
+  const { title, description, keywords, twitter, openGraph, alternates } = await getMetaData("archives", lang);
 
+  return {
+    title,
+    description,
+    keywords,
+    twitter,
+    openGraph,
+    alternates,
+  };
+}
 
 export default async function Page({ params }) {
   const resolvedParams = await params;
@@ -11,7 +25,7 @@ export default async function Page({ params }) {
 
   const { country } = await getRequestContext();
 
-  const { data, error } = await getData("archives", lang);
+  const { data, error } = await getData("archives", lang, country);
 
   if (error || !data) {
     // Fallback to local data in case of error

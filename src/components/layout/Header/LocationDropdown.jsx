@@ -3,6 +3,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 import { BorderBeam } from "@/components/ui/border-beam";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, use } from "react";
+import { DEFAULT_COUNTRY } from "@/lib/server/constants";
 
 export default function LocationDropdown({ locationsPromise }) {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function LocationDropdown({ locationsPromise }) {
       .split("; ")
       .find((c) => c.startsWith("country="))
       ?.split("=")[1];
-    setSelectedCountry(country || "united-arab-emirates");
+    setSelectedCountry(country || DEFAULT_COUNTRY);
 
     // Listen for country changes from other components (e.g., footer)
     const handleCountryChange = (event) => {

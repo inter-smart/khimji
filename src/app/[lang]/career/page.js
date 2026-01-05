@@ -1,31 +1,42 @@
 import InnerHero from "@/components/common/InnerHero";
 import CareerSection from "@/components/features/career/CareerSection";
 import { getData } from "@/lib/server/api";
+import { getMetaData } from "@/lib/server/metaApi";
 
-
-
-export default async function page({params}) {
-
+export async function generateMetadata({ params }) {
   const resolvedParams = await params;
-  const {lang} = resolvedParams
+  const lang = resolvedParams.lang;
+  const { title, description, keywords, twitter, openGraph, alternates } = await getMetaData("careers", lang, "career");
 
-  const {data, error}= await getData("careers", lang)
+  return {
+    title,
+    description,
+    keywords,
+    twitter,
+    openGraph,
+    alternates,
+  };
+}
 
+export default async function page({ params }) {
+  const resolvedParams = await params;
+  const { lang } = resolvedParams;
 
-  if(error || !data){
+  const { data, error } = await getData("careers", lang);
+
+  if (error || !data) {
     // Fallback to local data in case of error
     return <div>Error loading data</div>;
   }
-  
-  const {banner, career_cms, careers} = data
 
-  const career_section_data ={
-    ...career_cms, 
-    careerList: careers
-  }
+  const { banner, career_cms, careers } = data;
 
+  const career_section_data = {
+    ...career_cms,
+    careerList: careers,
+  };
 
-  console.log("career_section_data", career_section_data)
+  console.log("career_section_data", career_section_data);
   return (
     <>
       <InnerHero
@@ -33,12 +44,9 @@ export default async function page({params}) {
         coverImageMobile={banner?.banner_mobile}
         alt={banner?.banner_alt_text}
         title={banner?.banner_title}
-        breadCrumb_data={[
-          { link: { href: "/", label: "Home" } },
-          { link: { href: "/career", label: "Careers" } },
-        ]}
+        breadCrumb_data={[{ link: { href: "/", label: "Home" } }, { link: { href: "/career", label: "Careers" } }]}
       />
-      <CareerSection  data={career_section_data} />
+      <CareerSection data={career_section_data} />
     </>
   );
 }

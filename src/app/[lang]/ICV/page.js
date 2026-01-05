@@ -3,6 +3,22 @@ import NationSection from "@/components/features/ICV-initiative/NationSection";
 import ProcurementSection from "@/components/features/ICV-initiative/ProcurementSection";
 import QuestionSectionClient from "@/components/features/ICV-initiative/QuestionSectionClient";
 import { getData } from "@/lib/server/api";
+import { getMetaData } from "@/lib/server/metaApi";
+
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang;
+  const { title, description, keywords, twitter, openGraph, alternates } = await getMetaData("icv-intiatives", lang, "icv");
+
+  return {
+    title,
+    description,
+    keywords,
+    twitter,
+    openGraph,
+    alternates,
+  };
+}
 
 export default async function Page({ params }) {
   const resolvedParams = await params;

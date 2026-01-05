@@ -1,8 +1,22 @@
 import InnerHero from "@/components/common/InnerHero";
 import FaqSection from "@/components/features/faq/FaqSection";
 import { getData } from "@/lib/server/api";
+import { getMetaData } from "@/lib/server/metaApi";
 
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang;
+  const { title, description, keywords, twitter, openGraph, alternates } = await getMetaData("faq", lang);
 
+  return {
+    title,
+    description,
+    keywords,
+    twitter,
+    openGraph,
+    alternates,
+  };
+}
 
 export default async function Page({ params }) {
   const resolvedParams = await params;

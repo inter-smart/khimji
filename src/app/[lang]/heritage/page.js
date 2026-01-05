@@ -3,7 +3,22 @@ import BoardDirectorSection from "@/components/features/heritage/BoardDirectorSe
 import DrivenSection from "@/components/features/heritage/DrivenSection";
 import HeritageSection from "@/components/features/heritage/HeritageSection";
 import { getData } from "@/lib/server/api";
+import { getMetaData } from "@/lib/server/metaApi";
 
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang;
+  const { title, description, keywords, twitter, openGraph, alternates } = await getMetaData("heritage", lang);
+
+  return {
+    title,
+    description,
+    keywords,
+    twitter,
+    openGraph,
+    alternates,
+  };
+}
 
 export default async function page({ params }) {
   const resolvedParams = await params;
