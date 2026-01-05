@@ -13,9 +13,11 @@ import { toast } from "sonner";
 import { multipartPostToAPI } from "@/lib/server/clientApi";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function CareerForm({ careerId, onSuccess }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const form = useForm({
     resolver: zodResolver(careerFormSchema),
@@ -35,25 +37,26 @@ export default function CareerForm({ careerId, onSuccess }) {
       return;
     }
 
-    // if (!data.privacyConsent) {
-    //   toast.error("Please agree to the Privacy Policy to continue");
-    //   return;
-    // }
-
     setIsSubmitting(true);
 
-    const formData = new FormData();
-    formData.append("career_id", careerId);
-    formData.append("name", data.name);
-    formData.append("email", data.email);
-    formData.append("phone_number", data.phone_number);
-    formData.append("message", data.message);
-
-    if (data.resume && data.resume[0]) {
-      formData.append("resume", data.resume[0]);
-    }
-
     try {
+      // Execute reCAPTCHA
+      const recaptchaToken = await executeRecaptcha("careers");
+
+      const formData = new FormData();
+      formData.append("career_id", careerId);
+      formData.append("name", data.name);
+      formData.append("email", data.email);
+      formData.append("phone_number", data.phone_number);
+      formData.append("message", data.message);
+      if (recaptchaToken) {
+        formData.append("captcha_key", recaptchaToken);
+      }
+
+      if (data.resume && data.resume[0]) {
+        formData.append("resume", data.resume[0]);
+      }
+
       const response = await multipartPostToAPI("career-enquiry", formData);
 
       if (!response.status) {
@@ -64,8 +67,8 @@ export default function CareerForm({ careerId, onSuccess }) {
       if (response.status) {
         toast.success("Application submitted successfully!", {
           style: {
-            background: '#10b981',
-            color: 'white',
+            background: "#10b981",
+            color: "white",
           },
         });
         form.reset({

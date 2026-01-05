@@ -123,13 +123,12 @@ const questionFormSchema = z.object({
   message: z
     .string()
     .transform((val) => val?.trim() || "")
-    // Only run validations if value is not empty
-    .refine((val) => !val || validateNotEmpty(val), "Question is required")
-    .refine((val) => !val || validateNotOnlyWhitespace(val), "Question cannot be only whitespace")
-    .refine((val) => !val || validateSingleCharacter(val), "Question must be at least 2 characters")
-    .refine((val) => !val || validateMessageLength(val), "Question is too long (maximum 5000 characters)")
-    .refine((val) => !val || validateSecurity(val), "Invalid characters or potential security risk detected")
-    .refine((val) => !val || validateNotOnlySpecialChars(val), "Question cannot contain only special characters"),
+    .refine(validateNotEmpty, "Question is required")
+    .refine(validateNotOnlyWhitespace, "Question cannot be only whitespace")
+    .refine(validateSingleCharacter, "Question must be at least 2 characters")
+    .refine(validateMessageLength, "Question is too long (maximum 5000 characters)")
+    .refine(validateSecurity, "Invalid characters or potential security risk detected")
+    .refine(validateNotOnlySpecialChars, "Question cannot contain only special characters"),
 });
 
 export { careerFormSchema, questionFormSchema };

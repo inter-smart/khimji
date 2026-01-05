@@ -13,8 +13,10 @@ import { Loader2 } from "lucide-react";
 import { questionFormSchema } from "@/lib/validations/schemas";
 import { toast } from "sonner";
 import { multipartPostToAPI, postToAPI } from "@/lib/server/clientApi";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function QuestionSection({ title, description, form_title }) {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const form = useForm({
     resolver: zodResolver(questionFormSchema),
     defaultValues: {
@@ -34,6 +36,11 @@ export default function QuestionSection({ title, description, form_title }) {
     formData.append("message", data.message);
 
     try {
+      const recaptchaToken = await executeRecaptcha("question");
+      if (recaptchaToken) {
+        formData.append("captcha_key", recaptchaToken);
+      }
+
       const response = await multipartPostToAPI("contact-enquiry", formData);
 
       if (!response.status) {

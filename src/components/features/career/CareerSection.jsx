@@ -7,6 +7,7 @@ import CareerForm from "./CareerForm";
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
 import { renderHtml } from "@/lib/helper";
 import { useState } from "react";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 export default function CareerSection({ data }) {
   const [openDialog, setOpenDialog] = useState({});
@@ -77,7 +78,9 @@ export default function CareerSection({ data }) {
                             <DialogTitle className="text-[18px] sm:text-[20px] 2xl:text-[25px] 3xl:text-[32px] leading-[1] font-normal bg-gradient-to-r from-[#0B436A] to-[#299B8A] bg-clip-text text-transparent w-fit uppercase mb-[15px] sm:mb-[20px] lg:mb-[30px] 2xl:mb-[35px] 3xl:mb-[50px]">
                               Fill the form below
                             </DialogTitle>
-                            <CareerForm careerId={item?.id} onSuccess={() => handleCloseDialog(item?.id)} />
+                            <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}>
+                              <CareerForm careerId={item?.id} onSuccess={() => handleCloseDialog(item?.id)} />
+                            </GoogleReCaptchaProvider>
                           </DialogContent>
                         </Dialog>
                       </div>
