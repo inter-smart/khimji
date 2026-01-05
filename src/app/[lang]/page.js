@@ -5,6 +5,22 @@ import ParnerSectionMobile from "@/components/features/home/home-mobile/ParnerSe
 import ICVSection from "@/components/features/home/ICVSection";
 import VentureSection from "@/components/features/home/VentureSection";
 import { getData } from "@/lib/server/api";
+import { getMetaData } from "@/lib/server/metaApi";
+
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  const lang = resolvedParams.lang;
+  const { title, description, keywords, twitter, openGraph, alternates } = await getMetaData("home", lang);
+
+  return {
+    title,
+    description,
+    keywords,
+    twitter,
+    openGraph,
+    alternates,
+  };
+}
 
 export default async function Page({ params }) {
   const resolvedParams = await params;
