@@ -7,8 +7,6 @@ import "swiper/css";
 
 export default function BoardDirectorSection({
   title,
-  description,
-  form_title,
   directors,
    }) {
   return (

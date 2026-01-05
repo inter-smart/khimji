@@ -1,35 +1,17 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import VentureCard from "@/components/common/VentureCard";
 import { renderHtml } from "@/lib/helper";
 
-const VENTURE_SLIDES = [
-  {
-    video: "/videos/venture-1.mp4",
-    mobileImage: "/images/vetureCard-1.jpg",
-    title: "Logistics & Shipping",
-    description:
-      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: ["/images/ship-1.png", "/images/ship-2.png", "/images/ship-3.png", "/images/ship-4.png"],
-  },
-  {
-    video: "/videos/venture-2.mp4",
-    mobileImage: "/images/vetureCard-1.jpg",
-    title: "Logistics & Shipping",
-    description:
-      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: ["/images/ship-1.png", "/images/ship-2.png", "/images/ship-3.png", "/images/ship-4.png"],
-  },
-];
+
 
 export default function VentureSectionmob({ title, banner, banner_alt_text, ventureSlider, lang }) {
   const isRTL = lang == "ar";
@@ -121,11 +103,11 @@ export default function VentureSectionmob({ title, banner, banner_alt_text, vent
                 </div>
               </div>
               <Link
-                href="#!"
+                href="/venture"
                 className="text-[16px] xs:text-[18px] text-[#000000] font-medium w-fit flex items-center justify-center mt-[20px] h-[40px] xs:h-[50px]
                            min-w-[120px] xs:min-w-[140px] p-[8px] border border-[#000000] m-auto"
               >
-                View All
+                  {!isRTL ? "View All" : "عرض الكل"}
                 <div className="w-[14px] xs:w-[17px] h-[14px] flex items-center mx-[10px]">
                   <svg className="w-full h-full object-contain" viewBox="0 0 18 14">
                     <g clipPath="url(#clip0_1342_4984)">

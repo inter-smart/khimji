@@ -1,7 +1,7 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
@@ -54,16 +54,6 @@ export default function ICVinitiativeMobile({ title, description, banner, banner
                 </div>
               </SwiperSlide>
             ))}
-            {/* <SwiperSlide>
-                            <div className="w-full h-full overflow-hidden">
-                                <div className="w-full aspect-[400/370] overflow-hidden">
-                                    <Image src="/images/icv-1.jpg" width="400" height="370" className="w-full h-full object-cover" alt="ventureImg" />
-                                </div>
-                                <div className="text-[20px] xs:text-[25px] text-[#0B436A] uppercase m-[15px_0] ">
-                                    Another ICV Initiative Project
-                                </div>
-                            </div>
-                        </SwiperSlide> */}
           </Swiper>
 
           {/* Navigation Buttons */}
@@ -85,11 +75,11 @@ export default function ICVinitiativeMobile({ title, description, banner, banner
           </button>
 
           <Link
-            href="#!"
+            href="/icv"
             className="text-[16px] xs:text-[18px] text-[#000000] font-medium w-fit flex items-center justify-center h-[40px] xs:h-[50px]
                            min-w-[120px] xs:min-w-[140px] p-[8px] border border-[#000000] "
           >
-            View All
+            {!isRTL ? "View All" : "عرض الكل"}
             <div className="w-[14px] xs:w-[17px] h-[14px] flex items-center mx-[10px]">
               <svg className="w-full h-full object-contain" viewBox="0 0 18 14">
                 <g clipPath="url(#clip0_1342_4984)">

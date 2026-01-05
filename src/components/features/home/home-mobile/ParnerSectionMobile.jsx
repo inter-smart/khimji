@@ -1,15 +1,5 @@
 import Image from "next/image";
-const brands = [
-    "/images/partner-1.png",
-    "/images/partner-2.png",
-    "/images/partner-3.png",
-    "/images/partner-4.png", 
-    "/images/partner-5.png",
-    "/images/partner-6.png",
-    "/images/partner-7.png",
-    "/images/partner-8.png",
-    "/images/partner-9.png",
-];
+
 
 export default function ParnerSectionMobile({brands}) {
     return (

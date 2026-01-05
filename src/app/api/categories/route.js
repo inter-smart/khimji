@@ -9,7 +9,7 @@ const DUMMY_CATEGORIES = [
   { id: 6, title: "Heritage" },
 ];
 
-export async function GET(request) {
+export async function GET() {
   try {
     // Simulate API delay (optional - remove in production)
     await new Promise((resolve) => setTimeout(resolve, 500));

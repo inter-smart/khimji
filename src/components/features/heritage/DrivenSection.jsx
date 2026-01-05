@@ -6,11 +6,6 @@ import { renderHtml } from "@/lib/helper";
 
 export default function DrivenSection({ title, description, image, image_alt_text, metrics }) {
 
-
- console.log("metrics", metrics)
-
-
-
   return (
     <section className="w-full h-auto py-[40px_30px] sm:py-[70px_50px] lg:py-[100px_60px] 2xl:py-[120px_70px] 3xl:py-[150px_90px] block">
       <div className="container relative z-0">
@@ -22,7 +17,7 @@ export default function DrivenSection({ title, description, image, image_alt_tex
                 as="h2"
                 size="heading1"
                 className="mb-[35px]"
-                dangerouslySetInnerHimageTML={{ __html: title }}
+                dangerouslySetInnerHTML={{ __html: title }}
               ></Heading>
               <div className="text-[14px] 2xl:text-[16px] 3xl:text-[20px] leading-[1.5] font-normal text-black">
                 {renderHtml(description)}

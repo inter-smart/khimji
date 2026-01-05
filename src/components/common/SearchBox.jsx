@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 
 export default function SearchBox({ lang }) {
-  const isRTL = lang == " ar";
+  const isRTL = lang == "ar";
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const searchRef = useRef(null);
