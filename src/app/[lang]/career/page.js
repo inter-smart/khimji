@@ -1,170 +1,42 @@
 import InnerHero from "@/components/common/InnerHero";
 import CareerSection from "@/components/features/career/CareerSection";
 import { getData } from "@/lib/server/api";
+import { getMetaData } from "@/lib/server/metaApi";
 
-const local_data = {
-  career_section_data: {
-    title: "Career @ KR GROUP",
-    description:
-      "At Khimji Ramdas we believe that our people are our greatest asset. We are a dynamic and innovative company dedicated to fostering a collaborative and inclusive work environment where every team member can thrive. Whether you’re just starting your career or looking to take it to the next level, we offer a range of opportunities to help you achieve your goals. Explore our current job openings and discover how you can make a difference with us.",
-    button: {
-      link: "hrd@kr.om",
-      target: true,
-      label: "hrd@kr.om",
-    },
-    careerList: [
-      {
-        title: "Promotions Coordinator",
-        description:
-          "At Khimji Ramdas we believe that our people are our greatest asset.",
-        jobType: "Full Time",
-        requirements: "Minimum 5 years of exp",
-        responsibilities: [
-          "Manage day-to-day administrative tasks and office operations",
-          "Maintain records, filing systems, and documentation.",
-          "Coordinate meetings, schedules, and communications.",
-          "Assist HR and finance teams with clerical support.",
-          "Handle office supplies and vendor management.",
-        ],
-        skills: [
-          "Strong organizational and multitasking abilities.",
-          "Excellent written and verbal communication.",
-          "Proficiency in MS Office Suite (Word, Excel, Outlook).",
-          "Attention to detail and problem-solving mindset.",
-          "Ability to work independently and as part of a team.",
-        ],
-      },
-      {
-        title: "Office Administrator",
-        description:
-          "At Khimji Ramdas we believe that our people are our greatest asset. ",
-        jobType: "Full Time",
-        requirements: "Minimum 5 years of exp",
-        responsibilities: [
-          "Manage day-to-day administrative tasks and office operations",
-          "Maintain records, filing systems, and documentation.",
-          "Coordinate meetings, schedules, and communications.",
-          "Assist HR and finance teams with clerical support.",
-          "Handle office supplies and vendor management.",
-        ],
-        skills: [
-          "Strong organizational and multitasking abilities.",
-          "Excellent written and verbal communication.",
-          "Proficiency in MS Office Suite (Word, Excel, Outlook).",
-          "Attention to detail and problem-solving mindset.",
-          "Ability to work independently and as part of a team.",
-        ],
-      },
-      {
-        title: "Internal Auditor",
-        description:
-          "At Khimji Ramdas we believe that our people are our greatest asset.",
-        jobType: "Full Time",
-        requirements: "Minimum 5 years of exp",
-        responsibilities: [
-          "Manage day-to-day administrative tasks and office operations",
-          "Maintain records, filing systems, and documentation.",
-          "Coordinate meetings, schedules, and communications.",
-          "Assist HR and finance teams with clerical support.",
-          "Handle office supplies and vendor management.",
-        ],
-        skills: [
-          "Strong organizational and multitasking abilities.",
-          "Excellent written and verbal communication.",
-          "Proficiency in MS Office Suite (Word, Excel, Outlook).",
-          "Attention to detail and problem-solving mindset.",
-          "Ability to work independently and as part of a team.",
-        ],
-      },
-      {
-        title: "Promotions Coordinator",
-        description:
-          "At Khimji Ramdas we believe that our people are our greatest asset.",
-        jobType: "Full Time",
-        requirements: "Minimum 5 years of exp",
-        responsibilities: [
-          "Manage day-to-day administrative tasks and office operations",
-          "Maintain records, filing systems, and documentation.",
-          "Coordinate meetings, schedules, and communications.",
-          "Assist HR and finance teams with clerical support.",
-          "Handle office supplies and vendor management.",
-        ],
-        skills: [
-          "Strong organizational and multitasking abilities.",
-          "Excellent written and verbal communication.",
-          "Proficiency in MS Office Suite (Word, Excel, Outlook).",
-          "Attention to detail and problem-solving mindset.",
-          "Ability to work independently and as part of a team.",
-        ],
-      },
-      {
-        title: "Internal Auditor",
-        description:
-          "At Khimji Ramdas we believe that our people are our greatest asset.",
-        jobType: "Full Time",
-        requirements: "Minimum 5 years of exp",
-        responsibilities: [
-          "Manage day-to-day administrative tasks and office operations",
-          "Maintain records, filing systems, and documentation.",
-          "Coordinate meetings, schedules, and communications.",
-          "Assist HR and finance teams with clerical support.",
-          "Handle office supplies and vendor management.",
-        ],
-        skills: [
-          "Strong organizational and multitasking abilities.",
-          "Excellent written and verbal communication.",
-          "Proficiency in MS Office Suite (Word, Excel, Outlook).",
-          "Attention to detail and problem-solving mindset.",
-          "Ability to work independently and as part of a team.",
-        ],
-      },
-      {
-        title: "Promotions Coordinator",
-        description:
-          "At Khimji Ramdas we believe that our people are our greatest asset.",
-        jobType: "Full Time",
-        requirements: "Minimum 5 years of exp",
-        responsibilities: [
-          "Manage day-to-day administrative tasks and office operations",
-          "Maintain records, filing systems, and documentation.",
-          "Coordinate meetings, schedules, and communications.",
-          "Assist HR and finance teams with clerical support.",
-          "Handle office supplies and vendor management.",
-        ],
-        skills: [
-          "Strong organizational and multitasking abilities.",
-          "Excellent written and verbal communication.",
-          "Proficiency in MS Office Suite (Word, Excel, Outlook).",
-          "Attention to detail and problem-solving mindset.",
-          "Ability to work independently and as part of a team.",
-        ],
-      },
-    ],
-  },
-};
-
-export default async function page({params}) {
-
+export async function generateMetadata({ params }) {
   const resolvedParams = await params;
-  const {lang} = resolvedParams
+  const lang = resolvedParams.lang;
+  const { title, description, keywords, twitter, openGraph, alternates } = await getMetaData("careers", lang, "career");
 
-  const {data, error}= await getData("careers", lang)
+  return {
+    title,
+    description,
+    keywords,
+    twitter,
+    openGraph,
+    alternates,
+  };
+}
 
+export default async function page({ params }) {
+  const resolvedParams = await params;
+  const { lang } = resolvedParams;
 
-  if(error || !data){
+  const { data, error } = await getData("careers", lang);
+
+  if (error || !data) {
     // Fallback to local data in case of error
     return <div>Error loading data</div>;
   }
-  
-  const {banner, career_cms, careers} = data
 
-  const career_section_data ={
-    ...career_cms, 
-    careerList: careers
-  }
+  const { banner, career_cms, careers } = data;
 
+  const career_section_data = {
+    ...career_cms,
+    careerList: careers,
+  };
 
-  console.log("career_section_data", career_section_data)
+  console.log("career_section_data", career_section_data);
   return (
     <>
       <InnerHero
@@ -172,12 +44,9 @@ export default async function page({params}) {
         coverImageMobile={banner?.banner_mobile}
         alt={banner?.banner_alt_text}
         title={banner?.banner_title}
-        breadCrumb_data={[
-          { link: { href: "/", label: "Home" } },
-          { link: { href: "/career", label: "Careers" } },
-        ]}
+        breadCrumb_data={[{ link: { href: "/", label: "Home" } }, { link: { href: "/career", label: "Careers" } }]}
       />
-      <CareerSection  data={career_section_data} />
+      <CareerSection data={career_section_data} />
     </>
   );
 }
