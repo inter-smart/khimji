@@ -75,7 +75,7 @@ export default function ICVinitiativeMobile({ title, description, banner, banner
           </button>
 
           <Link
-            href="/icv"
+            href="/ICV"
             className="text-[16px] xs:text-[18px] text-[#000000] font-medium w-fit flex items-center justify-center h-[40px] xs:h-[50px]
                            min-w-[120px] xs:min-w-[140px] p-[8px] border border-[#000000] "
           >

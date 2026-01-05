@@ -33,9 +33,7 @@ export default async function Page({ params }) {
       />
       <ProcurementSection initiatives={initiatives} />
       <QuestionSectionClient
-        title={intiatives_cms?.section2_title}
-        description={intiatives_cms?.section2_description}
-        form_title={intiatives_cms?.section2_form_title}
+        intiatives_cms={intiatives_cms}
       />
     </>
   );

@@ -12,131 +12,7 @@ export default function ArchiveSection({ archives, title, lang }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [globeReady, setGlobeReady] = useState(false);
-  const [sectionVisible, setSectionVisible] = useState(false);
   const isRTL = lang == " ar";
-
-  // const categories = [
-  //     "CORPORATE",
-  //     "BRAND",
-  //     "LOGISTICS",
-  //     "PARTNERSHIP",
-  //     "CSR & COMMUNITY",
-  //     "AWARDS",
-  //     "PUBLIC & EVENT",
-  // ];
-
-  // const archivesData = {
-  //     CORPORATE: [
-  //         {
-  //             id: 1,
-  //             image: "/images/archive-1.jpg",
-  //             category: "CORPORATE",
-  //             date: "20 July 2025",
-  //             title: "20 Years Service Awards",
-  //             location: "Muscat, Oman",
-  //             coordinates: { lat: 23.61, lng: 58.54 },
-  //             link: "https://youtu.be/GfAc3KgLEcU",
-  //         },
-  //         {
-  //             id: 2,
-  //             image: "/images/archive-1.jpg",
-  //             category: "CORPORATE",
-  //             date: "15 June 2025",
-  //             title: "Corporate Excellence Award",
-  //             location: "Dubai, UAE",
-  //             coordinates: { lat: 25.2048, lng: 55.2708 },
-  //             link: "https://example.com",
-  //         },
-  //     ],
-
-  //     BRAND: [
-  //         {
-  //             id: 3,
-  //             image: "/images/archive-1.jpg",
-  //             category: "BRAND",
-  //             date: "10 August 2025",
-  //             title: "Brand Innovation Summit",
-  //             location: "Riyadh, Saudi Arabia",
-  //             coordinates: { lat: 24.7136, lng: 46.6753 },
-  //             link: "https://example.com",
-  //         },
-  //         {
-  //             id: 9,
-  //             image: "/images/archive-1.jpg",
-  //             category: "BRAND",
-  //             date: "25 August 2025",
-  //             title: "Brand Strategy Workshop",
-  //             location: "London, UK",
-  //             coordinates: { lat: 51.5074, lng: -0.1278 },
-  //             link: "https://example.com",
-  //         },
-  //     ],
-
-  //     LOGISTICS: [
-  //         {
-  //             id: 4,
-  //             image: "/images/archive-1.jpg",
-  //             category: "LOGISTICS",
-  //             date: "05 September 2025",
-  //             title: "Logistics Excellence",
-  //             location: "Singapore",
-  //             coordinates: { lat: 1.3521, lng: 103.8198 },
-  //             link: "https://example.com",
-  //         },
-  //     ],
-
-  //     PARTNERSHIP: [
-  //         {
-  //             id: 5,
-  //             image: "/images/archive-1.jpg",
-  //             category: "PARTNERSHIP",
-  //             date: "22 July 2025",
-  //             title: "Strategic Alliance",
-  //             location: "Mumbai, India",
-  //             coordinates: { lat: 19.076, lng: 72.8777 },
-  //             link: "https://example.com",
-  //         },
-  //     ],
-
-  //     "CSR & COMMUNITY": [
-  //         {
-  //             id: 6,
-  //             image: "/images/archive-1.jpg",
-  //             category: "CSR & COMMUNITY",
-  //             date: "30 June 2025",
-  //             title: "Community Outreach",
-  //             location: "Doha, Qatar",
-  //             coordinates: { lat: 25.2854, lng: 51.531 },
-  //             link: "https://example.com",
-  //         },
-  //     ],
-
-  //     AWARDS: [
-  //         {
-  //             id: 7,
-  //             image: "/images/archive-1.jpg",
-  //             category: "AWARDS",
-  //             date: "18 August 2025",
-  //             title: "Industry Excellence Awards",
-  //             location: "Abu Dhabi, UAE",
-  //             coordinates: { lat: 24.4539, lng: 54.3773 },
-  //             link: "https://example.com",
-  //         },
-  //     ],
-
-  //     "PUBLIC & EVENT": [
-  //         {
-  //             id: 8,
-  //             image: "/images/archive-1.jpg",
-  //             category: "PUBLIC & EVENT",
-  //             date: "12 September 2025",
-  //             title: "Annual Conference",
-  //             location: "Kuwait City, Kuwait",
-  //             coordinates: { lat: 29.3759, lng: 47.9774 },
-  //             link: "https://example.com",
-  //         },
-  //     ],
-  // };
 
   const transformArchivesToFrontend = (backendArchives) => {
     const frontendData = {};
@@ -160,12 +36,7 @@ export default function ArchiveSection({ archives, title, lang }) {
           lng: parseFloat(archive.longitude),
         },
         link: archive.link,
-        // mediaType: archive.media_type,
-        // video: archive.video,
-        // imageMobile: archive.image_mobile,
-        // imageAltText: archive.image_alt_text,
-        // imageMobileAltText: archive.image_mobile_alt_text
-      }));
+        }));
     });
 
     return frontendData;
@@ -179,8 +50,6 @@ export default function ArchiveSection({ archives, title, lang }) {
 
   const currentData = archivesData[activeCategory] || [];
   const currentItem = currentData.length > 0 ? currentData[currentIndex] : null;
-
-  console.log(archivesData);
 
   const textcontent = `text-[16px] xs:text-[20px] md:text-[12px] xl:text-[13px] 2xl:text-[15px] 3xl:text-[18px] text-[#000000] font-medium`;
   const icons = `w-[22px] lg:w-[30px] 2xl:w-[35px] 3xl:w-[45px] h-[22px] lg:h-[30px] 2xl:h-[35px] 3xl:h-[45px] rounded-full flex items-center justify-center overflow-hidden bg-[linear-gradient(#299a8b45_0%,#0c456b30_78%)] [&>svg]:max-w-[10px] lg:[&>svg]:max-w-[15px] [&>svg]:3xl:max-w-[18px]`;

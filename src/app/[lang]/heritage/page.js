@@ -35,7 +35,7 @@ export default async function page({ params }) {
         />
         <HeritageSection title={about_cms?.section2_title} timelines={timelines} lang={lang} />
         <BoardDirectorSection
-          title={about_cms?.section4_title}
+          title={about_cms?.section3_title}
           directors={directors}
         />
       </div>
