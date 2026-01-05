@@ -1,9 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,48 +10,54 @@ import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/layout/Heading";
 import { renderHtml } from "@/lib/helper";
 import { Loader2 } from "lucide-react";
-
-// Form validation schema
-const questionFormSchema = z.object({
-  fullName: z.string().min(1, "Full name is required"),
-  phoneNumber: z.string().min(10, "Phone number must be at least 10 digits"),
-  email: z.string().email("Please enter a valid email address"),
-  question: z.string().min(1, "Question is required"),
-  privacyConsent: z.boolean().refine((val) => val === true, {
-    message: "You must agree to the privacy policy",
-  }),
-});
+import { questionFormSchema } from "@/lib/validations/schemas";
+import { toast } from "sonner";
+import { multipartPostToAPI, postToAPI } from "@/lib/server/clientApi";
 
 export default function QuestionSection({ title, description, form_title }) {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const form = useForm({
     resolver: zodResolver(questionFormSchema),
     defaultValues: {
-      fullName: "",
-      phoneNumber: "",
+      name: "",
       email: "",
-      question: "",
+      phone_number: "",
+      message: "",
       privacyConsent: false,
     },
   });
 
-  async function onSubmit(values) {
-    setIsSubmitting(true);
+  async function onSubmit(data) {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("phone_number", data.phone_number);
+    formData.append("message", data.message);
 
     try {
-      console.log("Form submitted:", values);
+      const response = await multipartPostToAPI("contact-enquiry", formData);
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      if (!response.status) {
+        toast.error(response.message || "Failed to submit application");
+        return;
+      }
 
-      alert("Thank you for your question! We will get back to you soon.");
-      form.reset();
+      if (response.status) {
+        toast.success("Application submitted successfully!", {
+          style: {
+            background: "#10b981",
+            color: "white",
+          },
+        });
+        form.reset({
+          name: "",
+          email: "",
+          phone_number: "",
+          message: "",
+          privacyConsent: false,
+        });
+      }
     } catch (error) {
-      console.error("Submission error:", error);
-      alert("An error occurred. Please try again.");
-    } finally {
-      setIsSubmitting(false);
+      toast.error("An error occurred while submitting your question");
     }
   }
 
@@ -62,6 +66,7 @@ export default function QuestionSection({ title, description, form_title }) {
   const formItemStyle = "mb-[15px] sm:mb-[20px] 2xl:mb-[25px] 3xl:mb-[35px]";
 
   const privacyConsent = form.watch("privacyConsent");
+  const isSubmitting = form.formState.isSubmitting;
 
   return (
     <section className="w-full py-[40px] xl:py-[50px] 2xl:py-[60px] 3xl:py-[80px]">
@@ -87,7 +92,7 @@ export default function QuestionSection({ title, description, form_title }) {
                   <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-[20px] 2xl:gap-x-[30px]">
                     <FormField
                       control={form.control}
-                      name="fullName"
+                      name="name"
                       render={({ field }) => (
                         <FormItem className={formItemStyle}>
                           <FormControl>
@@ -99,7 +104,7 @@ export default function QuestionSection({ title, description, form_title }) {
                     />
                     <FormField
                       control={form.control}
-                      name="phoneNumber"
+                      name="phone_number"
                       render={({ field }) => (
                         <FormItem className={formItemStyle}>
                           <FormControl>
@@ -126,7 +131,7 @@ export default function QuestionSection({ title, description, form_title }) {
 
                   <FormField
                     control={form.control}
-                    name="question"
+                    name="message"
                     render={({ field }) => (
                       <FormItem className={formItemStyle}>
                         <FormControl>
