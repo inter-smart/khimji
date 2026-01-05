@@ -52,7 +52,7 @@ export default function DrivenSection({ title, description, image, image_alt_tex
                         end={item?.value || 0}
                         duration={2.5}
                         separator=","
-                        suffix={item?.symbol || "+"}
+                        suffix={item?.suffix || "+"}
                         enableScrollSpy={true}
                       />
                     </div>

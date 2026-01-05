@@ -217,7 +217,7 @@ export default function VentureSection({ title, ventures, banner, banner_alt_tex
 
                 <motion.div variants={buttonVariants} whileHover="hover" initial="rest" animate="rest">
                   <Link href={`/venture`} className={CONTACT_BUTTON_CLASS}>
-                    <span>View All</span>
+                     <span>{locale === "en" ? "View ALl" : "عرض الكل"}</span>
                     <motion.div className={ARROW_ICON_CLASS} variants={arrowVariants}>
                       <svg className="w-full h-full" viewBox="0 0 14 15">
                         <path
@@ -315,7 +315,7 @@ export default function VentureSection({ title, ventures, banner, banner_alt_tex
 
                 <motion.div variants={buttonVariants} whileHover="hover" initial="rest" animate="rest">
                   <Link href={`/venture`} className={CONTACT_BUTTON_CLASS}>
-                    <span>View All</span>
+                    <span>{locale === "en" ? "View ALl" : "عرض الكل"}</span>
                     <motion.div className={ARROW_ICON_CLASS} variants={arrowVariants}>
                       <svg className="w-full h-full" viewBox="0 0 14 15">
                         <path

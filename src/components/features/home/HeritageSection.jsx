@@ -248,7 +248,7 @@ export default function HeritageSection({ title, description, banner, banner_alt
 
                 <motion.div variants={buttonVariants} whileHover="hover" initial="rest" animate="rest">
                   <Link href={`/heritage`} className={CONTACT_BUTTON_CLASS}>
-                    <span>Discover More</span>
+                    <span>{lang==="ar"? "اكتشف المزيد" : "Discover More"}</span>
                     <motion.div className={ARROW_ICON_CLASS} variants={arrowVariants}>
                       <svg className="w-full h-full" viewBox="0 0 14 15">
                         <path
@@ -309,14 +309,13 @@ export default function HeritageSection({ title, description, banner, banner_alt
                   {metrics?.map((item, index)=>(
                     <motion.div  key={item.key} className="max-lg:w-1/2 lg:h-1/4 flex flex-col justify-center" custom={index} variants={counterItemVariants}>
                       <Heading size="heading1" as="div" className="leading-none !mb-[8px]">
-                        <Counter end={Number(item.value)} suffix="+" />
+                        <Counter end={Number(item.value)} suffix={item?.suffix}/>
                       </Heading>
                       <motion.p className="uppercase mb-0 leading-none" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 + (index*0.2), duration: 0.6 }}
                       >
                         {item?.key}
                       </motion.p>
                     </motion.div>
-
                       ))
                     }
                   </div>
