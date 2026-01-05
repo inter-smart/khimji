@@ -291,14 +291,7 @@ export default function HeritageSection({ title, description, banner, banner_alt
                     >
                       <Image
                         src={image}
-                        className="
-                                                    w-full
-                                                    h-full
-                                                    rounded-[10px]
-                                                    transition-transform
-                                                    duration-700
-                                                    ease-out
-                                                    group-hover:scale-110
+                        className=" w-full h-full rounded-[10px] transition-transform duration-700 ease-out group-hover:scale-110
                                                 "
                         width={285}
                         height={350}
@@ -313,61 +306,19 @@ export default function HeritageSection({ title, description, banner, banner_alt
                   ref={counterContainerRef}
                 >
                   <div className="flex flex-wrap lg:flex-col h-full justify-between">
-                    <motion.div className="max-lg:w-1/2 lg:h-1/4 flex flex-col justify-center" custom={0} variants={counterItemVariants}>
+                  {metrics?.map((item, index)=>(
+                    <motion.div  key={item.key} className="max-lg:w-1/2 lg:h-1/4 flex flex-col justify-center" custom={index} variants={counterItemVariants}>
                       <Heading size="heading1" as="div" className="leading-none !mb-[8px]">
-                        <Counter end={metrics?.value_1} suffix="+" />
+                        <Counter end={Number(item.value)} suffix="+" />
                       </Heading>
-                      <motion.p
-                        className="uppercase mb-0 leading-none"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4, duration: 0.6 }}
+                      <motion.p className="uppercase mb-0 leading-none" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 + (index*0.2), duration: 0.6 }}
                       >
-                        {metrics?.label_1}
+                        {item?.key}
                       </motion.p>
                     </motion.div>
 
-                    <motion.div className="max-lg:w-1/2 lg:h-1/4 flex flex-col justify-center" custom={1} variants={counterItemVariants}>
-                      <Heading size="heading1" as="div" className="!mb-[8px] leading-none">
-                        <Counter end={metrics?.value_2} suffix="K+" />
-                      </Heading>
-                      <motion.p
-                        className="uppercase mb-0"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.6, duration: 0.6 }}
-                      >
-                        {metrics?.label_2}
-                      </motion.p>
-                    </motion.div>
-
-                    <motion.div className="max-lg:w-1/2 lg:h-1/4  flex flex-col justify-center" custom={2} variants={counterItemVariants}>
-                      <Heading size="heading1" as="div" className="!mb-[8px] leading-none">
-                        <Counter end={metrics?.value_3} suffix="+" />
-                      </Heading>
-                      <motion.p
-                        className="uppercase mb-0"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.8, duration: 0.6 }}
-                      >
-                        {metrics?.label_3}
-                      </motion.p>
-                    </motion.div>
-
-                    <motion.div className="max-lg:w-1/2 lg:h-1/4  flex flex-col justify-center" custom={3} variants={counterItemVariants}>
-                      <Heading size="heading1" as="div" className="!mb-[8px] leading-none">
-                        <Counter end={metrics?.value_4} suffix="+" />
-                      </Heading>
-                      <motion.p
-                        className="uppercase mb-0"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.0, duration: 0.6 }}
-                      >
-                        {metrics?.label_4}
-                      </motion.p>
-                    </motion.div>
+                      ))
+                    }
                   </div>
                 </div>
               </motion.div>

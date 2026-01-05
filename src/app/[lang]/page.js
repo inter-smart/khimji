@@ -34,7 +34,7 @@ export default async function Page({ params }) {
         banner_alt_text={home_cms?.section2_banner_alt_text}
         image={home_cms?.section2_image}
         image_alt={home_cms?.section2_image_alt_text}
-        metrics={metrics}
+        metrics={metrics?.metrics}
         timelines={timelines}
         lang={lang}
       />

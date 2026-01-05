@@ -13,70 +13,16 @@ export default function HeritageMobile({ title, description, banner, banner_alt_
           <p className="[&_p]:text-white">{renderHtml(description)}</p>
 
           <div className="flex flex-wrap -m-[4px] xs:-m-[9px] mt-[30px]">
-            <div className="w-1/2 p-[4px] xs:p-[9px]">
-              <div
-                className="
-                                    w-full h-full
-                                    backdrop-blur-[2px]
-                                    rounded-[10px]
-                                    p-[10px] xs:p-[12px]
-                                    border border-white/35
-                                    shadow-[inset_-2px_-1px_3px_#f1f1f14a,inset_1px_1px_0px_#fafafa6e]"
-              >
-                <div className="text-[30px] xs:text-[35px] text-white font-semibold">
-                  {metrics?.value_1} <span>+</span>
+            {metrics?.map((item, index) => (
+              <div key={item?.key} className="w-1/2 p-[4px] xs:p-[9px]">
+                <div className=" w-full h-full backdrop-blur-[2px] rounded-[10px] p-[10px] xs:p-[12px] border border-white/35 shadow-[inset_-2px_-1px_3px_#f1f1f14a,inset_1px_1px_0px_#fafafa6e]">
+                  <div className="text-[30px] xs:text-[35px] text-white font-semibold">
+                    {item?.value} <span>+</span>
+                  </div>
+                  <div className="text-[12px] text-white uppercase">{item?.key}</div>
                 </div>
-                <div className="text-[12px] text-white uppercase">{metrics?.label_1}</div>
               </div>
-            </div>
-            <div className="w-1/2 p-[4px] xs:p-[9px]">
-              <div
-                className="
-                                    w-full h-full
-                                    backdrop-blur-[2px]
-                                    rounded-[10px]
-                                    p-[12px]
-                                    border border-white/35
-                                    shadow-[inset_-2px_-1px_3px_#f1f1f14a,inset_1px_1px_0px_#fafafa6e]"
-              >
-                <div className="text-[30px] xs:text-[35px] text-white font-semibold ">
-                  {metrics?.value_2} <span>K+</span>
-                </div>
-                <div className="text-[12px] text-white uppercase">{metrics?.label_2}</div>
-              </div>
-            </div>
-            <div className="w-1/2 p-[4px] xs:p-[9px]">
-              <div
-                className="
-                                    w-full h-full
-                                    backdrop-blur-[2px]
-                                    rounded-[10px]
-                                    p-[12px]
-                                    border border-white/35
-                                    shadow-[inset_-2px_-1px_3px_#f1f1f14a,inset_1px_1px_0px_#fafafa6e]"
-              >
-                <div className="text-[30px] xs:text-[35px] text-white font-semibold ">
-                  {metrics?.value_3} <span>+</span>
-                </div>
-                <div className="text-[12px] text-white uppercase">Verticals</div>
-              </div>
-            </div>
-            <div className="w-1/2 p-[4px] xs:p-[9px]">
-              <div
-                className="
-                                    w-full h-full
-                                    backdrop-blur-[2px]
-                                    rounded-[10px]
-                                    p-[12px]
-                                    border border-white/35
-                                    shadow-[inset_-2px_-1px_3px_#f1f1f14a,inset_1px_1px_0px_#fafafa6e]"
-              >
-                <div className="text-[35px] text-white font-semibold">
-                  {metrics?.value_4} <span>+</span>
-                </div>
-                <div className="text-[12px] text-white uppercase">{metrics?.label_4}</div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
