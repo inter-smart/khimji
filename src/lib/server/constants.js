@@ -141,3 +141,4 @@ export const DefaultOgImage = "/images/logo.png";
 
 export const API_BASE_URL = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/` || "http://localhost:3001";
 export const DEFAULT_COUNTRY = "united-arab-emirates";
+export const DEFAULT_BUSINESS_TYPE = "b2b";

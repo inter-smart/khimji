@@ -1,17 +1,58 @@
 "use client";
 
-import { use } from "react";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import { use, useEffect, useState } from "react";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 import { BorderBeam } from "@/components/ui/border-beam";
+import { useRouter } from "next/navigation";
+import { DEFAULT_BUSINESS_TYPE } from "@/lib/server/constants";
 
 export default function BusinessTypeDropDown({ businessTypePromise }) {
-  const businessType = use(businessTypePromise);
-  const data = businessType?.data || [];
+  const router = useRouter();
+  const business_type = use(businessTypePromise);
+  const data = business_type?.data || [];
+
+  const [selectedBusiness, setSelectedBusiness] = useState(() => {
+    if (typeof window !== "undefined") {
+      const business = document.cookie
+        .split("; ")
+        .find((c) => c.startsWith("business_type="))
+        ?.split("=")[1];
+      return business || DEFAULT_BUSINESS_TYPE;
+    }
+    return DEFAULT_BUSINESS_TYPE;
+  });
+
+  // Listen for business type changes from other components (e.g., footer)
+  useEffect(() => {
+    const handleBusinessTypeChange = (event) => {
+      setSelectedBusiness(event.detail.business_type);
+    };
+
+    window.addEventListener("businessTypeChanged", handleBusinessTypeChange);
+
+    return () => {
+      window.removeEventListener("businessTypeChanged", handleBusinessTypeChange);
+    };
+  }, []);
+
+  function changeBusinessType(value) {
+    document.cookie = `business_type=${value}; path=/`;
+    setSelectedBusiness(value);
+    router.refresh();
+  }
+
+
 
   return (
     <div className="px-[7px] sm:px-[3px]">
       <div className="relative inline-flex rounded-full">
-        <Select modal={false}>
+        <Select value={selectedBusiness}  onValueChange={changeBusinessType} modal={false}>
           <SelectTrigger
             className="
                           relative
@@ -30,14 +71,23 @@ export default function BusinessTypeDropDown({ businessTypePromise }) {
           </SelectTrigger>
           <SelectContent className="max-w-[110px] ">
             {data?.map((item) => (
-              <SelectItem key={item.id} value={item.id}>
+              <SelectItem key={item.id} value={item.slug}>
                 {item.name}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
-        <BorderBeam duration={10} size={50} className="from-transparent via-white/70 to-transparent" />
-        <BorderBeam duration={11} size={50} reverse className="from-transparent via-white/70 to-transparent" />
+        <BorderBeam
+          duration={10}
+          size={50}
+          className="from-transparent via-white/70 to-transparent"
+        />
+        <BorderBeam
+          duration={11}
+          size={50}
+          reverse
+          className="from-transparent via-white/70 to-transparent"
+        />
       </div>
     </div>
   );

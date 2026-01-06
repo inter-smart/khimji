@@ -24,7 +24,7 @@ export async function getData(endpoint, lang = "en", country = null, options = {
       "Content-Type": "application/json",
       "Location-Slug": country || DEFAULT_COUNTRY,
       "Accept-Language": lang,
-      "Business-Type": business_type,
+      "Business-Slug": business_type,
       ...options.headers,
     },
     ...options,

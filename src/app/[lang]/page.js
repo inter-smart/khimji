@@ -10,7 +10,8 @@ import { getMetaData } from "@/lib/server/metaApi";
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const lang = resolvedParams.lang;
-  const { title, description, keywords, twitter, openGraph, alternates } = await getMetaData("home", lang);
+  const { title, description, keywords, twitter, openGraph, alternates } =
+    await getMetaData("home", lang);
 
   return {
     title,
@@ -31,18 +32,31 @@ export default async function Page({ params }) {
   if (!data || error) {
     return <div>Error loading data</div>;
   }
-  const { sliders, home_cms, ventures, metrics, timelines, archives, initiatives, brands } = data;
+  const {
+    sliders,
+    home_cms,
+    ventures,
+    metrics,
+    timelines,
+    archives,
+    initiatives,
+    brands,
+  } = data;
 
+  console.log("ventures : ", ventures)
   return (
     <>
       <BannerSection data={sliders} />
-      <VentureSection
-        title={home_cms?.section1_title}
-        banner={home_cms?.section1_banner}
-        banner_alt_text={home_cms?.section1_banner_alt_text}
-        ventures={ventures}
-        lang={lang}
-      />
+
+      {ventures?.length>0 && (
+        <VentureSection
+          title={home_cms?.section1_title}
+          banner={home_cms?.section1_banner}
+          banner_alt_text={home_cms?.section1_banner_alt_text}
+          ventures={ventures}
+          lang={lang}
+        />
+      )}
       <HeritageSection
         title={home_cms?.section2_title}
         description={home_cms?.section2_description}
@@ -54,7 +68,11 @@ export default async function Page({ params }) {
         timelines={timelines}
         lang={lang}
       />
-      <ArchiveSection title={home_cms?.section3_title} archives={archives} lang={lang} />
+      <ArchiveSection
+        title={home_cms?.section3_title}
+        archives={archives}
+        lang={lang}
+      />
       <ICVSection
         title={home_cms?.section4_title}
         description={home_cms?.section4_description}

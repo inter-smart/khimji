@@ -1,6 +1,7 @@
 import VendordetailsSection from "@/components/features/venture/VendordetailsSection";
 import { getData } from "@/lib/server/api";
 import { DefaultOgImage } from "@/lib/server/constants";
+import { redirect } from "next/navigation";
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
@@ -74,7 +75,7 @@ export default async function Page({ params }) {
   const { data, error } = await getData(`venture-details?slug=${slug}`, lang);
 
     if (!data|| error) {
-     return <div>Error loading data</div>;
+     redirect(`/${lang}`)
    }
   return (
     <VendordetailsSection

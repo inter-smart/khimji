@@ -8,129 +8,10 @@ import { useState, useEffect } from "react";
 import { renderHtml } from "@/lib/helper";
 import { useParams } from "next/navigation";
 
-// Ventures data array
-// const corporateVentures = [
-//   {
-//     id: 1,
-//     video: "/videos/venture-1.mp4",
-//     mobileImage: "/images/vetureCard-1.jpg",
-//     title: "Logistics & Shipping",
-//     description:
-//       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-//     logos: [
-//       "/images/ship-1.png",
-//       "/images/ship-2.png",
-//       "/images/ship-3.png",
-//       "/images/ship-4.png",
-//     ],
-//   },
-//   {
-//     id: 2,
-//     video: "/videos/venture-2.mp4",
-//     mobileImage: "/images/vetureCard-1.jpg",
-//     title: "Construction & Building Solutions",
-//     description:
-//       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-//     logos: [
-//       "/images/ship-1.png",
-//       "/images/ship-2.png",
-//       "/images/ship-3.png",
-//       "/images/ship-4.png",
-//     ],
-//   },
-//   {
-//     id: 3,
-//     video: "/videos/venture-1.mp4",
-//     mobileImage: "/images/vetureCard-1.jpg",
-//     title: "Engineering & Energy Solutions",
-//     description:
-//       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-//     logos: [
-//       "/images/ship-1.png",
-//       "/images/ship-2.png",
-//       "/images/ship-3.png",
-//       "/images/ship-4.png",
-//     ],
-//   },
-//   {
-//     id: 4,
-//     video: "/videos/venture-2.mp4",
-//     mobileImage: "/images/vetureCard-1.jpg",
-//     title: "Marine Services & Equipment",
-//     description:
-//       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-//     logos: [
-//       "/images/ship-1.png",
-//       "/images/ship-2.png",
-//       "/images/ship-3.png",
-//       "/images/ship-4.png",
-//     ],
-//   },
-//   {
-//     id: 5,
-//     video: "/videos/venture-1.mp4",
-//     mobileImage: "/images/vetureCard-1.jpg",
-//     title: "Special Projects",
-//     description:
-//       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-//     logos: [
-//       "/images/ship-1.png",
-//       "/images/ship-2.png",
-//       "/images/ship-3.png",
-//       "/images/ship-4.png",
-//     ],
-//   },
-//   {
-//     id: 6,
-//     video: "/videos/venture-2.mp4",
-//     mobileImage: "/images/vetureCard-1.jpg",
-//     title: "Hospitality",
-//     description:
-//       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-//     logos: [
-//       "/images/ship-1.png",
-//       "/images/ship-2.png",
-//       "/images/ship-3.png",
-//       "/images/ship-4.png",
-//     ],
-//   },
-//   {
-//     id: 7,
-//     video: "/videos/venture-1.mp4",
-//     mobileImage: "/images/vetureCard-1.jpg",
-//     title: "Information Technology",
-//     description:
-//       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-//     logos: [
-//       "/images/ship-1.png",
-//       "/images/ship-2.png",
-//       "/images/ship-3.png",
-//       "/images/ship-4.png",
-//     ],
-//   },
-//   {
-//     id: 8,
-//     video: "/videos/venture-2.mp4",
-//     mobileImage: "/images/vetureCard-1.jpg",
-//     title: "Warehousing & Distribution",
-//     description:
-//       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-//     logos: [
-//       "/images/ship-1.png",
-//       "/images/ship-2.png",
-//       "/images/ship-3.png",
-//       "/images/ship-4.png",
-//     ],
-//   },
-// ];
-
-// const consumerVentures = [
-//   // Add consumer ventures data here if needed
-// ];
-
 export default function VentureListingSection({ data, title, context }) {
   const [activeSlug, setActiveSlug] = useState(data?.[0]?.slug);
   const [ventures, setVentures] = useState([]);
+  // category usetsate
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const API_BASE_URL =
@@ -159,7 +40,7 @@ export default function VentureListingSection({ data, title, context }) {
 
       // if (result?.status && result.data) {
       const data = await result.json();
-      setVentures(data?.data || []);
+      setVentures(data?.data ?? []);
 
       // }
     } catch (err) {
@@ -172,6 +53,13 @@ export default function VentureListingSection({ data, title, context }) {
   useEffect(() => {
     fetchVentures(activeSlug);
   }, [activeSlug]);
+
+
+   if (!data || data.length === 0) {
+    return <NoDataState message="There are no ventures available." />;
+  }
+
+
 
   return (
     <section className="relative py-[40px] xl:py-[60px] 2xl:py-[80px] 3xl:py-[140px]">
@@ -191,6 +79,7 @@ export default function VentureListingSection({ data, title, context }) {
 
             {/* Tabs Header */}
             <TabsList className="flex items-center  bg-transparent -m-[3px] max-sm:w-full">
+              
               {data?.map((item, index) => (
                 <div key={index} className="w-1/2 px-[3px]">
                   <TabsTrigger
@@ -238,8 +127,8 @@ export default function VentureListingSection({ data, title, context }) {
                 <LoadingState />
               ) : error ? (
                 <ErrorState message={error} />
-              ) : ventures.length === 0 ? (
-                <NoDataState />
+              ) : ventures.length === 0? (
+                <NoDataState message="There are no ventures available for this category" />
               ) : (
                 <div>
                   <div className="mb-[20px] 2xl:mb-[40px] 3xl:mb-[60px]">
@@ -333,7 +222,7 @@ function ErrorState({ message }) {
   );
 }
 
-function NoDataState() {
+function NoDataState({ message }) {
   return (
     <div className="w-full h-[400px] flex items-center justify-center">
       <div className="text-center">
@@ -356,7 +245,7 @@ function NoDataState() {
           No Ventures Found
         </p>
         <p className="text-[14px] 2xl:text-[16px] text-[#999]">
-          There are no ventures available for this category.
+          {message}.
         </p>
       </div>
     </div>
