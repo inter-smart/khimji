@@ -16,6 +16,29 @@ export default function Links({
   changeCountry,
   policies,
 }) {
+  const otherLinks = [
+    {
+      label: "Blogs",
+      link: "blog",
+    },
+    {
+      label: "Faq",
+      link: "faq",
+    },
+    {
+      label: "ICV Initiatives",
+      link: "ICV",
+    },
+    {
+      label: "Career",
+      link: "career",
+    },
+    {
+      label: "Contact",
+      link: "contact",
+    },
+  ];
+
   return (
     <>
       <div className="w-5/12">
@@ -60,6 +83,16 @@ export default function Links({
                     className={FOOTER_LINK_CLASS}
                   >
                     {item?.title}
+                  </Link>
+                </li>
+              ))}
+              {otherLinks?.map((item, index) => (
+                <li key={index}>
+                  <Link
+                    href={`/${lang}/${item?.link}`}
+                    className={FOOTER_LINK_CLASS}
+                  >
+                    {item?.label}
                   </Link>
                 </li>
               ))}
