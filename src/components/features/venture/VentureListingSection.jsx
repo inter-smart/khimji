@@ -131,19 +131,19 @@ import { useParams } from "next/navigation";
 export default function VentureListingSection({ data, title, context }) {
   const [activeSlug, setActiveSlug] = useState(data?.[0]?.slug);
   const [ventures, setVentures] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const API_BASE_URL =
     process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
   const { country, business_type } = context;
 
-  console.log("country: ", context);
   const { lang } = useParams();
 
   const fetchVentures = async (slug) => {
     if (!slug) return;
 
-    setLoading(true);
-
+    setIsLoading(true);
+    setError(null);
     try {
       const result = await fetch(
         `${API_BASE_URL}/api/venture-list?category_slug=${slug}&per_page=8&page=1`,
@@ -161,17 +161,14 @@ export default function VentureListingSection({ data, title, context }) {
       const data = await result.json();
       setVentures(data?.data || []);
 
-      console.log("venture data =>", data?.data);
-
       // }
     } catch (err) {
-      console.error(err);
+      setError(err.message);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
-  console.log("active data > ", ventures);
   useEffect(() => {
     fetchVentures(activeSlug);
   }, [activeSlug]);
@@ -237,27 +234,37 @@ export default function VentureListingSection({ data, title, context }) {
 
           {data?.map((item, index) => (
             <TabsContent key={index} value={item?.slug}>
-              <div className="mb-[20px] 2xl:mb-[40px] 3xl:mb-[60px]">
-                <div
-                  className="text-[16px] md:text-[18px] lg:text-[25px] xl:text-[30px] 2xl:text-[35px] 3xl:text-[40px] font-medium bg-gradient-to-r from-[#0B436A]
+              {isLoading ? (
+                <LoadingState />
+              ) : error ? (
+                <ErrorState message={error} />
+              ) : ventures.length === 0 ? (
+                <NoDataState />
+              ) : (
+                <div>
+                  <div className="mb-[20px] 2xl:mb-[40px] 3xl:mb-[60px]">
+                    <div
+                      className="text-[16px] md:text-[18px] lg:text-[25px] xl:text-[30px] 2xl:text-[35px] 3xl:text-[40px] font-medium bg-gradient-to-r from-[#0B436A]
                 to-[#299B8A] from-[30%] to-[100%] bg-clip-text text-transparent
                 uppercase tracking-wide !mb-[10px] 2xl:!mb-[10px] 3xl:!mb-[15px] w-fit"
-                >
-                  {item?.title}
+                    >
+                      {item?.title}
+                    </div>
+                    <div>{renderHtml(item?.description)}</div>
+                  </div>
+                  <div className="flex flex-wrap -m-[5px] lg:-m-[10px] 3xl:-m-[15px]">
+                    {ventures?.ventures?.map((venture) => (
+                      <Link
+                        href={`/${lang}/venture/${venture?.slug}`}
+                        key={venture?.id}
+                        className="w-full sm:w-1/2 p-[5px]  lg:p-[10px] 3xl:p-[15px]"
+                      >
+                        <VentureCard item={venture} />
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-                <div>{renderHtml(item?.description)}</div>
-              </div>
-              <div className="flex flex-wrap -m-[5px] lg:-m-[10px] 3xl:-m-[15px]">
-                {ventures?.ventures?.map((venture) => (
-                  <Link
-                    href={`/${lang}/venture/${venture?.slug}`}
-                    key={venture?.id}
-                    className="w-full sm:w-1/2 p-[5px]  lg:p-[10px] 3xl:p-[15px]"
-                  >
-                    <VentureCard item={venture} />
-                  </Link>
-                ))}
-              </div>
+              )}
             </TabsContent>
           ))}
 
@@ -282,5 +289,76 @@ export default function VentureListingSection({ data, title, context }) {
         </Tabs>
       </div>
     </section>
+  );
+}
+
+function LoadingState() {
+  return (
+    <div className="w-full h-[400px] flex items-center justify-center">
+      <div className="text-center">
+        <div className="w-[50px] h-[50px] border-4 border-[#299B8A] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <p className="text-[16px] 2xl:text-[18px] text-[#666]">
+          Loading ventures...
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function ErrorState({ message }) {
+  return (
+    <div className="w-full h-[400px] flex items-center justify-center">
+      <div className="text-center">
+        <div className="w-[60px] h-[60px] bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg
+            className="w-[30px] h-[30px] text-red-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </div>
+        <p className="text-[16px] 2xl:text-[18px] text-red-600 font-medium mb-2">
+          Error Loading Ventures
+        </p>
+        <p className="text-[14px] 2xl:text-[16px] text-[#666]">{message}</p>
+      </div>
+    </div>
+  );
+}
+
+function NoDataState() {
+  return (
+    <div className="w-full h-[400px] flex items-center justify-center">
+      <div className="text-center">
+        <div className="w-[60px] h-[60px] bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg
+            className="w-[30px] h-[30px] text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            />
+          </svg>
+        </div>
+        <p className="text-[16px] 2xl:text-[18px] text-[#666] font-medium mb-2">
+          No Ventures Found
+        </p>
+        <p className="text-[14px] 2xl:text-[16px] text-[#999]">
+          There are no ventures available for this category.
+        </p>
+      </div>
+    </div>
   );
 }
