@@ -146,7 +146,7 @@ export default function VentureListingSection({ data, title, context }) {
     setError(null);
     try {
       const result = await fetch(
-        `${API_BASE_URL}/api/venture-list?category_slug=${slug}&per_page=8&page=1`,
+        `${API_BASE_URL}/api/venture-list?category_slug=${slug}&per_page=66&page=1`,
         {
           method: "GET",
           headers: {

@@ -67,31 +67,47 @@ export function parseInitiativeDescription(html = "") {
   let currentSection = null;
 
   childNodes.forEach((node) => {
-    if (node.tagName === "DIV") {
-      // CONDITION 1: Title in <div><strong>, content in following <p>
-      const strong = node.querySelector("strong");
-      if (strong) {
-        currentSection = {
-          title: strong.textContent.trim(),
-          content: "",
-        };
-        sections.push(currentSection);
-      }
-    } else if (node.tagName === "P") {
-      const strong = node.querySelector("strong");
+    // Check for strong tag anywhere in the node
+    const strong = node.querySelector("strong");
+    
+    if (strong) {
+      // Strong tag found - extract as title
+      const title = strong.textContent.trim();
       
-      if (strong) {
-        // CONDITION 2: Title and content in same <p> separated by <br>
-        const title = strong.textContent.trim();
+      // Check if this is an h3 with content div structure
+      if (node.tagName === "DIV") {
+        const h3 = node.querySelector("h3");
+        const contentDiv = node.querySelector("div");
         
-        // Clone and extract content
+        if (h3) {
+          // Structure: div > h3 + div with p tags
+          let content = "";
+          if (contentDiv) {
+            const pTags = contentDiv.querySelectorAll("p");
+            pTags.forEach((p) => {
+              const cleaned = cleanContent(p.innerHTML).trim();
+              if (cleaned && cleaned !== "&nbsp;" && cleaned.replace(/&nbsp;/g, '').trim()) {
+                content += `<p>${cleaned}</p>`;
+              }
+            });
+          }
+          
+          currentSection = { title, content };
+          sections.push(currentSection);
+        } else {
+          // Structure: div > strong (title follows in next nodes)
+          currentSection = { title, content: "" };
+          sections.push(currentSection);
+        }
+      } else if (node.tagName === "P") {
+        // Structure: p > strong + content in same p
         const contentNode = node.cloneNode(true);
         const strongInContent = contentNode.querySelector("strong");
         if (strongInContent) {
           strongInContent.remove();
         }
         
-        // Remove the first br tag
+        // Remove the first br tag after strong
         const firstBr = contentNode.querySelector("br");
         if (firstBr) {
           firstBr.remove();
@@ -102,13 +118,17 @@ export function parseInitiativeDescription(html = "") {
 
         // Only add if there's actual content
         if (content && content !== "&nbsp;" && content.replace(/&nbsp;/g, '').trim()) {
-          sections.push({
-            title: title,
-            content: `<p>${content}</p>`,
-          });
+          currentSection = { title, content: `<p>${content}</p>` };
+          sections.push(currentSection);
+        } else {
+          // No content in same p, expect it in following nodes
+          currentSection = { title, content: "" };
+          sections.push(currentSection);
         }
-      } else if (currentSection) {
-        // CONDITION 1: This <p> is content for the previous section
+      }
+    } else {
+      // No strong tag - this is content
+      if (node.tagName === "P" && currentSection) {
         const content = cleanContent(node.innerHTML).trim();
         if (content && content !== "&nbsp;" && content.replace(/&nbsp;/g, '').trim()) {
           currentSection.content += `<p>${content}</p>`;

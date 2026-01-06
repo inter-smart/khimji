@@ -13,5 +13,5 @@ export default async function BlogList({ lang, searchParams }) {
 
   const { blogs, pagination } = data;
 
-  return <BlogsSection blogs={blogs} paginationData={pagination} lang={lang} />;
+  return <BlogsSection blogs={blogs} paginationData={pagination} lang={lang} error={error} />;
 }

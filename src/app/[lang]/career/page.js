@@ -43,7 +43,7 @@ export default async function page({ params }) {
         coverImageMobile={banner?.banner_mobile}
         alt={banner?.banner_alt_text}
         title={banner?.banner_title}
-        breadCrumb_data={[{ link: { href: "/", label: "Home" } }, { link: { href: "/career", label: "Careers" } }]}
+        breadCrumb_data={[{ link: { href: `/${lang}`, label: "Home" } }, { link: { href: "/career", label: "Careers" } }]}
       />
       <CareerSection data={career_section_data} />
     </>

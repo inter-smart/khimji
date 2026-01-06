@@ -41,7 +41,7 @@ export default async function Page({ params }) {
         coverImageMobile={banner?.banner_mobile || "/images/archive_innerbanner.jpg"}
         alt={banner?.banner_alt_text || "Archive Banner"}
         title={banner?.banner_title || "Archives"}
-        breadCrumb_data={[{ link: { href: "/", label: "Home" } }, { link: { href: "/heritage", label: "Archives" } }]}
+        breadCrumb_data={[{ link: { href: `/${lang}`, label: "Home" } }, { link: { href: "/heritage", label: "Archives" } }]}
       />
       <ArchiveListingSection key={country} categories={archive_categories} lang={lang} country={country} />
     </>

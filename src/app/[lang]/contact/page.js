@@ -38,7 +38,7 @@ export default async function Page({ params }) {
         coverImageMobile={banner?.banner_mobile || "/images/contact_innerbanner.jpg"}
         alt={banner?.banner_alt_text || "Contact Banner"}
         title={banner?.banner_title || "CONTACT"}
-        breadCrumb_data={[{ link: { href: "/", label: "Home" } }, { link: { href: "/Contact", label: "Contact" } }]}
+        breadCrumb_data={[{ link: { href: `/${lang}`, label: "Home" } }, { link: { href: "/Contact", label: "Contact" } }]}
       />
       <ContactSection sectors={contact_sectors} cms={contact_cms} lang={lang} key={country} />
     </>

@@ -39,7 +39,7 @@ export default async function page({ params }) {
           coverImageMobile={banner?.banner_mobile}
           alt={banner?.banner_alt_text}
           title={banner?.banner_title}
-          breadCrumb_data={[{ link: { href: "/", label: "Home" } }, { link: { href: "/heritage", label: "Heritage" } }]}
+          breadCrumb_data={[{ link: { href: `/${lang}`, label: "Home" } }, { link: { href: "/heritage", label: "Heritage" } }]}
         />
         <DrivenSection
           title={about_cms?.section1_title}

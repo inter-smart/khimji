@@ -36,7 +36,7 @@ export default async function Page({ params }) {
         coverImageMobile={banner?.banner_mobile || "/images/faq_innerbanner.jpg"}
         alt={banner?.banner_alt_text || "Faq Banner"}
         title={banner?.banner_title || "FAQ"}
-        breadCrumb_data={[{ link: { href: "/", label: "Home" } }, { link: { href: "/heritage", label: "Faq" } }]}
+        breadCrumb_data={[{ link: { href: `/${lang}`, label: "Home" } }, { link: { href: "/heritage", label: "Faq" } }]}
       />
       <FaqSection cms={faq_cms} data={faq} />
     </>
