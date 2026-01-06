@@ -30,7 +30,6 @@ export default async function Page({ params }) {
   }
   const { banner, contact_cms, contact_sectors } = data;
 
-
   return (
     <>
       <InnerHero
@@ -38,7 +37,7 @@ export default async function Page({ params }) {
         coverImageMobile={banner?.banner_mobile || "/images/contact_innerbanner.jpg"}
         alt={banner?.banner_alt_text || "Contact Banner"}
         title={banner?.banner_title || "CONTACT"}
-        breadCrumb_data={[{ link: { href: `/${lang}`, label: "Home" } }, { link: { href: "/Contact", label: "Contact" } }]}
+        breadCrumb_data={[{ link: { href: `/${lang}`, label: lang==="en"? "Home": "بيت" } }, { link: { href: "/Contact", label:lang==="en"? "Contact": "اتصال" } }]}
       />
       <ContactSection sectors={contact_sectors} cms={contact_cms} lang={lang} key={country} />
     </>
