@@ -19,6 +19,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
+
 export default async function Page({ params }) {
   const resolvedParams = await params;
   const { country } = await getRequestContext();
