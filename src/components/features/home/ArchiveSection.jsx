@@ -172,9 +172,6 @@ export default function ArchiveSection({ archives, title, lang }) {
           location: currentItem.location,
         },
       ];
-
-      console.log(Number(currentItem.coordinates.lat), Number(currentItem.coordinates.lng));
-
       globeInstanceRef.current.pointsData(data);
       globeInstanceRef.current.labelsData(data);
 

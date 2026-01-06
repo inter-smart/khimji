@@ -34,7 +34,12 @@ const VENTURE_SLIDES = [
     title: "Logistics & Shipping",
     description:
       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: ["/images/ship-1.png", "/images/ship-2.png", "/images/ship-3.png", "/images/ship-4.png"],
+    logos: [
+      "/images/ship-1.png",
+      "/images/ship-2.png",
+      "/images/ship-3.png",
+      "/images/ship-4.png",
+    ],
   },
   {
     video: "/videos/venture-2.mp4",
@@ -42,11 +47,22 @@ const VENTURE_SLIDES = [
     title: "Logistics & Shipping",
     description:
       "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: ["/images/ship-1.png", "/images/ship-2.png", "/images/ship-3.png", "/images/ship-4.png"],
+    logos: [
+      "/images/ship-1.png",
+      "/images/ship-2.png",
+      "/images/ship-3.png",
+      "/images/ship-4.png",
+    ],
   },
 ];
 
-export default function VentureSection({ title, ventures, banner, banner_alt_text, lang }) {
+export default function VentureSection({
+  title,
+  ventures,
+  banner,
+  banner_alt_text,
+  lang,
+}) {
   const isRTL = lang == "ar";
   const sectionRef = useRef(null);
 
@@ -165,7 +181,10 @@ export default function VentureSection({ title, ventures, banner, banner_alt_tex
 
   return (
     <>
-      <section ref={sectionRef} className="relative z-0 py-[45px] 2xl:py-[80px_50px] 3xl:py-[100px_70px] overflow-hidden max-sm:hidden">
+      <section
+        ref={sectionRef}
+        className="relative z-0 py-[45px] 2xl:py-[80px_50px] 3xl:py-[100px_70px] overflow-hidden max-sm:hidden"
+      >
         {/* Heading */}
         <div className="container">
           <motion.div
@@ -204,21 +223,35 @@ export default function VentureSection({ title, ventures, banner, banner_alt_tex
           <div className="flex flex-wrap w-full">
             {/* LEFT CONTENT */}
             <div className="w-full lg:w-[240px] xl:w-[300px] 2xl:w-[400px] 3xl:w-[450px] flex items-center">
-              <motion.div className="w-full max-w-[75%] max-lg:text-center max-lg:m-auto" variants={slideInFromLeft}>
+              <motion.div
+                className="w-full max-w-[75%] max-lg:text-center max-lg:m-auto"
+                variants={slideInFromLeft}
+              >
                 <motion.div variants={itemVariants}>
                   <Heading size="heading2" as="div">
                     {ventures[0]?.title}
                   </Heading>
                 </motion.div>
 
-                <motion.p className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px]" variants={itemVariants}>
+                <motion.p
+                  className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px]"
+                  variants={itemVariants}
+                >
                   {renderHtml(ventures[0]?.description)}
                 </motion.p>
 
-                <motion.div variants={buttonVariants} whileHover="hover" initial="rest" animate="rest">
+                <motion.div
+                  variants={buttonVariants}
+                  whileHover="hover"
+                  initial="rest"
+                  animate="rest"
+                >
                   <Link href={`/venture`} className={CONTACT_BUTTON_CLASS}>
-                    <span>{lang === "en" ? "View ALl" : "عرض الكل"}</span>
-                    <motion.div className={ARROW_ICON_CLASS} variants={arrowVariants}>
+                    <span>{lang === "en" ? "View All" : "عرض الكل"}</span>
+                    <motion.div
+                      className={ARROW_ICON_CLASS}
+                      variants={arrowVariants}
+                    >
                       <svg className="w-full h-full" viewBox="0 0 14 15">
                         <path
                           d="M7.23334 12.7448C7.14887 12.7465 7.0637 12.7245 6.98857 12.6748C6.7718 12.5318 6.70577 12.2213 6.8362 11.9893C6.84717 11.9688 8.2096 9.53275 10.8103 7.99975H0.700004C0.442637 7.99975 0.233337 7.7755 0.233337 7.49975C0.233337 7.224 0.442637 6.99975 0.700004 6.99975H10.8103C8.22407 5.4755 6.84624 3.02875 6.8327 3.00425C6.70507 2.77075 6.77577 2.46 6.99347 2.32175C7.2142 2.1815 7.50494 2.26275 7.63677 2.5005C7.84887 2.863 9.8378 6.11275 13.4052 7.012C13.6187 7.06825 13.7667 7.2685 13.7667 7.5C13.7667 7.7315 13.6197 7.93225 13.4092 7.987C9.8266 8.8895 7.84444 12.1435 7.63024 12.5118C7.54624 12.656 7.39084 12.7415 7.23334 12.7448Z"
@@ -233,7 +266,12 @@ export default function VentureSection({ title, ventures, banner, banner_alt_tex
 
             {/* RIGHT CONTENT - Swiper */}
             <div className="w-full lg:w-[calc(100%-240px)] xl:w-[calc(100%-300px)] 2xl:w-[calc(100%-400px)] 3xl:w-[calc(100%-450px)] max-lg:px-[35px] lg:ps-[60px] overflow-hidden">
-              <motion.div variants={slideInFromRight} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
+              <motion.div
+                variants={slideInFromRight}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+              >
                 <Swiper
                   dir={isRTL ? "rtl" : "ltr"}
                   // modules={[Autoplay]}
@@ -269,7 +307,9 @@ export default function VentureSection({ title, ventures, banner, banner_alt_tex
                 >
                   {ventures[0]?.ventures?.map((item, index) => (
                     <SwiperSlide key={index}>
-                      <VentureCard item={item} />
+                      <Link href={`/venture/${item?.slug}`}>
+                        <VentureCard item={item} />
+                      </Link>
                     </SwiperSlide>
                   ))}
                 </Swiper>
@@ -302,21 +342,35 @@ export default function VentureSection({ title, ventures, banner, banner_alt_tex
           <div className="flex flex-wrap w-full flex-row-reverse">
             {/* LEFT CONTENT */}
             <div className="w-full lg:w-[240px] xl:w-[300px] 2xl:w-[400px] 3xl:w-[450px] flex items-center justify-end">
-              <motion.div className="w-full max-w-[75%] max-lg:text-center max-lg:m-auto" variants={slideInFromRight}>
+              <motion.div
+                className="w-full max-w-[75%] max-lg:text-center max-lg:m-auto"
+                variants={slideInFromRight}
+              >
                 <motion.div variants={itemVariants}>
                   <Heading size="heading2" as="div">
                     {ventures[1]?.title}
                   </Heading>
                 </motion.div>
 
-                <motion.p className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px]" variants={itemVariants}>
+                <motion.p
+                  className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px]"
+                  variants={itemVariants}
+                >
                   {renderHtml(ventures[1]?.description)}
                 </motion.p>
 
-                <motion.div variants={buttonVariants} whileHover="hover" initial="rest" animate="rest">
+                <motion.div
+                  variants={buttonVariants}
+                  whileHover="hover"
+                  initial="rest"
+                  animate="rest"
+                >
                   <Link href={`/venture`} className={CONTACT_BUTTON_CLASS}>
-                    <span>{lang === "en" ? "View ALl" : "عرض الكل"}</span>
-                    <motion.div className={ARROW_ICON_CLASS} variants={arrowVariants}>
+                    <span>{lang === "en" ? "View All" : "عرض الكل"}</span>
+                    <motion.div
+                      className={ARROW_ICON_CLASS}
+                      variants={arrowVariants}
+                    >
                       <svg className="w-full h-full" viewBox="0 0 14 15">
                         <path
                           d="M7.23334 12.7448C7.14887 12.7465 7.0637 12.7245 6.98857 12.6748C6.7718 12.5318 6.70577 12.2213 6.8362 11.9893C6.84717 11.9688 8.2096 9.53275 10.8103 7.99975H0.700004C0.442637 7.99975 0.233337 7.7755 0.233337 7.49975C0.233337 7.224 0.442637 6.99975 0.700004 6.99975H10.8103C8.22407 5.4755 6.84624 3.02875 6.8327 3.00425C6.70507 2.77075 6.77577 2.46 6.99347 2.32175C7.2142 2.1815 7.50494 2.26275 7.63677 2.5005C7.84887 2.863 9.8378 6.11275 13.4052 7.012C13.6187 7.06825 13.7667 7.2685 13.7667 7.5C13.7667 7.7315 13.6197 7.93225 13.4092 7.987C9.8266 8.8895 7.84444 12.1435 7.63024 12.5118C7.54624 12.656 7.39084 12.7415 7.23334 12.7448Z"
@@ -331,7 +385,12 @@ export default function VentureSection({ title, ventures, banner, banner_alt_tex
 
             {/* RIGHT CONTENT - Swiper */}
             <div className="w-full lg:w-[calc(100%-240px)] xl:w-[calc(100%-300px)] 2xl:w-[calc(100%-400px)] 3xl:w-[calc(100%-450px)] max-lg:px-[35px] lg:pe-[60px] overflow-hidden">
-              <motion.div variants={slideInFromLeft} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
+              <motion.div
+                variants={slideInFromLeft}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+              >
                 <Swiper
                   dir={isRTL ? "rtl" : "ltr"}
                   modules={[Autoplay]}
@@ -380,7 +439,13 @@ export default function VentureSection({ title, ventures, banner, banner_alt_tex
         {/* Second Venture Section End */}
       </section>
 
-      <VentureSectionmob title={title} banner={banner} banner_alt_text={banner_alt_text} ventureSlider={ventures} lang={lang} />
+      <VentureSectionmob
+        title={title}
+        banner={banner}
+        banner_alt_text={banner_alt_text}
+        ventureSlider={ventures}
+        lang={lang}
+      />
     </>
   );
 }

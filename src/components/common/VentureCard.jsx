@@ -9,6 +9,7 @@ export default function VentureCard({ item }) {
         sm:p-[15px] xl:p-[20px] 2xl:p-[25px] 3xl:p-[30px]
         flex flex-wrap overflow-hidden
         rounded-[10px]
+        cursor-pointer
         border border-white
         bg-transparent
         backdrop-blur-[20px] backdrop-saturate-[180%]

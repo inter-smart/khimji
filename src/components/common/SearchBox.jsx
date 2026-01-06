@@ -8,7 +8,6 @@ export default function SearchBox({ lang }) {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log("Searching for:", searchQuery);
   };
 
   const openSearch = (e) => {

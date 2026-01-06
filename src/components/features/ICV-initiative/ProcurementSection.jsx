@@ -105,7 +105,6 @@ export default function ProcurementSection({ initiatives }) {
             {procurementData?.map((item) => {
   const sections = parseInitiativeDescription(item.description);
 
-  console.log("sections ", sections);
 
   return (
     <div key={item.id}>

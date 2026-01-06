@@ -36,7 +36,6 @@ export default async function page({ params }) {
     careerList: careers,
   };
 
-  console.log("career_section_data", career_section_data);
   return (
     <>
       <InnerHero

@@ -30,7 +30,6 @@ export default async function Page({ params }) {
   }
   const { banner, contact_cms, contact_sectors } = data;
 
-  console.log("Contact Data:", data);
 
   return (
     <>

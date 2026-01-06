@@ -1,4 +1,5 @@
 "use client";
+import { renderHtml } from "@/lib/helper";
 import Link from "next/link";
 
 const FOOTER_LINK_CLASS =
@@ -18,9 +19,10 @@ export default function Links({
   return (
     <>
       <div className="w-5/12">
-        <div className="max-w-[100px] text-[35px] lg:text-[35px] xl:text-[40px] 2xl:text-[55px] 3xl:text-[80px] leading-[1.4] text-white font-light uppercase">
-          {site_settings?.footer_title}
-        </div>
+        {renderHtml(
+          site_settings?.footer_title,
+          "max-w-[100px] text-[35px] lg:text-[35px] xl:text-[40px] 2xl:text-[55px] 3xl:text-[80px] leading-[1.4] text-white font-light uppercase"
+        )}
       </div>
       <div className="w-4/12">
         <div className="flex flex-wrap -m-[15px]">
@@ -53,7 +55,10 @@ export default function Links({
             <ul>
               {policies?.map((item, index) => (
                 <li key={index}>
-                  <Link href={`/${lang}/${item?.slug}`} className={FOOTER_LINK_CLASS}>
+                  <Link
+                    href={`/${lang}/${item?.slug}`}
+                    className={FOOTER_LINK_CLASS}
+                  >
                     {item?.title}
                   </Link>
                 </li>

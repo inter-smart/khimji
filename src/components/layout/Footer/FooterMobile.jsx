@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { renderHtml } from "@/lib/helper";
 
 const FOOTER_LINK_CLASS =
   "text-[14px] text-white font-medium mb-[6px] inline-block transition-all duration-300 hover:text-white/80 hover:translate-x-1";
@@ -19,7 +20,6 @@ export default function FooterMobile({ data, changeCountry, lang }) {
     router.refresh();
   }
 
-  console.log("links: ", data?.social_links);
 
   return (
     <section className="bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[45px_30px] sm:hidden">
@@ -33,9 +33,9 @@ export default function FooterMobile({ data, changeCountry, lang }) {
             alt="foter_img"
           />
         </Link>
-        <div className="text-[23px] text-white text-center uppercase mb-[15px]">
-          {data?.site_settings?.footer_about}
-        </div>
+        {/* <div className="[&_]:text-[23px] [&_]:text-white [&_]:text-center [&_]:uppercase [&_]:mb-[15px]"> */}
+          {renderHtml(data?.site_settings?.footer_title, "[&_]:text-[23px] [&_]:text-white [&_]:text-center [&_]:uppercase [&_]:mb-[15px]")}
+        {/* </div> */}
         {/* countryBx */}
         <div className="w-full h-full border border-[#d9d9d93a] p-[15px] text-center rounded-[10px] bg-transparent backdrop-blur-[2px] mb-[30px]">
           <div className="text-[16px] text-white uppercase mb-[10px]">
