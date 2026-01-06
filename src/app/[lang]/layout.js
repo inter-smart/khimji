@@ -6,6 +6,7 @@ import localFont from "next/font/local";
 import { Suspense } from "react";
 import HeaderSkeleton from "@/components/layout/Skeletons/HeaderSkeleton";
 import { Toaster } from "@/components/ui/sonner";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const Nobel = localFont({
   src: [
