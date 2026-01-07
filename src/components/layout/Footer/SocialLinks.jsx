@@ -29,9 +29,9 @@ export default function SocialLinks({ social_links, site_settings, lang }) {
               // map
               social_links?.map((item, index) => (
                 <div key={index} className="p-[10px] xl:p-[14px] 2xl:p-[17px] 3xl:p-[22px]">
-                  <Link target="_blank" href={item?.url} className={SOCIAL_ICON_CLASS}>
-                    <div className="w-[15px] 2xl:w-[20px] 3xl:w-[30px] h-[15px] 2xl:h-[20px] 3xl:h-[25px] flex items-center justify-center">
-                      {item.icon && <Image src={item.icon} width={30} height={30} alt={item.name} className="w-full object-contain"  />}
+                  <Link target="_blank" href={item?.url} className={SOCIAL_ICON_CLASS} rel="noopener noreferrer">
+                    <div className="w-[15px] 2xl:w-[20px] 3xl:w-[30px] h-[15px] 2xl:h-[20px] 3xl:h-[25px] flex items-center justify-center" aria-label={`Visit us on ${item?.name}`}>
+                      {item?.icon && <Image src={item?.icon} width={30} height={30} alt={item?.name} className="w-full object-contain" loading="lazy" quality={85} />}
                     </div>
                   </Link>
                 </div>
