@@ -18,7 +18,7 @@ export default function NationSection({
                             <Heading as="h2" size="heading1" className="mb-[15px]">
                                 {title}
                             </Heading>
-                            <p>{renderHtml(description)}</p>
+                            <div>{renderHtml(description)}</div>
                         </div>
                     </div>
                     <div className="w-full md:w-1/2 xl:w-5/12 p-[7px]">

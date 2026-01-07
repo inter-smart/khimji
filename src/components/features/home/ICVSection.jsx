@@ -7,9 +7,11 @@ import "swiper/css/autoplay";
 import Image from "next/image";
 import { Heading } from "@/components/layout/Heading";
 import { motion } from "framer-motion";
-import ICVinitiativeMobile from "./home-mobile/ICVinitiativeMobile";
 import Link from "next/link";
 import { renderHtml } from "@/lib/helper";
+import dynamic from "next/dynamic";
+
+const ICVinitiativeMobile = dynamic(() => import("./home-mobile/ICVinitiativeMobile"));
 
 export default function ICVSection({ title, description, banner, banner_alt_text, initiatives, lang }) {
   const isRTL = lang == " ar";
@@ -35,7 +37,7 @@ export default function ICVSection({ title, description, banner, banner_alt_text
             <Heading size="heading1" as="h2" className="mb-[30px]">
               {title}
             </Heading>
-            <p>{renderHtml(description)}</p>
+            {renderHtml(description)}
           </div>
         </div>
         <motion.div

@@ -1,5 +1,3 @@
-"use client";
-
 import BusinessTypeDropDown from "../layout/Header/BusinessTypeDropDown";
 import LocationDropdown from "../layout/Header/LocationDropdown";
 

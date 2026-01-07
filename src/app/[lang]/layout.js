@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import HeaderSkeleton from "@/components/layout/Skeletons/HeaderSkeleton";
 import { Toaster } from "@/components/ui/sonner";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import Script from "next/script";
 
 const Nobel = localFont({
   src: [
@@ -39,6 +40,11 @@ export default async function RootLayout({ children, params }) {
         <main className="grow">{children}</main>
         <Footer lang={lang} />
         <Toaster />
+
+          <Script
+          src="https://example.com/analytics.js"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );

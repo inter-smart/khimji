@@ -10,8 +10,11 @@ import { useRef } from "react";
 import { Heading } from "@/components/layout/Heading";
 import Link from "next/link";
 import VentureCard from "@/components/common/VentureCard";
-import VentureSectionmob from "./home-mobile/VentureSectionmob";
 import { renderHtml } from "@/lib/helper";
+import dynamic from "next/dynamic";
+
+
+const VentureSectionmob = dynamic(()=> import("./home-mobile/VentureSectionmob"));
 
 const CONTACT_BUTTON_CLASS = `
   text-[12px] 2xl:text-[16px] 3xl:text-[18px]
@@ -233,12 +236,12 @@ export default function VentureSection({
                   </Heading>
                 </motion.div>
 
-                <motion.p
+                <motion.div
                   className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px]"
                   variants={itemVariants}
                 >
                   {renderHtml(ventures[0]?.description)}
-                </motion.p>
+                </motion.div>
 
                 <motion.div
                   variants={buttonVariants}
@@ -352,12 +355,12 @@ export default function VentureSection({
                   </Heading>
                 </motion.div>
 
-                <motion.p
+                <motion.div
                   className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px]"
                   variants={itemVariants}
                 >
                   {renderHtml(ventures[1]?.description)}
-                </motion.p>
+                </motion.div>
 
                 <motion.div
                   variants={buttonVariants}

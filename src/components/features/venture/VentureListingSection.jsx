@@ -139,7 +139,7 @@ export default function VentureListingSection({ data, title, context }) {
                     >
                       {item?.title}
                     </div>
-                    <div>{renderHtml(item?.description)}</div>
+                    {renderHtml(item?.description)}
                   </div>
                   <div className="flex flex-wrap -m-[5px] lg:-m-[10px] 3xl:-m-[15px]">
                     {ventures?.ventures?.map((venture) => (

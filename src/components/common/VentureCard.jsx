@@ -100,7 +100,7 @@ export default function VentureCard({ item }) {
                 p-[12px_8px] xs:p-[12px] sm:p-0
               "
             >
-              <p className="max-sm:[&_*]:text-white">{renderHtml(item.description)}</p>
+              {renderHtml(item.description, "max-sm:[&_*]:text-white")}
             </div>
 
             {/* LOGOS */}

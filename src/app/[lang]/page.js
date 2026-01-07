@@ -2,10 +2,12 @@ import ArchiveSection from "@/components/features/home/ArchiveSection";
 import BannerSection from "@/components/features/home/BannerSection";
 import HeritageSection from "@/components/features/home/HeritageSection";
 import ParnerSectionMobile from "@/components/features/home/home-mobile/ParnerSectionMobile";
-import ICVSection from "@/components/features/home/ICVSection";
-import VentureSection from "@/components/features/home/VentureSection";
 import { getData } from "@/lib/server/api";
 import { getMetaData } from "@/lib/server/metaApi";
+import dynamic from "next/dynamic";
+
+const VentureSection = dynamic(() => import("@/components/features/home/VentureSection"));
+const ICVSection = dynamic(() => import("@/components/features/home/ICVSection"));
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;

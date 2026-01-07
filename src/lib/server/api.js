@@ -28,6 +28,9 @@ export async function getData(endpoint, lang = "en", country = null, options = {
       ...options.headers,
     },
     ...options,
+    next:{
+      revalidate: 60
+    }
   };
 
   try {

@@ -199,7 +199,7 @@ export default function ProcurementSection({ initiatives }) {
                         />
                       </div>
                     )}
-                    <p>{renderHtml(item.description)}</p>
+                    {renderHtml(item.description)}
                   </div>
                 </div>
               </div>

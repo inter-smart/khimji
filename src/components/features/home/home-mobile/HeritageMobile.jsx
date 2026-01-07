@@ -10,7 +10,7 @@ export default function HeritageMobile({ title, description, banner, banner_alt_
       <div className="container relative flex items-end h-full">
         <div className="w-full">
           <div className="text-[43px] text-white font-medium uppercase">{title}</div>
-          <p className="[&_p]:text-white">{renderHtml(description)}</p>
+          <div className="[&_p]:text-white">{renderHtml(description)}</div>
 
           <div className="flex flex-wrap -m-[4px] xs:-m-[9px] mt-[30px]">
             {metrics?.map((item, index) => (
