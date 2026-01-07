@@ -1,4 +1,4 @@
-"use client";
+"use client"; 
 
 import BottomLine from "./BottomLine";
 import Links from "./Links";
@@ -7,24 +7,19 @@ import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 
 const FooterMobile = dynamic(() => import("./FooterMobile"), {
-  ssr: false,
-  loading: () => (
-    <div className="h-[500px] bg-gradient-to-r from-[#0B436A] to-[#299B8A]" />
-  ),
+  ssr: true,
 });
 const Brands = dynamic(() => import("./Brands"), {
-  ssr: false,
-  loading: () => <div className="min-h-[80px]" />,
+  ssr: true,
 });
 const SocialLinks = dynamic(() => import("./SocialLinks"), {
-  ssr: false,
-  loading: () => <div className="min-h-[200px]" />,
+  ssr: true,
 });
 
 export default function FooterClient({ siteSettingPromise, lang }) {
-  const siteSettings = use(siteSettingPromise);
+  siteSettingPromise;
   const { brands, site_settings, social_links, locations, policies } =
-    siteSettings?.data || {};
+    siteSettingPromise?.data || {};
 
   const router = useRouter();
 
@@ -39,7 +34,7 @@ export default function FooterClient({ siteSettingPromise, lang }) {
 
   return (
     <>
-      <section className="w-full relative bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[30px] overflow-hidden max-sm:hidden  min-h-[420px] lg:min-h-[480px]">
+      <section className="w-full relative bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[30px] overflow-hidden max-sm:hidden  min-h-[520px] lg:min-h-[580px]">
         <div className="container">
           <div className="min-h-[80px]">
             <Brands brands={brands} lang={lang} />
@@ -63,7 +58,7 @@ export default function FooterClient({ siteSettingPromise, lang }) {
       </section>
 
       <FooterMobile
-        data={siteSettings?.data}
+        data={siteSettingPromise?.data}
         changeCountry={changeCountry}
         lang={lang}
       />
