@@ -1,12 +1,12 @@
 import { getData } from "@/lib/server/api";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
+import BannerSection from "@/components/features/home/BannerSection";
 
 const VentureSection = dynamic(() => import("@/components/features/home/VentureSection"));
-const ICVSection = dynamic(() => import("@/components/features/home/ICVSection"));
-const ArchiveSection = dynamic(() => import("@/components/features/home/ArchiveSection"));
-const BannerSection = dynamic(() => import("@/components/features/home/BannerSection"));
 const HeritageSection = dynamic(() => import("@/components/features/home/HeritageSection"));
+const ArchiveSection = dynamic(() => import("@/components/features/home/ArchiveSection"));
+const ICVSection = dynamic(() => import("@/components/features/home/ICVSection"));
 const ParnerSectionMobile = dynamic(() => import("@/components/features/home/home-mobile/ParnerSectionMobile"));
 
 

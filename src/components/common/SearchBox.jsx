@@ -40,6 +40,7 @@ export default function SearchBox({ lang }) {
       {/* Search Icon Button */}
       <button
         type="button"
+        aria-label="Search"
         onClick={openSearch}
         className={`
                         flex items-center justify-center

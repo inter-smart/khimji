@@ -6,9 +6,20 @@ import { use } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 
-const FooterMobile = dynamic(()=> import("./FooterMobile"));
-const Brands = dynamic(()=> import("./Brands"));
-const SocialLinks = dynamic(()=> import("./SocialLinks"));
+const FooterMobile = dynamic(() => import("./FooterMobile"), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[500px] bg-gradient-to-r from-[#0B436A] to-[#299B8A]" />
+  ),
+});
+const Brands = dynamic(() => import("./Brands"), {
+  ssr: false,
+  loading: () => <div className="min-h-[80px]" />,
+});
+const SocialLinks = dynamic(() => import("./SocialLinks"), {
+  ssr: false,
+  loading: () => <div className="min-h-[200px]" />,
+});
 
 export default function FooterClient({ siteSettingPromise, lang }) {
   const siteSettings = use(siteSettingPromise);

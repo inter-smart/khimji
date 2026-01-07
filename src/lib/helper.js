@@ -12,7 +12,7 @@ export function renderHtml(htmlString, className = "") {
   if (!htmlString) return null;
 
   return (
-    <p className={className}>
+    <div className={className}>
       {parse(htmlString, {
         replace: (domNode) => {
           if (domNode.attribs) {
@@ -21,7 +21,7 @@ export function renderHtml(htmlString, className = "") {
           }
         },
       })}
-    </p>
+    </div>
   );
 }
 
