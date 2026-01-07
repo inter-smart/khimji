@@ -102,15 +102,17 @@ export default function BannerClient({ data }) {
                       transition={{ duration: 1.2, delay: 0.8 }}
                       viewport={{ once: true }}
                       className="absolute top-0 left-0 w-full h-full pointer-events-none bg-cover bg-no-repeat bg-center z-10"
-                    >
+                    ></motion.div>
+                    <div className="relative w-full h-full">
                       <Image
                         src="/images/krBg.webp"
                         alt="Background"
                         fill
                         className="object-cover"
                         priority
+                        fetchPriority="high"
                       />
-                    </motion.div>
+                    </div>
                     <video
                       autoPlay
                       loop

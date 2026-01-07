@@ -2,7 +2,6 @@
 
 import BottomLine from "./BottomLine";
 import Links from "./Links";
-import { use } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 
