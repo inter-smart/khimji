@@ -1,9 +1,9 @@
-import BlogDetailSection from "@/components/features/blog/BlogDetailSection";
 import { getData } from "@/lib/server/api";
 import { DefaultOgImage } from "@/lib/server/constants";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 
+const BlogDetailSection = dynamic(() => import("@/components/features/blog/BlogDetailSection"));
 const RelatedBlogSection = dynamic(() => import("@/components/features/blog/RelatedBlogSection"));
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;

@@ -69,7 +69,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang }) 
               href={`/${lang}`}
               className="flex items-center justify-center max-w-[125px] lg:max-w-[145px] xl:max-w-[175px] 2xl:max-w-[225px] 3xl:max-w-[275px] w-full"
             >
-              <Image src="/images/logo.png" width="275" height="75" alt="logo" />
+                 <Image src="/images/logo.png" width="275" height="75" alt="logo" priority />
             </Link>
             <div className="flex items-center justify-end">
               <div className="flex items-center gap-4  p-4 rounded-xl">

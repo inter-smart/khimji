@@ -1,4 +1,3 @@
-"use client";
 import { renderHtml } from "@/lib/helper";
 import Link from "next/link";
 

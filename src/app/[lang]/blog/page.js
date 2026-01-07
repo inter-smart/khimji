@@ -1,8 +1,11 @@
-import BlogBanner from "@/components/features/blog/BlogBanner";
-import BlogList from "@/components/features/blog/BlogList";
-import BlogListSkeleton from "@/components/layout/Skeletons/BlogListSkeleton";
 import { getMetaData } from "@/lib/server/metaApi";
+import dynamic from "next/dynamic";
 import { Suspense } from "react";
+
+
+const BlogBanner = dynamic(() => import("@/components/features/blog/BlogBanner"));
+const BlogList = dynamic(() => import("@/components/features/blog/BlogList"));
+const BlogListSkeleton = dynamic(() => import("@/components/layout/Skeletons/BlogListSkeleton"));
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;

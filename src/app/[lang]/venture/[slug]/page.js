@@ -1,7 +1,10 @@
-import VendordetailsSection from "@/components/features/venture/VendordetailsSection";
 import { getData } from "@/lib/server/api";
 import { DefaultOgImage } from "@/lib/server/constants";
+import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";
+
+
+const VendordetailsSection = dynamic(() => import("@/components/features/venture/VendordetailsSection"));
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;

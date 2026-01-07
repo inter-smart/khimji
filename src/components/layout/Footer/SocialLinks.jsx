@@ -13,7 +13,7 @@ export default function SocialLinks({ social_links, site_settings, lang }) {
           href="/"
           className="max-w-[130px] xl:max-w-[165px] 2xl:max-w-[210px] 3xl:max-w-[250px] w-full mb-[25px] xl:mb-[30px] 2xl:mb-[35px] 3xl:mb-[50px] block transition-[0.5s] hover:scale-90"
         >
-          <Image src="/images/Logo-white-footer.png" width={150} height={80} alt="KR Logo" className="w-full object-contain" />
+          <Image src="/images/Logo-white-footer.png" width={150} height={80} alt="KR Logo" className="w-full object-contain" priority />
         </Link>
 
         {/* TEXT */}
@@ -31,7 +31,7 @@ export default function SocialLinks({ social_links, site_settings, lang }) {
                 <div key={index} className="p-[10px] xl:p-[14px] 2xl:p-[17px] 3xl:p-[22px]">
                   <Link target="_blank" href={item?.url} className={SOCIAL_ICON_CLASS}>
                     <div className="w-[15px] 2xl:w-[20px] 3xl:w-[30px] h-[15px] 2xl:h-[20px] 3xl:h-[25px] flex items-center justify-center">
-                      {item.icon && <Image src={item.icon} width={30} height={30} alt={item.name} className="w-full object-contain" />}
+                      {item.icon && <Image src={item.icon} width={30} height={30} alt={item.name} className="w-full object-contain"  />}
                     </div>
                   </Link>
                 </div>

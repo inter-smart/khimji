@@ -1,7 +1,10 @@
-import InnerHero from "@/components/common/InnerHero";
-import FaqSection from "@/components/features/faq/FaqSection";
 import { getData } from "@/lib/server/api";
 import { getMetaData } from "@/lib/server/metaApi";
+import dynamic from "next/dynamic";
+
+
+const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
+const FaqSection = dynamic(() => import("@/components/features/faq/FaqSection"));
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;

@@ -1,9 +1,12 @@
-import InnerHero from "@/components/common/InnerHero";
-import NationSection from "@/components/features/ICV-initiative/NationSection";
-import ProcurementSection from "@/components/features/ICV-initiative/ProcurementSection";
-import QuestionSectionClient from "@/components/features/ICV-initiative/QuestionSectionClient";
 import { getData } from "@/lib/server/api";
 import { getMetaData } from "@/lib/server/metaApi";
+import dynamic from "next/dynamic";
+
+
+const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
+const NationSection = dynamic(() => import("@/components/features/ICV-initiative/NationSection"));
+const ProcurementSection = dynamic(() => import("@/components/features/ICV-initiative/ProcurementSection"));
+const QuestionSectionClient = dynamic(() => import("@/components/features/ICV-initiative/QuestionSectionClient"));
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;

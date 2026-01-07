@@ -1,11 +1,12 @@
-import InnerHero from "@/components/common/InnerHero";
-import DrivenSection from "@/components/features/heritage/DrivenSection";
-import HeritageSection from "@/components/features/heritage/HeritageSection";
 import { getData } from "@/lib/server/api";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
 
+const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
+const DrivenSection = dynamic(() => import("@/components/features/heritage/DrivenSection"));
+const HeritageSection = dynamic(() => import("@/components/features/heritage/HeritageSection"));
 const BoardDirectorSection = dynamic(()=> import("@/components/features/heritage/BoardDirectorSection"));
+
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const lang = resolvedParams.lang;

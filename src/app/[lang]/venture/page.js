@@ -1,8 +1,11 @@
-import InnerHero from "@/components/common/InnerHero";
-import VentureListingSection from "@/components/features/venture/VentureListingSection";
 import { getData } from "@/lib/server/api";
 import { getRequestContext } from "@/lib/server/getCookieData";
 import { getMetaData } from "@/lib/server/metaApi";
+import dynamic from "next/dynamic";
+
+
+const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
+const VentureListingSection = dynamic(() => import("@/components/features/venture/VentureListingSection"));
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;

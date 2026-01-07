@@ -33,6 +33,7 @@ export default function Brands({ brands, lang }) {
                   alt={item?.logo_alt_text}
                   width={140}
                   height={65}
+                  loading="lazy"
                   className="w-auto object-contain max-w-[75px] 2xl:max-w-[80px] min-w-[45px] xl:min-w-[65px] 2xl:min-w-[75px] transition-[0.5s] hover:scale-90"
                 />
               </div>

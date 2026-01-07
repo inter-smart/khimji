@@ -1,6 +1,8 @@
-import PrivacySection from "@/components/features/privacy/PrivacySection";
 import { getData } from "@/lib/server/api";
 import { DefaultOgImage } from "@/lib/server/constants";
+import dynamic from "next/dynamic";
+
+const PrivacySection = dynamic(() => import("@/components/features/privacy/PrivacySection"));
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
