@@ -242,7 +242,7 @@ export default function HeritageSection({ title, description, banner, banner_alt
                   </Heading>
                 </motion.div>
 
-                <motion.div className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px] line-clamp-3" variants={fadeInUp}>
+                <motion.div className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px]" variants={fadeInUp}>
                   {renderHtml(description)}
                 </motion.div>
 

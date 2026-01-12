@@ -43,6 +43,14 @@ const validateSingleCharacter = (value) => {
   return value.trim().length >= 2;
 };
 
+const validateNotOnlyInvisibleChars = (value) => {
+  if (typeof value !== "string") return true;
+
+   return !value.includes("\\");
+};
+
+
+
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const MAX_FILE_SIZE_MB = MAX_FILE_SIZE / (1024 * 1024); // Convert bytes → MB
 const ACCEPTED_FILE_TYPES = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
@@ -54,6 +62,7 @@ export {
   validateNotOnlyWhitespace,
   validateMessageLength,
   validateSingleCharacter,
+  validateNotOnlyInvisibleChars,
   MAX_FILE_SIZE,
   MAX_FILE_SIZE_MB,
   ACCEPTED_FILE_TYPES,

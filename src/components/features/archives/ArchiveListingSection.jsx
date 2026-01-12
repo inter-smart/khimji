@@ -156,7 +156,20 @@ export default function ArchiveListingSection({ categories, lang, country }) {
 function ArchiveCard({ item, category }) {
   return (
     <div className="group [--image-size:100%] sm:[--image-size:210px] 2xl:[--image-size:310px] 3xl:[--image-size:385px] w-full h-full p-[10px_10px_15px_10px] sm:p-[15px_15px_20px_15px] 2xl:p-[20px_20px_30px_20px] rounded-[5px] 2xl:rounded-[8px] border border-white backdrop-blur-[20px] backdrop-saturate-[180%] shadow-[inset_5px_1px_33px_#f1f1f1,inset_3px_-3px_5px_#fafafa] flex flex-wrap">
-      <div className="w-[var(--image-size)] h-[210px] sm:h-auto aspect-[385/360] max-sm:mb-[20px] rounded-[5px] 2xl:rounded-[8px] overflow-hidden block">
+      <div
+       className="w-[var(--image-size)] h-[210px] sm:h-auto aspect-[385/360] max-sm:mb-[20px] rounded-[5px] 2xl:rounded-[8px] overflow-hidden block">
+       
+         {item?.media_type === "video" && item?.video ? (
+    <video
+      src={item.video}
+      poster={item?.video_thumbnail_image || "/images/placeholder.png"}
+      className="w-full h-full object-cover"
+      muted
+      loop
+      autoPlay
+      playsInline
+    />
+  ) : (
         <Image
           src={item?.image || "/images/placeholder.png"}
           alt={item?.image_alt_text || "Archive"}
@@ -164,6 +177,7 @@ function ArchiveCard({ item, category }) {
           height={360}
           className="w-full h-full object-cover group-hover:scale-[1.1] transition-all duration-500"
         />
+  )}
       </div>
       <div className="w-[var(--image-size)] sm:w-[calc(100%-var(--image-size))] pl-[15px] sm:pl-[20px] lg:pl-[25px] 2xl:pl-[30px] 3xl:pl-[40px]">
         <div className="text-[15px] sm:text-[16px] 2xl:text-[18px] 3xl:text-[22px] leading-[1.2] font-normal text-black mb-[15px] sm:mb-[20px] 2xl:mb-[25px] 3xl:mb-[35px]">

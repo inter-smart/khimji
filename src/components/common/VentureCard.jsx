@@ -21,16 +21,27 @@ export default function VentureCard({ item }) {
         <div className="w-full h-full overflow-hidden rounded-[10px]">
 
           {/* DESKTOP VIDEO ONLY */}
-          <video
-            autoPlay
+
+          {item?.media_type === "video" ?
+          (<video
+          autoPlay
             loop
             muted
             playsInline
             className="hidden sm:block w-full h-full object-cover"
+            poster={item?.video_thumbnail_image || "/images/placeholder.png"}
           >
             <source src={item.video} type="video/mp4" />
           </video>
-
+    ) : (
+          <Image
+            src={item?.image || "/images/placeholder.png"}
+            width={395}
+            height={465}
+            alt={item?.image_alt_text}
+            className="hidden sm:block w-full h-full object-cover"
+          />
+      )}
           {/* MOBILE IMAGE ONLY */}
           <Image
             src={item.image_mobile}

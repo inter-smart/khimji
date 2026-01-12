@@ -13,6 +13,9 @@ import Image from "next/image";
 import { renderHtml } from "@/lib/helper";
 
 export default function VendordetailsSection({ breadCrumb_data, pageData }) {
+
+  console.log("page data: ", pageData)
+
   return (
     <section className="py-[40px] 2xl:py-[55px] 3xl:py-[75px] max-sm:pt-[170px]">
       <div className="container">

@@ -48,7 +48,7 @@ export default function BannerClient({ data }) {
                     >
                       {item?.description}
                     </motion.p>
-                    {item?.action_type && (
+                    {item?.action_type && item?.action_url && (
                       <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -112,17 +112,18 @@ export default function BannerClient({ data }) {
                       />
                     </motion.div>
                     <video
+                      preload ="none"
                       autoPlay
                       loop
                       muted
                       playsInline
-                      poster="/images/clipImg.webp"
+                      poster="/images/clipImg.avif"
                       className="w-full h-full object-cover
-                  [mask-image:url('/images/clipImg.webp')]
+                  [mask-image:url('/images/clipImg.avif')]
                   [mask-repeat:no-repeat]
                   [mask-position:center]
                   [mask-size:cover]
-                  [-webkit-mask-image:url('/images/clipImg.webp')]
+                  [-webkit-mask-image:url('/images/clipImg.avif')]
                   [-webkit-mask-repeat:no-repeat]
                   [-webkit-mask-position:center]
                   [-webkit-mask-size:cover]"
@@ -156,7 +157,7 @@ export default function BannerClient({ data }) {
                   {item?.description}
                 </p>
 
-                {item?.action_type === "url" && (
+                {item?.action_type && item?.action_url && (
                   <Link
                     href={item?.action_url}
                     className="text-[16px] xs:text-[18px] text-white font-medium w-fit flex items-center justify-center h-[40px] xs:h-[50px] min-w-[160px] xs:min-w-[180px] p-[8px] border border-white"

@@ -9,7 +9,7 @@ import { renderHtml } from "@/lib/helper";
 import { useParams } from "next/navigation";
 
 export default function VentureListingSection({ data, title, context }) {
-  const [activeSlug, setActiveSlug] = useState(data?.[0]?.slug);
+  const [activeSlug, setActiveSlug] = useState();
   const [ventures, setVentures] = useState([]);
   // category usetsate
   const [isLoading, setIsLoading] = useState(false);
@@ -32,8 +32,8 @@ export default function VentureListingSection({ data, title, context }) {
           method: "GET",
           headers: {
             "Accept-Language": lang,
-            country: country,
-            business_type: business_type,
+            "Location-Slug": country,
+            "Business-Slug": business_type,
           },
         }
       );
@@ -50,16 +50,22 @@ export default function VentureListingSection({ data, title, context }) {
     }
   };
 
-  useEffect(() => {
-    fetchVentures(activeSlug);
-  }, [activeSlug]);
+useEffect(() => {
+  if (!activeSlug) return;
+  fetchVentures(activeSlug);
+}, [activeSlug, business_type, country, lang]);
 
 
-   if (!data || data.length === 0) {
+useEffect(() => {
+  if (data?.length) {
+    setActiveSlug(data[0].slug);
+  }
+}, [data, business_type, country, lang]);
+
+
+  if (!data || data.length === 0) {
     return <NoDataState message="There are no ventures available." />;
   }
-
-
 
   return (
     <section className="relative py-[40px] xl:py-[60px] 2xl:py-[80px] 3xl:py-[140px]">
@@ -68,8 +74,8 @@ export default function VentureListingSection({ data, title, context }) {
 
       <div className="container">
         <Tabs
-          defaultValue={data[0]?.slug}
-          onValueChange={(value) => setActiveSlug(value)}
+          value={activeSlug}
+          onValueChange={setActiveSlug}
           className="w-full mb-[35px ]"
         >
           <div className="flex flex-wrap justify-between items-center gap-2 mb-[20px] xl:mb-[30px] 2xl:mb-[50px] 3xl:mb-[70px]">
@@ -79,12 +85,11 @@ export default function VentureListingSection({ data, title, context }) {
 
             {/* Tabs Header */}
             <TabsList className="flex items-center  bg-transparent -m-[3px] max-sm:w-full">
-              
               {data?.map((item, index) => (
                 <div key={index} className="w-1/2 px-[3px]">
                   <TabsTrigger
                     value={item?.slug}
-                    onClick={() => setActiveSlug(item.slug)}
+                    // onClick={() => setActiveSlug(item.slug)}
                     className=" w-full
                   text-[11px] xs:text-[16px]
                   border border-[#2E8B8B]
@@ -127,7 +132,7 @@ export default function VentureListingSection({ data, title, context }) {
                 <LoadingState />
               ) : error ? (
                 <ErrorState message={error} />
-              ) : ventures.length === 0? (
+              ) : ventures.length === 0 ? (
                 <NoDataState message="There are no ventures available for this category" />
               ) : (
                 <div>
@@ -244,9 +249,7 @@ function NoDataState({ message }) {
         <p className="text-[16px] 2xl:text-[18px] text-[#666] font-medium mb-2">
           No Ventures Found
         </p>
-        <p className="text-[14px] 2xl:text-[16px] text-[#999]">
-          {message}.
-        </p>
+        <p className="text-[14px] 2xl:text-[16px] text-[#999]">{message}.</p>
       </div>
     </div>
   );

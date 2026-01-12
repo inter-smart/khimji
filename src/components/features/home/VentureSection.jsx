@@ -14,7 +14,7 @@ import { renderHtml } from "@/lib/helper";
 import dynamic from "next/dynamic";
 
 
-const VentureSectionmob = dynamic(()=> import("./home-mobile/VentureSectionmob"));
+const VentureSectionmob = dynamic(()=> import("./home-mobile/VentureSectionmob"), {ssr: false});
 
 const CONTACT_BUTTON_CLASS = `
   text-[12px] 2xl:text-[16px] 3xl:text-[18px]

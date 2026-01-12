@@ -166,9 +166,11 @@ export default function CareerForm({ careerId, onSuccess }) {
                     <div className="text-[14px] 2xl:text-[16px] 3xl:text-[20px] leading-[1.2] font-normal text-black mb-[5px] sm:mb-[10px]">
                       {value && value[0] ? value[0].name : "Upload Resume"}
                     </div>
+                    {!value &&
                     <div className="text-[12px] 2xl:text-[13px] 3xl:text-[15px] leading-[1.2] font-normal text-black/50">
                       Max file size 5 MB, PDF / DOC / DOCX Format
                     </div>
+                    }
                   </div>
                   <Input
                     id="resume"

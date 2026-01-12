@@ -71,7 +71,9 @@ export default function VentureSectionmob({ title, banner, banner_alt_text, vent
                 >
                   {venture?.ventures?.map((item, index) => (
                     <SwiperSlide key={index}>
-                      <VentureCard item={item} />
+                       <Link href={`/venture/${item?.slug}`}>
+                          <VentureCard item={item} />
+                      </Link>
                     </SwiperSlide>
                   ))}
                 </Swiper>

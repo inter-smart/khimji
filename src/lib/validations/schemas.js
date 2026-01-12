@@ -8,6 +8,7 @@ import {
   ACCEPTED_FILE_TYPES,
   validateSingleCharacter,
   validateMessageLength,
+  validateNotOnlyInvisibleChars,
 } from "./validateFunctions";
 
 const careerFormSchema = z.object({
@@ -66,6 +67,8 @@ const careerFormSchema = z.object({
     .refine((val) => !val || validateSingleCharacter(val), "Message must be at least 2 characters")
     .refine((val) => !val || validateMessageLength(val), "Message is too long (maximum 5000 characters)")
     .refine((val) => !val || validateSecurity(val), "Invalid characters or potential security risk detected")
+    .refine((val) => !val || validateNotOnlyInvisibleChars(val), "Cannot contain only spaces, tabs, or new lines")
+
     .refine((val) => !val || validateNotOnlySpecialChars(val), "Message cannot contain only special characters"),
   resume: z
     .any()
@@ -128,7 +131,9 @@ const questionFormSchema = z.object({
     .refine(validateSingleCharacter, "Question must be at least 2 characters")
     .refine(validateMessageLength, "Question is too long (maximum 5000 characters)")
     .refine(validateSecurity, "Invalid characters or potential security risk detected")
-    .refine(validateNotOnlySpecialChars, "Question cannot contain only special characters"),
+    .refine(validateNotOnlySpecialChars, "Question cannot contain only special characters")
+    .refine(validateNotOnlyInvisibleChars, "Question cannot contain only spaces, tabs, or new lines")
+
 });
 
 export { careerFormSchema, questionFormSchema };

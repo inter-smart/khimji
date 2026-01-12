@@ -54,6 +54,40 @@ export const LANGUAGES = {
   },
 };
 
+
+const navMenu = [
+  {
+    label: "Home",
+    link: "/"
+    
+  },
+  {
+    label: "Ventures",
+    link: "/venture"
+    
+  },
+  {
+    label: "About",
+    link: "/heritage"
+    
+  },
+  {
+    label: "ICV",
+    link: "/ICV"
+    
+  },
+  {
+    label: "Careers",
+    link: "/career"
+    
+  },
+  {
+    label: "Contact",
+    link: "/contact"
+  },
+]
+
+
 export default function Header({
   businessTypePromise,
   locationsPromise,
@@ -317,7 +351,7 @@ export default function Header({
                 <SheetDescription asChild>
                   <div>
                     <Accordion type="single" collapsible>
-                      <AccordionItem
+                      {/* <AccordionItem
                         value="item-1"
                         className="border-b border-[#f4f4f4]"
                       >
@@ -334,7 +368,7 @@ export default function Header({
                         className="border-b border-[#f4f4f4]"
                       >
                         <Link
-                          href="/about"
+                          href="/heritage"
                           className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
                           aria-label="menuLink"
                         >
@@ -375,19 +409,24 @@ export default function Header({
                         >
                           <span>News & Insights </span>
                         </Link>
-                      </AccordionItem>
+                      </AccordionItem> */}
+
+                      {navMenu?.map((item, index)=>(
                       <AccordionItem
+                        key={index}
                         value="item-6"
                         className="border-b border-[#f4f4f4]"
                       >
                         <Link
-                          href="/contact"
+                          href={item?.link}
                           className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
                           aria-label="menuLink"
                         >
-                          <span>Contact</span>
+                          <span>{item?.label}</span>
                         </Link>
                       </AccordionItem>
+                      ))
+}
                     </Accordion>
                   </div>
                 </SheetDescription>
