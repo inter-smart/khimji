@@ -3,10 +3,8 @@ import { getRequestContext } from "@/lib/server/getCookieData";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
 
-
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
 const ContactSection = dynamic(() => import("@/components/features/contact/ContactSection"));
-
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
@@ -22,7 +20,6 @@ export async function generateMetadata({ params }) {
     alternates,
   };
 }
-
 
 export default async function Page({ params }) {
   const resolvedParams = await params;
@@ -42,7 +39,10 @@ export default async function Page({ params }) {
         coverImageMobile={banner?.banner_mobile || "/images/contact_innerbanner.jpg"}
         alt={banner?.banner_alt_text || "Contact Banner"}
         title={banner?.banner_title || "CONTACT"}
-        breadCrumb_data={[{ link: { href: `/${lang}`, label: lang==="en"? "Home": "بيت" } }, { link: { href: "/Contact", label:lang==="en"? "Contact": "اتصال" } }]}
+        breadCrumb_data={[
+          { link: { href: `/${lang}`, label: lang === "en" ? "Home" : "بيت" } },
+          { link: { href: "/Contact", label: lang === "en" ? "Contact" : "اتصال" } },
+        ]}
       />
       <ContactSection sectors={contact_sectors} cms={contact_cms} lang={lang} key={country} />
     </>

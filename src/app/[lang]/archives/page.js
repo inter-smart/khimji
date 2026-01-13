@@ -1,11 +1,7 @@
+import ArchivesClient from "@/components/clientWrappers/ArchivesClient";
 import { getData } from "@/lib/server/api";
 import { getRequestContext } from "@/lib/server/getCookieData";
 import { getMetaData } from "@/lib/server/metaApi";
-import dynamic from "next/dynamic";
-
-
-const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
-const ArchiveListingSection = dynamic(() => import("@/components/features/archives/ArchiveListingSection"));
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
@@ -35,18 +31,5 @@ export default async function Page({ params }) {
     return <div>Error loading data</div>;
   }
 
-  const { banner, archive_categories } = data;
-
-  return (
-    <>
-      <InnerHero
-        coverImage={banner?.banner || "/images/archive_innerbanner.jpg"}
-        coverImageMobile={banner?.banner_mobile || "/images/archive_innerbanner.jpg"}
-        alt={banner?.banner_alt_text || "Archive Banner"}
-        title={banner?.banner_title || "Archives"}
-        breadCrumb_data={[{ link: { href: `/${lang}`, label: "Home" } }, { link: { href: "/heritage", label: "Archives" } }]}
-      />
-      <ArchiveListingSection key={country} categories={archive_categories} lang={lang} country={country} />
-    </>
-  );
+  return <ArchivesClient data={data} lang={lang} country={country} key={country} />;
 }
