@@ -1,4 +1,7 @@
-import HeaderClient from "./HeaderClient";
+import dynamic from "next/dynamic";
+const HeaderClient = dynamic(() => import("./HeaderClient"), {
+  ssr: true,
+});
 import { getData } from "@/lib/server/api";
 
 export default function Header({ lang }) {

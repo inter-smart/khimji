@@ -32,9 +32,7 @@ export default async function RootLayout({ children, params }) {
   return (
     <html lang={lang} dir={lang == "ar" ? "rtl" : "ltr"}>
       <body className={`${Nobel.className}`}>
-        <Suspense fallback={<HeaderSkeleton />}>
-          <Header lang={lang} />
-        </Suspense>
+        <Header lang={lang} />
         <main className="grow">{children}</main>
         <Footer lang={lang} />
         <Toaster />

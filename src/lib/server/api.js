@@ -20,6 +20,8 @@ export async function getData(endpoint, lang = "en", country = null, options = {
   }
 
   const defaultOptions = {
+    cache: "force-cache",
+    next: { revalidate: 600 },
     headers: {
       "Content-Type": "application/json",
       "Location-Slug": country || DEFAULT_COUNTRY,
