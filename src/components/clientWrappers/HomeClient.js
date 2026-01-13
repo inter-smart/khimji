@@ -2,7 +2,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-const BannerSection = dynamic(() => import("@/components/features/home/BannerSection"), { ssr: true });
 const VentureSection = dynamic(() => import("@/components/features/home/VentureSection"), { ssr: false });
 const HeritageSection = dynamic(() => import("@/components/features/home/HeritageSection"), { ssr: false });
 const ArchiveSection = dynamic(() => import("@/components/features/home/ArchiveSection"), { ssr: false });
@@ -10,12 +9,10 @@ const ICVSection = dynamic(() => import("@/components/features/home/ICVSection")
 const ParnerSectionMobile = dynamic(() => import("@/components/features/home/home-mobile/ParnerSectionMobile"), { ssr: false });
 
 const HomeClient = ({ data, lang }) => {
-  const { sliders, home_cms, ventures, metrics, timelines, archives, initiatives, brands } = data;
+  const { home_cms, ventures, metrics, timelines, archives, initiatives, brands } = data;
 
   return (
     <>
-      <BannerSection data={sliders} />
-
       {ventures?.length > 0 && (
         <VentureSection
           title={home_cms?.section1_title}

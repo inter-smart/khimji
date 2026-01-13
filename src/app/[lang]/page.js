@@ -1,6 +1,8 @@
 import { getData } from "@/lib/server/api";
+import dynamic from "next/dynamic";
 import { getMetaData } from "@/lib/server/metaApi";
 import HomeClient from "@/components/clientWrappers/HomeClient";
+const BannerSection = dynamic(() => import("@/components/features/home/BannerSection"), { ssr: true });
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
@@ -27,5 +29,12 @@ export default async function Page({ params }) {
     return <div>Error loading data</div>;
   }
 
-  return <HomeClient data={data} lang={lang} />;
+  const { sliders, ...rest } = data;
+
+  return (
+    <>
+      <BannerSection data={sliders} />
+      <HomeClient data={rest} lang={lang} />
+    </>
+  );
 }
