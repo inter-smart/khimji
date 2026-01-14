@@ -95,7 +95,7 @@ export default function CareerSection({ data }) {
                       </div>
                       {renderHtml(
                         item?.responsibilities,
-                        "[&_li]:text-[13px] 2xl:[&_li]:text-[14px] 3xl:[&_li]:text-[16px] [&_li]:leading-[1.2] [&_li]:font-normal [&_li]:text-[#1E1E1E] [&_li]:mb-[15px] [&_ul]:list-disc [&_ul]:list-inside"
+                        "[&_li]:text-[13px] 2xl:[&_li]:text-[14px] 3xl:[&_li]:text-[16px] [&_li]:leading-[1.2] [&_li]:font-normal [&_li]:text-[#1E1E1E] [&_li]:mb-[15px] [&_ul]:list-disc [&_ul]:list-inside [&_ol]:list-decimal [&_ol]:list-inside"
                       )}
                     </div>
                     <div className="w-full sm:w-[35%]">
@@ -104,7 +104,7 @@ export default function CareerSection({ data }) {
                       </div>
                       {renderHtml(
                         item?.required_skills,
-                        "[&_li]:text-[13px] 2xl:[&_li]:text-[14px] 3xl:[&_li]:text-[16px] [&_li]:leading-[1.2] [&_li]:font-normal [&_li]:text-[#1E1E1E] [&_li]:mb-[15px] [&_ul]:list-disc [&_ul]:list-inside"
+                        "[&_li]:text-[13px] 2xl:[&_li]:text-[14px] 3xl:[&_li]:text-[16px] [&_li]:leading-[1.2] [&_li]:font-normal [&_li]:text-[#1E1E1E] [&_li]:mb-[15px] [&_ul]:list-disc [&_ul]:list-inside [&_ol]:list-decimal [&_ol]:list-inside"
                       )}
                     </div>
                   </div>

@@ -62,27 +62,55 @@ export default function VendordetailsSection({ breadCrumb_data, pageData }) {
           </BreadcrumbList>
         </Breadcrumb>
 
-        <div className="w-full relative mt-[30px] aspect-[1640/690] overflow-hidden rounded-[10px] mb-[15px] xl:mb-[25px] 2xl:mb-[40px] 3xl:mb-[60px]">
-          {pageData?.banner_type === "video" ? (
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover"
-            >
-              <source src={pageData?.banner_video} type="video/mp4" />
-            </video>
-          ) : (
-            <Image
-              src={pageData?.banner_image}
-              alt={pageData?.banner_alt_text}
-              fill
-              className="object-cover"
-              priority
-            />
-          )}
-        </div>
+      <div className="w-full relative mt-[30px] mb-[15px] xl:mb-[25px] 2xl:mb-[40px] 3xl:mb-[60px] overflow-hidden rounded-[10px]">
+
+  {/* Desktop Banner */}
+  <div className="hidden sm:block aspect-[1640/690] relative">
+    {pageData?.banner_type === "video" ? (
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-full h-full object-cover"
+      >
+        <source src={pageData?.banner_video} type="video/mp4" />
+      </video>
+    ) : (
+      <Image
+        src={pageData?.banner_image}
+        alt={pageData?.banner_alt_text}
+        fill
+        className="object-cover"
+        priority
+      />
+    )}
+  </div>
+
+  {/* Mobile Banner */}
+  <div className="block sm:hidden aspect-[375/420] relative">
+    {pageData?.mobile_banner_type === "video" ? (
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="w-full h-full object-cover"
+      >
+        <source src={pageData?.mobile_banner_video} type="video/mp4" />
+      </video>
+    ) : (
+      <Image
+        src={pageData?.mobile_banner_image || pageData?.banner_image}
+        alt={pageData?.mobile_banner_alt_text || pageData?.banner_alt_text}
+        fill
+        className="object-cover"
+        priority
+      />
+    )}
+  </div>
+
+</div>
 
         <h2 className="lg:text-[22px] xl:text-[30px] 2xl:text-[40px] 3xl:text-[50px] text-[#0B436A] font-normal uppercase mb-[10px] xl:mb-[15px] 2xl:mb-[25px] 3xl:mb-[30px]">
           {pageData?.overview_title}
@@ -95,8 +123,7 @@ export default function VendordetailsSection({ breadCrumb_data, pageData }) {
               key={item.id}
               className="sm:w-1/2 p-[10px] 2xl:p-[12px] 3xl:p-[15px]"
             >
-              <Link
-                href={item.link?? "/"}
+              <div
                 className="w-full h-full block rounded-[10px] overflow-hidden relative p-[1px] group transition-all hover:bg-gradient-to-r hover:from-[#0B436A] hover:to-[#299B8A]"
               >
                 <div className="p-[20px_15px] xl:p-[25px_20px] 2xl:p-[35px_25px] 3xl:p-[40px_35px] bg-[#F7FAFA] rounded-[10px] overflow-hidden">
@@ -133,7 +160,7 @@ export default function VendordetailsSection({ breadCrumb_data, pageData }) {
                     </div>
                   </div>
                 </div>
-              </Link>
+              </div>
             </div>
           ))}
         </div>

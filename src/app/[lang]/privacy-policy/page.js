@@ -1,6 +1,7 @@
 import { getData } from "@/lib/server/api";
 import { DefaultOgImage } from "@/lib/server/constants";
 import dynamic from "next/dynamic";
+import NotFound from "../not-found";
 
 const PrivacySection = dynamic(() => import("@/components/features/privacy/PrivacySection"));
 
@@ -53,8 +54,8 @@ export default async function page({ params }) {
 
   const { data, error } = await getData("policy?slug=privacy-policy", lang);
 
-  if (error) {
-    return <div>Error loading data</div>;
+  if (error || !data) {
+    return <NotFound />;
   }
 
   return <PrivacySection data={data} />;

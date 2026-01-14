@@ -15,6 +15,41 @@ const SocialLinks = dynamic(() => import("./SocialLinks"), {
   ssr: true,
 });
 
+
+const otherLinks = [
+    {
+      label: "Blogs",
+      link: "blog",
+    },
+    {
+      label: "Faq",
+      link: "faq",
+    },
+    {
+      label: "Heritage",
+      link: "heritage",
+    },
+    {
+      label: "Ventures",
+      link: "venture",
+    },
+    {
+      label: "Archives",
+      link: "archives",
+    },
+    {
+      label: "ICV Initiatives",
+      link: "ICV",
+    },
+    {
+      label: "Career",
+      link: "career",
+    },
+    {
+      label: "Contact",
+      link: "contact",
+    },
+  ];
 export default function FooterClient({ siteSettingPromise, lang }) {
   siteSettingPromise;
   const { brands, site_settings, social_links, locations, policies } =
@@ -45,6 +80,7 @@ export default function FooterClient({ siteSettingPromise, lang }) {
               site_settings={site_settings}
               changeCountry={changeCountry}
               policies={policies}
+              otherLinks={otherLinks}
             />
             <SocialLinks
               social_links={social_links}
@@ -60,6 +96,7 @@ export default function FooterClient({ siteSettingPromise, lang }) {
         data={siteSettingPromise?.data}
         changeCountry={changeCountry}
         lang={lang}
+        otherLinks={otherLinks}
       />
     </>
   );

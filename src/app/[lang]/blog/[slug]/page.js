@@ -70,7 +70,9 @@ export default async function page({ params }) {
   return (
     <>
       <BlogDetailSection data={data} />
-      <RelatedBlogSection data={data?.related_blogs} />
+      {data?.related_blogs?.length>0 &&
+        <RelatedBlogSection data={data?.related_blogs} />
+      }
     </>
   );
 }
