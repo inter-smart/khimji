@@ -821,7 +821,7 @@ export default function ArchiveSection({ archives, title, lang }) {
                                   href={item.content}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className={`${textcontent} hover:text-[#299B8A] transition-colors break-all`}
+                                  className={`${textcontent} hover:text-[#299B8A] transition-colors break-all line-clamp-2`}
                                 >
                                   {item.content}
                                 </a>

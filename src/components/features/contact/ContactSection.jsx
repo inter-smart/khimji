@@ -5,10 +5,10 @@ import Contacts from "./Contacts";
 export default function ContactSection({ sectors, cms, lang }) {
   return (
     <section className="w-full h-auto py-[40px] sm:py-[50px_60px] lg:py-[70px_80px] 2xl:py-[85px_100px] 3xl:py-[110px_130px] bg-[#f9fbfb] overflow-hidden block relative z-0">
-      <div className="w-[120px] sm:w-[180px] 2xl:w-[225px] 3xl:w-[280px] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] pointer-events-none absolute -z-1 inset-[0_auto_auto_-2%]"></div>
-      <div className="w-[170px] sm:w-[220px] 2xl:w-[285px] 3xl:w-[370px] h-auto aspect-square bg-[#1A9BF5] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[180px] opacity-40 pointer-events-none absolute -z-1 inset-[5%_-15%_auto_auto]"></div>
-      <div className="w-[170px] sm:w-[220px] 2xl:w-[285px] 3xl:w-[370px] h-auto aspect-square bg-[#1A9BF5] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[180px] opacity-40 pointer-events-none absolute z-1 inset-[auto_auto_40%_-10%]"></div>
-      <div className="w-[170px] sm:w-[220px] 2xl:w-[285px] 3xl:w-[370px] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[180px] opacity-40 pointer-events-none absolute -z-1 inset-[auto_0_25%_auto]"></div>
+      <div className="w-[120px] h-[120px] sm:w-[180px] sm:h-[180px] 2xl:w-[225px] 2xl:h-[225px] 3xl:w-[280px] 3xl:h-[280px] bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] pointer-events-none absolute -z-1 inset-[0_auto_auto_-2%] transform-gpu"></div>
+      <div className="w-[170px] h-[170px] sm:w-[220px] sm:h-[220px] 2xl:w-[285px] 2xl:h-[285px] 3xl:w-[370px] 3xl:h-[370px] bg-[#1A9BF5] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[180px] opacity-40 pointer-events-none absolute -z-1 inset-[5%_-15%_auto_auto] transform-gpu"></div>
+      <div className="w-[170px] h-[170px] sm:w-[220px] sm:h-[220px] 2xl:w-[285px] 2xl:h-[285px] 3xl:w-[370px] 3xl:h-[370px] bg-[#1A9BF5] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[180px] opacity-40 pointer-events-none absolute z-1 inset-[auto_auto_40%_-10%] transform-gpu"></div>
+      <div className="w-[170px] h-[170px] sm:w-[220px] sm:h-[220px] 2xl:w-[285px] 2xl:h-[285px] 3xl:w-[370px] 3xl:h-[370px] bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[180px] opacity-40 pointer-events-none absolute -z-1 inset-[auto_0_25%_auto] transform-gpu"></div>
       <div className="container">
         <div className="w-full h-auto mb-[30px] sm:mb-[40px] lg:mb-[60px] 2xl:mb-[75px] 3xl:mb-[100px] max-lg:gap-[20px] flex flex-wrap">
           <div className="w-full lg:w-1/4 sm:px-[15px] lg:flex items-center">
@@ -57,7 +57,7 @@ export default function ContactSection({ sectors, cms, lang }) {
             </Link>
           </div>
         </div>
-        <Contacts sectors={sectors} cms={cms} lang={lang}  />
+        <Contacts sectors={sectors} cms={cms} lang={lang} />
       </div>
     </section>
   );
