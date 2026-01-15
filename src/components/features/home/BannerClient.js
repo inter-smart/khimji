@@ -119,7 +119,7 @@ export default function BannerClient({ data }) {
                       loop
                       muted
                       playsInline
-                      poster="/images/clipImg.avif"
+                      poster={item?.video_thumbnail_image? item?.video_thumbnail_image: item?.image}
                       className="w-full h-full object-cover
                   [mask-image:url('/images/clipImg.avif')]
                   [mask-repeat:no-repeat]

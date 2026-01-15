@@ -8,7 +8,7 @@ const FOOTER_LINK_CLASS =
 const SOCIAL_ICON_CLASS =
   "transition-all duration-300 hover:text-white/70 hover:scale-125 group  ";
 
-export default function FooterMobile({ data, changeCountry, lang }) {
+export default function FooterMobile({ data, changeCountry, lang, otherLinks }) {
   const router = useRouter();
 
   function changeCountry(slug) {
@@ -24,7 +24,7 @@ export default function FooterMobile({ data, changeCountry, lang }) {
   return (
     <section className="bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[45px_30px] sm:hidden">
       <div className="container">
-        <Link href="#" className="block w-full max-w-[205px] m-auto mb-[25px]">
+        <Link href="/" className="block w-full max-w-[205px] m-auto mb-[25px]">
           <Image
             src="/images/Logo-white-footer.png"
             width="205"
@@ -65,6 +65,13 @@ export default function FooterMobile({ data, changeCountry, lang }) {
                 <li key={index}>
                   <Link href={`/${lang}/${item?.slug}`} className={FOOTER_LINK_CLASS}>
                     {item?.title}
+                  </Link>
+                </li>
+              ))}
+              {otherLinks?.map((item, index) => (
+                <li key={index}>
+                  <Link href={`/${lang}/${item?.link}`} className={FOOTER_LINK_CLASS}>
+                    {item?.label}
                   </Link>
                 </li>
               ))}

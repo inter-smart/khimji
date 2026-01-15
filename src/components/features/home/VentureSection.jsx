@@ -203,7 +203,9 @@ export default function VentureSection({
         </div>
 
         {/* First Venture Section */}
-        <motion.div
+
+        {ventures[0] && (
+          <motion.div
           className="
                     relative 
                     lg:!ps-[calc(((100%-var(--breakpoint-lg))/2)+var(--breakpoint-gap-lg))]
@@ -319,11 +321,13 @@ export default function VentureSection({
               </motion.div>
             </div>
           </div>
-        </motion.div>
+          </motion.div>
+        )}
         {/* First Venture Section End */}
-
         {/* Second Venture Section */}
-        <motion.div
+
+        {ventures[1] && (
+          <motion.div
           className="
                     relative 
                     lg:!pe-[calc(((100%-var(--breakpoint-lg))/2)+var(--breakpoint-gap-lg))]
@@ -362,7 +366,7 @@ export default function VentureSection({
                   {renderHtml(ventures[1]?.description)}
                 </motion.div>
 
-                <motion.div
+    <motion.div
                   variants={buttonVariants}
                   whileHover="hover"
                   initial="rest"
@@ -438,7 +442,9 @@ export default function VentureSection({
               </motion.div>
             </div>
           </div>
-        </motion.div>
+          </motion.div>
+        )}
+
         {/* Second Venture Section End */}
       </section>
 

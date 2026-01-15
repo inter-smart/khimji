@@ -40,7 +40,7 @@ export default function ICVinitiativeMobile({ title, description, banner, banner
           >
             {data?.map((item, index) => (
               <SwiperSlide key={index}>
-                <div className="w-full h-full overflow-hidden">
+                <Link href="/ICV" className="w-full h-full overflow-hidden">
                   <div className="w-full aspect-[400/370] overflow-hidden">
                     <Image
                       src={item?.image_mobile}
@@ -51,7 +51,7 @@ export default function ICVinitiativeMobile({ title, description, banner, banner
                     />
                   </div>
                   <div className="text-[20px] xs:text-[25px] text-[#0B436A] uppercase m-[15px_0] ">{item?.title}</div>
-                </div>
+                </Link>
               </SwiperSlide>
             ))}
           </Swiper>

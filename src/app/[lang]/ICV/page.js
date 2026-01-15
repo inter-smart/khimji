@@ -44,13 +44,18 @@ export default async function Page({ params }) {
         title={banner?.banner_title}
         breadCrumb_data={[{ link: { href: "/", label: "Home" } }, { link: { href: "/ICV", label: "ICV Initiatives" } }]}
       />
-      <NationSection
+
+      {intiatives_cms && (
+        <NationSection
         title={intiatives_cms?.section1_title}
         description={intiatives_cms?.section1_description}
         image={intiatives_cms?.section1_image}
         image_alt_text={intiatives_cms?.section1_image_alt_text}
       />
-      <ProcurementSection initiatives={initiatives} />
+      )}
+      {initiatives?.length > 0 && (
+        <ProcurementSection initiatives={initiatives} />
+      )}
       <QuestionSectionClient
         intiatives_cms={intiatives_cms}
       />

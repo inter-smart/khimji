@@ -14,37 +14,9 @@ export default function Links({
   site_settings,
   changeCountry,
   policies,
+  otherLinks
 }) {
-  const otherLinks = [
-    {
-      label: "Blogs",
-      link: "blog",
-    },
-    {
-      label: "Faq",
-      link: "faq",
-    },
-    {
-      label: "Heritage",
-      link: "/heritage",
-    },
-    {
-      label: "Ventures",
-      link: "/venture",
-    },
-    {
-      label: "ICV Initiatives",
-      link: "ICV",
-    },
-    {
-      label: "Career",
-      link: "career",
-    },
-    {
-      label: "Contact",
-      link: "contact",
-    },
-  ];
+  
 
   return (
     <>
