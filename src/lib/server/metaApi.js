@@ -41,7 +41,7 @@ export async function getMetaData(pageKey, lang = "en", pagename = "") {
 
     const meta = result.data;
 
-    if (!result.status) {
+    if (result.status) {
       return {
         title: meta?.meta_title || metaTitle,
         description: meta?.meta_description || metaDescription,
