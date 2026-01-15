@@ -242,7 +242,7 @@ export default function HeritageSection({ title, description, banner, banner_alt
                   </Heading>
                 </motion.div>
 
-                <motion.div className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px]" variants={fadeInUp}>
+                <motion.div className="mb-[15px] lg:mb-[20px] xl:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px] line-clamp-3" variants={fadeInUp}>
                   {renderHtml(description)}
                 </motion.div>
 
@@ -262,7 +262,7 @@ export default function HeritageSection({ title, description, banner, banner_alt
               </motion.div>
 
               <motion.div
-                className="w-full relative lg:absolute start-[-180px] lg:start-[-190px] xl:start-[-200px] 2xl:start-[-260px] 3xl:start-[-280px] lg:bottom-[60px] z-10 
+                className="w-full relative lg:absolute start-[-180px] lg:start-[-190px] xl:start-[-200px] 2xl:start-[-260px] 3xl:start-[-280px] bottom-0 2xl:bottom-[60px] z-10 
                             before:absolute before:content-[''] before:bg-[#F9F9F9] before:start-0 xs:before:w-[33%] sm:before:w-[30%] before:md:w-[25%] before:top-0 before:h-full before:z-1 lg:before:hidden"
                 variants={scaleIn}
                 initial="hidden"
