@@ -1,3 +1,4 @@
+import { parseMetaTags, parseOtherMeta } from "@/lib/helper";
 import { getData } from "@/lib/server/api";
 import { DefaultOgImage } from "@/lib/server/constants";
 import dynamic from "next/dynamic";
@@ -17,10 +18,11 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const { meta_title, meta_description, meta_keywords, title, featured_image, image_alt_text, published_on } = data;
+  const { meta_title, meta_description, meta_keywords, other_meta_tags, title, featured_image, image_alt_text, published_on } = data;
 
   // Use blog's own image or fallback
   const ogImage = featured_image || DefaultOgImage;
+  const { other, scripts } = parseOtherMeta(other_meta_tags);
 
   return {
     title: meta_title || title || "Blog Post",
@@ -52,6 +54,10 @@ export async function generateMetadata({ params }) {
       images: [ogImage],
     },
 
+    other: {
+      ...other,
+    },
+
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blog/${slug}`,
     },
@@ -61,18 +67,22 @@ export async function generateMetadata({ params }) {
 export default async function page({ params }) {
   const resolvedParams = await Promise.resolve(params);
   const { slug, lang } = resolvedParams;
-  const { data, error } = await getData(`blog-details?slug=${slug}`, lang);
+  const { data, error, structuredData } = await getData(`blog-details?slug=${slug}`, lang);
 
-   if (!data || error) {
+  if (!data || error) {
     notFound();
   }
 
+  console.log(structuredData);
+
   return (
     <>
+      {structuredData &&
+        structuredData.map((schema, index) => (
+          <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+        ))}
       <BlogDetailSection data={data} />
-      {data?.related_blogs?.length>0 &&
-        <RelatedBlogSection data={data?.related_blogs} />
-      }
+      {data?.related_blogs?.length > 0 && <RelatedBlogSection data={data?.related_blogs} />}
     </>
   );
 }

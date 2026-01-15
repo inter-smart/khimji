@@ -1,7 +1,9 @@
+import DynamicMeta from "@/components/layout/DynamicMeta";
 import { getData } from "@/lib/server/api";
 import { getRequestContext } from "@/lib/server/getCookieData";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
+import Script from "next/script";
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
 const ContactSection = dynamic(() => import("@/components/features/contact/ContactSection"));
@@ -9,7 +11,7 @@ const ContactSection = dynamic(() => import("@/components/features/contact/Conta
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const lang = resolvedParams.lang;
-  const { title, description, keywords, twitter, openGraph, alternates } = await getMetaData("contact", lang, "contact");
+  const { title, description, keywords, twitter, openGraph, alternates, other } = await getMetaData("contact", lang, "contact");
 
   return {
     title,
@@ -18,6 +20,7 @@ export async function generateMetadata({ params }) {
     twitter,
     openGraph,
     alternates,
+    other,
   };
 }
 
@@ -25,7 +28,9 @@ export default async function Page({ params }) {
   const resolvedParams = await params;
   const { country } = await getRequestContext();
   const lang = resolvedParams.lang;
-  const { data, error } = await getData("contact", lang);
+  const { data, error, structuredData } = await getData("contact", lang);
+
+  console.log("DATT", structuredData);
 
   if (!data || error) {
     return <div>Error loading data</div>;
@@ -34,6 +39,16 @@ export default async function Page({ params }) {
 
   return (
     <>
+      {structuredData &&
+        structuredData.map((schema, index) => (
+          <Script
+            id={`schema-${index}`}
+            key={index}
+            type="application/ld+json"
+            strategy="beforeInteractive"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          />
+        ))}
       <InnerHero
         coverImage={banner?.banner || "/images/contact_innerbanner.jpg"}
         coverImageMobile={banner?.banner_mobile || "/images/contact_innerbanner.jpg"}

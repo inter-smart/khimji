@@ -1,3 +1,4 @@
+import { parseOtherMeta } from "../helper";
 import { API_BASE_URL, defaultMeta, DefaultOgImage } from "./constants";
 import { getRequestContext } from "./getCookieData";
 
@@ -42,6 +43,7 @@ export async function getMetaData(pageKey, lang = "en", pagename = "") {
     const meta = result.data;
 
     if (result.status) {
+      const { other } = parseOtherMeta(meta?.other_meta_tags || "");
       return {
         title: meta?.meta_title || metaTitle,
         description: meta?.meta_description || metaDescription,
@@ -63,54 +65,45 @@ export async function getMetaData(pageKey, lang = "en", pagename = "") {
         alternates: {
           canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/${pagename}`,
         },
+        other: {
+          ...other,
+        },
+
         error: null,
       };
     }
 
     // fallback if API fails but status != success
-    return {
-      title: metaTitle,
-      description: metaDescription,
-      keywords: metaKeywords,
-      openGraph: {
-        title: metaTitle,
-        description: metaDescription,
-        images: [{ url: DefaultOgImage, width: 1200, height: 630 }],
-        type: "website",
-        url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/${pagename}`,
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: metaTitle,
-        description: metaDescription,
-      },
-      alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/${pagename}`,
-      },
-      error: result.message || "No metadata found",
-    };
+    return buildFallbackMetadata(metaTitle, metaDescription, metaKeywords, lang, pagename);
   } catch (error) {
     // catch network or API errors
-    return {
-      title: metaTitle,
-      description: metaDescription,
-      keywords: metaKeywords,
-      openGraph: {
-        title: metaTitle,
-        description: metaDescription,
-        images: [{ url: DefaultOgImage, width: 1200, height: 630 }],
-        type: "website",
-        url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/${pagename}`,
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: metaTitle,
-        description: metaDescription,
-      },
-      alternates: {
-        canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/${pagename}`,
-      },
-      error: "No metadata found",
-    };
+    return buildFallbackMetadata(metaTitle, metaDescription, metaKeywords, lang, pagename);
   }
+}
+
+function buildFallbackMetadata(title, description, keywords, lang, pagename) {
+  return {
+    title,
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      images: [{ url: DefaultOgImage, width: 1200, height: 630 }],
+      type: "website",
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/${pagename}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/${pagename}`,
+    },
+    other: {},
+    links: [],
+    structuredData: null,
+    error: "No metadata found",
+  };
 }
