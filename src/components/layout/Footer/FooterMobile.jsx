@@ -1,138 +1,148 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { renderHtml } from "@/lib/helper";
+
+const FOOTER_LINK_CLASS =
+  "text-[14px] text-white font-medium mb-[6px] inline-block transition-all duration-300 hover:text-white/80 hover:translate-x-1";
+const SOCIAL_ICON_CLASS =
+  "transition-all duration-300 hover:text-white/70 hover:scale-125 group  ";
+
+export default function FooterMobile({ data, changeCountry, lang, otherLinks }) {
+  const router = useRouter();
+
+  function changeCountry(slug) {
+    document.cookie = `country=${slug}; path=/`;
+    // Dispatch custom event to notify other components
+    window.dispatchEvent(
+      new CustomEvent("countryChanged", { detail: { country: slug } })
+    );
+    router.refresh();
+  }
 
 
-const FOOTER_LINK_CLASS = "text-[14px] text-white font-medium mb-[6px] inline-block transition-all duration-300 hover:text-white/80 hover:translate-x-1";
-const SOCIAL_ICON_CLASS = "transition-all duration-300 hover:text-white/70 hover:scale-125 group  ";
+  return (
+    <section className="bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[45px_30px] sm:hidden">
+      <div className="container">
+        <Link href="/" className="block w-full max-w-[205px] m-auto mb-[25px]">
+          <Image
+            src="/images/Logo-white-footer.png"
+            width="205"
+            height="45"
+            className="w-full h-full object-contain"
+            alt="foter_img"
+          />
+        </Link>
+        {/* <div className="[&_]:text-[23px] [&_]:text-white [&_]:text-center [&_]:uppercase [&_]:mb-[15px]"> */}
+          {renderHtml(data?.site_settings?.footer_title, "[&_]:text-[23px] [&_]:text-white [&_]:text-center [&_]:uppercase [&_]:mb-[15px]")}
+        {/* </div> */}
+        {/* countryBx */}
+        <div className="w-full h-full border border-[#d9d9d93a] p-[15px] text-center rounded-[10px] bg-transparent backdrop-blur-[2px] mb-[30px]">
+          <div className="text-[16px] text-white uppercase mb-[10px]">
+            {lang === "en" ? "Countries" : "بلدان"}
+          </div>
+          <div className="flex flex-wrap justify-center items-center gap-4">
+            {data?.locations?.map((item, index) => (
+              <div
+                key={index}
+                onClick={() => changeCountry(item?.slug)}
+                className="text-[14px] text-white ps-[10px] relative before:absolute before:top-0 before:start-0
+                            before:bottom-0 before:content-[''] before:m-auto before:bg-[#D9D9D9] before:w-[5px] before:h-[5px] before:rounded-full "
+              >
+                {item?.name}
+              </div>
+            ))}
+          </div>
+        </div>
 
-export default function FooterMobile() {
-    return (
-        <section className="bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[45px_30px] sm:hidden">
-            <div className="container">
-                <Link href="#" className="block w-full max-w-[205px] m-auto mb-[25px]">
-                    <Image src="/images/Logo-white-footer.png" width="205" height="45" className="w-full h-full object-contain" alt="foter_img" />
-                </Link>
-                <div className="text-[23px] text-white text-center uppercase mb-[15px]">Innovative  Solutions, <br />Trusted  Partnerships</div>
-                {/* countryBx */}
-                <div className="w-full h-full border border-[#d9d9d93a] p-[15px] text-center rounded-[10px] bg-transparent backdrop-blur-[2px] mb-[30px]">
-                    <div className="text-[16px] text-white uppercase mb-[10px]">Countries</div>
-                    <div className="flex flex-wrap justify-center items-center gap-4">
-                        <div className="text-[14px] text-white ps-[10px] relative before:absolute before:top-0 before:start-0
-                            before:bottom-0 before:content-[''] before:m-auto before:bg-[#D9D9D9] before:w-[5px] before:h-[5px] before:rounded-full ">India</div>
-                        <div className="text-[14px] text-white ps-[10px] relative before:absolute before:top-0 before:start-0
-                            before:bottom-0 before:content-[''] before:m-auto before:bg-[#D9D9D9] before:w-[5px] before:h-[5px] before:rounded-full ">UAE</div>
-                        <div className="text-[14px] text-white ps-[10px] relative before:absolute before:top-0 before:start-0
-                            before:bottom-0 before:content-[''] before:m-auto before:bg-[#D9D9D9] before:w-[5px] before:h-[5px] before:rounded-full ">Oman</div>
-                        <div className="text-[14px] text-white ps-[10px] relative before:absolute before:top-0 before:start-0
-                            before:bottom-0 before:content-[''] before:m-auto before:bg-[#D9D9D9] before:w-[5px] before:h-[5px] before:rounded-full ">Saudi Arabia</div>
-                    </div>
-                </div>
-
-                <div className="flex">
-                    <div className="w-1/2">
-                        <div className="text-[16px] text-white font-medium uppercase mb-[15px]">
-                            Other Links
-                        </div>
-
-                        <ul>
-                            <li><Link href="#" className={FOOTER_LINK_CLASS}>Privacy Policy</Link></li>
-                            <li><Link href="#" className={FOOTER_LINK_CLASS}>Terms Of Use</Link></li>
-                            <li><Link href="#" className={FOOTER_LINK_CLASS}>Sitemap</Link></li>
-                            <li><Link href="#" className={FOOTER_LINK_CLASS}>Responsible <br />Disclosure</Link></li>
-                        </ul>
-                    </div>
-                    <div className="w-1/2">
-                        <div className="text-[16px] text-white font-medium uppercase mb-[15px]">
-                            Contact us
-                        </div>
-                        <p className="text-[14px] text-white mb-[20px]">From inquiries to detailed support, we’re always ready to help you find
-                            the right solution for your needs.</p>
-                        <Link href="#!" className="text-[16px] xs:text-[18px] text-white font-medium w-fit flex items-center justify-center h-[40px] xs:h-[50px]
-                           min-w-[120px] xs:min-w-[140px] p-[8px] border border-white ">
-                            Contact us
-                            <div className="w-[14px] xs:w-[17px] h-[14px] flex items-center mx-[10px]">
-                                <svg className="w-full h-full object-contain" viewBox="0 0 18 14" >
-                                    <g clipPath="url(#clip0_1342_4984)">
-                                        <path d="M9.38156 13.4279C9.27201 13.43 9.16155 13.4034 9.0641 13.3431C8.78295 13.17 8.69731 12.7942 8.86648 12.5133C8.8807 12.4885 10.6478 9.53965 14.0209 7.68392H0.907875C0.574073 7.68392 0.302612 7.41246 0.302612 7.07865C0.302612 
+        <div className="flex">
+          <div className="w-1/2">
+            <div className="text-[16px] text-white font-medium uppercase mb-[15px]">
+               {lang === "en" ? "Other Links" : "روابط اخرى"}
+            </div>
+            <ul>
+              {data?.policies?.map((item, index) => (
+                <li key={index}>
+                  <Link href={`/${lang}/${item?.slug}`} className={FOOTER_LINK_CLASS}>
+                    {item?.title}
+                  </Link>
+                </li>
+              ))}
+              {otherLinks?.map((item, index) => (
+                <li key={index}>
+                  <Link href={`/${lang}/${item?.link}`} className={FOOTER_LINK_CLASS}>
+                    {item?.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="w-1/2">
+            <div className="text-[16px] text-white font-medium uppercase mb-[15px]">
+              {lang === "en" ? "Contact us" : "اتصل بنا"}
+            </div>
+            <p className="text-[14px] text-white mb-[20px]">
+              {data?.site_settings?.footer_description}
+            </p>
+            <Link
+              href="contact"
+              className="text-[16px] xs:text-[18px] text-white font-medium w-fit flex items-center justify-center h-[40px] xs:h-[50px]
+                           min-w-[120px] xs:min-w-[140px] p-[8px] border border-white "
+            >
+              {lang === "en" ? "Contact us" : "اتصل بنا"}
+              <div className="w-[14px] xs:w-[17px] h-[14px] flex items-center mx-[10px]">
+                <svg
+                  className="w-full h-full object-contain"
+                  viewBox="0 0 18 14"
+                >
+                  <g clipPath="url(#clip0_1342_4984)">
+                    <path
+                      d="M9.38156 13.4279C9.27201 13.43 9.16155 13.4034 9.0641 13.3431C8.78295 13.17 8.69731 12.7942 8.86648 12.5133C8.8807 12.4885 10.6478 9.53965 14.0209 7.68392H0.907875C0.574073 7.68392 0.302612 7.41246 0.302612 7.07865C0.302612 
                                         6.74485 0.574073 6.47339 0.907875 6.47339H14.0209C10.6665 4.62824 8.87949 1.66639 8.86194 1.63673C8.6964 1.35407 8.7881 0.977903 
                                         9.07045 0.810547C9.35674 0.640771 9.73382 0.739126 9.90481 1.02693C10.1799 1.46574 12.7595 5.39965 17.3865 6.48822C17.6634 6.55631 17.8552 6.79872 17.8552 
-                                        7.07896C17.8552 7.35919 17.6646 7.60221 17.3916 7.66848C12.745 8.76098 10.1742 12.7 9.89634 13.1458C9.78739 13.3204 9.58584 13.4239 9.38156 13.4279Z" fill="white" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_1342_4984">
-                                            <rect width="18" height="14" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </div>
-                        </Link>
+                                        7.07896C17.8552 7.35919 17.6646 7.60221 17.3916 7.66848C12.745 8.76098 10.1742 12.7 9.89634 13.1458C9.78739 13.3204 9.58584 13.4239 9.38156 13.4279Z"
+                      fill="white"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_1342_4984">
+                      <rect width="18" height="14" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+            </Link>
+          </div>
+        </div>
 
-                    </div>
-                </div>
-
-                <div className="my-[15px] xs:my-[20px] border-b border-white/20">
-                    <div className="text-[14px] xs:text-[16px]  text-white font-medium mb-[15px] 2xl:mb-[20px] 3xl:mb-[30px] uppercase">Follow Us</div>
-                    <div className="flex items-center -m-[10px] pb-[40px]">
-                        <div className="p-[10px]">
-                            <Link href="#" className={SOCIAL_ICON_CLASS}>
-                                <div className="w-[15px] 2xl:w-[20px] 3xl:w-[30px] h-[15px] 2xl:h-[20px] 3xl:h-[25px] flex items-center justify-center">
-                                    <svg width="16" height="17" viewBox="0 0 16 17" className="group-hover:scale-75 transition-all">
-                                        <path d="M15.7261 8.10872C15.699 5.96998 14.8589 3.94897 13.3607 2.41796C11.8349 0.858728 9.82085 0 7.68948 0C5.63205 0 3.70734 0.80902 2.26983 2.27798C0.994206 3.58154 0.211588 5.32013 0.066009 7.17353C-0.0720567 8.93199 0.365997 10.7115 1.3014 12.2077L0.0240665 15.736C-0.0295333 15.8841 0.00811056 16.0506 0.119919 16.1597C0.193386 16.2313 0.289625 16.2691 0.387375 16.2691C0.438341 16.2691 0.489772 16.2541 0.538531 16.2329L3.86524 14.7862C5.13521 15.594 6.58736 16.0103 8.07847 16.0103H8.07862C10.1357 16.0103 12.0604 15.2109 13.4977 13.7421C14.9619 12.2458 15.7534 10.2513 15.7261 8.10872ZM12.9499 13.192C11.6588 14.5114 9.92874 15.238 8.07843 15.238C6.66977 15.2379 5.29926 14.8166 4.11503 14.0195C4.05082 13.9762 3.97662 13.9542 3.90199 13.9542C3.85075 13.9542 3.79932 13.9646 3.7508 13.9857L1.06167 15.1512L2.09571 12.2949C2.13897 12.1754 2.12325 12.0418 2.0535 11.9362C0.152876 9.05879 0.474203 5.23231 2.81753 2.8377C4.10872 1.51823 5.83894 0.791527 7.68948 0.791527C9.61392 0.791527 11.4335 1.5679 12.813 2.97765C14.1676 4.36187 14.9271 6.18777 14.9516 8.11901C14.9761 10.0463 14.2652 11.8479 12.9499 13.192Z" fill="white" />
-                                        <path d="M11.807 9.70507C11.7092 9.65328 11.5984 9.59454 11.4649 9.51888C11.3904 9.47649 11.2968 9.41855 11.1975 9.3572C10.688 9.0422 10.3019 8.81924 9.97328 8.81924C9.8963 8.81924 9.82349 8.83152 9.75713 8.85564C9.46921 8.96007 9.23277 9.23907 9.00413 9.50885C8.92033 9.60769 8.80039 9.74921 8.72762 9.81245C8.43893 9.76301 7.83005 9.40773 7.17299 8.78884C6.51517 8.16922 6.1379 7.59505 6.08611 7.32378C6.15317 7.25498 6.30457 7.14118 6.41016 7.06174C6.6955 6.84717 6.99055 6.6253 7.10204 6.35494C7.24426 6.00758 6.98361 5.59214 6.56962 4.9981C6.50449 4.9046 6.44294 4.81629 6.39828 4.74666C6.31765 4.62043 6.25533 4.516 6.20034 4.42396C5.97462 4.04611 5.82549 3.79639 5.26512 3.79639C4.90142 3.79639 4.38721 4.12011 4.0389 4.44114C3.53271 4.90779 3.25389 5.44655 3.25389 5.95923C3.25486 7.35168 4.0799 8.94761 5.51748 10.3394C5.51995 10.3417 5.52242 10.3423 5.52496 10.3447C7.00258 11.6988 8.69785 12.4733 10.1761 12.4733H10.1767C10.7203 12.4733 11.2924 12.2136 11.7878 11.7371C12.1289 11.4091 12.4731 10.9283 12.4731 10.5859C12.4731 10.0581 12.2081 9.91772 11.807 9.70507ZM10.1763 11.7539C8.91709 11.753 7.38105 11.0342 6.06663 9.83105C4.78913 8.59283 4.02602 7.1459 4.02521 5.95996C4.02521 5.24259 5.01353 4.56054 5.27199 4.52316C5.32478 4.52338 5.35247 4.52632 5.36566 4.52843C5.39982 4.56548 5.46774 4.67917 5.5282 4.78041C5.58293 4.87201 5.65107 4.98607 5.73784 5.12189C5.79028 5.20373 5.85569 5.29755 5.92491 5.39686C6.05591 5.58487 6.31927 5.96279 6.36365 6.1241C6.28942 6.22309 6.05908 6.39628 5.92904 6.49406C5.59619 6.74437 5.30874 6.9605 5.30874 7.26595C5.30955 8.00377 6.3185 9.01139 6.6277 9.30264C6.93691 9.59389 8.00667 10.5442 8.79164 10.545C9.11384 10.544 9.34233 10.2743 9.60696 9.96214C9.71131 9.83904 9.8963 9.62077 10.0018 9.55121C10.1729 9.59272 10.5746 9.84107 10.7744 9.96461C10.8798 10.0298 10.9794 10.0913 11.0668 10.1411C11.2105 10.2225 11.3315 10.2867 11.4288 10.3382C11.5363 10.3952 11.657 10.4592 11.6964 10.4914C11.6986 10.5038 11.7017 10.5298 11.7019 10.5795C11.662 10.8228 10.9376 11.753 10.1763 11.7539Z" fill="white" />
-                                    </svg>
-
-                                </div>
-                            </Link>
-                        </div>
-                        <div className="p-[10px]">
-                            <Link href="#" className={SOCIAL_ICON_CLASS}>
-                                <div className="w-[15px] h-[15px] flex items-center justify-center">
-                                    <svg width="21" height="21" viewBox="0 0 21 21" className="group-hover:scale-75 transition-all" >
-                                        <path d="M2.77727 0C2.02296 0 1.3372 0.274311 0.822894 0.78862C0.274311 1.3372 0 2.02292 0 2.74295C0 3.49726 0.308585 4.18302 0.822894 4.69733C1.3372 5.21164 2.05724 5.52022 2.74299 5.48595C2.74299 5.48595 2.77727 5.48595 2.81158 5.48595C3.49734 5.48595 4.14879 5.21164 4.66309 4.69733C5.1774 4.18302 5.48599 3.49726 5.48599 2.74295C5.52026 2.02292 5.21168 1.33716 4.69737 0.822854C4.18306 0.274271 3.4973 0 2.77727 0ZM4.18306 4.21733C3.80589 4.59451 3.29158 4.8345 2.74299 4.80023C2.22869 4.80023 1.6801 4.59451 1.30293 4.21733C0.891482 3.84016 0.685759 3.29158 0.685759 2.74299C0.685759 2.19441 0.891482 1.6801 1.30293 1.26866C1.6801 0.891482 2.19441 0.685759 2.77727 0.685759C3.29158 0.685759 3.80589 0.891482 4.18306 1.26866C4.59451 1.6801 4.80023 2.19441 4.80023 2.74299C4.80023 3.29158 4.59451 3.84016 4.18306 4.21733Z" fill="white" />
-                                        <path d="M4.11445 6.1709H1.33718C0.788596 6.1709 0.342834 6.61662 0.342834 7.19952V19.2001C0.342834 19.7487 0.822869 20.2287 1.37145 20.2287H4.11445C4.66303 20.2287 5.14306 19.7487 5.14306 19.2343V7.19952C5.14306 6.65089 4.66303 6.1709 4.11445 6.1709ZM4.45731 19.2343C4.45731 19.4058 4.28586 19.5429 4.11445 19.5429H1.37145C1.2 19.5429 1.02859 19.3715 1.02859 19.2001V7.19952C1.02859 7.02807 1.16573 6.85666 1.33718 6.85666H4.11445C4.2859 6.85666 4.45731 7.02811 4.45731 7.19952V19.2343Z" fill="white" />
-                                        <path d="M15.7721 5.82888H15.0521C13.7149 5.82888 12.4462 6.41178 11.6234 7.33753V6.8575C11.6234 6.51464 11.2805 6.17174 10.9376 6.17174H7.50888C7.20029 6.17174 6.82312 6.44605 6.82312 6.82318V19.6123C6.82312 19.9895 7.20029 20.2295 7.50888 20.2295H11.2805C11.5891 20.2295 11.9662 19.9895 11.9662 19.6123V12.2063C11.9662 11.0748 12.7891 10.1833 13.852 10.1833C14.4006 10.1833 14.9149 10.389 15.2921 10.7662C15.635 11.0748 15.7721 11.5548 15.7721 12.172V19.5438C15.7721 19.8866 16.115 20.2295 16.4579 20.2295H19.8866C20.2295 20.2295 20.5724 19.8867 20.5724 19.5438V10.6977C20.5723 7.9547 18.4808 5.82888 15.7721 5.82888ZM19.8866 19.5095L19.8523 19.5438H16.4921L16.4579 12.172C16.4579 11.3491 16.2521 10.732 15.8064 10.2863C15.2921 9.77194 14.6063 9.49763 13.8863 9.49763C12.4462 9.53191 11.3148 10.6977 11.3148 12.2063V19.5438H7.54315V6.8575H10.9376L10.9719 6.89177V9.05187L11.8976 8.12611L11.9319 8.09184C12.6177 7.13181 13.8177 6.51464 15.0863 6.51464H15.8064C18.1036 6.51464 19.8866 8.36615 19.8866 10.6977V19.5095Z" fill="white" />
-                                    </svg>
-
-                                </div>
-                            </Link>
-                        </div>
-                        <div className="p-[10px]">
-                            <Link href="#" className={SOCIAL_ICON_CLASS}>
-                                <div className="w-[15px] h-[15px] flex items-center justify-center">
-                                    <svg width="15" height="16" viewBox="0 0 15 16" className="group-hover:scale-75 transition-all"  >
-                                        <path d="M8.71411 6.42961L14.165 0H12.8733L8.14031 5.58274L4.36006 0H0L5.71647 8.44209L0 15.1845H1.29176L6.28994 9.28896L10.2822 15.1845H14.6422L8.71379 6.42961H8.71411ZM6.94487 8.51647L6.36567 7.67583L1.7572 0.986746H3.74127L7.46036 6.38505L8.03955 7.22569L12.8739 14.2427H10.8899L6.94487 8.51679V8.51647Z" fill="white" />
-                                    </svg>
-                                </div>
-                            </Link>
-                        </div>
-                        <div className="p-[10px]">
-                            <Link href="#" className={SOCIAL_ICON_CLASS}>
-                                <div className="w-[15px]  h-[15px] flex items-center justify-center">
-                                    <svg width="23" height="23" viewBox="0 0 23 23" className="group-hover:scale-75 transition-all">
-                                        <path d="M5.95996 0.0743256H16.0586C19.3042 0.0743256 21.9451 2.71446 21.9453 5.96007V16.0587C21.9453 19.3043 19.3042 21.9454 16.0586 21.9454H5.95996C2.71435 21.9452 0.0742188 19.3042 0.0742188 16.0587V5.96007C0.0744187 2.71459 2.71448 0.0745255 5.95996 0.0743256ZM5.95996 1.2169C3.34464 1.2171 1.217 3.34475 1.2168 5.96007V16.0587C1.2168 18.674 3.34452 20.8017 5.95996 20.8019H16.0586C18.6742 20.8019 20.8018 18.6741 20.8018 16.0587V5.96007C20.8016 3.34463 18.6739 1.2169 16.0586 1.2169H5.95996Z" fill="white" stroke="#313232" strokeWidth="0.147775" />
-                                        <path d="M11.0093 5.06331C14.2883 5.06331 16.9565 7.73062 16.9566 11.0096C16.9566 14.2886 14.2884 16.9569 11.0093 16.9569C7.73036 16.9568 5.06305 14.2886 5.06305 11.0096C5.06312 7.73067 7.73041 5.06338 11.0093 5.06331ZM11.0093 6.20589C8.36074 6.20596 6.2057 8.361 6.20563 11.0096C6.20563 13.6584 8.3607 15.8132 11.0093 15.8133C13.6582 15.8133 15.813 13.6585 15.813 11.0096C15.813 8.36096 13.6582 6.20589 11.0093 6.20589Z" fill="white" stroke="#313232" strokeWidth="0.147775" />
-                                        <path d="M17.1743 2.92533C18.1145 2.92548 18.8794 3.69025 18.8794 4.63041C18.8792 5.57046 18.1144 6.33534 17.1743 6.33549C16.2342 6.33549 15.4694 5.57056 15.4692 4.63041C15.4692 3.69031 16.2341 2.92533 17.1743 2.92533ZM17.1743 4.06791C16.8644 4.06791 16.6118 4.3203 16.6118 4.63041C16.612 4.94021 16.8645 5.19193 17.1743 5.19193C17.4842 5.19179 17.7357 4.94014 17.7358 4.63041C17.7358 4.32037 17.4843 4.06806 17.1743 4.06791Z" fill="white" stroke="#313232" strokeWidth="0.147775" />
-                                    </svg>
-                                </div>
-                            </Link>
-                        </div>
-                        <div className="p-[10px]">
-                            <Link href="#" className={SOCIAL_ICON_CLASS}>
-                                <div className="w-[15px] h-[15px] flex items-center justify-center">
-                                    <svg width="30" height="23" viewBox="0 0 30 23" className="group-hover:scale-75 transition-all">
-                                        <path d="M5.9668 0.074585H24.0381C27.2871 0.0746317 29.9307 2.72644 29.9307 5.98572V16.059C29.9307 19.3182 27.2871 21.97 24.0381 21.9701H5.9668C2.71772 21.9701 0.0742188 19.3189 0.0742188 16.059V5.98572C0.0742188 2.72641 2.71772 0.074585 5.9668 0.074585ZM5.9668 1.15076C3.31103 1.15076 1.15039 3.3207 1.15039 5.98572V16.0599C1.15058 18.7248 3.31114 20.8939 5.9668 20.8939H24.0381C26.6937 20.8939 28.8533 18.7254 28.8535 16.0599V5.98572C28.8535 3.32073 26.6938 1.1508 24.0381 1.15076H5.9668Z" fill="white" stroke="#313232" strokeWidth="0.147775" />
-                                        <path d="M11.3668 5.89282C11.534 5.79719 11.7401 5.79906 11.9059 5.89575L20.3903 10.8645V10.8655C20.5553 10.9618 20.6569 11.139 20.6569 11.3303C20.6568 11.4976 20.5788 11.6541 20.4489 11.7551L20.3903 11.7952L11.9059 16.7629C11.8219 16.8118 11.7284 16.8362 11.6344 16.8362C11.5417 16.8362 11.4487 16.8132 11.3658 16.7659C11.1991 16.67 11.0963 16.4908 11.0963 16.2981V6.3606C11.0963 6.16724 11.1994 5.98865 11.3668 5.89282ZM12.1725 15.3586L12.2838 15.2932L18.944 11.3938L19.0524 11.3293L18.944 11.2659L12.2838 7.3645L12.1725 7.29907V15.3586Z" fill="white" stroke="#313232" strokeWidth="0.147775" />
-                                    </svg>
-                                </div>
-                            </Link>
-                        </div>
-
-                    </div>
-                </div>
-                <p className="text-[14px] text-white max-w-[190px]">Copyright © 2025 khimji ramdas. All Rights Reserved.</p>
-
-
-            </div>
-        </section>
-    )
+        <div className="my-[15px] xs:my-[20px] border-b border-white/20">
+          <div className="text-[14px] xs:text-[16px]  text-white font-medium mb-[15px] 2xl:mb-[20px] 3xl:mb-[30px] uppercase">
+            {lang === "en" ? "Follow us" : "تابعنا"}
+          </div>
+          <div className="flex items-center -m-[10px] pb-[40px]">
+            {data?.social_links?.map((item, index) => (
+              <div key={index} className="p-[10px]">
+                <Link href={item?.url} className={SOCIAL_ICON_CLASS}>
+                  <div className="w-[15px] h-[15px] flex items-center justify-center">
+                    <Image
+                      src={item?.icon}
+                      className="w-full h-full object-contain"
+                      width={30}
+                      height={30}
+                      alt={item?.name}
+                    />
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+        <p className="text-[14px] text-white max-w-[190px]">
+          {lang === "en"
+            ? "Copyright © 2025 Khimji Ramdas. All Rights Reserved."
+            : "جميع الحقوق محفوظة © 2025 خيمجي رامداس."}
+        </p>
+      </div>
+    </section>
+  );
 }

@@ -1,3 +1,4 @@
+import { renderHtml } from "@/lib/helper";
 import Image from "next/image";
 
 export default function VentureCard({ item }) {
@@ -8,6 +9,7 @@ export default function VentureCard({ item }) {
         sm:p-[15px] xl:p-[20px] 2xl:p-[25px] 3xl:p-[30px]
         flex flex-wrap overflow-hidden
         rounded-[10px]
+        cursor-pointer
         border border-white
         bg-transparent
         backdrop-blur-[20px] backdrop-saturate-[180%]
@@ -19,22 +21,33 @@ export default function VentureCard({ item }) {
         <div className="w-full h-full overflow-hidden rounded-[10px]">
 
           {/* DESKTOP VIDEO ONLY */}
-          <video
-            autoPlay
+
+          {item?.media_type === "video" ?
+          (<video
+          autoPlay
             loop
             muted
             playsInline
             className="hidden sm:block w-full h-full object-cover"
+            poster={item?.video_thumbnail_image || "/images/placeholder.png"}
           >
             <source src={item.video} type="video/mp4" />
           </video>
-
-          {/* MOBILE IMAGE ONLY */}
+    ) : (
           <Image
-            src={item.mobileImage}
+            src={item?.image || "/images/placeholder.png"}
             width={395}
             height={465}
-            alt={item.title}
+            alt={item?.image_alt_text}
+            className="hidden sm:block w-full h-full object-cover"
+          />
+      )}
+          {/* MOBILE IMAGE ONLY */}
+          <Image
+            src={item.image_mobile}
+            width={395}
+            height={465}
+            alt={item?.image_mobile_alt_text}
             className="block sm:hidden w-full h-full object-cover"
           />
 
@@ -98,7 +111,7 @@ export default function VentureCard({ item }) {
                 p-[12px_8px] xs:p-[12px] sm:p-0
               "
             >
-              <p className="max-sm:text-white">{item.description}</p>
+              {renderHtml(item.description, "max-sm:[&_*]:text-white")}
             </div>
 
             {/* LOGOS */}
@@ -112,7 +125,7 @@ export default function VentureCard({ item }) {
               "
             >
               <div className="flex flex-wrap items-center justify-center gap-1 3xl:gap-4 max-sm:w-[85%] mx-auto p-[10px]">
-                {item.logos.map((logo, i) => (
+                {item?.partners?.map((partner, i) => (
                   <div
                     key={i}
                     className="
@@ -124,8 +137,8 @@ export default function VentureCard({ item }) {
                     "
                   >
                     <Image
-                      src={logo}
-                      alt={logo}
+                      src={partner?.logo}
+                      alt={partner?.logo_alt_text}
                       width={80}
                       height={40}
                       className="object-contain  min-w-[38px] max-w-[38px] 3xl:min-width-[50px] 3xl:max-w-[50px]"

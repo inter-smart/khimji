@@ -32,10 +32,10 @@ export default function InnerHero({
         </picture>
       </div>
       <div className="container py-[20px] sm:py-[30px] lg:py-[40px] 2xl:py-[50px] 3xl:py-[60px] relative z-2">
-        <div
+        <h1
           dangerouslySetInnerHTML={{ __html: title }}
           className="text-[22px] sm:text-[28px] md:text-[34px] lg:text-[45px] 2xl:text-[55px] 3xl:text-[70px] leading-[1.3] font-normal text-white uppercase mb-2.5 sm:mb-[15px] lg:mb-[20px] 2xl:mb-[30px] 3xl:mb-[35px]"
-        ></div>
+        ></h1>
         <BreadCrumb items={breadCrumb_data} />
       </div>
     </section>
