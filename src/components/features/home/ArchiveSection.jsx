@@ -526,7 +526,7 @@ export default function ArchiveSection({ archives, title, lang }) {
                                 backdrop-blur-[20px] lg:backdrop-saturate-[180%] 
                                 shadow-[inset_5px_1px_33px_#f1f1f1,inset_3px_-3px_5px_#fafafa] flex flex-wrap flex-row"
               >
-                <div className="w-full md:w-[200px] lg:w-[280px] xl:w-[350px] 2xl:w-[475px] 3xl:w-[600px] max-md:h-full">
+                <div className="w-full md:w-[200px] lg:w-[280px] xl:w-[350px] 2xl:w-[475px] 3xl:w-[600px] max-xl:h-full">
                   <motion.div
                     className="w-full h-full rounded-[10px] overflow-hidden group aspect-[600/280] cursor-pointer"
                     variants={imageVariants}
