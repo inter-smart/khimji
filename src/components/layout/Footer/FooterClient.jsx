@@ -9,10 +9,10 @@ const FooterMobile = dynamic(() => import("./FooterMobile"), {
   ssr: false,
 });
 const Brands = dynamic(() => import("./Brands"), {
-  ssr: false,
+  ssr: true,
 });
 const SocialLinks = dynamic(() => import("./SocialLinks"), {
-  ssr: false,
+  ssr: true,
 });
 
 const otherLinks = [
