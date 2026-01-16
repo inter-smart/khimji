@@ -12,8 +12,7 @@ const ARROW_ICON_CLASS =
 export default function BannerClient({ data }) {
   return (
     <div>
-      {data?.map((item, index) => (
-        <div key={index}>
+        <div>
           <section className="py-[60px_40px] xl:py-[60px_40px] 2xl:py-[80px_40px] 3xl:py-[145px_60px] max-sm:hidden relative z-0">
             <div className="w-[120px] sm:w-[180px] 2xl:w-[225px] 3xl:w-[280px] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] pointer-events-none absolute -z-1 inset-[0_auto_auto_-2%]"></div>
             <div className="container">
@@ -27,7 +26,7 @@ export default function BannerClient({ data }) {
                       transition={{ duration: 0.8 }}
                       viewport={{ once: true }}
                     >
-                      {item?.title?.split(" ")[0]}
+                      {data[0]?.title?.split(" ")[0]}
                       <motion.span
                         className="text-[#299B8A] block"
                         initial={{ opacity: 0, y: 20 }}
@@ -35,7 +34,7 @@ export default function BannerClient({ data }) {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         viewport={{ once: true }}
                       >
-                        {item?.title?.split(" ")[1]}
+                        {data[0]?.title?.split(" ")[1]}
                       </motion.span>
                     </motion.div>
 
@@ -46,9 +45,9 @@ export default function BannerClient({ data }) {
                       transition={{ duration: 0.8, delay: 0.3 }}
                       viewport={{ once: true }}
                     >
-                      {item?.description}
+                      {data[0]?.description}
                     </motion.p>
-                    {item?.action_type && item?.action_url && (
+                    {data[0]?.action_type && data[0]?.action_url && (
                       <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -57,10 +56,10 @@ export default function BannerClient({ data }) {
                         whileHover={{ x: 10 }}
                       >
                         <Link
-                          href={item?.action_url}
+                          href={data[0]?.action_url}
                           className={CONTACT_BUTTON_CLASS}
                         >
-                          {item?.action_title}
+                          {data[0]?.action_title}
                           <motion.div
                             className={ARROW_ICON_CLASS}
                             whileHover={{ x: 5 }}
@@ -119,7 +118,7 @@ export default function BannerClient({ data }) {
                       loop
                       muted
                       playsInline
-                      poster={item?.video_thumbnail_image? item?.video_thumbnail_image: item?.image}
+                      poster={data[0]?.video_thumbnail_image? data[0]?.video_thumbnail_image: data[0]?.image}
                       className="w-full h-full object-cover
                   [mask-image:url('/images/clipImg.avif')]
                   [mask-repeat:no-repeat]
@@ -130,7 +129,7 @@ export default function BannerClient({ data }) {
                   [-webkit-mask-position:center]
                   [-webkit-mask-size:cover]"
                     >
-                      <source src={item?.video} type="video/mp4" />
+                      <source src={data[0]?.video} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   </motion.div>
@@ -142,7 +141,7 @@ export default function BannerClient({ data }) {
           {/* MOBILE VIEW */}
           <section className="w-full relative h-screen sm:hidden z-0 before:absolute before:top-0 before:content-[''] before:bottom-0 before:w-full before:h-full before:bg-gradient-to-t before:from-black  before:to-black/0 before:opacity-[0.5]">
             <Image
-              src={item?.image_mobile}
+              src={data[0]?.image_mobile}
               className="w-full h-full object-cover absolute top-0 left-0 -z-1 "
               width="440"
               height="930"
@@ -151,20 +150,20 @@ export default function BannerClient({ data }) {
             <div className="container flex items-end h-full py-[60px]">
               <div className="relative z-1 w-full">
                 <div className="text-[40px] xs:text-[50px] text-white font-medium mb-[10px] uppercase leading-[45px] xs:leading-[55px]">
-                  {item?.title?.split(" ")[0]}
+                  {data[0]?.title?.split(" ")[0]}
                   <br />
-                  {item?.title?.split(" ")[1]}
+                  {data[0]?.title?.split(" ")[1]}
                 </div>
                 <p className="text-[16px] xs:text-[20px] text-white max-w-[90%] mb-[25px] xs:mb-[35px]">
-                  {item?.description}
+                  {data[0]?.description}
                 </p>
 
-                {item?.action_type && item?.action_url && (
+                {data[0]?.action_type && data[0]?.action_url && (
                   <Link
-                    href={item?.action_url}
+                    href={data[0]?.action_url}
                     className="text-[16px] xs:text-[18px] text-white font-medium w-fit flex items-center justify-center h-[40px] xs:h-[50px] min-w-[160px] xs:min-w-[180px] p-[8px] border border-white"
                   >
-                    {item?.action_title}
+                    {data[0]?.action_title}
                     <div className="w-[14px] xs:w-[17px] h-[14px] flex items-center mx-[10px]">
                       <svg
                         className="w-full h-full object-contain"
@@ -189,7 +188,6 @@ export default function BannerClient({ data }) {
             </div>
           </section>
         </div>
-      ))}
     </div>
   );
 }
