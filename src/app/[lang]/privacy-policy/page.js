@@ -1,3 +1,5 @@
+import DynamicMeta from "@/components/layout/DynamicMeta";
+import { parseOtherMeta } from "@/lib/helper";
 import { getData } from "@/lib/server/api";
 import { DefaultOgImage } from "@/lib/server/constants";
 import dynamic from "next/dynamic";
@@ -19,7 +21,8 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const { meta_title, meta_description, meta_keywords, title } = data;
+  const { meta_title, meta_description, other_meta_tags, meta_keywords, title } = data;
+  const { other } = parseOtherMeta(other_meta_tags);
 
   return {
     title: meta_title || title || "Policy",
@@ -42,6 +45,10 @@ export async function generateMetadata({ params }) {
       images: [DefaultOgImage],
     },
 
+    other: {
+      ...other,
+    },
+
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/policies/privacy-policy`,
     },
@@ -52,11 +59,16 @@ export default async function page({ params }) {
   const resolvedParams = await params;
   const { lang } = resolvedParams;
 
-  const { data, error } = await getData("policy?slug=privacy-policy", lang);
+  const { data, error, structuredData, lineScripts } = await getData("policy?slug=privacy-policy", lang);
 
   if (error || !data) {
     return <NotFound />;
   }
 
-  return <PrivacySection data={data} />;
+  return (
+    <>
+      <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />
+      <PrivacySection data={data} />
+    </>
+  );
 }

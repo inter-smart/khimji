@@ -1,11 +1,6 @@
 import InnerHero from "@/components/common/InnerHero";
-import { getData } from "@/lib/server/api";
 
-export default async function BlogBanner({ lang }) {
-  const { data: cms } = await getData("blogs", lang);
-
-  const bannerData = cms?.banner;
-
+export default async function BlogBanner({ bannerData }) {
   return (
     <InnerHero
       coverImage={bannerData?.banner}

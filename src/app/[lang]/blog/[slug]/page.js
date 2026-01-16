@@ -1,4 +1,5 @@
-import { parseMetaTags, parseOtherMeta } from "@/lib/helper";
+import DynamicMeta from "@/components/layout/DynamicMeta";
+import { parseOtherMeta } from "@/lib/helper";
 import { getData } from "@/lib/server/api";
 import { DefaultOgImage } from "@/lib/server/constants";
 import dynamic from "next/dynamic";
@@ -67,20 +68,15 @@ export async function generateMetadata({ params }) {
 export default async function page({ params }) {
   const resolvedParams = await Promise.resolve(params);
   const { slug, lang } = resolvedParams;
-  const { data, error, structuredData } = await getData(`blog-details?slug=${slug}`, lang);
+  const { data, error, structuredData, lineScripts } = await getData(`blog-details?slug=${slug}`, lang);
 
   if (!data || error) {
     notFound();
   }
 
-  console.log(structuredData);
-
   return (
     <>
-      {structuredData &&
-        structuredData.map((schema, index) => (
-          <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-        ))}
+      <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />
       <BlogDetailSection data={data} />
       {data?.related_blogs?.length > 0 && <RelatedBlogSection data={data?.related_blogs} />}
     </>

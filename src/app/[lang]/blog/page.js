@@ -1,7 +1,8 @@
+import DynamicMeta from "@/components/layout/DynamicMeta";
+import { getData } from "@/lib/server/api";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-
 
 const BlogBanner = dynamic(() => import("@/components/features/blog/BlogBanner"));
 const BlogList = dynamic(() => import("@/components/features/blog/BlogList"));
@@ -10,7 +11,7 @@ const BlogListSkeleton = dynamic(() => import("@/components/layout/Skeletons/Blo
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const lang = resolvedParams.lang;
-  const { title, description, keywords, twitter, openGraph, alternates } = await getMetaData("blogs", lang, "blog");
+  const { title, description, keywords, twitter, openGraph, alternates, other } = await getMetaData("blogs", lang, "blog");
 
   return {
     title,
@@ -19,6 +20,7 @@ export async function generateMetadata({ params }) {
     twitter,
     openGraph,
     alternates,
+    other,
   };
 }
 
@@ -27,9 +29,18 @@ export default async function Page({ params, searchParams }) {
   const resollvedSearchParams = await searchParams;
   const { lang } = resolvedParams;
 
+  const { data: cms, error, structuredData, lineScripts } = await getData("blogs", lang);
+
+  if (error || !cms) {
+    return <div>Error loading data</div>;
+  }
+
+  const bannerData = cms?.banner;
+
   return (
     <>
-      <BlogBanner lang={lang} />
+      <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />
+      <BlogBanner bannerData={bannerData} />
       <Suspense fallback={<BlogListSkeleton />}>
         <BlogList lang={lang} searchParams={resollvedSearchParams} />
       </Suspense>

@@ -139,195 +139,11 @@ export function parseInitiativeDescription(html = "") {
   return sections;
 }
 
-/**
- * Parses HTML meta tags and scripts into Next.js metadata format
- * Handles: <meta>, <link>, <script type="application/ld+json">
- *
- * @param {string} htmlString - Raw HTML string from admin
- * @returns {Object} - Parsed metadata object { other, links, scripts }
- */
-export function parseMetaTags(htmlString) {
-  if (!htmlString || typeof htmlString !== "string" || htmlString.trim() === "") {
-    return { other: {}, links: [], scripts: [] };
-  }
-
-  const other = {};
-  const links = [];
-  const scripts = [];
-
-  try {
-    // ==========================================
-    // 1. PARSE META TAGS
-    // ==========================================
-    // Matches: <meta name="..." content="...">
-    //          <meta property="..." content="...">
-    //          <meta http-equiv="..." content="...">
-    //          <meta charset="...">
-    const metaRegex = /<meta\s+([^>]+?)>/gi;
-    let metaMatch;
-
-    while ((metaMatch = metaRegex.exec(htmlString)) !== null) {
-      const attributes = metaMatch[1];
-
-      // Extract all possible attribute combinations
-      const nameMatch = attributes.match(/name\s*=\s*["']([^"']+)["']/i);
-      const propertyMatch = attributes.match(/property\s*=\s*["']([^"']+)["']/i);
-      const httpEquivMatch = attributes.match(/http-equiv\s*=\s*["']([^"']+)["']/i);
-      const charsetMatch = attributes.match(/charset\s*=\s*["']?([^"'\s>]+)["']?/i);
-      const contentMatch = attributes.match(/content\s*=\s*["']([^"']*)["']/i);
-      const itemPropMatch = attributes.match(/itemprop\s*=\s*["']([^"']+)["']/i);
-
-      const content = contentMatch ? contentMatch[1] : "";
-
-      // Handle different meta tag types
-      if (charsetMatch) {
-        // <meta charset="utf-8"> - Usually handled by Next.js automatically
-        other["charset"] = charsetMatch[1];
-      } else if (nameMatch) {
-        // <meta name="..." content="...">
-        const key = nameMatch[1];
-        other[key] = content;
-      } else if (propertyMatch) {
-        // <meta property="..." content="..."> (OpenGraph, Facebook, etc.)
-        const key = propertyMatch[1];
-        other[key] = content;
-      } else if (httpEquivMatch) {
-        // <meta http-equiv="..." content="...">
-        const key = httpEquivMatch[1];
-        other[key] = content;
-      } else if (itemPropMatch) {
-        // <meta itemprop="..." content="..."> (Microdata)
-        const key = `itemprop:${itemPropMatch[1]}`;
-        other[key] = content;
-      }
-    }
-
-    // ==========================================
-    // 2. PARSE LINK TAGS
-    // ==========================================
-    // Matches: <link rel="..." href="...">
-    //          <link rel="icon" href="...">
-    //          <link rel="canonical" href="...">
-    //          <link rel="alternate" hreflang="..." href="...">
-    const linkRegex = /<link\s+([^>]+?)>/gi;
-    let linkMatch;
-
-    while ((linkMatch = linkRegex.exec(htmlString)) !== null) {
-      const attributes = linkMatch[1];
-
-      const relMatch = attributes.match(/rel\s*=\s*["']([^"']+)["']/i);
-      const hrefMatch = attributes.match(/href\s*=\s*["']([^"']+)["']/i);
-      const hreflangMatch = attributes.match(/hreflang\s*=\s*["']([^"']+)["']/i);
-      const typeMatch = attributes.match(/type\s*=\s*["']([^"']+)["']/i);
-      const sizesMatch = attributes.match(/sizes\s*=\s*["']([^"']+)["']/i);
-      const mediaMatch = attributes.match(/media\s*=\s*["']([^"']+)["']/i);
-      const asMatch = attributes.match(/as\s*=\s*["']([^"']+)["']/i);
-      const crossoriginMatch = attributes.match(/crossorigin\s*=\s*["']([^"']+)["']/i);
-
-      if (relMatch && hrefMatch) {
-        const linkObj = {
-          rel: relMatch[1],
-          href: hrefMatch[1],
-        };
-
-        // Add optional attributes if present
-        if (hreflangMatch) linkObj.hreflang = hreflangMatch[1];
-        if (typeMatch) linkObj.type = typeMatch[1];
-        if (sizesMatch) linkObj.sizes = sizesMatch[1];
-        if (mediaMatch) linkObj.media = mediaMatch[1];
-        if (asMatch) linkObj.as = asMatch[1];
-        if (crossoriginMatch) linkObj.crossOrigin = crossoriginMatch[1];
-
-        links.push(linkObj);
-      }
-    }
-
-    // ==========================================
-    // 3. PARSE JSON-LD SCRIPTS
-    // ==========================================
-    // Matches: <script type="application/ld+json">{...}</script>
-    const scriptRegex = /<script[^>]*type\s*=\s*["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
-    let scriptMatch;
-
-    while ((scriptMatch = scriptRegex.exec(htmlString)) !== null) {
-      try {
-        const jsonContent = scriptMatch[1].trim();
-        // Remove HTML comments if present
-        const cleanedJson = jsonContent.replace(/<!--[\s\S]*?-->/g, "");
-        const parsedJson = JSON.parse(cleanedJson);
-        scripts.push(parsedJson);
-      } catch (e) {
-        console.warn("Failed to parse JSON-LD script:", e.message);
-        // Continue parsing other scripts even if one fails
-      }
-    }
-
-    // ==========================================
-    // 4. PARSE REGULAR SCRIPTS (Optional)
-    // ==========================================
-    // Matches: <script src="..."></script> or <script>...</script>
-    // Note: Be careful with this - only include if you trust the admin input
-    const externalScriptRegex = /<script[^>]*src\s*=\s*["']([^"']+)["'][^>]*><\/script>/gi;
-    let externalScriptMatch;
-    const externalScripts = [];
-
-    while ((externalScriptMatch = externalScriptRegex.exec(htmlString)) !== null) {
-      const srcMatch = externalScriptMatch[1];
-      if (srcMatch) {
-        externalScripts.push({ src: srcMatch, type: "external" });
-      }
-    }
-
-    // Only add external scripts if there are any
-    if (externalScripts.length > 0) {
-      // Store separately to handle with caution
-      other["_external_scripts"] = externalScripts;
-    }
-
-    // ==========================================
-    // 5. HANDLE SPECIAL CASES
-    // ==========================================
-
-    // Remove duplicates from 'other' (keep last occurrence)
-    const uniqueOther = {};
-    Object.keys(other).forEach((key) => {
-      uniqueOther[key] = other[key];
-    });
-
-    // Handle viewport separately if needed (Next.js has built-in viewport support)
-    if (uniqueOther["viewport"]) {
-      // Store but flag it - Next.js might handle this differently
-      uniqueOther["_viewport_override"] = uniqueOther["viewport"];
-    }
-
-    return {
-      other: uniqueOther,
-      links,
-      scripts,
-    };
-  } catch (error) {
-    console.error("Error parsing meta tags:", error);
-    return { other: {}, links: [], scripts: [] };
-  }
-}
-
-/**
- * Sanitize and validate parsed metadata
- * Removes potentially dangerous or conflicting tags
- *
- * @param {Object} parsedMeta - Output from parseMetaTags
- * @returns {Object} - Sanitized metadata
- */
 export function sanitizeMetadata(parsedMeta) {
-  const { other, links, scripts } = parsedMeta;
+  const { other, links, scripts, inlineScripts } = parsedMeta;
 
-  // List of meta tags that should NOT be overridden (Next.js manages these)
-  const reservedMetaTags = [
-    "viewport", // Next.js handles this via viewport export
-    "charset", // Next.js sets this automatically
-  ];
+  const reservedMetaTags = ["viewport", "charset"];
 
-  // Filter out reserved tags
   const sanitizedOther = {};
   Object.keys(other).forEach((key) => {
     if (!reservedMetaTags.includes(key.toLowerCase())) {
@@ -335,10 +151,8 @@ export function sanitizeMetadata(parsedMeta) {
     }
   });
 
-  // Validate links (ensure hrefs are valid URLs or paths)
   const sanitizedLinks = links.filter((link) => {
     try {
-      // Check if href is a valid URL or relative path
       if (link.href.startsWith("http") || link.href.startsWith("https") || link.href.startsWith("/")) {
         return true;
       }
@@ -348,61 +162,31 @@ export function sanitizeMetadata(parsedMeta) {
     }
   });
 
+  // ⚠️ SECURITY WARNING: Inline scripts can be dangerous!
+  // Only allow if you trust the admin completely
+  const sanitizedInlineScripts = inlineScripts
+    .map((script) => {
+      if (script.type === "inline") {
+        // You can add content filtering here
+        // For example, block certain dangerous patterns
+        const dangerousPatterns = [/eval\s*\(/gi, /Function\s*\(/gi, /document\.write/gi, /<iframe/gi];
+
+        const isDangerous = dangerousPatterns.some((pattern) => pattern.test(script.content));
+
+        if (isDangerous) {
+          console.warn("Blocked potentially dangerous inline script:", script.content);
+          return null;
+        }
+      }
+      return script;
+    })
+    .filter(Boolean);
+
   return {
     other: sanitizedOther,
     links: sanitizedLinks,
     scripts,
-  };
-}
-
-/**
- * Helper function to merge admin meta with existing OpenGraph/Twitter data
- * Prevents duplication and gives priority to admin-defined values
- *
- * @param {Object} existing - Existing metadata object
- * @param {Object} parsed - Parsed metadata from admin
- * @returns {Object} - Merged metadata
- */
-export function mergeMetadata(existing, parsed) {
-  const { other, links, scripts } = sanitizeMetadata(parsed);
-
-  // Extract OpenGraph tags from 'other'
-  const ogTags = {};
-  const twitterTags = {};
-  const remainingOther = {};
-
-  Object.keys(other).forEach((key) => {
-    if (key.startsWith("og:")) {
-      // Remove 'og:' prefix for Next.js openGraph object
-      const ogKey = key.replace("og:", "");
-      ogTags[ogKey] = other[key];
-    } else if (key.startsWith("twitter:")) {
-      // Remove 'twitter:' prefix for Next.js twitter object
-      const twitterKey = key.replace("twitter:", "");
-      twitterTags[twitterKey] = other[key];
-    } else {
-      remainingOther[key] = other[key];
-    }
-  });
-
-  return {
-    ...existing,
-    openGraph: {
-      ...existing.openGraph,
-      ...ogTags,
-    },
-    twitter: {
-      ...existing.twitter,
-      ...twitterTags,
-    },
-    other: {
-      ...existing.other,
-      ...remainingOther,
-    },
-    // Add links if any (icons, canonical, etc.)
-    ...(links.length > 0 && { links }),
-    // Store scripts separately
-    structuredData: scripts.length > 0 ? scripts : existing.structuredData,
+    inlineScripts: sanitizedInlineScripts,
   };
 }
 
@@ -452,4 +236,156 @@ export function parseOtherMeta(htmlString) {
   }
 
   return { other, scripts };
+}
+
+export function parseMetaTags(htmlString) {
+  if (!htmlString || typeof htmlString !== "string" || htmlString.trim() === "") {
+    return { other: {}, links: [], scripts: [], inlineScripts: [] };
+  }
+
+  const other = {};
+  const links = [];
+  const scripts = [];
+  const inlineScripts = []; // NEW: Store inline scripts separately
+
+  try {
+    // ==========================================
+    // 1. PARSE META TAGS (same as before)
+    // ==========================================
+    const metaRegex = /<meta\s+([^>]+?)>/gi;
+    let metaMatch;
+
+    while ((metaMatch = metaRegex.exec(htmlString)) !== null) {
+      const attributes = metaMatch[1];
+
+      const nameMatch = attributes.match(/name\s*=\s*["']([^"']+)["']/i);
+      const propertyMatch = attributes.match(/property\s*=\s*["']([^"']+)["']/i);
+      const httpEquivMatch = attributes.match(/http-equiv\s*=\s*["']([^"']+)["']/i);
+      const charsetMatch = attributes.match(/charset\s*=\s*["']?([^"'\s>]+)["']?/i);
+      const contentMatch = attributes.match(/content\s*=\s*["']([^"']*)["']/i);
+      const itemPropMatch = attributes.match(/itemprop\s*=\s*["']([^"']+)["']/i);
+
+      const content = contentMatch ? contentMatch[1] : "";
+
+      if (charsetMatch) {
+        other["charset"] = charsetMatch[1];
+      } else if (nameMatch) {
+        other[nameMatch[1]] = content;
+      } else if (propertyMatch) {
+        other[propertyMatch[1]] = content;
+      } else if (httpEquivMatch) {
+        other[httpEquivMatch[1]] = content;
+      } else if (itemPropMatch) {
+        other[`itemprop:${itemPropMatch[1]}`] = content;
+      }
+    }
+
+    // ==========================================
+    // 2. PARSE LINK TAGS (same as before)
+    // ==========================================
+    const linkRegex = /<link\s+([^>]+?)>/gi;
+    let linkMatch;
+
+    while ((linkMatch = linkRegex.exec(htmlString)) !== null) {
+      const attributes = linkMatch[1];
+
+      const relMatch = attributes.match(/rel\s*=\s*["']([^"']+)["']/i);
+      const hrefMatch = attributes.match(/href\s*=\s*["']([^"']+)["']/i);
+      const hreflangMatch = attributes.match(/hreflang\s*=\s*["']([^"']+)["']/i);
+      const typeMatch = attributes.match(/type\s*=\s*["']([^"']+)["']/i);
+      const sizesMatch = attributes.match(/sizes\s*=\s*["']([^"']+)["']/i);
+      const mediaMatch = attributes.match(/media\s*=\s*["']([^"']+)["']/i);
+      const asMatch = attributes.match(/as\s*=\s*["']([^"']+)["']/i);
+      const crossoriginMatch = attributes.match(/crossorigin\s*=\s*["']([^"']+)["']/i);
+
+      if (relMatch && hrefMatch) {
+        const linkObj = {
+          rel: relMatch[1],
+          href: hrefMatch[1],
+        };
+
+        if (hreflangMatch) linkObj.hreflang = hreflangMatch[1];
+        if (typeMatch) linkObj.type = typeMatch[1];
+        if (sizesMatch) linkObj.sizes = sizesMatch[1];
+        if (mediaMatch) linkObj.media = mediaMatch[1];
+        if (asMatch) linkObj.as = asMatch[1];
+        if (crossoriginMatch) linkObj.crossOrigin = crossoriginMatch[1];
+
+        links.push(linkObj);
+      }
+    }
+
+    // ==========================================
+    // 3. PARSE ALL SCRIPT TAGS
+    // ==========================================
+
+    // 3a. JSON-LD Scripts
+    const jsonLdRegex = /<script[^>]*type\s*=\s*["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
+    let jsonLdMatch;
+
+    while ((jsonLdMatch = jsonLdRegex.exec(htmlString)) !== null) {
+      try {
+        const jsonContent = jsonLdMatch[1].trim();
+        const cleanedJson = jsonContent.replace(/<!--[\s\S]*?-->/g, "");
+        const parsedJson = JSON.parse(cleanedJson);
+        scripts.push(parsedJson);
+      } catch (e) {
+        console.warn("Failed to parse JSON-LD script:", e.message);
+      }
+    }
+
+    // 3b. External Scripts (with src attribute)
+    const externalScriptRegex = /<script[^>]*src\s*=\s*["']([^"']+)["'][^>]*>[\s\S]*?<\/script>/gi;
+    let externalMatch;
+
+    while ((externalMatch = externalScriptRegex.exec(htmlString)) !== null) {
+      const srcMatch = externalMatch[1];
+      if (srcMatch) {
+        inlineScripts.push({
+          type: "external",
+          src: srcMatch,
+          content: null,
+        });
+      }
+    }
+
+    // 3c. Inline Scripts (NEW - handles your case)
+    // Match <script>...</script> that are NOT JSON-LD and NOT external
+    const inlineScriptRegex = /<script(?![^>]*type\s*=\s*["']application\/ld\+json["'])(?![^>]*src\s*=)([^>]*)>([\s\S]*?)<\/script>/gi;
+    let inlineMatch;
+
+    while ((inlineMatch = inlineScriptRegex.exec(htmlString)) !== null) {
+      const attributes = inlineMatch[1];
+      const scriptContent = inlineMatch[2].trim();
+
+      if (scriptContent) {
+        const scriptObj = {
+          type: "inline",
+          content: scriptContent,
+          attributes: attributes.trim(),
+        };
+
+        // Parse any attributes (async, defer, type, etc.)
+        const asyncMatch = attributes.match(/async/i);
+        const deferMatch = attributes.match(/defer/i);
+        const typeMatch = attributes.match(/type\s*=\s*["']([^"']+)["']/i);
+
+        if (asyncMatch) scriptObj.async = true;
+        if (deferMatch) scriptObj.defer = true;
+        if (typeMatch) scriptObj.scriptType = typeMatch[1];
+
+        inlineScripts.push(scriptObj);
+      }
+    }
+
+    return {
+      other,
+      links,
+      scripts, // JSON-LD only
+      inlineScripts, // Inline + External scripts
+    };
+  } catch (error) {
+    console.error("Error parsing meta tags:", error);
+    return { other: {}, links: [], scripts: [], inlineScripts: [] };
+  }
 }

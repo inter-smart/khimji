@@ -1,7 +1,7 @@
+import DynamicMeta from "@/components/layout/DynamicMeta";
 import { getData } from "@/lib/server/api";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
-
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
 const FaqSection = dynamic(() => import("@/components/features/faq/FaqSection"));
@@ -9,7 +9,7 @@ const FaqSection = dynamic(() => import("@/components/features/faq/FaqSection"))
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const lang = resolvedParams.lang;
-  const { title, description, keywords, twitter, openGraph, alternates } = await getMetaData("faq", lang);
+  const { title, description, keywords, twitter, openGraph, alternates, other } = await getMetaData("faq", lang, "faq");
 
   return {
     title,
@@ -18,13 +18,14 @@ export async function generateMetadata({ params }) {
     twitter,
     openGraph,
     alternates,
+    other,
   };
 }
 
 export default async function Page({ params }) {
   const resolvedParams = await params;
   const { lang } = resolvedParams;
-  const { data, error } = await getData("faq", lang);
+  const { data, error, structuredData, lineScripts } = await getData("faq", lang);
 
   if (error || !data) {
     return <div>Error loading data</div>;
@@ -34,6 +35,7 @@ export default async function Page({ params }) {
 
   return (
     <>
+      <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />
       <InnerHero
         coverImage={banner?.banner || "/images/faq_innerbanner.jpg"}
         coverImageMobile={banner?.banner_mobile || "/images/faq_innerbanner.jpg"}

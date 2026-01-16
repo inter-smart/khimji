@@ -1,7 +1,7 @@
+import DynamicMeta from "@/components/layout/DynamicMeta";
 import { getData } from "@/lib/server/api";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
-
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
 const NationSection = dynamic(() => import("@/components/features/ICV-initiative/NationSection"));
@@ -11,7 +11,7 @@ const QuestionSectionClient = dynamic(() => import("@/components/features/ICV-in
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const lang = resolvedParams.lang;
-  const { title, description, keywords, twitter, openGraph, alternates } = await getMetaData("icv-intiatives", lang, "icv");
+  const { title, description, keywords, twitter, openGraph, alternates, other } = await getMetaData("icv-intiatives", lang, "icv-intiatives");
 
   return {
     title,
@@ -20,6 +20,7 @@ export async function generateMetadata({ params }) {
     twitter,
     openGraph,
     alternates,
+    other,
   };
 }
 
@@ -28,7 +29,7 @@ export default async function Page({ params }) {
   const lang = resolvedParams.lang;
 
   // Simple GET request
-  const { data, error } = await getData("icv-intiatives", lang);
+  const { data, error, structuredData, lineScripts } = await getData("icv-intiatives", lang);
 
   if (!data || error) {
     return <div>Error loading data</div>;
@@ -37,28 +38,25 @@ export default async function Page({ params }) {
 
   return (
     <>
+      <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />
       <InnerHero
         coverImage={banner?.banner}
         coverImageMobile={banner?.banner_mobile}
         alt={banner?.banner_alt_text}
         title={banner?.banner_title}
-        breadCrumb_data={[{ link: { href: "/", label: "Home" } }, { link: { href: "/ICV", label: "ICV Initiatives" } }]}
+        breadCrumb_data={[{ link: { href: "/", label: "Home" } }, { link: { href: "/icv-initiatives", label: "ICV Initiatives" } }]}
       />
 
       {intiatives_cms && (
         <NationSection
-        title={intiatives_cms?.section1_title}
-        description={intiatives_cms?.section1_description}
-        image={intiatives_cms?.section1_image}
-        image_alt_text={intiatives_cms?.section1_image_alt_text}
-      />
+          title={intiatives_cms?.section1_title}
+          description={intiatives_cms?.section1_description}
+          image={intiatives_cms?.section1_image}
+          image_alt_text={intiatives_cms?.section1_image_alt_text}
+        />
       )}
-      {initiatives?.length > 0 && (
-        <ProcurementSection initiatives={initiatives} />
-      )}
-      <QuestionSectionClient
-        intiatives_cms={intiatives_cms}
-      />
+      {initiatives?.length > 0 && <ProcurementSection initiatives={initiatives} />}
+      <QuestionSectionClient intiatives_cms={intiatives_cms} />
     </>
   );
 }

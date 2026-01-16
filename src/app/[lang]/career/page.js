@@ -1,7 +1,7 @@
+import DynamicMeta from "@/components/layout/DynamicMeta";
 import { getData } from "@/lib/server/api";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
-import Script from "next/script";
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
 const CareerSection = dynamic(() => import("@/components/features/career/CareerSection"));
@@ -9,7 +9,7 @@ const CareerSection = dynamic(() => import("@/components/features/career/CareerS
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const lang = resolvedParams.lang;
-  const { title, description, keywords, twitter, openGraph, alternates } = await getMetaData("careers", lang, "career");
+  const { title, description, keywords, twitter, openGraph, alternates, other } = await getMetaData("careers", lang, "career");
 
   return {
     title,
@@ -18,6 +18,7 @@ export async function generateMetadata({ params }) {
     twitter,
     openGraph,
     alternates,
+    other,
   };
 }
 
@@ -25,7 +26,7 @@ export default async function page({ params }) {
   const resolvedParams = await params;
   const { lang } = resolvedParams;
 
-  const { data, error, structuredData } = await getData("careers", lang);
+  const { data, error, structuredData, lineScripts } = await getData("careers", lang);
 
   if (error || !data) {
     // Fallback to local data in case of error
@@ -41,16 +42,7 @@ export default async function page({ params }) {
 
   return (
     <>
-      {structuredData &&
-        structuredData.map((schema, index) => (
-          <Script
-            id={`schema-${index}`}
-            key={index}
-            type="application/ld+json"
-            strategy="beforeInteractive"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-          />
-        ))}
+      <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />
       <InnerHero
         coverImage={banner?.banner}
         coverImageMobile={banner?.banner_mobile}

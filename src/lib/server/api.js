@@ -1,4 +1,4 @@
-import { parseOtherMeta } from "../helper";
+import { parseMetaTags, parseOtherMeta, sanitizeMetadata } from "../helper";
 import { API_BASE_URL, DEFAULT_COUNTRY } from "./constants";
 import { getRequestContext } from "./getCookieData";
 
@@ -43,18 +43,22 @@ export async function getData(endpoint, lang = "en", country = null, options = {
 
     const data = await response.json();
 
-    const otherMeta = data?.data?.meta_tags?.other_meta_tags;
-    let structuredData = null;
+    const otherMeta = data?.data?.meta_tags?.other_meta_tags || data?.data?.other_meta_tags;
+    let structuredData = [];
+    let lineScripts = [];
 
     if (otherMeta) {
-      const { scripts = [] } = parseOtherMeta(otherMeta) || {};
-      structuredData = scripts.length ? scripts : null;
+      const parsedMeta = parseMetaTags(otherMeta) || {};
+      const { scripts = [], inlineScripts = [] } = sanitizeMetadata(parsedMeta);
+      structuredData = scripts.length ? scripts : [];
+      lineScripts = inlineScripts.length ? inlineScripts : [];
     }
 
     return {
       error: data?.status === false,
       data: data?.status ? data.data : null,
       structuredData,
+      lineScripts,
     };
   } catch (error) {
     return {
