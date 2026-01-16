@@ -163,7 +163,7 @@ function ArchiveCard({ item, category }) {
     <video
       src={item.video}
       poster={item?.video_thumbnail_image || "/images/placeholder.png"}
-      className="w-full h-full object-cover"
+      className="w-full h-full hidden sm:block object-cover"
       muted
       loop
       autoPlay
@@ -175,9 +175,18 @@ function ArchiveCard({ item, category }) {
           alt={item?.image_alt_text || "Archive"}
           width={385}
           height={360}
-          className="w-full h-full object-cover group-hover:scale-[1.1] transition-all duration-500"
+          className="w-full h-full hidden sm:block object-cover group-hover:scale-[1.1] transition-all duration-500"
         />
   )}
+
+   <Image
+              src={item?.image_mobile}
+              width={395}
+              height={465}
+              alt={item?.image_mobile_alt_text}
+              className="block sm:hidden w-full h-full object-cover"
+            />
+  
       </div>
       <div className="w-[var(--image-size)] sm:w-[calc(100%-var(--image-size))] pl-[15px] sm:pl-[20px] lg:pl-[25px] 2xl:pl-[30px] 3xl:pl-[40px]">
         <div className="text-[15px] sm:text-[16px] 2xl:text-[18px] 3xl:text-[22px] leading-[1.2] font-normal text-black mb-[15px] sm:mb-[20px] 2xl:mb-[25px] 3xl:mb-[35px]">

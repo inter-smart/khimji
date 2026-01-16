@@ -109,7 +109,7 @@ export default function VendordetailsSection({ breadCrumb_data, pageData }) {
               className="sm:w-1/2 p-[10px] 2xl:p-[12px] 3xl:p-[15px]"
             >
               <div className="w-full h-full block rounded-[10px] overflow-hidden relative p-[1px] group transition-all hover:bg-gradient-to-r hover:from-[#0B436A] hover:to-[#299B8A]">
-                <div className="p-[20px_15px] xl:p-[25px_20px] 2xl:p-[35px_25px] 3xl:p-[40px_35px] bg-[#F7FAFA] rounded-[10px] overflow-hidden">
+                <div className="p-[20px_15px] xl:p-[25px_20px] 2xl:p-[35px_25px] 3xl:p-[40px_35px] bg-[#F7FAFA] rounded-[10px] overflow-hidden h-full">
                   <div className="w-full rounded-[10px] overflow-hidden mb-[15px] 2xl:mb-[25px] 3xl:mb-[40px]">
                     {item?.media_type === "video" ? (
                       <video
