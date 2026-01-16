@@ -2,12 +2,13 @@ import { getData } from "@/lib/server/api";
 import dynamic from "next/dynamic";
 import { getMetaData } from "@/lib/server/metaApi";
 import HomeClient from "@/components/clientWrappers/HomeClient";
+import DynamicMeta from "@/components/layout/DynamicMeta";
 const BannerSection = dynamic(() => import("@/components/features/home/BannerSection"), { ssr: true });
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const lang = resolvedParams.lang;
-  const { title, description, keywords, twitter, openGraph, alternates } = await getMetaData("home", lang);
+  const { title, description, keywords, twitter, openGraph, alternates, other } = await getMetaData("home", lang);
 
   return {
     title,
@@ -16,6 +17,7 @@ export async function generateMetadata({ params }) {
     twitter,
     openGraph,
     alternates,
+    other,
   };
 }
 
@@ -23,7 +25,7 @@ export default async function Page({ params }) {
   const resolvedParams = await params;
   const lang = resolvedParams.lang;
 
-  const { data, error } = await getData("home", lang);
+  const { data, error, structuredData, lineScripts } = await getData("home", lang);
 
   if (!data || error) {
     return <div>Error loading data</div>;
@@ -33,6 +35,7 @@ export default async function Page({ params }) {
 
   return (
     <>
+      <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />
       <BannerSection data={sliders} />
       <HomeClient data={rest} lang={lang} />
     </>

@@ -3,7 +3,6 @@ import { getData } from "@/lib/server/api";
 import { getRequestContext } from "@/lib/server/getCookieData";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
-import Script from "next/script";
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
 const ContactSection = dynamic(() => import("@/components/features/contact/ContactSection"));
@@ -28,9 +27,7 @@ export default async function Page({ params }) {
   const resolvedParams = await params;
   const { country } = await getRequestContext();
   const lang = resolvedParams.lang;
-  const { data, error, structuredData } = await getData("contact", lang);
-
-  console.log("DATT", structuredData);
+  const { data, error, structuredData, lineScripts } = await getData("contact", lang);
 
   if (!data || error) {
     return <div>Error loading data</div>;
@@ -39,16 +36,7 @@ export default async function Page({ params }) {
 
   return (
     <>
-      {structuredData &&
-        structuredData.map((schema, index) => (
-          <Script
-            id={`schema-${index}`}
-            key={index}
-            type="application/ld+json"
-            strategy="beforeInteractive"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-          />
-        ))}
+      <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />
       <InnerHero
         coverImage={banner?.banner || "/images/contact_innerbanner.jpg"}
         coverImageMobile={banner?.banner_mobile || "/images/contact_innerbanner.jpg"}

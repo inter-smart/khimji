@@ -1,8 +1,9 @@
+import DynamicMeta from "@/components/layout/DynamicMeta";
+import { parseOtherMeta } from "@/lib/helper";
 import { getData } from "@/lib/server/api";
 import { DefaultOgImage } from "@/lib/server/constants";
 import dynamic from "next/dynamic";
-import { redirect } from "next/navigation";
-
+import { notFound } from "next/navigation";
 
 const VendordetailsSection = dynamic(() => import("@/components/features/venture/VendordetailsSection"));
 
@@ -23,6 +24,7 @@ export async function generateMetadata({ params }) {
     meta_title,
     meta_description,
     meta_keywords,
+    other_meta_tags,
     title,
     published_on,
     banner_type,
@@ -35,6 +37,7 @@ export async function generateMetadata({ params }) {
   const featuredImage = banner_type === "video" ? banner_video_thumbnail_image : banner_image;
 
   const ogImage = featuredImage || DefaultOgImage;
+  const { other } = parseOtherMeta(other_meta_tags);
   const imageAltText = banner_alt_text || banner_mobile_alt_text || title || "Venture image";
 
   return {
@@ -65,6 +68,10 @@ export async function generateMetadata({ params }) {
       images: [ogImage],
     },
 
+    other: {
+      ...other,
+    },
+
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/venture/${slug}`,
     },
@@ -75,22 +82,25 @@ export default async function Page({ params }) {
   const resolvedParams = await params;
   const { slug, lang } = resolvedParams;
 
-  const { data, error } = await getData(`venture-details?slug=${slug}`, lang);
+  const { data, error, structuredData, lineScripts } = await getData(`venture-details?slug=${slug}`, lang);
 
-    if (!data|| error) {
-     redirect(`/${lang}`)
-   }
+  if (!data || error) {
+    notFound();
+  }
   return (
-    <VendordetailsSection
-      breadCrumb_data={[
-        { href: `/${lang}`, label: "Home" },
-        { href: "/venture", label: "Venture" },
-        {
-          href: `/venture/${slug}`,
-          label: data?.title,
-        },
-      ]}
-      pageData={data}
-    />
+    <>
+      <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />
+      <VendordetailsSection
+        breadCrumb_data={[
+          { href: `/${lang}`, label: "Home" },
+          { href: "/venture", label: "Venture" },
+          {
+            href: `/venture/${slug}`,
+            label: data?.title,
+          },
+        ]}
+        pageData={data}
+      />
+    </>
   );
 }

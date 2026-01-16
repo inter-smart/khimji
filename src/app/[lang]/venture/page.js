@@ -1,8 +1,8 @@
+import DynamicMeta from "@/components/layout/DynamicMeta";
 import { getData } from "@/lib/server/api";
 import { getRequestContext } from "@/lib/server/getCookieData";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
-
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
 const VentureListingSection = dynamic(() => import("@/components/features/venture/VentureListingSection"));
@@ -10,7 +10,7 @@ const VentureListingSection = dynamic(() => import("@/components/features/ventur
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const lang = resolvedParams.lang;
-  const { title, description, keywords, twitter, openGraph, alternates } = await getMetaData("ventures", lang, "venture");
+  const { title, description, keywords, twitter, openGraph, alternates, other } = await getMetaData("ventures", lang, "venture");
 
   return {
     title,
@@ -19,6 +19,7 @@ export async function generateMetadata({ params }) {
     twitter,
     openGraph,
     alternates,
+    other,
   };
 }
 
@@ -29,7 +30,7 @@ export default async function Page({ params }) {
   const context = await getRequestContext();
   const { country } = context;
   // Simple GET request
-  const { data, error } = await getData("ventures", lang, country);
+  const { data, error, structuredData, lineScripts } = await getData("ventures", lang, country);
 
   if (!data || error) {
     return <div>Error loading data</div>;
@@ -38,6 +39,7 @@ export default async function Page({ params }) {
 
   return (
     <>
+      <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />
       <div className="overflow-hidden">
         <InnerHero
           coverImage={banner?.banner}
