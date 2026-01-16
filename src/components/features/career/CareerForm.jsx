@@ -17,6 +17,7 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function CareerForm({ careerId, onSuccess }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState(null);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const form = useForm({
@@ -38,6 +39,7 @@ export default function CareerForm({ careerId, onSuccess }) {
     }
 
     setIsSubmitting(true);
+    setFormError(null);
 
     try {
       // Execute reCAPTCHA
@@ -60,7 +62,7 @@ export default function CareerForm({ careerId, onSuccess }) {
       const response = await multipartPostToAPI("career-enquiry", formData);
 
       if (!response.status) {
-        toast.error(response.message || "Failed to submit application");
+        setFormError(response.message || "Failed to submit application");
         return;
       }
 
@@ -85,9 +87,9 @@ export default function CareerForm({ careerId, onSuccess }) {
           onSuccess();
         }
       }
-    } catch (error) {
-      console.error("❌ Submission error:", error);
-      toast.error("An error occurred while submitting your application");
+    } catch (err) {
+      console.error("❌ Submission error:", err);
+      setFormError("An error occurred while submitting your application");
     } finally {
       setIsSubmitting(false);
     }
@@ -166,11 +168,11 @@ export default function CareerForm({ careerId, onSuccess }) {
                     <div className="text-[14px] 2xl:text-[16px] 3xl:text-[20px] leading-[1.2] font-normal text-black mb-[5px] sm:mb-[10px]">
                       {value && value[0] ? value[0].name : "Upload Resume"}
                     </div>
-                    {!value &&
-                    <div className="text-[12px] 2xl:text-[13px] 3xl:text-[15px] leading-[1.2] font-normal text-black/50">
-                      Max file size 5 MB, PDF / DOC / DOCX Format
-                    </div>
-                    }
+                    {!value && (
+                      <div className="text-[12px] 2xl:text-[13px] 3xl:text-[15px] leading-[1.2] font-normal text-black/50">
+                        Max file size 5 MB, PDF / DOC / DOCX Format
+                      </div>
+                    )}
                   </div>
                   <Input
                     id="resume"
@@ -209,6 +211,11 @@ export default function CareerForm({ careerId, onSuccess }) {
             </FormItem>
           )}
         />
+        {formError && (
+          <div className="mb-[15px] sm:mb-[20px] p-[10px_15px] sm:p-[12px_20px] bg-red-50 border border-red-200 rounded-[5px] text-red-600 text-[13px] sm:text-[14px] 2xl:text-[15px] 3xl:text-[17px] leading-[1.4]">
+            {formError}
+          </div>
+        )}
         <div className="w-full h-auto flex justify-end">
           <Button
             type="button"
