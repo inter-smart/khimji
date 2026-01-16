@@ -11,7 +11,7 @@ const QuestionSectionClient = dynamic(() => import("@/components/features/ICV-in
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const lang = resolvedParams.lang;
-  const { title, description, keywords, twitter, openGraph, alternates, other } = await getMetaData("icv-intiatives", lang, "icv");
+  const { title, description, keywords, twitter, openGraph, alternates, other } = await getMetaData("icv-intiatives", lang, "icv-intiatives");
 
   return {
     title,
@@ -44,7 +44,7 @@ export default async function Page({ params }) {
         coverImageMobile={banner?.banner_mobile}
         alt={banner?.banner_alt_text}
         title={banner?.banner_title}
-        breadCrumb_data={[{ link: { href: "/", label: "Home" } }, { link: { href: "/ICV", label: "ICV Initiatives" } }]}
+        breadCrumb_data={[{ link: { href: "/", label: "Home" } }, { link: { href: "/icv-initiatives", label: "ICV Initiatives" } }]}
       />
 
       {intiatives_cms && (

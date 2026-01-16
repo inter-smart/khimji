@@ -11,18 +11,9 @@ import Link from "next/link";
 import { renderHtml } from "@/lib/helper";
 import dynamic from "next/dynamic";
 
-const ICVinitiativeMobile = dynamic(() =>
-  import("./home-mobile/ICVinitiativeMobile")
-);
+const ICVinitiativeMobile = dynamic(() => import("./home-mobile/ICVinitiativeMobile"));
 
-export default function ICVSection({
-  title,
-  description,
-  banner,
-  banner_alt_text,
-  initiatives,
-  lang,
-}) {
+export default function ICVSection({ title, description, banner, banner_alt_text, initiatives, lang }) {
   const isRTL = lang == " ar";
 
   const icvVideos = [
@@ -74,29 +65,14 @@ export default function ICVSection({
           >
             {initiatives?.map((item, index) => (
               <SwiperSlide key={index}>
-                <Link
-                  href="/ICV"
-                  className="relative z-0 w-full h-full overflow-hidden"
-                >
+                <Link href="/icv-initiatives" className="relative z-0 w-full h-full overflow-hidden">
                   {item?.media_type === "video" ? (
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-cover"
-                    >
+                    <video autoPlay loop muted playsInline className="w-full h-full object-cover">
                       <source src={item.video} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   ) : (
-                    <Image
-                      src={item?.image}
-                      alt={item?.image_alt_text}
-                      width={500}
-                      height={500}
-                      className="w-full h-full object-cover"
-                    />
+                    <Image src={item?.image} alt={item?.image_alt_text} width={500} height={500} className="w-full h-full object-cover" />
                   )}
 
                   {/* Gradient overlay */}
@@ -104,9 +80,7 @@ export default function ICVSection({
 
                   {/* Title */}
                   <div className="absolute bottom-0 left-0 p-[20px] pb-[90px] xl:pb-[130px] 2xl:pb-[140px] 3xl:pb-[170px] w-full z-10 flex items-end">
-                    <div className="2xl:text-[20px] 3xl:text-[30px] text-white font-medium uppercase">
-                      {item.title}
-                    </div>
+                    <div className="2xl:text-[20px] 3xl:text-[30px] text-white font-medium uppercase">{item.title}</div>
                   </div>
                 </Link>
               </SwiperSlide>
@@ -115,14 +89,7 @@ export default function ICVSection({
         </motion.div>
       </section>
 
-      <ICVinitiativeMobile
-        title={title}
-        description={description}
-        banner={banner}
-        banner_alt_text={banner_alt_text}
-        data={initiatives}
-        lang={lang}
-      />
+      <ICVinitiativeMobile title={title} description={description} banner={banner} banner_alt_text={banner_alt_text} data={initiatives} lang={lang} />
     </>
   );
 }

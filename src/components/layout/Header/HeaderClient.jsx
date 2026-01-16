@@ -5,35 +5,12 @@ import Link from "next/link";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import SearchBox from "@/components/common/SearchBox";
 import HeaderSelect from "@/components/common/HeaderSelect";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { useRouter } from "next/navigation";
 
@@ -54,45 +31,34 @@ export const LANGUAGES = {
   },
 };
 
-
 const navMenu = [
   {
     label: "Home",
-    link: "/"
-    
+    link: "/",
   },
   {
     label: "Ventures",
-    link: "/venture"
-    
+    link: "/venture",
   },
   {
     label: "About",
-    link: "/heritage"
-    
+    link: "/heritage",
   },
   {
     label: "ICV",
-    link: "/ICV"
-    
+    link: "/icv-initiatives",
   },
   {
     label: "Careers",
-    link: "/career"
-    
+    link: "/career",
   },
   {
     label: "Contact",
-    link: "/contact"
+    link: "/contact",
   },
-]
+];
 
-
-export default function Header({
-  businessTypePromise,
-  locationsPromise,
-  lang,
-}) {
+export default function Header({ businessTypePromise, locationsPromise, lang }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const currentPath = usePathname();
   const [open, setOpen] = useState(false);
@@ -121,11 +87,7 @@ export default function Header({
 
   return (
     <header>
-      <div
-        className={`w-full bg-white max-sm:hidden ${
-          isScrolled ? "stickyHeader" : ""
-        }`}
-      >
+      <div className={`w-full bg-white max-sm:hidden ${isScrolled ? "stickyHeader" : ""}`}>
         <div className="container">
           <div className="w-full flex flex-wrap items-center justify-between p-[15px_0] border-[rgba(0,0,0,0.1)] border-b ">
             {/* logo */}
@@ -156,10 +118,7 @@ export default function Header({
 
                 {/* Business Select */}
 
-                <HeaderSelect
-                  businessTypePromise={businessTypePromise}
-                  locationsPromise={locationsPromise}
-                />
+                <HeaderSelect businessTypePromise={businessTypePromise} locationsPromise={locationsPromise} />
 
                 {/* country Dropdown */}
                 <DropdownMenu>
@@ -171,9 +130,7 @@ export default function Header({
                       height={20}
                       className="rounded-sm object-cover w-[28px] h-[20px]"
                     />
-                    <span className="font-medium text-[16px] uppercase">
-                      {languageData?.name}
-                    </span>
+                    <span className="font-medium text-[16px] uppercase">{languageData?.name}</span>
                   </DropdownMenuTrigger>
 
                   <DropdownMenuContent align="end">
@@ -181,18 +138,10 @@ export default function Header({
                       <DropdownMenuItem
                         key={lang.code}
                         onClick={() => changeLanguage(lang.code)}
-                        className={`cursor-pointer ${
-                          lang.code === lang.code ? "bg-accent" : ""
-                        }`}
+                        className={`cursor-pointer ${lang.code === lang.code ? "bg-accent" : ""}`}
                       >
                         <div className="flex items-center gap-2 w-full">
-                          <Image
-                            src={lang.flag}
-                            alt={lang.fullName}
-                            width={20}
-                            height={20}
-                            className="rounded-sm object-cover w-[20px] h-[20px]"
-                          />
+                          <Image src={lang.flag} alt={lang.fullName} width={20} height={20} className="rounded-sm object-cover w-[20px] h-[20px]" />
                           <span>{lang.fullName}</span>
                         </div>
                       </DropdownMenuItem>
@@ -215,33 +164,18 @@ export default function Header({
         >
           <div
             className={`w-full  ${
-              isScrolled
-                ? "stickyHeader pt-[10px] w-full !bg-[#279689ed] backdrop-blur-[5px]"
-                : "absolute top-0 start-0  pt-[30px]"
+              isScrolled ? "stickyHeader pt-[10px] w-full !bg-[#279689ed] backdrop-blur-[5px]" : "absolute top-0 start-0  pt-[30px]"
             }`}
           >
             <div className="container relative ">
               <div className="flex items-center justify-between w-full pb-[15px] relative after:absolute after:bottom-0 after:content-[''] after:start-0 after:w-full after:h-[1px] after:bg-white/20 ">
-                <Link
-                  href="/"
-                  className="w-[130px] xs:w-[140px] sm:w-[170px] p-[10px_0]"
-                >
-                  <Image
-                    src="/images/Logo-white-footer.png"
-                    width="200"
-                    height="115"
-                    className="object-contain"
-                    alt="logo"
-                  />
+                <Link href="/" className="w-[130px] xs:w-[140px] sm:w-[170px] p-[10px_0]">
+                  <Image src="/images/Logo-white-footer.png" width="200" height="115" className="object-contain" alt="logo" />
                 </Link>
                 <div className="flex items-center">
                   <div className="me-[5px] sm:me-[20px]">
                     <div className="relative inline-flex rounded-full max-w-[130px]">
-                      <Select
-                        value={languageData?.code}
-                        onValueChange={(lang) => changeLanguage(lang)}
-                        modal={false}
-                      >
+                      <Select value={languageData?.code} onValueChange={(lang) => changeLanguage(lang)} modal={false}>
                         <SelectTrigger
                           className="
                             h-[27px]
@@ -278,17 +212,8 @@ export default function Header({
                       </Select>
 
                       {/* Border Beams */}
-                      <BorderBeam
-                        duration={8}
-                        size={50}
-                        className="from-transparent via-white/70 to-transparent"
-                      />
-                      <BorderBeam
-                        duration={8}
-                        size={50}
-                        reverse
-                        className="from-transparent via-white/70 to-transparent"
-                      />
+                      <BorderBeam duration={8} size={50} className="from-transparent via-white/70 to-transparent" />
+                      <BorderBeam duration={8} size={50} reverse className="from-transparent via-white/70 to-transparent" />
                     </div>
                   </div>
                   <div className="me-[5px] sm:me-[20px]">
@@ -296,38 +221,16 @@ export default function Header({
                   </div>
                   <SheetTrigger className="w-[25px] h-[25px] flex items-center justify-center">
                     <svg width="24" height="18" viewBox="0 0 24 18">
-                      <path
-                        d="M0 8.29166H24"
-                        stroke="white"
-                        strokeWidth="2.58333"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M0 16.2917H24"
-                        stroke="white"
-                        strokeWidth="2.58333"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M0 1.29166H24"
-                        stroke="white"
-                        strokeWidth="2.58333"
-                        strokeLinejoin="round"
-                      />
+                      <path d="M0 8.29166H24" stroke="white" strokeWidth="2.58333" strokeLinejoin="round" />
+                      <path d="M0 16.2917H24" stroke="white" strokeWidth="2.58333" strokeLinejoin="round" />
+                      <path d="M0 1.29166H24" stroke="white" strokeWidth="2.58333" strokeLinejoin="round" />
                     </svg>
                   </SheetTrigger>
                 </div>
               </div>
-              <div
-                className={`flex items-center gap-3 max-w-1/2 pt-[15px] ${
-                  isScrolled ? "opacity-0 h-0" : ""
-                }`}
-              >
+              <div className={`flex items-center gap-3 max-w-1/2 pt-[15px] ${isScrolled ? "opacity-0 h-0" : ""}`}>
                 <div className="w-1/2">
-                  <HeaderSelect
-                    businessTypePromise={businessTypePromise}
-                    locationsPromise={locationsPromise}
-                  />
+                  <HeaderSelect businessTypePromise={businessTypePromise} locationsPromise={locationsPromise} />
                 </div>
               </div>
             </div>
@@ -411,22 +314,17 @@ export default function Header({
                         </Link>
                       </AccordionItem> */}
 
-                      {navMenu?.map((item, index)=>(
-                      <AccordionItem
-                        key={index}
-                        value="item-6"
-                        className="border-b border-[#f4f4f4]"
-                      >
-                        <Link
-                          href={item?.link}
-                          className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
-                          aria-label="menuLink"
-                        >
-                          <span>{item?.label}</span>
-                        </Link>
-                      </AccordionItem>
-                      ))
-}
+                      {navMenu?.map((item, index) => (
+                        <AccordionItem key={index} value="item-6" className="border-b border-[#f4f4f4]">
+                          <Link
+                            href={item?.link}
+                            className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
+                            aria-label="menuLink"
+                          >
+                            <span>{item?.label}</span>
+                          </Link>
+                        </AccordionItem>
+                      ))}
                     </Accordion>
                   </div>
                 </SheetDescription>
