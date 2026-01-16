@@ -1,11 +1,13 @@
 import DynamicMeta from "@/components/layout/DynamicMeta";
-import { parseOtherMeta } from "@/lib/helper";
+import { NoDataState, parseOtherMeta } from "@/lib/helper";
 import { getData } from "@/lib/server/api";
 import { DefaultOgImage } from "@/lib/server/constants";
 import dynamic from "next/dynamic";
 import NotFound from "../not-found";
 
-const PrivacySection = dynamic(() => import("@/components/features/privacy/PrivacySection"));
+const PrivacySection = dynamic(() =>
+  import("@/components/features/privacy/PrivacySection")
+);
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
@@ -21,7 +23,13 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const { meta_title, meta_description, other_meta_tags, meta_keywords, title } = data;
+  const {
+    meta_title,
+    meta_description,
+    other_meta_tags,
+    meta_keywords,
+    title,
+  } = data;
   const { other } = parseOtherMeta(other_meta_tags);
 
   return {
@@ -59,10 +67,12 @@ export default async function page({ params }) {
   const resolvedParams = await params;
   const { lang } = resolvedParams;
 
-  const { data, error, structuredData, lineScripts } = await getData("policy?slug=privacy-policy", lang);
-
-  if (error || !data) {
-    return <NotFound />;
+  const { data, error, structuredData, lineScripts } = await getData(
+    "policy?slug=privacy-policy",
+    lang
+  );
+  if (!data) {
+    return  <NoDataState title="Content Not Found" message="There is no data found" />
   }
 
   return (

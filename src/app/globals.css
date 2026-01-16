@@ -407,3 +407,47 @@ section {
   background: linear-gradient(#0b436a, #299b8a) padding-box,
     linear-gradient(180deg, #0b436a 0%, #299b8a 100%) border-box;
 }
+
+/* globals.css or app/globals.css */
+
+/* Force GPU acceleration for transforms */
+.transition-transform,
+.transition-all {
+  will-change: transform;
+}
+
+/* Remove will-change after animation completes */
+.transition-transform:not(:hover):not(:focus),
+.transition-all:not(:hover):not(:focus) {
+  will-change: auto;
+}
+
+/* Optimize Swiper specifically */
+.swiper {
+  contain: layout style paint;
+  transform: translateZ(0); /* Force GPU layer */
+}
+
+.swiper-slide {
+  contain: layout style paint;
+  will-change: transform;
+}
+
+/* Footer optimizations */
+footer,
+section[class*="bg-gradient"] {
+  contain: layout style paint;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 580px;
+}
+
+/* Prevent layout shift on images */
+img {
+  content-visibility: auto;
+}
+
+/* Optimize hover effects to use only transform/opacity */
+a:hover,
+button:hover {
+  will-change: transform, opacity;
+}

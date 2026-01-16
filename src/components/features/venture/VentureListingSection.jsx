@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import VentureCard from "@/components/common/VentureCard";
 import { useState, useEffect } from "react";
-import { renderHtml } from "@/lib/helper";
+import { NoDataState, renderHtml } from "@/lib/helper";
 import { useParams } from "next/navigation";
 
 export default function VentureListingSection({ data, title, context }) {
@@ -64,7 +64,7 @@ useEffect(() => {
 
 
   if (!data || data.length === 0) {
-    return <NoDataState message="There are no ventures available." />;
+    return <NoDataState title = "No Ventures Found" message="There are no ventures available." />;
   }
 
   return (
@@ -133,7 +133,7 @@ useEffect(() => {
               ) : error ? (
                 <ErrorState message={error} />
               ) : ventures.length === 0 ? (
-                <NoDataState message="There are no ventures available for this category" />
+                <NoDataState title = "No Ventures Found" message="There are no ventures available for this category" />
               ) : (
                 <div>
                   <div className="mb-[20px] 2xl:mb-[40px] 3xl:mb-[60px]">
@@ -227,30 +227,4 @@ function ErrorState({ message }) {
   );
 }
 
-function NoDataState({ message }) {
-  return (
-    <div className="w-full h-[400px] flex items-center justify-center">
-      <div className="text-center">
-        <div className="w-[60px] h-[60px] bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg
-            className="w-[30px] h-[30px] text-gray-400"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-            />
-          </svg>
-        </div>
-        <p className="text-[16px] 2xl:text-[18px] text-[#666] font-medium mb-2">
-          No Ventures Found
-        </p>
-        <p className="text-[14px] 2xl:text-[16px] text-[#999]">{message}.</p>
-      </div>
-    </div>
-  );
-}
+
