@@ -416,3 +416,31 @@ export function NoDataState({title, message }) {
     </div>
   );
 }
+
+
+
+export const splitIntoSections = (html) => {
+  if (!html) return [];
+
+  // Split by <strong> tags
+  const parts = html.split(/(<strong>.*?<\/strong>)/g).filter(Boolean);
+
+  // If no <strong> tags, return the whole text as one section
+  if (!parts.some((p) => p.startsWith("<strong>"))) {
+    return [{ title: "", description: html.trim() }];
+  }
+
+  const sections = [];
+
+  for (let i = 0; i < parts.length; i++) {
+    const part = parts[i];
+    if (part.startsWith("<strong>")) {
+      const title = part.replace(/<\/?strong>/g, "").trim();
+      const description = parts[i + 1] ? parts[i + 1].trim() : "";
+      sections.push({ title, description });
+      i++; // skip description
+    }
+  }
+
+  return sections;
+};

@@ -4,15 +4,15 @@ import { useState } from "react";
 import Link from "next/link";
 import { Heading } from "@/components/layout/Heading";
 import Image from "next/image";
-import { parseInitiativeDescription, renderHtml } from "@/lib/helper";
+import {
+  parseInitiativeDescription,
+  renderHtml,
+  splitIntoSections,
+} from "@/lib/helper";
 import { Button } from "@/components/ui/button";
 
 export default function ProcurementSection({ initiatives }) {
   const [isExpanded, setIsExpanded] = useState(false);
-
-  const procurementData = initiatives[0]?.initiatives || [];
-
-  const buildingData = initiatives[1]?.initiatives || [];
 
   return (
     <section className="">
@@ -242,8 +242,8 @@ export default function ProcurementSection({ initiatives }) {
                 ? "lg:flex-row-reverse"
                 : ""
               : index % 2 === 1
-              ? "lg:flex-row-reverse"
-              : ""
+                ? "lg:flex-row-reverse"
+                : ""
           }`}
               >
                 {/* IMAGE */}
@@ -256,8 +256,8 @@ export default function ProcurementSection({ initiatives }) {
               item.logo
                 ? "aspect-[770/530]"
                 : isExpanded
-                ? "aspect-[770/830]"
-                : "aspect-[800/570]"
+                  ? "aspect-[770/830]"
+                  : "aspect-[800/570]"
             }`}
                   >
                     <div className="w-full h-full overflow-hidden rounded-[10px]">
@@ -325,41 +325,50 @@ export default function ProcurementSection({ initiatives }) {
                         </ul>
                       )}
 
-                      {/* DESCRIPTION */}
-                      {!item.logo
-                        ? (() => {
-                            const sections = parseInitiativeDescription(
-                              item.description
-                            );
-                            return (
-                              <>
-                                {sections.map((section, i) => (
-                                  <div key={i}>
-                                    {(i === 0 || isExpanded) && (
-                                      <>
-                                        <h3 className="text-[15px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] 3xl:text-[25px] font-medium bg-gradient-to-r from-[#0B436A] to-[#299B8A] bg-clip-text text-transparent uppercase tracking-wide my-[14px]">
-                                          {section.title}
-                                        </h3>
-                                        <div className="text-[14px] lg:text-[15px] xl:text-[16px] 2xl:text-[18px] text-gray-700 [&_p]:mb-4">
-                                          {renderHtml(section.content)}
-                                        </div>
-                                      </>
-                                    )}
-                                  </div>
-                                ))}
+                      {(() => {
+                        const sections = splitIntoSections(item.description);
+                        const isExpandable = sections.length > 1;
+                        const sectionStyles =
+                          "[&_strong]:text-[15px] [&_strong]:lg:text-[16px] [&_strong]:xl:text-[18px] [&_strong]:2xl:text-[20px] [&_strong]:3xl:text-[25px] [&_strong]:font-medium [&_strong]:bg-gradient-to-r [&_strong]:from-[#0B436A] [&_strong]:to-[#299B8A] [&_strong]:bg-clip-text [&_strong]:text-transparent [&_strong]:uppercase [&_strong]:tracking-wide [&_strong]:my-[14px] text-[14px] lg:text-[15px] xl:text-[16px] 2xl:text-[18px] text-gray-700 [&_p]:mb-4";
+                        const result = `<strong>${sections[0]?.title}</strong>${sections[0]?.description}`;
+                        if (!sections.length) return null; // <-- early exit if no section
 
-                                {sections.length > 1 && (
-                                  <button
-                                    onClick={() => setIsExpanded(!isExpanded)}
-                                    className="text-[18px] text-[#000000] flex items-center gap-2 border border-[#000] w-fit h-[40px] px-4 mt-[30px]"
-                                  >
-                                    {isExpanded ? "Show Less" : "Show More"}
-                                  </button>
+                        return (
+                          <>
+                            {!isExpanded && sections[0] && (
+                              <div>
+                                {renderHtml(
+                                  sections[0].title
+                                    ? `<strong>${sections[0].title}</strong>${sections[0].description}`
+                                    : sections[0].description,
+                                  sectionStyles,
                                 )}
-                              </>
-                            );
-                          })()
-                        : renderHtml(item.description)}
+                              </div>
+                            )}
+
+                            {isExpanded &&
+                              sections.map((section, index) => (
+                                <div key={index}>
+                                  {renderHtml(
+                                    section.title
+                                      ? `<strong>${section.title}</strong>${section.description}`
+                                      : section.description,
+                                    sectionStyles,
+                                  )}
+                                </div>
+                              ))}
+
+                            {isExpandable && (
+                              <button
+                                onClick={() => setIsExpanded(!isExpanded)}
+                                className="text-[18px] text-[#000000] flex items-center gap-2 border border-[#000] w-fit h-[40px] px-4 mt-[30px]"
+                              >
+                                {isExpanded ? "Show Less" : "Show More"}
+                              </button>
+                            )}
+                          </>
+                        );
+                      })()}
                     </div>
                   </div>
                 </div>
