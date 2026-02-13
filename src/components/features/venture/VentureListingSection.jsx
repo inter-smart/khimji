@@ -50,21 +50,21 @@ export default function VentureListingSection({ data, title, context }) {
     }
   };
 
-useEffect(() => {
-  if (!activeSlug) return;
-  fetchVentures(activeSlug);
-}, [activeSlug, business_type, country, lang]);
+  useEffect(() => {
+    if (!activeSlug) return;
+    fetchVentures(activeSlug);
+  }, [activeSlug, business_type, country, lang]);
 
 
-useEffect(() => {
-  if (data?.length) {
-    setActiveSlug(data[0].slug);
-  }
-}, [data, business_type, country, lang]);
+  useEffect(() => {
+    if (data?.length) {
+      setActiveSlug(data[0].slug);
+    }
+  }, [data, business_type, country, lang]);
 
 
   if (!data || data.length === 0) {
-    return <NoDataState title = "No Ventures Found" message="There are no ventures available." />;
+    return <NoDataState title="No Ventures Found" message="There are no ventures available." />;
   }
 
   return (
@@ -86,7 +86,7 @@ useEffect(() => {
             {/* Tabs Header */}
             <TabsList className="flex items-center  bg-transparent -m-[3px] max-sm:w-full">
               {data?.map((item, index) => (
-                <div key={index} className="w-1/2 px-[3px]">
+                <div key={index} className="w-full px-[3px]">
                   <TabsTrigger
                     value={item?.slug}
                     // onClick={() => setActiveSlug(item.slug)}
@@ -133,7 +133,7 @@ useEffect(() => {
               ) : error ? (
                 <ErrorState message={error} />
               ) : ventures.length === 0 ? (
-                <NoDataState title = "No Ventures Found" message="There are no ventures available for this category" />
+                <NoDataState title="No Ventures Found" message="There are no ventures available for this category" />
               ) : (
                 <div>
                   <div className="mb-[20px] 2xl:mb-[40px] 3xl:mb-[60px]">

@@ -13,7 +13,8 @@ export default function ArchiveSection({ archives, title, lang }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [globeReady, setGlobeReady] = useState(false);
-  const isRTL = lang == " ar";
+  const isRTL = lang?.trim() === "ar";
+
   const router = useRouter();
   const transformArchivesToFrontend = (backendArchives) => {
     const frontendData = {};
@@ -425,11 +426,10 @@ export default function ArchiveSection({ archives, title, lang }) {
                   setCurrentIndex(0);
                 }}
                 className={`text-[16px] lg:text-[12px] xl:text-[14px] 2xl:text-[16px] 3xl:text-[18px] max-lg:p-[10px_17px] tracking-wide transition-colors cursor-pointer 
-                                     uppercase rounded-[40px] max-lg:border max-lg:border-[#0b426a22] max-lg:bg-white ${
-                                       activeCategory === cat
-                                         ? " max-lg:bg-gradient-to-r from-[#0B436A] to-[#299B8A] lg:bg-transparent text-white lg:text-[#289989] font-medium"
-                                         : "text-[#000000] hover:text-[#289989]"
-                                     }`}
+                                     uppercase rounded-[40px] max-lg:border max-lg:border-[#0b426a22] max-lg:bg-white ${activeCategory === cat
+                    ? " max-lg:bg-gradient-to-r from-[#0B436A] to-[#299B8A] lg:bg-transparent text-white lg:text-[#289989] font-medium"
+                    : "text-[#000000] hover:text-[#289989]"
+                  }`}
               >
                 {cat}
               </button>
@@ -533,7 +533,7 @@ export default function ArchiveSection({ archives, title, lang }) {
                     onClick={handleClick}
                   >
                     {currentItem?.media_type === "video" &&
-                    currentItem?.video ? (
+                      currentItem?.video ? (
                       <video
                         src={currentItem.video}
                         poster={
@@ -546,8 +546,8 @@ export default function ArchiveSection({ archives, title, lang }) {
                         playsInline
                         autoPlay
                         preload="metadata"
-                        // onMouseEnter={(e) => e.currentTarget.play()}
-                        // onMouseLeave={(e) => e.currentTarget.pause()}
+                      // onMouseEnter={(e) => e.currentTarget.play()}
+                      // onMouseLeave={(e) => e.currentTarget.pause()}
                       />
                     ) : (
                       <Image
@@ -652,9 +652,8 @@ export default function ArchiveSection({ archives, title, lang }) {
                       ].map((item, idx) => (
                         <motion.div
                           key={idx}
-                          className={`w-full ${
-                            idx === 1 ? "md:w-3/5" : "md:w-2/5"
-                          } p-[8px]`}
+                          className={`w-full ${idx === 1 ? "md:w-3/5" : "md:w-2/5"
+                            } p-[8px]`}
                           custom={idx}
                           variants={iconItemVariants}
                           initial="hidden"

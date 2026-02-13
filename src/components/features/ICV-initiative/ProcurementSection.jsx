@@ -15,9 +15,10 @@ export default function ProcurementSection({ initiatives }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <section className="">
+    <section className="relative">
+         <div className="w-[120px] sm:w-[180px] 2xl:w-[225px] 3xl:w-[280px] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] pointer-events-none absolute -z-1 inset-[10%_auto_auto_10%]"></div>
       <div className="container">
-        <div className="flex flex-wrap -m-[8px] mb-[25px] 2xl:mb-[35px] 3xl:mb-[50px]">
+        <div className="flex flex-wrap -m-[8px] mb-[25px] 2xl:mb-[35px] 3xl:mb-[50px] ">
           {initiatives?.map((item, index) => (
             <div key={index} className="p-[8px]">
               <Button

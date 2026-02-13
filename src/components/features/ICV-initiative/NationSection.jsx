@@ -10,7 +10,8 @@ export default function NationSection({
     image_alt_text
 }) {
     return (
-        <section className="py-[40px] xl:py-[60px] 2xl:py-[90px] 3xl:py-[140px]">
+        <section className="py-[40px] xl:py-[60px] 2xl:py-[90px] 3xl:py-[140px] relative">
+             <div className="w-[120px] sm:w-[180px] 2xl:w-[225px] 3xl:w-[280px] h-auto aspect-square bg-[#1a9af577] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] pointer-events-none absolute right-0 -z-1 inset-[0_auto_-2%]"></div>
             <div className="container">
                 <div className="flex flex-wrap -m-[7px]">
                     <div className="w-full md:w-1/2 xl:w-7/12 p-[7px]">

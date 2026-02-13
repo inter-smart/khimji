@@ -128,7 +128,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang }) 
                       alt={languageData?.fullName}
                       width={28}
                       height={20}
-                      className="rounded-sm object-cover w-[28px] h-[20px]"
+                      className="rounded-[100px] object-cover w-[30px] h-[30px] 2xl:w-[35px] 2xl:h-[35px]"
                     />
                     <span className="font-medium text-[16px] uppercase">{languageData?.name}</span>
                   </DropdownMenuTrigger>
