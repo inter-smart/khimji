@@ -5,7 +5,7 @@ export default function VentureCard({ item }) {
   return (
     <div
       className="
-        relative z-0 w-full h-full
+        relative z-0 w-full h-full min-h-[260px] lg:min-[350px] xl:min-h-[320px] 2xl:min-[400px] 3xl:min-h-[485px]
         sm:p-[15px] xl:p-[20px] 2xl:p-[25px] 3xl:p-[30px]
         flex flex-wrap overflow-hidden
         rounded-[10px]

@@ -6,7 +6,8 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
 export default function HeritageSection({ title, timelines, data, lang }) {
-  const isRTL = lang == " ar";
+  const isRTL = lang?.trim() === "ar";
+
 
   const getPointOnQuadraticBezier = (t, p0, p1, p2) => {
     const x = Math.pow(1 - t, 2) * p0.x + 2 * (1 - t) * t * p1.x + Math.pow(t, 2) * p2.x;

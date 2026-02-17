@@ -14,7 +14,8 @@ import dynamic from "next/dynamic";
 const ICVinitiativeMobile = dynamic(() => import("./home-mobile/ICVinitiativeMobile"));
 
 export default function ICVSection({ title, description, banner, banner_alt_text, initiatives, lang }) {
-  const isRTL = lang == " ar";
+  const isRTL = lang?.trim() === "ar";
+
 
   const icvVideos = [
     { src: "/videos/icv-1.mp4", title: "Business" },

@@ -74,7 +74,8 @@ const Counter = ({ end, suffix = "" }) => {
 
 export default function HeritageSection({ title, description, banner, banner_alt_text, metrics, timelines, image, image_alt, lang }) {
   const counterContainerRef = useRef(null);
-  const isRTL = lang == " ar";
+  const isRTL = lang?.trim() === "ar";
+
 
   // Animation variants
   const containerVariants = {
@@ -269,13 +270,13 @@ export default function HeritageSection({ title, description, banner, banner_alt
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
               >
-                <CircularSwiper timeline={timelines} />
+                <CircularSwiper timeline={timelines} lang={lang} />
               </motion.div>
             </div>
 
             <div className="w-full lg:w-1/2">
               <motion.div className="flex flex-wrap" variants={slideInFromRight}>
-                <div className="w-[320px] xl:w-[375px] 2xl:w-[475px] 3xl:w-[600px]">
+                <div className="w-[350px] xl:w-[400px] 2xl:w-[500px] 3xl:w-[650px]">
                   <motion.div
                     className="w-full h-full p-[15px] xl:p-[25px] 2xl:p-[30px] 3xl:p-[40px] rounded-[10px] overflow-hidden max-h-[750px] aspect-[530/660]
                                         border border-white bg-transparent
@@ -287,7 +288,7 @@ export default function HeritageSection({ title, description, banner, banner_alt
                       initial={{ opacity: 0, scale: 1.1 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 1, delay: 0.8 }}
-                      className="group overflow-hidden rounded-[10px] "
+                      className="group w-full h-full overflow-hidden rounded-[10px] "
                     >
                       <Image
                         src={image}
@@ -302,7 +303,7 @@ export default function HeritageSection({ title, description, banner, banner_alt
                 </div>
 
                 <div
-                  className="w-[calc(100%-320px)] xl:w-[calc(100%-375px)] 2xl:w-[calc(100%-475px)] 3xl:w-[calc(100%-600px)] ps-[45px] xl:ps-[55px] 2xl:ps-[65px] 3xl:ps-[85px]"
+                  className="w-[calc(100%-350px)] xl:w-[calc(100%-400px)] 2xl:w-[calc(100%-500px)] 3xl:w-[calc(100%-650px)] px-[45px] xl:px-[35px] 2xl:px-[45px] 3xl:px-[65px]"
                   ref={counterContainerRef}
                 >
                   <div className="flex flex-wrap lg:flex-col h-full justify-between">
@@ -317,7 +318,7 @@ export default function HeritageSection({ title, description, banner, banner_alt
                           <Counter end={Number(item.value)} suffix={item?.suffix} />
                         </Heading>
                         <motion.p
-                          className="uppercase mb-0 leading-none"
+                          className="uppercase mb-0 leading-relaxed"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ delay: 0.4 + index * 0.2, duration: 0.6 }}

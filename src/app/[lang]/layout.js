@@ -6,6 +6,7 @@ import localFont from "next/font/local";
 import { Suspense } from "react";
 import HeaderSkeleton from "@/components/layout/Skeletons/HeaderSkeleton";
 import { Toaster } from "@/components/ui/sonner";
+import CookieConsent from "@/components/layout/CookieConsent";
 
 const Nobel = localFont({
   src: [
@@ -35,6 +36,7 @@ export default async function RootLayout({ children, params }) {
         <Header lang={lang} />
         <main className="grow">{children}</main>
         <Footer lang={lang} />
+        <CookieConsent />
         <Toaster />
       </body>
     </html>
