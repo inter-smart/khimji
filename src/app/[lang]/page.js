@@ -6,6 +6,7 @@ import DynamicMeta from "@/components/layout/DynamicMeta";
 import { getRequestContext } from "@/lib/server/getCookieData";
 const BannerSection = dynamic(() => import("@/components/features/home/BannerSection"), { ssr: true });
 
+
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const lang = resolvedParams.lang;

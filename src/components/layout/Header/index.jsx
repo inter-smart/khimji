@@ -3,10 +3,16 @@ const HeaderClient = dynamic(() => import("./HeaderClient"), {
   ssr: true,
 });
 import { getData } from "@/lib/server/api";
+import { cookies } from "next/headers";
 
-export default function Header({ lang }) {
+export default async function Header({ lang }) {
   const businessTypePromise = getData("get-businesses");
   const locationsPromise = getData("get-locations");
 
-  return <HeaderClient businessTypePromise={businessTypePromise} locationsPromise={locationsPromise} lang={lang} />;
+    const cookieStore = await cookies();
+
+  const country = cookieStore.get("country")?.value;
+  const businessType = cookieStore.get("business_type")?.value;
+
+  return <HeaderClient businessTypePromise={businessTypePromise} locationsPromise={locationsPromise} lang={lang} country={country} businessType={businessType} />;
 }

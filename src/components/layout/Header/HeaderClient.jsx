@@ -58,7 +58,7 @@ const navMenu = [
   },
 ];
 
-export default function Header({ businessTypePromise, locationsPromise, lang }) {
+export default function Header({ businessTypePromise, locationsPromise, lang, country, businessType }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const currentPath = usePathname();
   const [open, setOpen] = useState(false);
@@ -114,7 +114,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang }) 
             <div className="flex items-center justify-end">
               <div className="flex items-center gap-4  p-4 rounded-xl">
                 {/* Search Box*/}
-                <SearchBox lang={lang} />
+                <SearchBox lang={lang} businessType={businessType} country={country} />
 
                 {/* Business Select */}
 
