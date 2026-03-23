@@ -1,9 +1,10 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Pagination, pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
+import "swiper/css/pagination";
 import { motion } from "framer-motion";
 import { useRef } from "react";
 
@@ -267,6 +268,7 @@ export default function VentureSection({
                       </motion.div>
                     </Link>
                   </motion.div>
+
                 </motion.div>
               </div>
 
@@ -282,6 +284,8 @@ export default function VentureSection({
                     dir={isRTL ? "rtl" : "ltr"}
                     // modules={[Autoplay]}
                     // autoplay={{ delay: 0, disableOnInteraction: false }}
+                    modules={[Pagination]}
+                    pagination={{ clickable: true }}
                     speed={3500}
                     loop={true}
                     slidesPerView={2}
@@ -309,7 +313,7 @@ export default function VentureSection({
                         spaceBetween: 50,
                       },
                     }}
-                    className="overflow-hidden"
+                    className="overflow-hidden pb-[50px]"
                   >
                     {ventures[0]?.ventures?.map((item, index) => (
                       <SwiperSlide key={index}>
@@ -319,6 +323,7 @@ export default function VentureSection({
                       </SwiperSlide>
                     ))}
                   </Swiper>
+
                 </motion.div>
               </div>
             </div>
