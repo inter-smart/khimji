@@ -1,7 +1,7 @@
 import BlogCard from "@/components/common/BlogCard";
 import BlogPagination from "./Pagination";
 
-export default function BlogsSection({ blogs, paginationData, error }) {
+export default function BlogsSection({ blogs, paginationData, error, variant }) {
   return (
     <section className="w-full h-auto py-[40px] sm:py-[50px] lg:py-[60px_70px] 2xl:py-[70px_90px] 3xl:py-[90px_115px] overflow-hidden block relative z-0">
       <div className="w-[120px] sm:w-[180px] 2xl:w-[225px] 3xl:w-[280px] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] pointer-events-none absolute -z-1 inset-[0_auto_auto_-2%]"></div>
@@ -10,7 +10,7 @@ export default function BlogsSection({ blogs, paginationData, error }) {
       <div className="container">
         <div className="w-full h-auto mb-[40px] sm:mb-[60px] lg:mb-[80px] 2xl:mb-[110px] 3xl:mb-[140px]">
           {blogs.length === 0 ? (
-            <NoDataState />
+            <NoDataState variant={variant} />
           ) : error ? (
             <ErrorState message={error} />
             
@@ -19,7 +19,7 @@ export default function BlogsSection({ blogs, paginationData, error }) {
               {blogs?.length > 0 ? (
                 blogs?.map((item, index) => (
                   <div key={index} className="w-full sm:w-1/2 lg:w-1/3 p-[5px] sm:p-[7px] 2xl:p-[10px]">
-                    <BlogCard item={item} />
+                    <BlogCard item={item} variant={variant}/>
                   </div>
                 ))
               ) : (
@@ -37,7 +37,7 @@ export default function BlogsSection({ blogs, paginationData, error }) {
   );
 }
 
-function ErrorState({ message }) {
+function ErrorState({ message, variant }) {
   return (
     <div className="w-full h-[400px] flex items-center justify-center">
       <div className="text-center">
@@ -46,14 +46,14 @@ function ErrorState({ message }) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </div>
-        <p className="text-[16px] 2xl:text-[18px] text-red-600 font-medium mb-2">Error Loading Blogs</p>
+        <p className="text-[16px] 2xl:text-[18px] text-red-600 font-medium mb-2">Error Loading ${variant==="news"? "News": "Blogs"}</p>
         <p className="text-[14px] 2xl:text-[16px] text-[#666]">{message}</p>
       </div>
     </div>
   );
 }
 
-function NoDataState() {
+function NoDataState({variant}) {
   return (
     <div className="w-full h-[400px] flex items-center justify-center">
       <div className="text-center">
@@ -67,8 +67,8 @@ function NoDataState() {
             />
           </svg>
         </div>
-        <p className="text-[16px] 2xl:text-[18px] text-[#666] font-medium mb-2">No Blogs Found</p>
-        <p className="text-[14px] 2xl:text-[16px] text-[#999]">There are no blogs available.</p>
+        <p className="text-[16px] 2xl:text-[18px] text-[#666] font-medium mb-2">No ${variant==="news"? "News": "Blogs"} Found</p>
+        <p className="text-[14px] 2xl:text-[16px] text-[#999]">There are no ${variant==="news"? "news": "blogs"} available.</p>
       </div>
     </div>
   );

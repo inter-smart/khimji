@@ -53,7 +53,7 @@ export default function ArchiveSection({ archives, title, lang }) {
   const archivesData = transformArchivesToFrontend(archives);
 
   const handleClick = () => {
-    router.push(`/archives`);
+    router.push(`/newsroom`);
   };
 
   // Usage

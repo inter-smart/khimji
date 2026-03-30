@@ -56,13 +56,13 @@ const HomeClient = ({ data, lang }) => {
         timelines={timelines}
         lang={lang}
       />
-      {archives?.length > 0 && (
+      {/* {archives?.length > 0 && (
         <ArchiveSection
           title={home_cms?.section3_title}
           archives={archives}
           lang={lang}
         />
-      )}
+      )} */}
 
       {initiatives?.length > 0 && (
         <ICVSection
