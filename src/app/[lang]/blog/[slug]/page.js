@@ -10,7 +10,7 @@ const RelatedBlogSection = dynamic(() => import("@/components/features/blog/Rela
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const { slug, lang } = resolvedParams;
-  const { data, error } = await getData(`blog-details?slug=${slug}`, lang);
+  const { data, error } = await getData(`blog-details?slug=${slug}&type=blog`, lang);
 
   if (!data || error) {
     return {
