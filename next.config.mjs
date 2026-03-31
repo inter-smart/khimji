@@ -26,6 +26,31 @@ const nextConfig = {
       },
     ],
   },
+
+  async redirects() {
+    return [
+      {
+        source: "/en/archives",
+        destination: "/en/newsroom",
+        permanent: true, // 308 redirect (SEO-friendly)
+      },
+      {
+        source: "/ar/archives",
+        destination: "/ar/newsroom",
+        permanent: true, // 308 redirect (SEO-friendly)
+      },
+            {
+        source: "/en/news",
+        destination: "/en/newsroom",
+        permanent: true, // 308 redirect (SEO-friendly)
+      },
+      {
+        source: "/ar/news",
+        destination: "/ar/newsroom",
+        permanent: true, // 308 redirect (SEO-friendly)
+      },
+    ];
+  },
 };
 
 export default nextConfig;

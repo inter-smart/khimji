@@ -4,6 +4,7 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Brands({ brands, lang }) {
   return (
@@ -14,7 +15,7 @@ export default function Brands({ brands, lang }) {
           modules={[Autoplay]}
           autoplay={{ delay: 0, disableOnInteraction: false }}
           speed={2500}
-          loop={true}
+          loop={false}
           slidesPerView={2}
           spaceBetween={10}
           breakpoints={{
@@ -28,14 +29,16 @@ export default function Brands({ brands, lang }) {
           {brands?.map((item, index) => (
             <SwiperSlide key={index}>
               <div className="w-full h-full flex items-center justify-center">
-                <Image
-                  src={item?.logo}
-                  alt={item?.logo_alt_text}
-                  width={140}
-                  height={65}
-                  prop
-                  className="w-auto object-contain max-w-[75px] 2xl:max-w-[80px] min-w-[45px] xl:min-w-[65px] 2xl:min-w-[75px] transition-[0.5s] hover:scale-90"
-                />
+                <Link href={item?.url ?? ""}>
+                  <Image
+                    src={item?.logo}
+                    alt={item?.logo_alt_text}
+                    width={140}
+                    height={65} 
+                    prop="true"
+                    className="w-auto object-contain max-w-[75px] 2xl:max-w-[80px] min-w-[45px] xl:min-w-[65px] 2xl:min-w-[75px] transition-[0.5s] hover:scale-90"
+                  />
+                </Link>
               </div>
             </SwiperSlide>
           ))}

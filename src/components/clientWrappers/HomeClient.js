@@ -2,14 +2,37 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-const VentureSection = dynamic(() => import("@/components/features/home/VentureSection"), { ssr: false });
-const HeritageSection = dynamic(() => import("@/components/features/home/HeritageSection"), { ssr: false });
-const ArchiveSection = dynamic(() => import("@/components/features/home/ArchiveSection"), { ssr: false });
-const ICVSection = dynamic(() => import("@/components/features/home/ICVSection"), { ssr: false });
-const ParnerSectionMobile = dynamic(() => import("@/components/features/home/home-mobile/ParnerSectionMobile"), { ssr: false });
+const VentureSection = dynamic(
+  () => import("@/components/features/home/VentureSection"),
+  { ssr: false },
+);
+const HeritageSection = dynamic(
+  () => import("@/components/features/home/HeritageSection"),
+  { ssr: false },
+);
+const ArchiveSection = dynamic(
+  () => import("@/components/features/home/ArchiveSection"),
+  { ssr: false },
+);
+const ICVSection = dynamic(
+  () => import("@/components/features/home/ICVSection"),
+  { ssr: false },
+);
+const ParnerSectionMobile = dynamic(
+  () => import("@/components/features/home/home-mobile/ParnerSectionMobile"),
+  { ssr: false },
+);
 
 const HomeClient = ({ data, lang }) => {
-  const { home_cms, ventures, metrics, timelines, archives, initiatives, brands } = data;
+  const {
+    home_cms,
+    ventures,
+    metrics,
+    timelines,
+    archives,
+    initiatives,
+    brands,
+  } = data;
 
   return (
     <>
@@ -33,15 +56,25 @@ const HomeClient = ({ data, lang }) => {
         timelines={timelines}
         lang={lang}
       />
-      <ArchiveSection title={home_cms?.section3_title} archives={archives} lang={lang} />
-      <ICVSection
-        title={home_cms?.section4_title}
-        description={home_cms?.section4_description}
-        banner={home_cms?.section4_banner}
-        banner_alt_text={home_cms?.section4_banner_alt_text}
-        initiatives={initiatives}
-        lang={lang}
-      />
+      {/* {archives?.length > 0 && (
+        <ArchiveSection
+          title={home_cms?.section3_title}
+          archives={archives}
+          lang={lang}
+        />
+      )} */}
+
+      {initiatives?.length > 0 && (
+        <ICVSection
+          title={home_cms?.section4_title}
+          description={home_cms?.section4_description}
+          banner={home_cms?.section4_banner}
+          banner_alt_text={home_cms?.section4_banner_alt_text}
+          initiatives={initiatives}
+          lang={lang}
+        />
+      )}
+      
       <ParnerSectionMobile brands={brands} />
     </>
   );

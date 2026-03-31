@@ -42,7 +42,7 @@ export default async function Page({ params, searchParams }) {
       <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />
       <BlogBanner bannerData={bannerData} />
       <Suspense fallback={<BlogListSkeleton />}>
-        <BlogList variant="blog" lang={lang} searchParams={resollvedSearchParams} />
+        <BlogList variant="news" lang={lang} searchParams={resollvedSearchParams} />
       </Suspense>
     </>
   );

@@ -46,7 +46,7 @@ export default function LocationDropdown({ locationsPromise }) {
                           relative
                           text-[16px] 3xs:text-[18px] lg:text-[12px] 2xl:text-[14px] 3xl:text-[18px] text-white sm:text-black font-medium max-w-full min-h-[30px]
                            2xl:min-h-[35px] 3xl:min-h-[45px] px-3 sm:px-2 
-                          border border-white/5 sm:border-black min-w-[195px] lg:min-w-[155px] rounded-[40px] sm:rounded-[5px]
+                          border border-white/5 sm:border-black min-w-[145px] lg:min-w-[90px] lxl:min-w-[155px] rounded-[40px] sm:rounded-[5px]
                           outline-none shadow-none focus:outline-none focus:ring-0 focus:shadow-none backdrop-blur-[2px]
                           data-[state=open]:border-[#00095b]                         
                           data-[placeholder]:sm:text-black

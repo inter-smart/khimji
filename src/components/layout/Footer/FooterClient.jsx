@@ -53,6 +53,7 @@ export default function FooterClient({ siteSettingPromise, lang }) {
   siteSettingPromise;
   const { brands, site_settings, social_links, locations, policies } = siteSettingPromise?.data || {};
 
+
   const router = useRouter();
 
   function changeCountry(slug) {
