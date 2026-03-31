@@ -65,7 +65,7 @@ const HomeClient = ({ data, lang }) => {
         />
       )} */}
 
-      <NewsSection  lang={lang}/>
+      <NewsSection lang={lang}/>
 
       {initiatives?.length > 0 && (
         <ICVSection

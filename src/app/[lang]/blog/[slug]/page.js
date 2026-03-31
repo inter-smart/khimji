@@ -68,7 +68,7 @@ export async function generateMetadata({ params }) {
 export default async function page({ params }) {
   const resolvedParams = await Promise.resolve(params);
   const { slug, lang } = resolvedParams;
-  const { data, error, structuredData, lineScripts } = await getData(`blog-details?slug=${slug}`, lang);
+  const { data, error, structuredData, lineScripts } = await getData(`blog-details?slug=${slug}&type=blog`, lang);
 
   if (!data || error) {
     notFound();

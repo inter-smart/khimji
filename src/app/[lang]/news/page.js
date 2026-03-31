@@ -29,7 +29,7 @@ export default async function Page({ params, searchParams }) {
   const resollvedSearchParams = await searchParams;
   const { lang } = resolvedParams;
 
-  const { data: cms, error, structuredData, lineScripts } = await getData("blogs", lang);
+  const { data: cms, error, structuredData, lineScripts } = await getData("blog&page=news", lang);
 
   if (error || !cms) {
     return <div>Error loading data</div>;

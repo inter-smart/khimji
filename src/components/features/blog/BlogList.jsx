@@ -5,7 +5,7 @@ export default async function BlogList({ lang, searchParams, variant }) {
   const perPage = parseInt(searchParams?.perPage) || 12;
   const page = parseInt(searchParams?.page) || 1;
 
-  const { data, error } = await getData(`blog-list?per_page=${perPage}&page=${page}`, lang);
+  const { data, error } = await getData(`blog-list?per_page=${perPage}&page=${page}&type=${variant}`, lang);
 
   if (!data || error) {
     return <div>Error loading data</div>;
