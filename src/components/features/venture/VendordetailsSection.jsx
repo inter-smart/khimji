@@ -152,7 +152,7 @@ export default function VendordetailsSection({ breadCrumb_data, pageData, lang }
                         loop
                         muted
                         playsInline
-                        className="hidden sm:block w-full h-full object-cover"
+                        className="hidden sm:block w-full h-full object-cover aspect-[733/343]"
                         poster={
                           item?.video_thumbnail_image ||
                           "/images/placeholder.png"
@@ -171,7 +171,7 @@ export default function VendordetailsSection({ breadCrumb_data, pageData, lang }
                           width={740}
                           height={340}
                           alt={item?.image_alt_text}
-                          className="w-full h-full object-cover transition-all duration-250 group-hover:scale-105"
+                          className="w-full h-full object-cover transition-all duration-250 group-hover:scale-105 aspect-[733/343]"
                         />
                       </picture>
                     )}

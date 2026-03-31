@@ -2,7 +2,7 @@ import { renderHtml } from "@/lib/helper";
 import Link from "next/link";
 
 const FOOTER_LINK_CLASS =
-  "text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-white font-medium mb-[4px] xl:mb-[7px] 3xl:mb-[10px] inline-block transition-all duration-300 hover:text-white/80 hover:translate-x-1 cursor-pointer";
+  "text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-white font-medium mb-[4px] xl:mb-[7px] 3xl:mb-[10px] inline-block transition-all duration-300 hover:text-white/80 hover:translate-x-1 cursor-pointer lg:gap-2";
 const CONTACT_BUTTON_CLASS =
   "text-[12px] 2xl:text-[16px] 3xl:text-[18px] text-white capitalize font-medium flex items-center group transition-all duration-300 hover:text-white/90";
 const ARROW_ICON_CLASS =
@@ -54,9 +54,9 @@ export default function Links({
               {lang === "en" ? "Other Links" : "روابط اخرى"}
             </div>
 
-            <ul>
+            <ul className="lg:flex lg:flex-wrap  ">
               {policies?.map((item, index) => (
-                <li key={index}>
+                <li key={index} className="xl:w-1/2">
                   <Link
                     href={`/${lang}/${item?.slug}`}
                     className={FOOTER_LINK_CLASS}
@@ -66,7 +66,7 @@ export default function Links({
                 </li>
               ))}
               {otherLinks?.map((item, index) => (
-                <li key={index}>
+                <li key={index} className="lg:w-1/2">
                   <Link
                     href={`/${lang}/${item?.link}`}
                     className={FOOTER_LINK_CLASS}

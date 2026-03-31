@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import dynamic from "next/dynamic";
+import NewsSection from "../features/home/NewsSection";
 
 const VentureSection = dynamic(
   () => import("@/components/features/home/VentureSection"),
@@ -63,6 +64,8 @@ const HomeClient = ({ data, lang }) => {
           lang={lang}
         />
       )} */}
+
+      <NewsSection  lang={lang}/>
 
       {initiatives?.length > 0 && (
         <ICVSection
