@@ -10,12 +10,12 @@ const RelatedBlogSection = dynamic(() => import("@/components/features/blog/Rela
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const { slug, lang } = resolvedParams;
-  const { data, error } = await getData(`blog-details?slug=${slug}`, lang);
+  const { data, error } = await getData(`news-details?slug=${slug}`, lang);
 
   if (!data || error) {
     return {
-      title: "Blog Not Found",
-      description: "The requested blog post could not be found.",
+      title: "News Not Found",
+      description: "The requested news article could not be found.",
     };
   }
 
@@ -26,32 +26,32 @@ export async function generateMetadata({ params }) {
   const { other, scripts } = parseOtherMeta(other_meta_tags);
 
   return {
-    title: meta_title || title || "Blog Post",
-    description: meta_description || "Read our latest blog post",
+    title: meta_title || title || "News Post",
+    description: meta_description || "Read our latest news post",
     keywords: meta_keywords || "",
 
     // Enhanced SEO fields
     openGraph: {
-      title: meta_title || title || "Blog Post",
-      description: meta_description || "Read our latest blog post",
+      title: meta_title || title || "News Post",
+      description: meta_description || "Read our latest news post",
       images: [
         {
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: image_alt_text || title || "Blog post image",
+          alt: image_alt_text || title || "News post image",
         },
       ],
       type: "article",
       publishedTime: published_on ? published_on : undefined,
       authors: undefined,
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blog/${slug}`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/news/${slug}`,
     },
 
     twitter: {
       card: "summary_large_image",
-      title: meta_title || title || "Blog Post",
-      description: meta_description || "Read our latest blog post",
+      title: meta_title || title || "News Post",
+      description: meta_description || "Read our latest news post",
       images: [ogImage],
     },
 
@@ -60,7 +60,7 @@ export async function generateMetadata({ params }) {
     },
 
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blog/${slug}`,
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/news/${slug}`,
     },
   };
 }

@@ -33,6 +33,7 @@ const HomeClient = ({ data, lang }) => {
     archives,
     initiatives,
     brands,
+    news
   } = data;
 
   return (
@@ -65,7 +66,7 @@ const HomeClient = ({ data, lang }) => {
         />
       )} */}
 
-      <NewsSection lang={lang}/>
+      <NewsSection data={news} lang={lang}/>
 
       {initiatives?.length > 0 && (
         <ICVSection

@@ -48,6 +48,14 @@ const otherLinks = [
     label: "Contact",
     link: "contact",
   },
+   {
+    label: "News",
+    link: "news",
+  },
+   {
+    label: "Blogs",
+    link: "blog",
+  },
 ];
 export default function FooterClient({ siteSettingPromise, lang }) {
   siteSettingPromise;

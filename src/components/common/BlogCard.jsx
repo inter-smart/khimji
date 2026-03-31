@@ -18,7 +18,7 @@ export default function BlogCard({page="blog", item, variant }) {
                 <div className="text-[12px] sm:text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.5] font-normal text-white w-fit p-[5px_15px] 2xl:p-[7px_20px] 3xl:p-[10px_30px] mb-[10px] sm:mb-[15px] lg:mb-[20px] 3xl:mb-[30px] bg-linear-to-r from-[#0B436A] to-[#299B8A] rounded-full">{formatDate(item?.published_on)}</div>
                 <div className="text-[13px] sm:text-[14px] 2xl:text-[18px] 3xl:text-[22px] leading-[1.5] font-normal text-black mb-[10px] sm:mb-[15px] lg:mb-[20px] 3xl:mb-[30px] line-clamp-2">{item?.title}</div>
                 <Link
-                    href={variant ? `${variant}/${item?.slug}`: `${item?.slug}`}
+                    href={variant ? `${variant === "news" ? "newsroom" : "blog"}/${item?.slug}`: `${item?.slug}`}
                     target={"_self"}
                     className="text-[13px] sm:text-[14px] 2xl:text-[15px] 3xl:text-[18px] leading-[1.5] font-normal text-black w-fit flex items-center hover:text-[#0B436A] transition-colors duration-300">View All
                     <span className="w-[15px] 3xl:w-[20px] h-auto aspect-square ms-[8px] sm:ms-[10px] 3xl:ms-[15px] flex items-center justify-center">
