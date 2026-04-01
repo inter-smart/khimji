@@ -42,7 +42,7 @@ const navMenu = [
     link: "/venture",
   },
   {
-    label: "About",
+    label: "Heritage",
     link: "/heritage",
   },
   {

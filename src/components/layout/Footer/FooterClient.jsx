@@ -33,10 +33,6 @@ const otherLinks = [
     link: "venture",
   },
   {
-    label: "Archives",
-    link: "archives",
-  },
-  {
     label: "ICV Initiatives",
     link: "icv-initiatives",
   },
@@ -49,7 +45,7 @@ const otherLinks = [
     link: "contact",
   },
    {
-    label: "News",
+    label: "Newsrooms",
     link: "news",
   },
    {

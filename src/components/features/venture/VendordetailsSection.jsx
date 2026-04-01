@@ -200,7 +200,7 @@ export default function VendordetailsSection({ breadCrumb_data, pageData, lang }
                     </div>
                   </div>
                   <div className="mt-[15px]">
-                    <Link href={`/url`} className={CONTACT_BUTTON_CLASS}>
+                    <Link href={`/${item?.url}`} className={CONTACT_BUTTON_CLASS}>
                       <span>{lang === "ar" ? "اكتشف المزيد" : "Discover More"}</span>
                       <motion.div className={ARROW_ICON_CLASS} variants={arrowVariants}>
                         <svg className="w-full h-full" viewBox="0 0 14 15">

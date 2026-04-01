@@ -11,7 +11,7 @@ const BlogListSkeleton = dynamic(() => import("@/components/layout/Skeletons/Blo
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const lang = resolvedParams.lang;
-  const { title, description, keywords, twitter, openGraph, alternates, other } = await getMetaData("blogs?page=news", lang, "blog");
+  const { title, description, keywords, twitter, openGraph, alternates, other } = await getMetaData("blogs?page=news  ", lang, "blog");
 
   return {
     title,
