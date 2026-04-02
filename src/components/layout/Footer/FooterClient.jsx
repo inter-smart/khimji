@@ -17,12 +17,12 @@ const SocialLinks = dynamic(() => import("./SocialLinks"), {
 
 const otherLinks = [
   {
-    label: "Blogs",
-    link: "blog",
-  },
-  {
     label: "Faq",
     link: "faq",
+  },
+   {
+    label: "Privacy Policy",
+    link: "privacy-policy",
   },
   {
     label: "Heritage",
