@@ -28,8 +28,11 @@ const ARROW_ICON_CLASS = `
   group-hover:translate-x-1
 `;
 
-
-export default function VendordetailsSection({ breadCrumb_data, pageData, lang }) {
+export default function VendordetailsSection({
+  breadCrumb_data,
+  pageData,
+  lang,
+}) {
   const isRTL = lang?.trim() === "ar";
 
   const arrowVariants = {
@@ -199,19 +202,29 @@ export default function VendordetailsSection({ breadCrumb_data, pageData, lang }
                       />
                     </div>
                   </div>
-                  <div className="mt-[15px]">
-                    <Link href={`/${item?.url}`} className={CONTACT_BUTTON_CLASS}>
-                      <span>{lang === "ar" ? "اكتشف المزيد" : "Discover More"}</span>
-                      <motion.div className={ARROW_ICON_CLASS} variants={arrowVariants}>
-                        <svg className="w-full h-full" viewBox="0 0 14 15">
-                          <path
-                            d="M7.23334 12.7448C7.14887 12.7465 7.0637 12.7245 6.98857 12.6748C6.7718 12.5318 6.70577 12.2213 6.8362 11.9893C6.84717 11.9688 8.2096 9.53275 10.8103 7.99975H0.700004C0.442637 7.99975 0.233337 7.7755 0.233337 7.49975C0.233337 7.224 0.442637 6.99975 0.700004 6.99975H10.8103C8.22407 5.4755 6.84624 3.02875 6.8327 3.00425C6.70507 2.77075 6.77577 2.46 6.99347 2.32175C7.2142 2.1815 7.50494 2.26275 7.63677 2.5005C7.84887 2.863 9.8378 6.11275 13.4052 7.012C13.6187 7.06825 13.7667 7.2685 13.7667 7.5C13.7667 7.7315 13.6197 7.93225 13.4092 7.987C9.8266 8.8895 7.84444 12.1435 7.63024 12.5118C7.54624 12.656 7.39084 12.7415 7.23334 12.7448Z"
-                            fill="currentColor"
-                          />
-                        </svg>
-                      </motion.div>
-                    </Link>
-                  </div>
+                  {item?.url && (
+                    <div className="mt-[15px]">
+                      <Link
+                        href={`/${item?.url}`}
+                        className={CONTACT_BUTTON_CLASS}
+                      >
+                        <span>
+                          {lang === "ar" ? "اكتشف المزيد" : "Discover More"}
+                        </span>
+                        <motion.div
+                          className={ARROW_ICON_CLASS}
+                          variants={arrowVariants}
+                        >
+                          <svg className="w-full h-full" viewBox="0 0 14 15">
+                            <path
+                              d="M7.23334 12.7448C7.14887 12.7465 7.0637 12.7245 6.98857 12.6748C6.7718 12.5318 6.70577 12.2213 6.8362 11.9893C6.84717 11.9688 8.2096 9.53275 10.8103 7.99975H0.700004C0.442637 7.99975 0.233337 7.7755 0.233337 7.49975C0.233337 7.224 0.442637 6.99975 0.700004 6.99975H10.8103C8.22407 5.4755 6.84624 3.02875 6.8327 3.00425C6.70507 2.77075 6.77577 2.46 6.99347 2.32175C7.2142 2.1815 7.50494 2.26275 7.63677 2.5005C7.84887 2.863 9.8378 6.11275 13.4052 7.012C13.6187 7.06825 13.7667 7.2685 13.7667 7.5C13.7667 7.7315 13.6197 7.93225 13.4092 7.987C9.8266 8.8895 7.84444 12.1435 7.63024 12.5118C7.54624 12.656 7.39084 12.7415 7.23334 12.7448Z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </motion.div>
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
