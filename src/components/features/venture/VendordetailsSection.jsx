@@ -205,7 +205,8 @@ export default function VendordetailsSection({
                   {item?.url && (
                     <div className="mt-[15px]">
                       <Link
-                        href={`/${item?.url}`}
+                        href={`${item?.url}`}
+                        target="_blank"
                         className={CONTACT_BUTTON_CLASS}
                       >
                         <span>
