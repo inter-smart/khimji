@@ -191,16 +191,17 @@ export default function VendordetailsSection({
                     <div className="pe-[15px] flex-1">
                       {renderHtml(item.description)}
                     </div>
-
-                    <div className="w-[80px] md:w-[100px] xl:w-[130px] 3xl:w-[165px]">
-                      <Image
-                        src={item?.logo}
-                        width={165}
-                        height={55}
-                        alt={item?.logo_alt_text}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
+                    {item?.logo && (
+                      <div className="w-[80px] md:w-[100px] xl:w-[130px] 3xl:w-[165px]">
+                        <Image
+                          src={item?.logo}
+                          width={165}
+                          height={55}
+                          alt={item?.logo_alt_text}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                    )}
                   </div>
                   {item?.url && (
                     <div className="mt-[15px]">
