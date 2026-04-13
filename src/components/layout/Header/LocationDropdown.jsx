@@ -49,7 +49,7 @@ export default function LocationDropdown({ locationsPromise }) {
                           border border-white/5 sm:border-black min-w-[145px] lg:min-w-[90px] lxl:min-w-[155px] rounded-[40px] sm:rounded-[5px]
                           outline-none shadow-none focus:outline-none focus:ring-0 focus:shadow-none backdrop-blur-[2px]
                           data-[state=open]:border-[#00095b]                         
-                          data-[placeholder]:sm:text-black
+                          data-[placeholder]:sm:text-black  !pr-[25px]
                            data-[placeholder]:text-white  [&>svg]:hidden
                           after:content-[''] after:absolute after:right-2 after:top-1/2 after:-translate-y-1/2  after:w-[12px] after:h-[12px]
                            after:bg-[url('/images/arrow.svg')] after:max-sm:invert-100 after:max-sm:brightness-100 after:bg-no-repeat after:bg-center
