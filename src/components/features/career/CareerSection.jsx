@@ -27,7 +27,7 @@ export default function CareerSection({ data }) {
             {data?.title}
           </Heading>
           <div className="text-[13px] lg:text-[14px] 2xl:text-[16px] 3xl:text-[20px] leading-[1.5] font-normal text-black mb-[15px] sm:mb-[20px] 2xl:mb-[25px] 3xl:mb-[35px]">
-            {renderHtml(data?.description)}
+            {renderHtml(data?.description,"[&_li]:my-[8px] [&_ul]:list-disc [&_ul]:list-inside [&_ol]:list-decimal [&_ol]:list-inside")}
           </div>
           <Link
             href={`mailto:${data?.email}` || "#"}

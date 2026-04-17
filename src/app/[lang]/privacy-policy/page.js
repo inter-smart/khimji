@@ -18,7 +18,7 @@ export async function generateMetadata({ params }) {
   // Handle error or missing data
   if (error || !data) {
     return {
-      title: "Policy Not Found",
+      title: "Privacy Policy",
       description: "The requested policy page could not be found.",
     };
   }
