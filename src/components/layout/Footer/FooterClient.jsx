@@ -20,10 +20,6 @@ const otherLinks = [
     label: "Faq",
     link: "faq",
   },
-   {
-    label: "Privacy Policy",
-    link: "privacy-policy",
-  },
   {
     label: "Heritage",
     link: "heritage",

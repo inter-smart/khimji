@@ -65,6 +65,7 @@ export default function Links({
                   </Link>
                 </li>
               ))}
+
               {otherLinks?.map((item, index) => (
                 <li key={index} className="lg:w-1/2">
                   <Link

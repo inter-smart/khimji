@@ -61,10 +61,12 @@ export default function CareerForm({ careerId, onSuccess }) {
 
       const response = await multipartPostToAPI("career-enquiry", formData);
 
-      if (!response.status) {
-        setFormError(response.message || "Failed to submit application");
-        return;
+      if (!response.status || response.ok) {
+        return setFormError(response.message || "Failed to submit application");
+        
       }
+
+
 
       if (response.status) {
         toast.success("Application submitted successfully!", {
