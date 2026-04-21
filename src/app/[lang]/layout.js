@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import HeaderSkeleton from "@/components/layout/Skeletons/HeaderSkeleton";
 import { Toaster } from "@/components/ui/sonner";
 import CookieConsent from "@/components/layout/CookieConsent";
+import { PolicySlugProvider } from "@/context/PolicySlugContext";
 
 const Nobel = localFont({
   src: [
@@ -33,11 +34,13 @@ export default async function RootLayout({ children, params }) {
   return (
     <html lang={lang} dir={lang == "ar" ? "rtl" : "ltr"}>
       <body className={`${Nobel.className}`}>
-        <Header lang={lang} />
-        <main className="grow">{children}</main>
-        <Footer lang={lang} />
-        <CookieConsent />
-        <Toaster />
+        <PolicySlugProvider>
+          <Header lang={lang} />
+          <main className="grow">{children}</main>
+          <Footer lang={lang} />
+          <CookieConsent />
+          <Toaster />
+        </PolicySlugProvider>
       </body>
     </html>
   );

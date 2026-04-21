@@ -11,9 +11,9 @@ const PrivacySection = dynamic(() =>
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
-  const { lang } = resolvedParams;
+  const { lang, slug } = resolvedParams;
 
-  const { data, error } = await getData("policy?slug=privacy-policy", lang);
+  const { data, error } = await getData(`policy?slug=${slug}`, lang);
 
   // Handle error or missing data
   if (error || !data) {
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }) {
       description: meta_description || "View our policy details",
       images: [{ url: DefaultOgImage, width: 1200, height: 630 }],
       type: "website",
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/policies/privacy-policy`,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/${slug}`,
     },
 
     twitter: {
@@ -58,21 +58,21 @@ export async function generateMetadata({ params }) {
     },
 
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/policies/privacy-policy`,
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/${slug}`,
     },
   };
 }
 
 export default async function page({ params }) {
   const resolvedParams = await params;
-  const { lang } = resolvedParams;
+  const { lang, slug } = resolvedParams;
 
   const { data, error, structuredData, lineScripts } = await getData(
-    "policy?slug=privacy-policy",
+    `policy?slug=${slug}`,
     lang
   );
   if (!data) {
-    return  <NoDataState title="Content Not Found" message="There is no data found" />
+    return <NoDataState title="Content Not Found" message="There is no data found" />
   }
 
   return (

@@ -2,8 +2,10 @@
 
 import BottomLine from "./BottomLine";
 import Links from "./Links";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams, usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import { usePolicySlug } from "@/context/PolicySlugContext";
 
 const FooterMobile = dynamic(() => import("./FooterMobile"), {
   ssr: false,
@@ -40,11 +42,11 @@ const otherLinks = [
     label: "Contact",
     link: "contact",
   },
-   {
+  {
     label: "Newsrooms",
     link: "news",
   },
-   {
+  {
     label: "Blogs",
     link: "blog",
   },
@@ -55,11 +57,48 @@ export default function FooterClient({ siteSettingPromise, lang }) {
 
 
   const router = useRouter();
+  const params = useParams();
+  const pathname = usePathname();
+  const { setPrivacyPolicySlug } = usePolicySlug();
+  const [prevPolicies, setPrevPolicies] = useState(policies);
+
+  useEffect(() => {
+    if (prevPolicies && policies && prevPolicies !== policies) {
+      // Policies changed, likely due to country change refresh
+      const currentSlug = params?.slug;
+      if (currentSlug) {
+        const oldPolicy = prevPolicies.find((p) => p.slug === currentSlug);
+        if (oldPolicy) {
+          // Find corresponding policy in new list
+          const newPolicy =
+            policies.find((p) => p.id === oldPolicy.id) ||
+            policies.find((p) => p.title === oldPolicy.title);
+
+          if (newPolicy && newPolicy.slug !== currentSlug) {
+            router.push(`/${lang}/${newPolicy.slug}`);
+          }
+        }
+      }
+    }
+    setPrevPolicies(policies);
+
+    // Update global privacy policy slug
+    const privacyPolicy = policies?.find(
+      (p) =>
+        p.slug.includes("privacy-policy") ||
+        (p.title && p.title.toLowerCase().includes("privacy policy"))
+    );
+    if (privacyPolicy) {
+      setPrivacyPolicySlug(privacyPolicy.slug);
+    }
+  }, [policies, params?.slug, lang, router, prevPolicies, setPrivacyPolicySlug]);
 
   function changeCountry(slug) {
     document.cookie = `country=${slug}; path=/`;
     // Dispatch custom event to notify other components
-    window.dispatchEvent(new CustomEvent("countryChanged", { detail: { country: slug } }));
+    window.dispatchEvent(
+      new CustomEvent("countryChanged", { detail: { country: slug } })
+    );
     router.refresh();
   }
 
