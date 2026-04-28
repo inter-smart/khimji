@@ -1,6 +1,7 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useState, useTransition } from "react";
+import GlobalLoader from "@/components/layout/GlobalLoader";
 import {
   Select,
   SelectTrigger,
@@ -17,6 +18,7 @@ export default function BusinessTypeDropDown({ businessTypePromise }) {
   const business_type = use(businessTypePromise);
   const data = business_type?.data || [];
 
+  const [isPending, startTransition] = useTransition();
   const [selectedBusiness, setSelectedBusiness] = useState(() => {
     if (typeof window !== "undefined") {
       const business = document.cookie
@@ -44,12 +46,14 @@ export default function BusinessTypeDropDown({ businessTypePromise }) {
   function changeBusinessType(value) {
     document.cookie = `business_type=${value}; path=/`;
     setSelectedBusiness(value);
-    router.refresh();
+    startTransition(() => { router.refresh(); });
   }
 
 
 
   return (
+    <>
+    {isPending && <GlobalLoader />}
     <div className="px-[7px] sm:px-[3px]">
       <div className="relative inline-flex rounded-full">
         <Select value={selectedBusiness}  onValueChange={changeBusinessType} modal={false}>
@@ -90,5 +94,6 @@ export default function BusinessTypeDropDown({ businessTypePromise }) {
         />
       </div>
     </div>
+    </>
   );
 }

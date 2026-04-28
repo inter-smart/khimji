@@ -3,8 +3,6 @@ import "../globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer/Footer";
 import localFont from "next/font/local";
-import { Suspense } from "react";
-import HeaderSkeleton from "@/components/layout/Skeletons/HeaderSkeleton";
 import { Toaster } from "@/components/ui/sonner";
 import CookieConsent from "@/components/layout/CookieConsent";
 import { PolicySlugProvider } from "@/context/PolicySlugContext";
@@ -22,10 +20,25 @@ const Nobel = localFont({
   display: "swap",
 });
 
+
+const Bukra = localFont({
+  src: [
+    {
+      path: "../../../public/fonts/bukra-regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-Bukra",
+  preload: true,
+  display: "swap",
+});
+
 export const metadata = {
   title: "Khimji Ramdas",
   description: "Khimji Ramdas is a Ramdas company",
 };
+
 
 export default async function RootLayout({ children, params }) {
   const paramsResolved = await params;
@@ -33,7 +46,7 @@ export default async function RootLayout({ children, params }) {
 
   return (
     <html lang={lang} dir={lang == "ar" ? "rtl" : "ltr"}>
-      <body className={`${Nobel.className}`}>
+      <body className={`${lang === "ar" ? Bukra.className : Nobel.className}`}>
         <PolicySlugProvider>
           <Header lang={lang} />
           <main className="grow">{children}</main>

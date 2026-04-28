@@ -145,8 +145,18 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+@font-face {
+  font-family: "ZaridText";
+  src: url("/fonts/29LTZaridText-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF,
+                 U+FB50-FDFF, U+FE70-FEFF;
+}
+
 body {
-  font-family: var(--font-base1), Arial, sans-serif;
+  font-family: "ZaridText", var(--font-base1), Arial, sans-serif;
 }
 
 /* Prevent white gap when shadcn Select / Sheet opens */

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useTransition } from "react";
+import GlobalLoader from "@/components/layout/GlobalLoader";
 import Link from "next/link";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import Image from "next/image";
@@ -66,6 +67,7 @@ const navMenu = [
 
 export default function Header({ businessTypePromise, locationsPromise, lang, country, businessType }) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const currentPath = usePathname();
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -83,9 +85,8 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
   function handleVentureClick(businessType) {
     document.cookie = `business_type=${businessType}; path=/`;
     window.dispatchEvent(new CustomEvent("businessTypeChanged", { detail: { business_type: businessType } }));
-    router.push(`/${lang}/venture`);
-    router.refresh();
     setOpen(false);
+    startTransition(() => { router.push(`/${lang}/venture`); });
   }
 
   // scroll sticky
@@ -106,10 +107,12 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
     const segments = (currentPath ?? "/").split("/");
     segments[1] = newLang; // replace "en" → "ar"
     const newPath = segments.join("/");
-    router.push(newPath);
+    startTransition(() => { router.push(newPath); });
   };
 
   return (
+    <>
+    {isPending && <GlobalLoader />}
     <header>
       <div className={`w-full bg-white max-sm:hidden ${isScrolled ? "stickyHeader" : ""}`}>
         <div className="container">
@@ -694,5 +697,6 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
         </div>
       </Sheet>
     </header>
+    </>
   );
 }

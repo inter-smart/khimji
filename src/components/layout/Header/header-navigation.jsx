@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import GlobalLoader from "@/components/layout/GlobalLoader";
 import { ChevronDown } from "lucide-react";
 import {
   DropdownMenu,
@@ -20,15 +21,17 @@ const VENTURE_SUBMENU = [
 export default function HeaderNavigation({ locale, pathname, onNavigationClick, menuItems, showDarkHeader }) {
   const isEN = locale === "en";
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
   function handleVentureClick(businessType) {
     document.cookie = `business_type=${businessType}; path=/`;
     window.dispatchEvent(new CustomEvent("businessTypeChanged", { detail: { business_type: businessType } }));
-    router.push(`/${locale}/venture`);
-    router.refresh();
+    startTransition(() => { router.push(`/${locale}/venture`); });
   }
 
   return (
+    <>
+    {isPending && <GlobalLoader />}
     <nav aria-label="Primary navigation" className="w-full">
       <ul className="flex items-center gap-3 text-[15px] 2xl:text-[18px]">
         {menuItems?.map((item) => {
@@ -79,5 +82,6 @@ export default function HeaderNavigation({ locale, pathname, onNavigationClick, 
         })}
       </ul>
     </nav>
+    </>
   );
 }

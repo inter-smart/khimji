@@ -2,7 +2,8 @@
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, use } from "react";
+import { useEffect, useState, use, useTransition } from "react";
+import GlobalLoader from "@/components/layout/GlobalLoader";
 import { DEFAULT_COUNTRY } from "@/lib/server/constants";
 
 export default function LocationDropdown({ locationsPromise }) {
@@ -10,6 +11,7 @@ export default function LocationDropdown({ locationsPromise }) {
   const locations = use(locationsPromise);
   const countries = locations?.data || [];
   const [selectedCountry, setSelectedCountry] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   // Read cookie only on client side
   useEffect(() => {
@@ -34,10 +36,12 @@ export default function LocationDropdown({ locationsPromise }) {
   function changeCountry(slug) {
     document.cookie = `country=${slug}; path=/`;
     setSelectedCountry(slug);
-    router.refresh();
+    startTransition(() => { router.refresh(); });
   }
 
   return (
+    <>
+    {isPending && <GlobalLoader />}
     <div className="px-[7px] sm:px-[3px]">
       <div className="relative inline-flex rounded-full">
         <Select  value={selectedCountry} onValueChange={changeCountry} modal={false}>
@@ -69,5 +73,6 @@ export default function LocationDropdown({ locationsPromise }) {
         <BorderBeam duration={13} size={70} className="from-transparent via-white/70 to-transparent" />
       </div>
     </div>
+    </>
   );
 }
