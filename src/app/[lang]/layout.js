@@ -24,12 +24,12 @@ const Nobel = localFont({
 const Bukra = localFont({
   src: [
     {
-      path: "../../../public/fonts/bukra-regular.woff2",
-      weight: "400",
+      path: "../../../public/fonts/29LTZaridText-Bold.woff2",
+      weight: "500",
       style: "normal",
     },
   ],
-  variable: "--font-Bukra",
+  variable: "--font-Nobel",
   preload: true,
   display: "swap",
 });
@@ -46,7 +46,7 @@ export default async function RootLayout({ children, params }) {
 
   return (
     <html lang={lang} dir={lang == "ar" ? "rtl" : "ltr"}>
-      <body className={`${lang === "ar" ? Bukra.className : Nobel.className}`}>
+      <body className={`${Nobel.className}`}>
         <PolicySlugProvider>
           <Header lang={lang} />
           <main className="grow">{children}</main>
