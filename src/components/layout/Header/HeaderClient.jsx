@@ -40,6 +40,11 @@ const navMenu = [
   {
     label: "Ventures",
     link: "/venture",
+    hasSubmenu: true,
+    subMenu: [
+      { label: "Consumer Oriented", businessType: "b2c" },
+      { label: "Corporate Oriented", businessType: "b2b" },
+    ],
   },
   {
     label: "Heritage",
@@ -74,6 +79,14 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
   }));
 
   const handleNavigationLinkClick = () => setOpen(false);
+
+  function handleVentureClick(businessType) {
+    document.cookie = `business_type=${businessType}; path=/`;
+    window.dispatchEvent(new CustomEvent("businessTypeChanged", { detail: { business_type: businessType } }));
+    router.push(`/${lang}/venture`);
+    router.refresh();
+    setOpen(false);
+  }
 
   // scroll sticky
   useEffect(() => {
@@ -218,6 +231,9 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                           />
                         </Link>
                       </div>
+                      <div className="py-[10px] border-b border-[#f4f4f4] mb-[10px]">
+                        <HeaderSelect businessTypePromise={businessTypePromise} locationsPromise={locationsPromise} />
+                      </div>
                       <SheetDescription asChild>
                         <div>
                           <Accordion type="single" collapsible>
@@ -282,15 +298,36 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                       </AccordionItem> */}
 
                             {navMenu?.map((item, index) => (
-                              <AccordionItem key={index} value="item-6" className="border-b border-[#f4f4f4]">
-                                <Link
-                                  href={`/${lang}${item?.link}`}
-                                  className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
-                                  aria-label="menuLink"
-                                >
-                                  <span>{item?.label}</span>
-                                </Link>
-                              </AccordionItem>
+                              item.hasSubmenu ? (
+                                <AccordionItem key={index} value={`item-${index}`} className="border-b border-[#f4f4f4]">
+                                  <AccordionTrigger className="text-[12px] font-normal text-black py-[8px] w-full">
+                                    {item.label}
+                                  </AccordionTrigger>
+                                  <AccordionContent>
+                                    <div className="flex flex-col ps-3">
+                                      {item.subMenu?.map((sub) => (
+                                        <button
+                                          key={sub.businessType}
+                                          onClick={() => handleVentureClick(sub.businessType)}
+                                          className="text-[12px] text-black py-[6px] text-start hover:text-[#299b8a] transition-colors"
+                                        >
+                                          {sub.label}
+                                        </button>
+                                      ))}
+                                    </div>
+                                  </AccordionContent>
+                                </AccordionItem>
+                              ) : (
+                                <AccordionItem key={index} value={`item-${index}`} className="border-b border-[#f4f4f4]">
+                                  <Link
+                                    href={`/${lang}${item?.link}`}
+                                    className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
+                                    aria-label="menuLink"
+                                  >
+                                    <span>{item?.label}</span>
+                                  </Link>
+                                </AccordionItem>
+                              )
                             ))}
                           </Accordion>
                         </div>
@@ -395,6 +432,9 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                           />
                         </Link>
                       </div>
+                      <div className="py-[10px] border-b border-[#f4f4f4] mb-[10px]">
+                        <HeaderSelect businessTypePromise={businessTypePromise} locationsPromise={locationsPromise} />
+                      </div>
                       <SheetDescription asChild>
                         <div>
                           <Accordion type="single" collapsible>
@@ -459,15 +499,36 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                       </AccordionItem> */}
 
                             {navMenu?.map((item, index) => (
-                              <AccordionItem key={index} value="item-6" className="border-b border-[#f4f4f4]">
-                                <Link
-                                  href={`/${lang}${item?.link}`}
-                                  className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
-                                  aria-label="menuLink"
-                                >
-                                  <span>{item?.label}</span>
-                                </Link>
-                              </AccordionItem>
+                              item.hasSubmenu ? (
+                                <AccordionItem key={index} value={`item-${index}`} className="border-b border-[#f4f4f4]">
+                                  <AccordionTrigger className="text-[12px] font-normal text-black py-[8px] w-full">
+                                    {item.label}
+                                  </AccordionTrigger>
+                                  <AccordionContent>
+                                    <div className="flex flex-col ps-3">
+                                      {item.subMenu?.map((sub) => (
+                                        <button
+                                          key={sub.businessType}
+                                          onClick={() => handleVentureClick(sub.businessType)}
+                                          className="text-[12px] text-black py-[6px] text-start hover:text-[#299b8a] transition-colors"
+                                        >
+                                          {sub.label}
+                                        </button>
+                                      ))}
+                                    </div>
+                                  </AccordionContent>
+                                </AccordionItem>
+                              ) : (
+                                <AccordionItem key={index} value={`item-${index}`} className="border-b border-[#f4f4f4]">
+                                  <Link
+                                    href={`/${lang}${item?.link}`}
+                                    className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
+                                    aria-label="menuLink"
+                                  >
+                                    <span>{item?.label}</span>
+                                  </Link>
+                                </AccordionItem>
+                              )
                             ))}
                           </Accordion>
                         </div>
@@ -500,50 +561,6 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                 </Link>
                 <div className="flex items-center">
                   <div className="me-[5px] sm:me-[20px]">
-                    <div className="relative inline-flex rounded-full max-w-[130px]">
-                      <Select value={languageData?.code} onValueChange={(lang) => changeLanguage(lang)} modal={false}>
-                        <SelectTrigger
-                          className="
-                            h-[27px]
-                            w-auto
-                            px-2
-                            border-white/5
-                            rounded-full
-                            text-white 
-                            focus:ring-0
-                            focus:outline-none
-                            flex items-center  
-                            max-w-[95px]
-      "
-                        >
-                          {/* Globe Icon or Country Flag */}
-                          <Image
-                            src={languageData?.flag}
-                            alt={languageData?.fullName}
-                            width={17}
-                            height={17}
-                            className="rounded-full me-1 object-cover w-[17px] h-[17px]"
-                          />
-
-                          <SelectValue placeholder="Select Country" />
-                        </SelectTrigger>
-
-                        <SelectContent className=" min-w-[120px] rounded-xl bg-white text-black shadow-lg  ">
-                          {languages.map((lang) => (
-                            <SelectItem key={lang.code} value={lang.code}>
-                              {lang.fullName}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-
-                      {/* Border Beams */}
-
-                      <BorderBeam duration={8} size={50} className="from-transparent via-white/70 to-transparent" />
-                      <BorderBeam duration={8} size={50} reverse className="from-transparent via-white/70 to-transparent" />
-                    </div>
-                  </div>
-                  <div className="me-[5px] sm:me-[20px]">
                     <SearchBox lang={lang} />
                   </div>
                   <SheetTrigger className="w-[25px] h-[25px] flex items-center justify-center">
@@ -553,11 +570,6 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                       <path d="M0 1.29166H24" stroke="white" strokeWidth="2.58333" strokeLinejoin="round" />
                     </svg>
                   </SheetTrigger>
-                </div>
-              </div>
-              <div className={`flex items-center gap-3 max-w-1/2 pt-[15px] ${isScrolled ? "opacity-0 h-0" : ""}`}>
-                <div className="w-1/2">
-                  <HeaderSelect businessTypePromise={businessTypePromise} locationsPromise={locationsPromise} />
                 </div>
               </div>
             </div>
@@ -642,15 +654,36 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                       </AccordionItem> */}
 
                       {navMenu?.map((item, index) => (
-                        <AccordionItem key={index} value="item-6" className="border-b border-[#f4f4f4]">
-                          <Link
-                            href={`/${lang}${item?.link}`}
-                            className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
-                            aria-label="menuLink"
-                          >
-                            <span>{item?.label}</span>
-                          </Link>
-                        </AccordionItem>
+                        item.hasSubmenu ? (
+                          <AccordionItem key={index} value={`item-${index}`} className="border-b border-[#f4f4f4]">
+                            <AccordionTrigger className="text-[12px] font-normal text-black py-[8px] w-full">
+                              {item.label}
+                            </AccordionTrigger>
+                            <AccordionContent>
+                              <div className="flex flex-col ps-3">
+                                {item.subMenu?.map((sub) => (
+                                  <button
+                                    key={sub.businessType}
+                                    onClick={() => handleVentureClick(sub.businessType)}
+                                    className="text-[12px] text-black py-[6px] text-start hover:text-[#299b8a] transition-colors"
+                                  >
+                                    {sub.label}
+                                  </button>
+                                ))}
+                              </div>
+                            </AccordionContent>
+                          </AccordionItem>
+                        ) : (
+                          <AccordionItem key={index} value={`item-${index}`} className="border-b border-[#f4f4f4]">
+                            <Link
+                              href={`/${lang}${item?.link}`}
+                              className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
+                              aria-label="menuLink"
+                            >
+                              <span>{item?.label}</span>
+                            </Link>
+                          </AccordionItem>
+                        )
                       ))}
                     </Accordion>
                   </div>
