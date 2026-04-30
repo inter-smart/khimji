@@ -564,6 +564,44 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                 </Link>
                 <div className="flex items-center">
                   <div className="me-[5px] sm:me-[20px]">
+                    <div className="relative inline-flex rounded-full max-w-[130px]">
+                      <Select value={languageData?.code} onValueChange={(lang) => changeLanguage(lang)} modal={false}>
+                        <SelectTrigger
+                          className="
+                            h-[27px]
+                            w-auto
+                            px-2
+                            border-white/5
+                            rounded-full
+                            text-white
+                            focus:ring-0
+                            focus:outline-none
+                            flex items-center
+                            max-w-[95px]
+      "
+                        >
+                          <Image
+                            src={languageData?.flag}
+                            alt={languageData?.fullName}
+                            width={17}
+                            height={17}
+                            className="rounded-full me-1 object-cover w-[17px] h-[17px]"
+                          />
+                          <SelectValue placeholder="Select Country" />
+                        </SelectTrigger>
+                        <SelectContent className=" min-w-[120px] rounded-xl bg-white text-black shadow-lg  ">
+                          {languages.map((lang) => (
+                            <SelectItem key={lang.code} value={lang.code}>
+                              {lang.fullName}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <BorderBeam duration={8} size={50} className="from-transparent via-white/70 to-transparent" />
+                      <BorderBeam duration={8} size={50} reverse className="from-transparent via-white/70 to-transparent" />
+                    </div>
+                  </div>
+                  <div className="me-[5px] sm:me-[20px]">
                     <SearchBox lang={lang} />
                   </div>
                   <SheetTrigger className="w-[25px] h-[25px] flex items-center justify-center">
@@ -573,6 +611,11 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                       <path d="M0 1.29166H24" stroke="white" strokeWidth="2.58333" strokeLinejoin="round" />
                     </svg>
                   </SheetTrigger>
+                </div>
+              </div>
+              <div className={`flex items-center gap-3 max-w-1/2 pt-[15px] ${isScrolled ? "opacity-0 h-0" : ""}`}>
+                <div className="w-1/2">
+                  <HeaderSelect businessTypePromise={businessTypePromise} locationsPromise={locationsPromise} />
                 </div>
               </div>
             </div>
