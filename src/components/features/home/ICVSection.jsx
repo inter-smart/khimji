@@ -66,7 +66,7 @@ export default function ICVSection({ title, description, banner, banner_alt_text
           >
             {initiatives?.map((item, index) => (
               <SwiperSlide key={index}>
-                <Link href="/icv-initiatives" className="relative z-0 w-full h-full overflow-hidden">
+                <Link href={`/${lang}/icv-initiatives`} className="relative z-0 w-full h-full overflow-hidden">
                   {item?.media_type === "video" ? (
                     <video autoPlay loop muted playsInline className="w-full h-full object-cover">
                       <source src={item.video} type="video/mp4" />

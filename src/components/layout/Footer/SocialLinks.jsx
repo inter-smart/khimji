@@ -29,6 +29,9 @@ export default function SocialLinks({ social_links, site_settings, lang }) {
         </p>
 
         {/* SOCIAL ICONS */}
+
+{social_links?.length > 0 && (
+
         <div className="mt-[25px] xl:mt-[30px] 2xl:mt-[35px] 3xl:mt-[50px]">
           <div className="text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-white font-medium mb-[15px] 2xl:mb-[20px] 3xl:mb-[30px] uppercase">
             {lang === "en" ? "Follow Us" : "تابعنا"}
@@ -68,6 +71,7 @@ export default function SocialLinks({ social_links, site_settings, lang }) {
             }
           </div>
         </div>
+)}
       </div>
     </div>
   );

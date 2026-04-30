@@ -248,7 +248,7 @@ export default function HeritageSection({ title, description, banner, banner_alt
                 </motion.div>
 
                 <motion.div variants={buttonVariants} whileHover="hover" initial="rest" animate="rest">
-                  <Link href={`/heritage`} className={CONTACT_BUTTON_CLASS}>
+                  <Link href={`/${lang}/heritage`} className={CONTACT_BUTTON_CLASS}>
                     <span>{lang === "ar" ? "اكتشف المزيد" : "Discover More"}</span>
                     <motion.div className={ARROW_ICON_CLASS} variants={arrowVariants}>
                       <svg className="w-full h-full" viewBox="0 0 14 15">

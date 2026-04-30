@@ -72,7 +72,7 @@ export default function Links({
                     href={`/${lang}/${item?.link}`}
                     className={FOOTER_LINK_CLASS}
                   >
-                    {item?.label}
+                    {lang === "en" ? item?.label : item?.label_ar}
                   </Link>
                 </li>
               ))}

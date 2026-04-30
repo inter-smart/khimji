@@ -21,41 +21,48 @@ const SocialLinks = dynamic(() => import("./SocialLinks"), {
 const otherLinks = [
   {
     label: "Faq",
+    label_ar: "الأسئلة الشائعة",
     link: "faq",
   },
   {
     label: "Heritage",
+    label_ar: "التاريخ",
     link: "heritage",
   },
   {
     label: "Ventures",
+    label_ar: "الاستثمارات",
     link: "venture",
   },
   {
     label: "ICV Initiatives",
+    label_ar: "استثمارات ICV",
     link: "icv-initiatives",
   },
   {
     label: "Career",
+    label_ar: "الوظائف",
     link: "career",
   },
   {
     label: "Contact",
+    label_ar: "اتصل بنا",
     link: "contact",
   },
   {
     label: "Newsrooms",
+    label_ar: "غرف الأخبار",
     link: "news",
   },
   {
     label: "Blogs",
+    label_ar: "المدونة",
     link: "blog",
   },
 ];
 export default function FooterClient({ siteSettingPromise, lang }) {
   siteSettingPromise;
   const { brands, site_settings, social_links, locations, policies } = siteSettingPromise?.data || {};
-
 
   const router = useRouter();
   const params = useParams();
