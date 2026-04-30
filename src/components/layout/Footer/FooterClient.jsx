@@ -2,6 +2,7 @@
 
 import BottomLine from "./BottomLine";
 import Links from "./Links";
+import GlobalLoader from "@/components/layout/GlobalLoader";
 import { useRouter, useParams, usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
@@ -92,8 +93,10 @@ export default function FooterClient({ siteSettingPromise, lang }) {
       setPrivacyPolicySlug(privacyPolicy.slug);
     }
   }, [policies, params?.slug, lang, router, prevPolicies, setPrivacyPolicySlug]);
+  const [loading, setLoading] = useState(false);
 
   function changeCountry(slug) {
+    setLoading(true);
     document.cookie = `country=${slug}; path=/`;
     // Dispatch custom event to notify other components
     window.dispatchEvent(
@@ -104,6 +107,7 @@ export default function FooterClient({ siteSettingPromise, lang }) {
 
   return (
     <>
+      {loading && <GlobalLoader />}
       <section className="w-full relative bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[30px] overflow-hidden max-sm:hidden  min-h-[520px] lg:min-h-[580px]">
         <div className="container">
           <div className="min-h-[80px]">

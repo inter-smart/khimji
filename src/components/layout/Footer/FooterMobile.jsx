@@ -1,27 +1,31 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { renderHtml } from "@/lib/helper";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import GlobalLoader from "@/components/layout/GlobalLoader";
 
 const FOOTER_LINK_CLASS =
   "text-[14px] text-white font-medium mb-[6px] inline-block transition-all duration-300 hover:text-white/80 hover:translate-x-1";
 const SOCIAL_ICON_CLASS =
   "transition-all duration-300 hover:text-white/70 hover:scale-125 group  ";
 
-export default function FooterMobile({ data, changeCountry, lang, otherLinks }) {
+export default function FooterMobile({ data, lang, otherLinks }) {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   function changeCountry(slug) {
+    setLoading(true);
     document.cookie = `country=${slug}; path=/`;
-    // Dispatch custom event to notify other components
     window.dispatchEvent(
       new CustomEvent("countryChanged", { detail: { country: slug } })
     );
     router.refresh();
   }
 
-
   return (
+    <>
+    {loading && <GlobalLoader />}
     <section className="bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[45px_30px] sm:hidden">
       <div className="container">
         <Link href="/" className="block w-full max-w-[205px] m-auto mb-[25px]">
@@ -47,7 +51,7 @@ export default function FooterMobile({ data, changeCountry, lang, otherLinks }) 
                 key={index}
                 onClick={() => changeCountry(item?.slug)}
                 className="text-[14px] text-white ps-[10px] relative before:absolute before:top-0 before:start-0
-                            before:bottom-0 before:content-[''] before:m-auto before:bg-[#D9D9D9] before:w-[5px] before:h-[5px] before:rounded-full "
+                            before:bottom-0 before:content-[''] before:m-auto before:bg-[#D9D9D9] before:w-[5px] before:h-[5px] before:rounded-full cursor-pointer"
               >
                 {item?.name}
               </div>
@@ -144,5 +148,6 @@ export default function FooterMobile({ data, changeCountry, lang, otherLinks }) 
         </p>
       </div>
     </section>
+    </>
   );
 }
