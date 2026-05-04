@@ -20,8 +20,14 @@ export default function VentureListingSection({ data, title, context }) {
 
   const { lang } = useParams();
 
+  const BUSINESS_SLUG_MAP = { b2b: "corporate-oriented", b2c: "consumer-oriented" };
+
+  const SLUG_TO_BUSINESS = { "corporate-oriented": "b2b", "consumer-oriented": "b2c" };
+
   const fetchVentures = async (slug) => {
     if (!slug) return;
+
+    const businessType = SLUG_TO_BUSINESS[slug] ?? business_type;
 
     setIsLoading(true);
     setError(null);
@@ -33,7 +39,7 @@ export default function VentureListingSection({ data, title, context }) {
           headers: {
             "Accept-Language": lang,
             "Location-Slug": country,
-            "Business-Slug": business_type,
+            "Business-Slug": businessType,
           },
         }
       );
@@ -58,7 +64,9 @@ export default function VentureListingSection({ data, title, context }) {
 
   useEffect(() => {
     if (data?.length) {
-      setActiveSlug(data[0].slug);
+      const target = BUSINESS_SLUG_MAP[business_type];
+      const match = target && data.find((item) => item.slug === target);
+      setActiveSlug(match ? match.slug : data[0].slug);
     }
   }, [data, business_type, country, lang]);
 

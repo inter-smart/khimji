@@ -2,6 +2,7 @@ import DynamicMeta from "@/components/layout/DynamicMeta";
 import { parseOtherMeta } from "@/lib/helper";
 import { getData } from "@/lib/server/api";
 import { DefaultOgImage } from "@/lib/server/constants";
+import { getRequestContext } from "@/lib/server/getCookieData";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 
@@ -11,7 +12,9 @@ export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const { slug, lang } = resolvedParams;
 
-  const { data, error } = await getData(`venture-details?slug=${slug}`, lang);
+  const { business_type } = await getRequestContext();
+  const categorySlug = business_type === "b2c" ? "consumer-oriented" : "corporate-oriented";
+  const { data, error } = await getData(`venture-details?slug=${slug}&category_slug=${categorySlug}`, lang);
 
   if (!data || error) {
     return {
@@ -82,7 +85,9 @@ export default async function Page({ params }) {
   const resolvedParams = await params;
   const { slug, lang } = resolvedParams;
 
-  const { data, error, structuredData, lineScripts } = await getData(`venture-details?slug=${slug}`, lang);
+  const { business_type } = await getRequestContext();
+  const categorySlug = business_type === "b2c" ? "consumer-oriented" : "corporate-oriented";
+  const { data, error, structuredData, lineScripts } = await getData(`venture-details?slug=${slug}&category_slug=${categorySlug}`, lang);
 
   if (!data || error) {
     notFound();

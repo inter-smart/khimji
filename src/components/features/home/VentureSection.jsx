@@ -6,13 +6,15 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/pagination";
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useTransition } from "react";
+import { useRouter } from "next/navigation";
 
 import { Heading } from "@/components/layout/Heading";
 import Link from "next/link";
 import VentureCard from "@/components/common/VentureCard";
 import { renderHtml } from "@/lib/helper";
 import dynamic from "next/dynamic";
+import GlobalLoader from "@/components/layout/GlobalLoader";
 
 
 const VentureSectionmob = dynamic(() => import("./home-mobile/VentureSectionmob"), { ssr: false });
@@ -31,34 +33,7 @@ const ARROW_ICON_CLASS = `
   group-hover:translate-x-1
 `;
 
-const VENTURE_SLIDES = [
-  {
-    video: "/videos/venture-1.mp4",
-    mobileImage: "/images/vetureCard-2.jpg",
-    title: "Logistics & Shipping",
-    description:
-      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: [
-      "/images/ship-1.png",
-      "/images/ship-2.png",
-      "/images/ship-3.png",
-      "/images/ship-4.png",
-    ],
-  },
-  {
-    video: "/videos/venture-2.mp4",
-    mobileImage: "/images/vetureCard-2.jpg",
-    title: "Logistics & Shipping",
-    description:
-      "Khimji Ramdas Shipping and Multimodal Logistics , KRHL (Khimji Ramdas Heavy Lift), Schenker Khimji's LLC, Khimji's Sparkle Marine Services SAOC, Middle East Fuji Khimji LLC",
-    logos: [
-      "/images/ship-1.png",
-      "/images/ship-2.png",
-      "/images/ship-3.png",
-      "/images/ship-4.png",
-    ],
-  },
-];
+
 
 export default function VentureSection({
   title,
@@ -68,6 +43,14 @@ export default function VentureSection({
   lang,
 }) {
   const isRTL = lang?.trim() === "ar";
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
+  function handleViewAllClick(businessType) {
+    document.cookie = `business_type=${businessType}; path=/`;
+    window.dispatchEvent(new CustomEvent("businessTypeChanged", { detail: { business_type: businessType } }));
+    startTransition(() => { router.push(`/${lang}/venture`); });
+  }
 
   const sectionRef = useRef(null);
 
@@ -186,6 +169,7 @@ export default function VentureSection({
 
   return (
     <>
+      {isPending && <GlobalLoader />}
       <section
         ref={sectionRef}
         className="relative z-0 py-[45px] 2xl:py-[80px_50px] 3xl:py-[100px_70px] overflow-hidden max-sm:hidden"
@@ -253,7 +237,7 @@ export default function VentureSection({
                     initial="rest"
                     animate="rest"
                   >
-                    <Link href={`/venture`} className={CONTACT_BUTTON_CLASS}>
+                    <button onClick={() => handleViewAllClick("b2b")} className={CONTACT_BUTTON_CLASS}>
                       <span>{lang === "en" ? "View All" : "عرض الكل"}</span>
                       <motion.div
                         className={ARROW_ICON_CLASS}
@@ -266,7 +250,7 @@ export default function VentureSection({
                           />
                         </svg>
                       </motion.div>
-                    </Link>
+                    </button>
                   </motion.div>
 
                 </motion.div>
@@ -378,7 +362,7 @@ export default function VentureSection({
                     initial="rest"
                     animate="rest"
                   >
-                    <Link href={`/venture`} className={CONTACT_BUTTON_CLASS}>
+                    <button onClick={() => handleViewAllClick("b2c")} className={CONTACT_BUTTON_CLASS}>
                       <span>{lang === "en" ? "View All" : "عرض الكل"}</span>
                       <motion.div
                         className={ARROW_ICON_CLASS}
@@ -391,7 +375,7 @@ export default function VentureSection({
                           />
                         </svg>
                       </motion.div>
-                    </Link>
+                    </button>
                   </motion.div>
                 </motion.div>
               </div>

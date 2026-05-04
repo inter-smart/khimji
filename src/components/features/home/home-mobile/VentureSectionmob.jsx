@@ -10,14 +10,26 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import VentureCard from "@/components/common/VentureCard";
 import { renderHtml } from "@/lib/helper";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import GlobalLoader from "@/components/layout/GlobalLoader";
 
-
+const BUSINESS_TYPES = ["b2c", "b2b"];
 
 export default function VentureSectionmob({ title, banner, banner_alt_text, ventureSlider, lang }) {
   const isRTL = lang == "ar";
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
+  function handleViewAllClick(businessType) {
+    document.cookie = `business_type=${businessType}; path=/`;
+    window.dispatchEvent(new CustomEvent("businessTypeChanged", { detail: { business_type: businessType } }));
+    startTransition(() => { router.push(`/${lang}/venture`); });
+  }
 
   return (
     <section className="sm:hidden mt-[3px]">
+      {isPending && <GlobalLoader />}
       <div className="w-full h-[290px] relative before:absolute before:left-0 before:content-[''] before:bottom-0 before:w-full before:h-full before:bg-black/40 before:z-1">
         <Image src={banner} width="441" height="290" className="absolute top-0 left-0 w-full h-full object-cover" alt={banner_alt_text} />
         <div className="container flex items-end h-full">
@@ -50,7 +62,7 @@ export default function VentureSectionmob({ title, banner, banner_alt_text, vent
             ))}
           </TabsList>
 
-          {ventureSlider?.map((venture) => (
+          {ventureSlider?.map((venture, index) => (
             <TabsContent key={venture.id} value={venture.slug} className="mt-6 text-center">
               {" "}
               <h3 className="text-[22px] text-[#0B436A] font-medium mb-3">{venture?.title}</h3>
@@ -104,8 +116,8 @@ export default function VentureSectionmob({ title, banner, banner_alt_text, vent
                   </button>
                 </div>
               </div>
-              <Link
-                href={`/${lang}/venture`}
+              <button
+                onClick={() => handleViewAllClick(BUSINESS_TYPES[index] ?? "b2c")}
                 className="text-[16px] xs:text-[18px] text-[#000000] font-medium w-fit flex items-center justify-center mt-[20px] h-[40px] xs:h-[50px]
                            min-w-[120px] xs:min-w-[140px] p-[8px] border border-[#000000] m-auto"
               >
@@ -114,9 +126,9 @@ export default function VentureSectionmob({ title, banner, banner_alt_text, vent
                   <svg className="w-full h-full object-contain" viewBox="0 0 18 14">
                     <g clipPath="url(#clip0_1342_4984)">
                       <path
-                        d="M9.38156 13.4279C9.27201 13.43 9.16155 13.4034 9.0641 13.3431C8.78295 13.17 8.69731 12.7942 8.86648 12.5133C8.8807 12.4885 10.6478 9.53965 14.0209 7.68392H0.907875C0.574073 7.68392 0.302612 7.41246 0.302612 7.07865C0.302612 
-                                        6.74485 0.574073 6.47339 0.907875 6.47339H14.0209C10.6665 4.62824 8.87949 1.66639 8.86194 1.63673C8.6964 1.35407 8.7881 0.977903 
-                                        9.07045 0.810547C9.35674 0.640771 9.73382 0.739126 9.90481 1.02693C10.1799 1.46574 12.7595 5.39965 17.3865 6.48822C17.6634 6.55631 17.8552 6.79872 17.8552 
+                        d="M9.38156 13.4279C9.27201 13.43 9.16155 13.4034 9.0641 13.3431C8.78295 13.17 8.69731 12.7942 8.86648 12.5133C8.8807 12.4885 10.6478 9.53965 14.0209 7.68392H0.907875C0.574073 7.68392 0.302612 7.41246 0.302612 7.07865C0.302612
+                                        6.74485 0.574073 6.47339 0.907875 6.47339H14.0209C10.6665 4.62824 8.87949 1.66639 8.86194 1.63673C8.6964 1.35407 8.7881 0.977903
+                                        9.07045 0.810547C9.35674 0.640771 9.73382 0.739126 9.90481 1.02693C10.1799 1.46574 12.7595 5.39965 17.3865 6.48822C17.6634 6.55631 17.8552 6.79872 17.8552
                                         7.07896C17.8552 7.35919 17.6646 7.60221 17.3916 7.66848C12.745 8.76098 10.1742 12.7 9.89634 13.1458C9.78739 13.3204 9.58584 13.4239 9.38156 13.4279Z"
                         fill="black"
                       />
@@ -128,17 +140,17 @@ export default function VentureSectionmob({ title, banner, banner_alt_text, vent
                     </defs>
                   </svg>
                 </div>
-              </Link>
+              </button>
             </TabsContent>
           ))}
-          {/* <TabsContent value="consumer" className="mt-6 text-center">
+          <TabsContent value="consumer" className="mt-6 text-center">
             <h3 className="text-[22px] text-[#0B436A] text-lg font-medium mb-3">
               {ventureSlider[1]?.title}
             </h3>
             <p className="text-[20px]] text-[#000000]  leading-relaxed">
               {renderHtml(ventureSlider[1]?.description)}
             </p>
-          </TabsContent> */}
+          </TabsContent>
         </Tabs>
       </div>
     </section>
