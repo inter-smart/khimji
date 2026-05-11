@@ -3,15 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 const CONTACT_BUTTON_CLASS = `
-  text-[12px] 2xl:text-[16px] 3xl:text-[18px]
-  text-black capitalize font-medium
+  text-[14px] 2xl:text-[16px] 3xl:text-[18px]
+  text-white sm:text-black capitalize font-medium
   flex items-center group transition-all duration-300
   hover:text-[#299B8A] max-w-fit max-lg:mb-[25px]
 `;
 
 const ARROW_ICON_CLASS = `
   w-[14px] h-[14px] flex items-center
-  mt-[5px] mx-[15px]
+   mx-[15px]
   transition-transform duration-300
   group-hover:translate-x-1
 `;
@@ -185,7 +185,7 @@ export default function VentureCard({ item, lang = "en" }) {
                 ))}
               </div>
             </div>
-            <div className={'CONTACT_BUTTON_CLASS w-full flex mt-[20px]'}>
+           <div className={`${CONTACT_BUTTON_CLASS} w-full flex mt-[20px]`}>
               <span>{lang === "ar" ? "اكتشف المزيد" : "View"}</span>
               <div className={ARROW_ICON_CLASS} variants={arrowVariants}>
                 <svg className="w-full h-full" viewBox="0 0 14 15">

@@ -145,18 +145,14 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-@font-face {
-  font-family: "ZaridText";
-  src: url("/fonts/29LTZaridText-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF,
-                 U+FB50-FDFF, U+FE70-FEFF;
+html[lang="ar"] {
+  --font-base1: var(--font-Brown), var(--font-Bukra), Arial, sans-serif;
+  
 }
 
 body {
-  font-family: "ZaridText", var(--font-base1), Arial, sans-serif;
+  font-family: var(--font-base1), Arial, sans-serif;
+ 
 }
 
 /* Prevent white gap when shadcn Select / Sheet opens */
@@ -338,18 +334,27 @@ body[data-scroll-locked] {
   overflow: auto !important;
 }
 
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .stickyHeader {
   position: fixed;
   top: 0;
-  animation-name: fadeInDown;
-  animation-duration: 0.8s;
-  animation-fill-mode: both;
-  background: #fff;
+  animation: fadeInDown 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+  background: #ffffffd1;
   -webkit-backdrop-filter: blur(30px);
   backdrop-filter: blur(30px);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   border: 0 !important;
-  z-index: 999;
+  z-index: 9999;
 }
 
 @layer base {
@@ -393,19 +398,7 @@ body[data-scroll-locked] {
   backdrop-filter: blur(7px);
 }  */
 
-.stickyHeader {
-  position: fixed;
-  top: 0;
-  /* animation-name: fadeInDown; */
-  /* animation-duration: 0.8s;
-  animation-fill-mode: both; */
-  background: #ffffffd1;
-  -webkit-backdrop-filter: blur(30px);
-  backdrop-filter: blur(30px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  border: 0 !important;
-  z-index: 9;
-}
+
 
 section {
   position: relative;

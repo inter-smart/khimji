@@ -14,7 +14,7 @@ export default function ParnerSectionMobile({brands}) {
                                     alt={item?.logo_alt_text}
                                     width={140}
                                     height={65}
-                                    className="w-auto object-contain  max-w-[70px] min-w-[42px]  3xs:min-w-[50px]"
+                                    className="w-auto object-contain  max-w-[70px] min-w-[42px]  3xs:min-w-[50px] invert-0 brightness-0 saturate-0"
                                 />
                             </div>
                         </div>

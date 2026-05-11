@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useTransition } from "react";
+import { useState, useEffect, useTransition, useRef } from "react";
 import GlobalLoader from "@/components/layout/GlobalLoader";
 import Link from "next/link";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
@@ -66,6 +66,7 @@ const navMenu = [
 ];
 
 export default function Header({ businessTypePromise, locationsPromise, lang, country, businessType }) {
+  const headerRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isPending, startTransition] = useTransition();
   const currentPath = usePathname();
@@ -100,6 +101,22 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
     return () => window?.removeEventListener("scroll", handleScroll);
   }, [currentPath]);
 
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      // Only update the height when not scrolled to avoid measurement changes when sticky
+      if (headerRef.current && !isScrolled) {
+        const height = headerRef.current.offsetHeight;
+        if (height > 0) {
+          document.documentElement.style.setProperty("--header-height", `${height}px`);
+        }
+      }
+    };
+
+    updateHeaderHeight();
+    window.addEventListener("resize", updateHeaderHeight);
+    return () => window.removeEventListener("resize", updateHeaderHeight);
+  }, [isScrolled]);
+
   const languageData = LANGUAGES[lang];
   const languages = Object.values(LANGUAGES);
 
@@ -113,10 +130,10 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
   return (
     <>
     {isPending && <GlobalLoader />}
-    <header>
+    <header ref={headerRef}>
       <div className={`w-full bg-white max-sm:hidden ${isScrolled ? "stickyHeader" : ""}`}>
         <div className="container">
-          <div className="w-full flex flex-wrap items-center justify-between p-[15px_0] border-[rgba(0,0,0,0.1)] border-b ">
+          <div className="w-full flex flex-wrap items-center justify-between p-[15px_0] border-[rgba(0,0,0,0.1)] border-b z-10">
             {/* logo */}
             <Link
               href={`/${lang}`}

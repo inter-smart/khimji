@@ -21,7 +21,7 @@ const VentureSectionmob = dynamic(() => import("./home-mobile/VentureSectionmob"
 
 const CONTACT_BUTTON_CLASS = `
   text-[12px] 2xl:text-[16px] 3xl:text-[18px]
-  text-black capitalize font-medium
+  text-black capitalize font-medium max-sm:!text-white
   flex items-center group transition-all duration-300
   hover:text-[#299B8A] max-w-fit max-lg:m-auto max-lg:mb-[25px]
 `;
@@ -237,7 +237,7 @@ export default function VentureSection({
                     initial="rest"
                     animate="rest"
                   >
-                    <button onClick={() => handleViewAllClick("b2b")} className={CONTACT_BUTTON_CLASS}>
+                    <button onClick={() => handleViewAllClick("b2b")}   className={`${CONTACT_BUTTON_CLASS} text-white`}>
                       <span>{lang === "en" ? "View All" : "عرض الكل"}</span>
                       <motion.div
                         className={ARROW_ICON_CLASS}
@@ -297,7 +297,7 @@ export default function VentureSection({
                         spaceBetween: 50,
                       },
                     }}
-                    className="overflow-hidden pb-[50px]"
+                    className="overflow-hidden pb-[50px] !h-auto [&_.swiper-slide]:!h-auto"
                   >
                     {ventures[0]?.ventures?.map((item, index) => (
                       <SwiperSlide key={index}>
@@ -362,7 +362,7 @@ export default function VentureSection({
                     initial="rest"
                     animate="rest"
                   >
-                    <button onClick={() => handleViewAllClick("b2c")} className={CONTACT_BUTTON_CLASS}>
+                    <button onClick={() => handleViewAllClick("b2c")} className={`${CONTACT_BUTTON_CLASS} text-white`}>
                       <span>{lang === "en" ? "View All" : "عرض الكل"}</span>
                       <motion.div
                         className={ARROW_ICON_CLASS}
