@@ -290,7 +290,7 @@ export default function SearchBox({ lang, country, businessType }) {
                   {searchResults.map((result, index) => (
                     <li key={result.id || index}>
                       <Link
-                        href={`/${result.type}/${result.url || result.slug}`}
+                        href={`/${lang}/${result.type}/${result.url || result.slug}`}
                         onClick={handleResultClick}
                         className="
                           px-4 py-3

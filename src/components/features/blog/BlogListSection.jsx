@@ -115,7 +115,7 @@ export default function BlogListSection({ lang, country }) {
                     key={index}
                     className="w-full sm:w-1/2 lg:w-1/3 p-[5px] sm:p-[7px] 2xl:p-[10px]"
                   >
-                    <BlogCard item={item} />
+                    <BlogCard item={item} lang={lang} />
                   </div>
                 ))
               ) : (

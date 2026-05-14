@@ -78,7 +78,7 @@ export default async function page({ params }) {
     <>
       <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />
       <BlogDetailSection data={data} />
-      {data?.related_blogs?.length > 0 && <RelatedBlogSection data={data?.related_blogs} />}
+      {data?.related_blogs?.length > 0 && <RelatedBlogSection data={data?.related_blogs} lang={lang} />}
     </>
   );
 }

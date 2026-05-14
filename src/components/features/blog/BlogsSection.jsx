@@ -1,7 +1,7 @@
 import BlogCard from "@/components/common/BlogCard";
 import BlogPagination from "./Pagination";
 
-export default function BlogsSection({ blogs, paginationData, error, variant }) {
+export default function BlogsSection({ blogs, paginationData, error, variant, lang }) {
   return (
     <section className="w-full h-auto py-[40px] sm:py-[50px] lg:py-[60px_70px] 2xl:py-[70px_90px] 3xl:py-[90px_115px] overflow-hidden block relative z-0">
       <div className="w-[120px] sm:w-[180px] 2xl:w-[225px] 3xl:w-[280px] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] pointer-events-none absolute -z-1 inset-[0_auto_auto_-2%]"></div>
@@ -19,7 +19,7 @@ export default function BlogsSection({ blogs, paginationData, error, variant }) 
               {blogs?.length > 0 ? (
                 blogs?.map((item, index) => (
                   <div key={index} className="w-full sm:w-1/2 lg:w-1/3 p-[5px] sm:p-[7px] 2xl:p-[10px]">
-                    <BlogCard item={item} variant={variant}/>
+                    <BlogCard item={item} variant={variant} lang={lang}/>
                   </div>
                 ))
               ) : (

@@ -301,7 +301,7 @@ export default function VentureSection({
                   >
                     {ventures[0]?.ventures?.map((item, index) => (
                       <SwiperSlide key={index}>
-                        <Link href={`/venture/${item?.slug}`}>
+                        <Link href={`/${lang}/venture/${item?.slug}`}>
                           <VentureCard item={item} />
                         </Link>
                       </SwiperSlide>
@@ -423,7 +423,7 @@ export default function VentureSection({
                   >
                     {ventures[1]?.ventures?.map((item, index) => (
                       <SwiperSlide key={index}>
-                        <Link href={`/venture/${item?.slug}`}>
+                        <Link href={`/${lang}/venture/${item?.slug}`}>
                           <VentureCard item={item} />
                         </Link>
                       </SwiperSlide>

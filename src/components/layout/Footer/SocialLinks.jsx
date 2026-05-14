@@ -11,7 +11,7 @@ export default function SocialLinks({ social_links, site_settings, lang }) {
       {/* LOGO */}
       <div className="flex flex-col items-end text-end max-w-[175px] xl:max-w-[200px] 2xl:max-w-[265px] 3xl:max-w-[320px] ms-auto">
         <div className="max-w-[130px] xl:max-w-[165px] 2xl:max-w-[210px] 3xl:max-w-[250px] w-full mb-[25px] xl:mb-[30px] 2xl:mb-[35px] 3xl:mb-[50px] block transition-[0.5s] hover:scale-90">
-          <Link href="/">
+          <Link href={`/${lang}`}>
             <Image
               src="/images/Logo-white-footer.png"
               width={150}
