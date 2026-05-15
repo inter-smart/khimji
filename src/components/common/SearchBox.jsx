@@ -1,12 +1,15 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function SearchBox({ lang, country, businessType }) {
   const isRTL = lang == "ar";
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const searchRef = useRef(null);
   const debounceRef = useRef(null);
@@ -76,8 +79,11 @@ export default function SearchBox({ lang, country, businessType }) {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      fetchSearchResults(searchQuery);
+    const q = searchQuery.trim();
+    if (q) {
+      setIsNavigating(true);
+      closeSearch();
+      router.push(`/${lang}/search?q=${encodeURIComponent(q)}`);
     }
   };
 
@@ -114,7 +120,7 @@ export default function SearchBox({ lang, country, businessType }) {
 
   return (
     <div
-      className={`relative flex items-center ${isRTL ? "flex-row-reverse" : ""}`}
+      className={`relative flex items-center z-100 ${isRTL ? "flex-row-reverse" : ""}`}
       ref={searchRef}
     >
       {/* Search Icon Button */}
@@ -209,7 +215,7 @@ export default function SearchBox({ lang, country, businessType }) {
                           hover:scale-105 active:scale-95
                         `}
           >
-            {isLoading ? (
+            {isLoading || isNavigating ? (
               <svg
                 className="animate-spin"
                 width="18"
