@@ -5,7 +5,14 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { careerFormSchema } from "@/lib/validations/schemas";
@@ -14,6 +21,7 @@ import { multipartPostToAPI } from "@/lib/server/clientApi";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import Link from "next/link";
 
 export default function CareerForm({ careerId, onSuccess }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -63,10 +71,7 @@ export default function CareerForm({ careerId, onSuccess }) {
 
       if (!response.status || response.ok) {
         return setFormError(response.message || "Failed to submit application");
-        
       }
-
-
 
       if (response.status) {
         toast.success("Application submitted successfully!", {
@@ -99,7 +104,8 @@ export default function CareerForm({ careerId, onSuccess }) {
 
   const inputStyle =
     "w-full h-[30px] 2xl:h-[40px] 3xl:h-[50px] rounded-none border-0 border-b-1 border-black/10 shadow-none p-[4_0] text-[14px] 2xl:text-[16px] 3xl:text-[20px] placeholder:text-[14px] 2xl:placeholder:text-[16px] 3xl:placeholder:text-[20px] placeholder:text-black ring-0 focus-visible:border-black focus-visible:ring-0 focus-visible:ring-offset-0 transition-all duration-200";
-  const formItemStyle = "mb-[20px] sm:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px] gap-0";
+  const formItemStyle =
+    "mb-[20px] sm:mb-[25px] 2xl:mb-[30px] 3xl:mb-[40px] gap-0";
 
   const privacyConsent = form.watch("privacyConsent");
 
@@ -113,7 +119,12 @@ export default function CareerForm({ careerId, onSuccess }) {
             render={({ field }) => (
               <FormItem className={formItemStyle}>
                 <FormControl>
-                  <Input placeholder="Full Name*" {...field} className={inputStyle} disabled={isSubmitting} />
+                  <Input
+                    placeholder="Full Name*"
+                    {...field}
+                    className={inputStyle}
+                    disabled={isSubmitting}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -125,7 +136,12 @@ export default function CareerForm({ careerId, onSuccess }) {
             render={({ field }) => (
               <FormItem className={formItemStyle}>
                 <FormControl>
-                  <Input placeholder="Phone Number*" {...field} className={inputStyle} disabled={isSubmitting} />
+                  <Input
+                    placeholder="Phone Number*"
+                    {...field}
+                    className={inputStyle}
+                    disabled={isSubmitting}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -138,7 +154,13 @@ export default function CareerForm({ careerId, onSuccess }) {
           render={({ field }) => (
             <FormItem className={formItemStyle}>
               <FormControl>
-                <Input placeholder="Email*" type="email" {...field} className={inputStyle} disabled={isSubmitting} />
+                <Input
+                  placeholder="Email*"
+                  type="email"
+                  {...field}
+                  className={inputStyle}
+                  disabled={isSubmitting}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -150,7 +172,12 @@ export default function CareerForm({ careerId, onSuccess }) {
           render={({ field }) => (
             <FormItem className={formItemStyle}>
               <FormControl>
-                <Textarea placeholder="Your Message*" className={`${inputStyle} min-h-[75px] 3xl:min-h-[100px]`} {...field} disabled={isSubmitting} />
+                <Textarea
+                  placeholder="Your Message*"
+                  className={`${inputStyle} min-h-[75px] 3xl:min-h-[100px]`}
+                  {...field}
+                  disabled={isSubmitting}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -164,7 +191,13 @@ export default function CareerForm({ careerId, onSuccess }) {
               <FormControl>
                 <div className="w-full h-auto p-[15px] sm:p-[20px] 3xl:p-[30px] bg-[#faf8f8] border-1 border-dashed border-black/20 text-center relative z-0">
                   <span className="w-[20px] sm:w-[25px] 2xl:w-[30px] 3xl:w-[40px] h-auto aspect-square mx-auto mb-[5px] lg:mb-[10px] flex items-center justify-center">
-                    <Image src="/images/resume_upload.svg" alt="Upload Icon" width={50} height={50} className="w-full h-full object-contain" />
+                    <Image
+                      src="/images/resume_upload.svg"
+                      alt="Upload Icon"
+                      width={50}
+                      height={50}
+                      className="w-full h-full object-contain"
+                    />
                   </span>
                   <div className="text-center">
                     <div className="text-[14px] 2xl:text-[16px] 3xl:text-[20px] leading-[1.2] font-normal text-black mb-[5px] sm:mb-[10px]">
@@ -206,7 +239,18 @@ export default function CareerForm({ careerId, onSuccess }) {
               </FormControl>
               <div className="flex-1 leading-none space-y-1">
                 <FormLabel className="text-[14px] 2xl:text-[16px] 3xl:text-[20px] leading-[1.2] font-normal text-black/60 cursor-pointer">
-                  I agree to the Privacy Policy and consent to the processing of my information.*
+                  I agree to the
+                  <span>
+                    <Link
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="/privacy-policy"
+                      className="text-[#299B8A] underline"
+                    >
+                    Privacy Policy
+                    </Link>
+                  </span>
+                  and consent to the processing of my information.*
                 </FormLabel>
                 <FormMessage />
               </div>

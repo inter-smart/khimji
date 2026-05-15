@@ -1,7 +1,13 @@
 import { Heading } from "@/components/layout/Heading";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { NoDataState } from "@/lib/helper";
 
 export default function FaqSection({ cms, data }) {
+
+  if (!data || data.length === 0) {
+      return <NoDataState title="No FAQ Found" message="There are no FAQ available." />
+    }
+
   return (
     <section className="w-full h-auto py-[40px] sm:py-[70px_60px] lg:py-[100px_80px] 2xl:py-[120px_100px] 3xl:py-[155px_130px] overflow-hidden block relative z-0">
       <div className="w-[120px] sm:w-[180px] 2xl:w-[225px] 3xl:w-[280px] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] pointer-events-none absolute -z-1 inset-[0_auto_auto_-2%]"></div>

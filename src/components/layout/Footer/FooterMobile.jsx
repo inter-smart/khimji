@@ -159,8 +159,9 @@ export default function FooterMobile({ data, lang, otherLinks }) {
           </div>
           <p className="text-[14px] text-white max-w-[190px]">
             {lang === "en"
-              ? "Copyright © 2025 Khimji Ramdas. All Rights Reserved."
-              : "جميع الحقوق محفوظة © 2025 خيمجي رامداس."}
+              ? // Instead of hardcoding the year:
+                `Copyright © ${new Date().getFullYear()} Khimji Ramdas. All Rights Reserved.`
+              : `جميع الحقوق محفوظة © ${new Date().getFullYear()} خيمجي رامداس.`}
           </p>
         </div>
       </section>
