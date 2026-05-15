@@ -30,24 +30,22 @@ export default function Brands({ brands, lang }) {
             <SwiperSlide key={index}>
               <div className="w-full h-full flex items-center justify-center">
                 {item?.url ? (
-                  <Link href={item.url} aria-label={item?.logo_alt_text || "Brand logo"}>
+                  <Link href={item.url} aria-label={item?.logo_alt_text || "Brand logo"} className="aspect-[140/65] block">
                     <Image
                       src={item?.logo}
-                      alt={item?.logo_alt_text}
+                      alt={item?.logo_alt_text || "Brand logo"}
                       width={140}
                       height={65}
-                      prop="true"
                       className="w-auto object-contain max-w-[75px] 2xl:max-w-[80px] min-w-[45px] xl:min-w-[65px] 2xl:min-w-[75px] transition-[0.5s] hover:scale-90"
                     />
                   </Link>
                 ) : (
-                  <div>
+                  <div className=" aspect-[140/65]">
                     <Image
                       src={item?.logo}
-                      alt={item?.logo_alt_text}
+                      alt={item?.logo_alt_text || "Brand logo"}
                       width={140}
                       height={65}
-                      prop="true"
                       className="w-auto object-contain max-w-[75px] 2xl:max-w-[80px] min-w-[45px] xl:min-w-[65px] 2xl:min-w-[75px] transition-[0.5s] hover:scale-90"
                     />
                   </div>

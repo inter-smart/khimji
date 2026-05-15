@@ -24,7 +24,7 @@ export default function SocialLinks({ social_links, site_settings, lang }) {
         </div>
 
         {/* TEXT */}
-        <p className="text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-white font-medium">
+        <p className="text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-white font-medium min-h-[3em]">
           {site_settings?.footer_about}
         </p>
 
@@ -61,7 +61,6 @@ export default function SocialLinks({ social_links, site_settings, lang }) {
                           height={30}
                           alt={item?.name}
                           className="w-full object-contain"
-                          priority
                         />
                       )}
                     </div>

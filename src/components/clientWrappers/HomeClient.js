@@ -3,26 +3,10 @@ import React from "react";
 import dynamic from "next/dynamic";
 import NewsSection from "../features/home/NewsSection";
 
-const VentureSection = dynamic(
-  () => import("@/components/features/home/VentureSection"),
-  { ssr: false },
-);
-const HeritageSection = dynamic(
-  () => import("@/components/features/home/HeritageSection"),
-  { ssr: false },
-);
-const ArchiveSection = dynamic(
-  () => import("@/components/features/home/ArchiveSection"),
-  { ssr: false },
-);
-const ICVSection = dynamic(
-  () => import("@/components/features/home/ICVSection"),
-  { ssr: false },
-);
-const ParnerSectionMobile = dynamic(
-  () => import("@/components/features/home/home-mobile/ParnerSectionMobile"),
-  { ssr: false },
-);
+const VentureSection = dynamic(() => import("@/components/features/home/VentureSection"));
+const HeritageSection = dynamic(() => import("@/components/features/home/HeritageSection"));
+const ICVSection = dynamic(() => import("@/components/features/home/ICVSection"));
+const ParnerSectionMobile = dynamic(() => import("@/components/features/home/home-mobile/ParnerSectionMobile"));
 
 const HomeClient = ({ data, lang }) => {
   const {
@@ -58,15 +42,8 @@ const HomeClient = ({ data, lang }) => {
         timelines={timelines}
         lang={lang}
       />
-      {/* {archives?.length > 0 && (
-        <ArchiveSection
-          title={home_cms?.section3_title}
-          archives={archives}
-          lang={lang}
-        />
-      )} */}
-
-      <NewsSection data={news} lang={lang}/>
+    
+      <NewsSection data={news} lang={lang} />
 
       {initiatives?.length > 0 && (
         <ICVSection
@@ -78,7 +55,7 @@ const HomeClient = ({ data, lang }) => {
           lang={lang}
         />
       )}
-      
+
       <ParnerSectionMobile brands={brands} />
     </>
   );
