@@ -13,7 +13,7 @@ export default function Brands({ brands, lang }) {
         <Swiper
           dir={lang === "ar" ? "rtl" : "ltr"}
           modules={[Autoplay]}
-          autoplay={{ delay: 1, disableOnInteraction: false }}
+          autoplay={{ delay: 0, disableOnInteraction: false }}
           speed={2500}
           loop={false}
           slidesPerView={2}

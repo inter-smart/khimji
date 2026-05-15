@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 import { usePolicySlug } from "@/context/PolicySlugContext";
 
 const FooterMobile = dynamic(() => import("./FooterMobile"), {
-  ssr: true,
+  ssr: false,
 });
 const Brands = dynamic(() => import("./Brands"), {
   ssr: true,
