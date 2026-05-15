@@ -1,14 +1,10 @@
 import { getData } from "@/lib/server/api";
-import dynamic from "next/dynamic";
 import { getMetaData } from "@/lib/server/metaApi";
 import HomeClient from "@/components/clientWrappers/HomeClient";
 import DynamicMeta from "@/components/layout/DynamicMeta";
 import { getRequestContext } from "@/lib/server/getCookieData";
 import { notFound } from "next/navigation";
-const BannerSection = dynamic(
-  () => import("@/components/features/home/BannerSection"),
-  { ssr: true },
-);
+import BannerSection from "@/components/features/home/BannerSection";
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;

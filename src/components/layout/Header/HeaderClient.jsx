@@ -142,7 +142,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
               <span className="relative w-full aspect-[275/75]">
                 <Image
                   src="/images/logo.png"
-                  alt="logo"
+                  alt="Khimji Ramdas"
                   fill
                   priority
                   className="object-contain"
@@ -177,7 +177,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
 
                 {/* country Dropdown */}
                 <DropdownMenu>
-                  <DropdownMenuTrigger className="flex items-center gap-2 px-2 cursor-pointer focus:outline-none">
+                  <DropdownMenuTrigger aria-label={`Select language, current: ${languageData?.fullName}`} className="flex items-center gap-2 px-2 cursor-pointer focus:outline-none">
                     <Image
                       src="/images/langicon.png"
                       alt={languageData?.fullName}
@@ -223,8 +223,8 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                     <div className="flex items-center justify-between w-full pb-[15px] relative">
 
                       <div className="flex items-center">
-                        <SheetTrigger className="w-[25px] h-[25px] flex items-center justify-center">
-                          <svg width="24" height="18" viewBox="0 0 24 18">
+                        <SheetTrigger aria-label="Open navigation menu" className="w-[25px] h-[25px] flex items-center justify-center">
+                          <svg width="24" height="18" viewBox="0 0 24 18" aria-hidden="true">
                             <path d="M0 8.29166H24" stroke="#299B8A" strokeWidth="2.58333" strokeLinejoin="round" />
                             <path d="M0 16.2917H24" stroke="#299B8A" strokeWidth="2.58333" strokeLinejoin="round" />
                             <path d="M0 1.29166H24" stroke="#299B8A" strokeWidth="2.58333" strokeLinejoin="round" />
@@ -244,7 +244,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                         <Link href="/" className="block max-w-[115px]  w-full h-full">
                           <Image
                             src="/images/logo.png"
-                            alt="logo"
+                            alt="Khimji Ramdas"
                             width={175}
                             height={100}
                             className="w-full h-full 3xl:max-w-[125px] 2xl:max-w-[100px] max-w-[90px] object-contain block hover:scale-105 transition-transform duration-300"
@@ -342,7 +342,6 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                                   <Link
                                     href={`/${lang}${item?.link}`}
                                     className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
-                                    aria-label="menuLink"
                                   >
                                     <span>{item?.label}</span>
                                   </Link>
@@ -370,7 +369,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                   <div className="container relative">
                     <div className="flex items-center justify-between w-full pb-[15px] relative after:absolute after:bottom-0 after:content-[''] after:start-0 after:w-full after:h-[1px] after:bg-white/20 ">
                       <Link href="/" className="w-[130px] xs:w-[140px] sm:w-[170px] p-[10px_0]">
-                        <Image src="/images/Logo-white-footer.png" width="200" height="115" className="object-contain" alt="logo" />
+                        <Image src="/images/Logo-white-footer.png" width="200" height="115" className="object-contain" alt="Khimji Ramdas" />
                       </Link>
                       <div className="flex items-center">
                         <div className="me-[5px] sm:me-[20px]">
@@ -420,8 +419,8 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                         <div className="me-[5px] sm:me-[20px]">
                           <SearchBox lang={lang} />
                         </div>
-                        <SheetTrigger className="w-[25px] h-[25px] flex items-center justify-center">
-                          <svg width="24" height="18" viewBox="0 0 24 18">
+                        <SheetTrigger aria-label="Open navigation menu" className="w-[25px] h-[25px] flex items-center justify-center">
+                          <svg width="24" height="18" viewBox="0 0 24 18" aria-hidden="true">
                             <path d="M0 8.29166H24" stroke="white" strokeWidth="2.58333" strokeLinejoin="round" />
                             <path d="M0 16.2917H24" stroke="white" strokeWidth="2.58333" strokeLinejoin="round" />
                             <path d="M0 1.29166H24" stroke="white" strokeWidth="2.58333" strokeLinejoin="round" />
@@ -445,7 +444,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                         <Link href="/" className="block max-w-[115px]  w-full h-full">
                           <Image
                             src="/images/logo.png"
-                            alt="logo"
+                            alt="Khimji Ramdas"
                             width={175}
                             height={100}
                             className="w-full h-full 3xl:max-w-[125px] 2xl:max-w-[100px] max-w-[90px] object-contain block hover:scale-105 transition-transform duration-300"
@@ -543,7 +542,6 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                                   <Link
                                     href={`/${lang}${item?.link}`}
                                     className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
-                                    aria-label="menuLink"
                                   >
                                     <span>{item?.label}</span>
                                   </Link>
@@ -577,7 +575,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
             <div className="container relative">
               <div className="flex items-center justify-between w-full pb-[15px] relative after:absolute after:bottom-0 after:content-[''] after:start-0 after:w-full after:h-[1px] after:bg-white/20 ">
                 <Link href="/" className="w-[130px] xs:w-[140px] sm:w-[170px] p-[10px_0]">
-                  <Image src="/images/Logo-white-footer.png" width="200" height="115" className="object-contain" alt="logo" />
+                  <Image src="/images/Logo-white-footer.png" width="200" height="115" className="object-contain" alt="Khimji Ramdas" />
                 </Link>
                 <div className="flex items-center">
                   <div className="me-[5px] sm:me-[20px]">

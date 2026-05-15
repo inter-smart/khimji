@@ -238,10 +238,13 @@ export default function BannerClient({ data }) {
       <section className="w-full relative h-screen sm:hidden z-0 before:absolute before:top-0 before:content-[''] before:bottom-0 before:w-full before:h-full before:bg-gradient-to-t before:from-black  before:to-black/0 before:opacity-[0.5]">
         <Image
           src={data[0]?.image_mobile}
-          className="w-full h-full object-cover absolute top-0 left-0 -z-1 "
-          width="440"
-          height="930"
-          alt="mobileBanner"
+          className="w-full h-full object-cover absolute top-0 left-0 -z-1"
+          width={440}
+          height={930}
+          alt={data[0]?.alt_text || "Khimji Ramdas"}
+          priority
+          fetchPriority="high"
+          sizes="100vw"
         />
         <div className="container flex items-end h-full py-[60px]">
           <div className="relative z-1 w-full">

@@ -3,8 +3,7 @@ import "../globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer/Footer";
 import localFont from "next/font/local";
-import { Toaster } from "@/components/ui/sonner";
-import CookieConsent from "@/components/layout/CookieConsent";
+import ClientExtras from "@/components/layout/ClientExtras";
 import { PolicySlugProvider } from "@/context/PolicySlugContext";
 
 const Nobel = localFont({
@@ -65,8 +64,7 @@ export default async function RootLayout({ children, params }) {
           <Header lang={lang} />
           <main className="grow">{children}</main>
           <Footer lang={lang} />
-          <CookieConsent />
-          <Toaster />
+          <ClientExtras />
         </PolicySlugProvider>
       </body>
     </html>

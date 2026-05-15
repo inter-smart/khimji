@@ -257,6 +257,7 @@ export default function SearchBox({ lang, country, businessType }) {
           {/* Submit Button Inside Input */}
           <button
             type="submit"
+            aria-label={isRTL ? "إرسال البحث" : "Submit search"}
             className={`
                           absolute end-1 top-1/2 -translate-y-1/2
                           flex items-center justify-center
@@ -304,6 +305,7 @@ export default function SearchBox({ lang, country, businessType }) {
           {searchQuery && (
             <button
               type="button"
+              aria-label={isRTL ? "مسح البحث" : "Clear search"}
               onClick={() => setSearchQuery("")}
               className={`
                             absolute end-12 top-1/2 -translate-y-1/2
