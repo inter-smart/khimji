@@ -342,6 +342,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                                   <Link
                                     href={`/${lang}${item?.link}`}
                                     className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
+                                    aria-label="menuLink"
                                   >
                                     <span>{item?.label}</span>
                                   </Link>
@@ -542,6 +543,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                                   <Link
                                     href={`/${lang}${item?.link}`}
                                     className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
+                                    aria-label="menuLink"
                                   >
                                     <span>{item?.label}</span>
                                   </Link>
