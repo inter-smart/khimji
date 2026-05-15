@@ -305,7 +305,7 @@ export default function ProcurementSection({ initiatives }) {
                       )}
 
                       {/* CLIENT & YEAR → ONLY FOR PROCUREMENT */}
-                      {!item.logo && (item.client || item.year) && (
+                      {(item.client || item.year) && (
                         <ul className="mb-[25px] 2xl:mb-[40px] 3xl:mb-[60px]">
                           {item.client && (
                             <li className="text-[14px] xl:text-[16px] 2xl:text-[18px] 3xl:text-[20px] text-[#000000] mb-[15px]">
