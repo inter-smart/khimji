@@ -3,7 +3,7 @@ import { NoDataState, parseOtherMeta } from "@/lib/helper";
 import { getData } from "@/lib/server/api";
 import { DefaultOgImage } from "@/lib/server/constants";
 import dynamic from "next/dynamic";
-import NotFound from "../not-found";
+import { notFound } from "next/navigation";
 
 const PrivacySection = dynamic(() =>
   import("@/components/features/privacy/PrivacySection")
@@ -71,8 +71,10 @@ export default async function page({ params }) {
     `policy?slug=${slug}`,
     lang
   );
-  if (!data) {
-    return <NoDataState title="Content Not Found" message="There is no data found" />
+  
+  
+  if (!data || error) {
+    notFound();
   }
 
   return (

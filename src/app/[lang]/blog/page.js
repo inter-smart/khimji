@@ -3,6 +3,7 @@ import { getData } from "@/lib/server/api";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import { notFound } from "next/navigation";
 
 const BlogBanner = dynamic(() => import("@/components/features/blog/BlogBanner"));
 const BlogList = dynamic(() => import("@/components/features/blog/BlogList"));
@@ -31,10 +32,9 @@ export default async function Page({ params, searchParams }) {
 
   const { data: cms, error, structuredData, lineScripts } = await getData("blogs?page=blogs", lang);
 
-  if (error || !cms) {
-    return <div>Error loading data</div>;
-  }
-
+  if (!data || error) {
+     notFound();
+   }
   const bannerData = cms?.banner;
 
   return (

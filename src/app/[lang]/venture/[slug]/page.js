@@ -4,6 +4,7 @@ import { getData } from "@/lib/server/api";
 import { DefaultOgImage } from "@/lib/server/constants";
 import { getRequestContext } from "@/lib/server/getCookieData";
 import dynamic from "next/dynamic";
+import NotFound from "../../not-found";
 import { notFound } from "next/navigation";
 
 const VendordetailsSection = dynamic(() => import("@/components/features/venture/VendordetailsSection"));
@@ -89,9 +90,10 @@ export default async function Page({ params }) {
   const categorySlug = business_type === "b2c" ? "consumer-oriented" : "corporate-oriented";
   const { data, error, structuredData, lineScripts } = await getData(`venture-details?slug=${slug}&category_slug=${categorySlug}`, lang);
 
-  if (!data || error) {
-    notFound();
-  }
+ 
+   if (!data || error) {
+     notFound();
+   }
   return (
     <>
       <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />

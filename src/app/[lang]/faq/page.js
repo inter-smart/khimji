@@ -2,6 +2,7 @@ import DynamicMeta from "@/components/layout/DynamicMeta";
 import { getData } from "@/lib/server/api";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
+import { notFound } from "next/navigation";
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
 const FaqSection = dynamic(() => import("@/components/features/faq/FaqSection"));
@@ -27,10 +28,9 @@ export default async function Page({ params }) {
   const { lang } = resolvedParams;
   const { data, error, structuredData, lineScripts } = await getData("faq", lang);
 
-  if (error || !data) {
-    return <div>Error loading data</div>;
-  }
-
+  if (!data || error) {
+     notFound();
+   }
   const { banner, faq, faq_cms } = data;
 
   return (

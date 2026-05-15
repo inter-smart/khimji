@@ -16,7 +16,7 @@ export default function NewsSection({ lang, data }) {
 
     return (
         <section
-            className='relative z-0 py-[45px] 2xl:py-[80px_50px] 3xl:py-[100px_70px] bg-[#FAFAFA] overflow-hidden max-sm:hidden' >
+            className='relative z-0 py-[45px] 2xl:py-[80px_50px] 3xl:py-[100px_70px] bg-[#FAFAFA] overflow-hidden' >
             <div className="container">
                 <div className="max-w-[420px] 2xl:max-w-[450px] 3xl:max-w-[600px] m-auto text-center relative z-20">
                     <Heading size="heading1" as="h2" className="mb-[30px]">

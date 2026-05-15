@@ -3,6 +3,7 @@ import { getData } from "@/lib/server/api";
 import { getRequestContext } from "@/lib/server/getCookieData";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
+import { notFound } from "next/navigation";
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
 const ContactSection = dynamic(() => import("@/components/features/contact/ContactSection"));
@@ -30,7 +31,7 @@ export default async function Page({ params }) {
   const { data, error, structuredData, lineScripts } = await getData("contact", lang);
 
   if (!data || error) {
-    return <div>Error loading data</div>;
+    notFound();
   }
   const { banner, contact_cms, contact_sectors } = data;
 

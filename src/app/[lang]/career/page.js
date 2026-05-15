@@ -2,6 +2,7 @@ import DynamicMeta from "@/components/layout/DynamicMeta";
 import { getData } from "@/lib/server/api";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
+import { notFound } from "next/navigation";
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
 const CareerSection = dynamic(() => import("@/components/features/career/CareerSection"));
@@ -28,11 +29,10 @@ export default async function page({ params }) {
 
   const { data, error, structuredData, lineScripts } = await getData("careers", lang);
 
-  if (error || !data) {
-    // Fallback to local data in case of error
-    return <div>Error loading data</div>;
+  if (!data || error) {
+    notFound();
   }
-
+  
   const { banner, career_cms, careers } = data;
 
   const career_section_data = {

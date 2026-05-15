@@ -4,13 +4,24 @@ import { getMetaData } from "@/lib/server/metaApi";
 import HomeClient from "@/components/clientWrappers/HomeClient";
 import DynamicMeta from "@/components/layout/DynamicMeta";
 import { getRequestContext } from "@/lib/server/getCookieData";
-const BannerSection = dynamic(() => import("@/components/features/home/BannerSection"), { ssr: true });
-
+import { notFound } from "next/navigation";
+const BannerSection = dynamic(
+  () => import("@/components/features/home/BannerSection"),
+  { ssr: true },
+);
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const lang = resolvedParams.lang;
-  const { title, description, keywords, twitter, openGraph, alternates, other } = await getMetaData("home", lang);
+  const {
+    title,
+    description,
+    keywords,
+    twitter,
+    openGraph,
+    alternates,
+    other,
+  } = await getMetaData("home", lang);
 
   return {
     title,
@@ -28,10 +39,14 @@ export default async function Page({ params }) {
   const lang = resolvedParams.lang;
   const { country } = await getRequestContext();
 
-  const { data, error, structuredData, lineScripts } = await getData("home", lang, country);
+  const { data, error, structuredData, lineScripts } = await getData(
+    "home",
+    lang,
+    country,
+  );
 
   if (!data || error) {
-    return <div>Error loading data</div>;
+    notFound();
   }
 
   const { sliders, ...rest } = data;

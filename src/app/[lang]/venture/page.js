@@ -3,6 +3,7 @@ import { getData } from "@/lib/server/api";
 import { getRequestContext } from "@/lib/server/getCookieData";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
+import { notFound } from "next/navigation";
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
 const VentureListingSection = dynamic(() => import("@/components/features/venture/VentureListingSection"));
@@ -32,9 +33,9 @@ export default async function Page({ params }) {
   // Simple GET request
   const { data, error, structuredData, lineScripts } = await getData("ventures", lang, country);
 
-  if (!data || error) {
-    return <div>Error loading data</div>;
-  }
+   if (!data || error) {
+     notFound();
+   }
   const { banner, venture_cms, venture_categories } = data;
 
   return (

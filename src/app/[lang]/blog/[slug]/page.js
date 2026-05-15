@@ -70,9 +70,9 @@ export default async function page({ params }) {
   const { slug, lang } = resolvedParams;
   const { data, error, structuredData, lineScripts } = await getData(`blog-details?slug=${slug}&type=blog`, lang);
 
-  if (!data || error) {
-    notFound();
-  }
+   if (!data || error) {
+     notFound();
+   }
 
   return (
     <>
