@@ -1,9 +1,15 @@
-import BannerClient from "./BannerClient";
+import dynamic from "next/dynamic";
+import BannerMobile from "./BannerMobile";
+
+const BannerDesktop = dynamic(() => import("./BannerClient"), {
+  ssr: true,
+});
 
 export default function BannerSection({ data }) {
   return (
     <div>
-      <BannerClient data={data} />
+      <BannerMobile data={data} />
+      <BannerDesktop data={data} />
     </div>
   );
 }
