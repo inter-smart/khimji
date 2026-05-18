@@ -1,5 +1,5 @@
 import { parseOtherMeta } from "../helper";
-import { API_BASE_URL, defaultMeta, DefaultOgImage } from "./constants";
+import { API_BASE_URL, defaultMeta, DefaultOgImage, DEFAULT_COUNTRY } from "./constants";
 import { getRequestContext } from "./getCookieData";
 
 export async function getMetaData(pageKey, lang = "en", pagename = "") {

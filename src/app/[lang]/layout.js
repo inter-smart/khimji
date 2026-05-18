@@ -1,9 +1,7 @@
 // app/layout.jsx
 import "../globals.css";
-import dynamic from "next/dynamic";
 import Header from "@/components/layout/Header";
-
-const Footer = dynamic(() => import("@/components/layout/Footer/Footer"));
+import Footer from "@/components/layout/Footer/Footer";
 
 import localFont from "next/font/local";
 import { PolicySlugProvider } from "@/context/PolicySlugContext";

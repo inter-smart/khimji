@@ -1,15 +1,12 @@
-import Script from "next/script";
-
 export default function DynamicMeta({ structuredData = [], lineScripts = [] }) {
   return (
     <>
       {/* JSON-LD Structured Data */}
       {structuredData.map((schema, index) => (
-        <Script
+        <script
           id={`schema-${index}`}
           key={`schema-${index}`}
           type="application/ld+json"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(schema),
           }}
