@@ -4,19 +4,10 @@ import BottomLine from "./BottomLine";
 import Links from "./Links";
 import { useRouter, useParams, usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
 import { usePolicySlug } from "@/context/PolicySlugContext";
-
-const Brands = dynamic(() => import("./Brands"), {
-  ssr: true,
-});
-
-const FooterMobile = dynamic(() => import("./FooterMobile"), {
-  ssr: true,
-});
-const SocialLinks = dynamic(() => import("./SocialLinks"), {
-  ssr: true,
-});
+import Brands from "./Brands";
+import FooterMobile from "./FooterMobile";
+import SocialLinks from "./SocialLinks";
 
 const otherLinks = [
   {

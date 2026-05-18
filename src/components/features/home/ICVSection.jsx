@@ -11,7 +11,7 @@ import Link from "next/link";
 import { renderHtml } from "@/lib/helper";
 import dynamic from "next/dynamic";
 
-const ICVinitiativeMobile = dynamic(() => import("./home-mobile/ICVinitiativeMobile"), { ssr: false });
+const ICVinitiativeMobile = dynamic(() => import("./home-mobile/ICVinitiativeMobile"));
 
 export default function ICVSection({ title, description, banner, banner_alt_text, initiatives, lang }) {
   const isRTL = lang?.trim() === "ar";
