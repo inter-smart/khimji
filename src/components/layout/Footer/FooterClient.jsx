@@ -105,7 +105,7 @@ export default function FooterClient({ siteSettingPromise, lang }) {
 
   return (
     <>
-      <section className="w-full relative bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[30px] overflow-hidden max-sm:hidden min-h-[520px] lg:min-h-[580px]">
+           <section className="w-full hidden sm:block relative bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[30px] overflow-hidden min-h-[520px] lg:min-h-[580px]">
         <div className="container">
           <div className="min-h-[145px] xl:min-h-[170px] 3xl:min-h-[175px]">
             <Brands brands={brands} lang={lang} />
