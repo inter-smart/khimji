@@ -20,7 +20,7 @@ export default function Links({
 
   return (
     <>
-      <div className="w-5/12 min-h-[1.4em]">
+      <div className="w-5/12">
         {renderHtml(
           site_settings?.footer_title,
           "text-[35px] lg:text-[35px] xl:text-[40px] 2xl:text-[55px] 3xl:text-[80px] leading-[1.4] text-white font-light uppercase max-w-[94%]"

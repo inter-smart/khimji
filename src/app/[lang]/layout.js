@@ -2,11 +2,10 @@
 import "../globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer/Footer";
-
 import localFont from "next/font/local";
-import { PolicySlugProvider } from "@/context/PolicySlugContext";
 import { Toaster } from "@/components/ui/sonner";
 import CookieConsent from "@/components/layout/CookieConsent";
+import { PolicySlugProvider } from "@/context/PolicySlugContext";
 
 const Nobel = localFont({
   src: [
@@ -20,6 +19,7 @@ const Nobel = localFont({
   preload: true,
   display: "swap",
 });
+
 
 const Bukra = localFont({
   src: [
@@ -40,6 +40,7 @@ const Brown = localFont({
       path: "../../../public/fonts/brown-light.woff2",
       weight: "300",
       style: "normal",
+      
     },
   ],
   variable: "--font-Brown",
@@ -52,16 +53,13 @@ export const metadata = {
   description: "Khimji Ramdas is a Ramdas company",
 };
 
+
 export default async function RootLayout({ children, params }) {
   const paramsResolved = await params;
   const { lang } = paramsResolved || { lang: "en" };
 
   return (
-    <html
-      lang={lang}
-      dir={lang == "ar" ? "rtl" : "ltr"}
-      className={`${Nobel.variable} ${Bukra.variable} ${Brown.variable}`}
-    >
+    <html lang={lang} dir={lang == "ar" ? "rtl" : "ltr"} className={`${Nobel.variable} ${Bukra.variable} ${Brown.variable}`}>
       <body className="font-base1">
         <PolicySlugProvider>
           <Header lang={lang} />

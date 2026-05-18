@@ -46,7 +46,6 @@ export default function LocationDropdown({ locationsPromise }) {
       <div className="relative inline-flex rounded-full">
         <Select  value={selectedCountry} onValueChange={changeCountry} modal={false}>
           <SelectTrigger
-          aria-label="Select Location"
            className="
                           relative
                           text-[16px] 3xs:text-[18px] lg:text-[12px] 2xl:text-[14px] 3xl:text-[18px] text-white sm:text-black font-medium max-w-full min-h-[30px]

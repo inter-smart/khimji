@@ -25,26 +25,27 @@ export default function FooterMobile({ data, lang, otherLinks }) {
 
   return (
     <>
+      {loading && <GlobalLoader />}
       <section className="bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[45px_30px] sm:hidden">
         <div className="container">
           <Link
             href={`/${lang}`}
-            className="block w-full max-w-[205px] aspect-[205/45] m-auto mb-[25px]"
+            className="block w-full max-w-[205px] m-auto mb-[25px]"
           >
             <Image
               src="/images/Logo-white-footer.png"
               width="205"
               height="45"
               className="w-full h-full object-contain"
-              alt="footer_img"
+              alt="foter_img"
             />
           </Link>
-          <div className="min-h-[30px]">
-            {renderHtml(
-              data?.site_settings?.footer_title,
-              "[&_]:text-[23px] [&_]:text-white [&_]:text-center [&_]:uppercase [&_]:mb-[15px]",
-            )}
-          </div>
+          {/* <div className="[&_]:text-[23px] [&_]:text-white [&_]:text-center [&_]:uppercase [&_]:mb-[15px]"> */}
+          {renderHtml(
+            data?.site_settings?.footer_title,
+            "[&_]:text-[23px] [&_]:text-white [&_]:text-center [&_]:uppercase [&_]:mb-[15px]",
+          )}
+          {/* </div> */}
           {/* countryBx */}
           <div className="w-full h-full border border-[#d9d9d93a] p-[15px] text-center rounded-[10px] bg-transparent backdrop-blur-[2px] mb-[30px]">
             <div className="text-[16px] text-white uppercase mb-[10px]">

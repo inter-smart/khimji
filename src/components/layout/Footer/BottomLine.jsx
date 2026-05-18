@@ -10,10 +10,10 @@ export default function BottomLine({ lang }) {
           : `جميع الحقوق محفوظة © ${new Date().getFullYear()} خيمجي رامداس.`}
       </span>
 
-      <Link href="https://www.intersmartsolution.com/" target="_blank" className="flex items-center gap-2">
+      {/* <Link href="https://www.intersmartsolution.com/" target="_blank" className="flex items-center gap-2">
         {lang === "en" ? "Designed & Developed By:" : "تم التصميم والتطوير بواسطة"}
         <Image src="/images/intersmart.png" width={110} height={28} alt="InterSmart" />
-      </Link>
+      </Link> */}
     </div>
   );
 }
