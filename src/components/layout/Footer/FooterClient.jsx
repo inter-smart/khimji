@@ -2,14 +2,16 @@
 
 import BottomLine from "./BottomLine";
 import Links from "./Links";
-import FooterMobile from "./FooterMobile";
-import GlobalLoader from "@/components/layout/GlobalLoader";
 import { useRouter, useParams, usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { usePolicySlug } from "@/context/PolicySlugContext";
 
 const Brands = dynamic(() => import("./Brands"), {
+  ssr: true,
+});
+
+const FooterMobile = dynamic(() => import("./FooterMobile"), {
   ssr: true,
 });
 const SocialLinks = dynamic(() => import("./SocialLinks"), {

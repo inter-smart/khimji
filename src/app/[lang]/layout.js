@@ -64,9 +64,6 @@ export default async function RootLayout({ children, params }) {
       dir={lang == "ar" ? "rtl" : "ltr"}
       className={`${Nobel.variable} ${Bukra.variable} ${Brown.variable}`}
     >
-      <head>
-        <link rel="preload" as="image" href="/images/Logo-white-footer.png" />
-      </head>
       <body className="font-base1">
         <PolicySlugProvider>
           <Header lang={lang} />

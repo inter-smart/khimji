@@ -143,13 +143,13 @@ export default function BannerClient({ data }) {
       <section className="relative w-full h-[calc(100vh-var(--header-height,108px))] max-sm:hidden after:absolute after:content-[''] after:top-0 after:bottom-0 after:bg-gradient-to-t after:from-black/70 after:from-[40%] after:to-transparent after:w-full after:h-full">
         <div className="w-full h-full">
           <video
-            preload="none"
+            preload="metadata"
             autoPlay
             loop
             muted
             playsInline
             poster={data[0]?.video_thumbnail_image ? data[0]?.video_thumbnail_image : data[0]?.image}
-            className="w-full h-full object-cover "
+            className="w-full h-full object-cover"
           >
             <source src={data[0]?.video} type="video/mp4" />
             Your browser does not support the video tag.
@@ -238,9 +238,12 @@ export default function BannerClient({ data }) {
       <section className="w-full relative h-screen sm:hidden z-0 before:absolute before:top-0 before:content-[''] before:bottom-0 before:w-full before:h-full before:bg-gradient-to-t before:from-black  before:to-black/0 before:opacity-[0.5]">
         <Image
           src={data[0]?.image_mobile}
-          className="w-full h-full object-cover absolute top-0 left-0 -z-1 "
+          className="w-full h-full object-cover absolute top-0 left-0 -z-1"
           width="440"
           height="930"
+          sizes="100vw"
+          priority
+          fetchPriority="high"
           alt="mobileBanner"
         />
         <div className="container flex items-end h-full py-[60px]">
