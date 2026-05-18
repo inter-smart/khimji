@@ -2,15 +2,13 @@
 
 import BottomLine from "./BottomLine";
 import Links from "./Links";
+import FooterMobile from "./FooterMobile";
 import GlobalLoader from "@/components/layout/GlobalLoader";
 import { useRouter, useParams, usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { usePolicySlug } from "@/context/PolicySlugContext";
 
-const FooterMobile = dynamic(() => import("./FooterMobile"), {
-  ssr: false,
-});
 const Brands = dynamic(() => import("./Brands"), {
   ssr: true,
 });
@@ -114,7 +112,6 @@ export default function FooterClient({ siteSettingPromise, lang }) {
 
   return (
     <>
-      {loading && <GlobalLoader />}
       <section className="w-full relative bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[30px] overflow-hidden max-sm:hidden min-h-[520px] lg:min-h-[580px]">
         <div className="container">
           <div className="min-h-[145px] xl:min-h-[170px] 3xl:min-h-[175px]">
@@ -134,7 +131,6 @@ export default function FooterClient({ siteSettingPromise, lang }) {
           <BottomLine lang={lang} />
         </div>
       </section>
-
       <FooterMobile data={siteSettingPromise?.data} changeCountry={changeCountry} lang={lang} otherLinks={otherLinks} />
     </>
   );

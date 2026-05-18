@@ -1,7 +1,10 @@
 // app/layout.jsx
 import "../globals.css";
+import dynamic from "next/dynamic";
 import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer/Footer";
+
+const Footer = dynamic(() => import("@/components/layout/Footer/Footer"));
+
 import localFont from "next/font/local";
 import { PolicySlugProvider } from "@/context/PolicySlugContext";
 import { Toaster } from "@/components/ui/sonner";
@@ -61,6 +64,9 @@ export default async function RootLayout({ children, params }) {
       dir={lang == "ar" ? "rtl" : "ltr"}
       className={`${Nobel.variable} ${Bukra.variable} ${Brown.variable}`}
     >
+      <head>
+        <link rel="preload" as="image" href="/images/Logo-white-footer.png" />
+      </head>
       <body className="font-base1">
         <PolicySlugProvider>
           <Header lang={lang} />
