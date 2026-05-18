@@ -37,6 +37,7 @@ export default function ArchiveSection({ archives, title, lang }) {
           day: "numeric",
           month: "long",
           year: "numeric",
+          timeZone: "UTC",
         }),
         title: archive.title,
         location: archive.location,
