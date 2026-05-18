@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 const CONTACT_BUTTON_CLASS =
   "text-[12px] 2xl:text-[16px] 3xl:text-[18px] text-black capitalize font-medium flex items-center group transition-all duration-300 hover:text-[#299B8A]";
@@ -10,6 +11,16 @@ const ARROW_ICON_CLASS =
   "w-[14px] h-[14px] flex items-center mt-[5px] mx-[15px] transition-transform duration-300 group-hover:translate-x-1";
 
 export default function BannerClient({ data }) {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 640);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const bannerTitle = data[0]?.title?.split(" ");
 
@@ -22,18 +33,20 @@ export default function BannerClient({ data }) {
 
       <section className="relative w-full h-[calc(100vh-var(--header-height,108px))] max-sm:hidden after:absolute after:content-[''] after:top-0 after:bottom-0 after:bg-gradient-to-t after:from-black/70 after:from-[40%] after:to-transparent after:w-full after:h-full">
         <div className="w-full h-full">
-          <video
-            preload="metadata"
-            autoPlay
-            loop
-            muted
-            playsInline
-            poster={data[0]?.video_thumbnail_image ? data[0]?.video_thumbnail_image : data[0]?.image}
-            className="w-full h-full object-cover"
-          >
-            <source src={data[0]?.video} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          {isDesktop && (
+            <video
+              preload="metadata"
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster={data[0]?.video_thumbnail_image ? data[0]?.video_thumbnail_image : data[0]?.image}
+              className="w-full h-full object-cover"
+            >
+              <source src={data[0]?.video} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          )}
 
           {/* contents */}
 
@@ -123,6 +136,7 @@ export default function BannerClient({ data }) {
           height="930"
           sizes="100vw"
           alt="mobileBanner"
+          priority={true}
         />
         <div className="container flex items-end h-full py-[60px]">
           <div className="relative z-1 w-full">
