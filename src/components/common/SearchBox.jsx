@@ -102,10 +102,15 @@ export default function SearchBox({ lang, country, businessType }) {
 
   // Calculate dropdown position relative to input container
   useEffect(() => {
-    const shouldShow = (showResults || (isLoading && searchQuery.trim())) && isSearchOpen;
+    const shouldShow =
+      (showResults || (isLoading && searchQuery.trim())) && isSearchOpen;
     if (shouldShow && inputContainerRef.current) {
       const rect = inputContainerRef.current.getBoundingClientRect();
-      setDropdownPos({ top: rect.bottom + 8, left: rect.left, width: rect.width });
+      setDropdownPos({
+        top: rect.bottom + 8,
+        left: rect.left,
+        width: rect.width,
+      });
     }
   }, [showResults, isLoading, searchQuery, isSearchOpen]);
 
@@ -113,10 +118,14 @@ export default function SearchBox({ lang, country, businessType }) {
     if (!showDropdown || isLoading) return;
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setSelectedIndex((prev) => (prev < searchResults.length - 1 ? prev + 1 : 0));
+      setSelectedIndex((prev) =>
+        prev < searchResults.length - 1 ? prev + 1 : 0,
+      );
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : searchResults.length - 1));
+      setSelectedIndex((prev) =>
+        prev > 0 ? prev - 1 : searchResults.length - 1,
+      );
     } else if (e.key === "Enter" && selectedIndex >= 0) {
       e.preventDefault();
       const result = searchResults[selectedIndex];
@@ -168,7 +177,8 @@ export default function SearchBox({ lang, country, businessType }) {
     };
   }, [isSearchOpen]);
 
-  const showDropdown = (showResults || (isLoading && searchQuery.trim())) && isSearchOpen;
+  const showDropdown =
+    (showResults || (isLoading && searchQuery.trim())) && isSearchOpen;
 
   return (
     <div
@@ -257,6 +267,7 @@ export default function SearchBox({ lang, country, businessType }) {
           {/* Submit Button Inside Input */}
           <button
             type="submit"
+            aria-label={isRTL ? "إرسال البحث" : "Submit search"}
             className={`
                           absolute end-1 top-1/2 -translate-y-1/2
                           flex items-center justify-center
@@ -304,6 +315,7 @@ export default function SearchBox({ lang, country, businessType }) {
           {searchQuery && (
             <button
               type="button"
+              aria-label={isRTL ? "مسح البحث" : "Clear search"}
               onClick={() => setSearchQuery("")}
               className={`
                             absolute end-12 top-1/2 -translate-y-1/2
@@ -356,7 +368,10 @@ export default function SearchBox({ lang, country, businessType }) {
             ) : searchResults.length > 0 ? (
               <ul className="py-2">
                 {searchResults.map((result, index) => (
-                  <li key={result.id || index} ref={(el) => (resultRefs.current[index] = el)}>
+                  <li
+                    key={result.id || index}
+                    ref={(el) => (resultRefs.current[index] = el)}
+                  >
                     <Link
                       href={`/${lang}/${result.type}/${result.url || result.slug}`}
                       onClick={handleResultClick}

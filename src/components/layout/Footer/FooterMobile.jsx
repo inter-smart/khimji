@@ -37,7 +37,7 @@ export default function FooterMobile({ data, lang, otherLinks }) {
               width="205"
               height="45"
               className="w-full h-full object-contain"
-              alt="foter_img"
+              alt="footer_img"
             />
           </Link>
           {/* <div className="[&_]:text-[23px] [&_]:text-white [&_]:text-center [&_]:uppercase [&_]:mb-[15px]"> */}
