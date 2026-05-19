@@ -120,12 +120,11 @@ export default function BoardDirectorSection({ title, directors }) {
               <DialogTitle className="text-center text-[20px] sm:text-[24px] font-bold text-[#013763] leading-tight">
                 {selected?.name}
               </DialogTitle>
-              {/* {selected?.designation && ( */}
+              {selected?.designation && (
                 <DialogDescription className="text-[14px] sm:text-[16px] font-medium text-[#238A84]">
-                  {/* {selected.designation} */}
-                  ghsjkghskjgsdjgjjrhln,ncxmbkc vjsldfjsl scjvaslkfjlkafgpret lfjsfjlsdkfldsf
+                  {selected.designation}
                 </DialogDescription>
-              {/* )} */}
+              )}
             </DialogHeader>
             {
               <p className="text-[14px] sm:text-[15px] text-gray-600 leading-relaxed text-left mt-4">
