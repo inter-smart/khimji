@@ -58,9 +58,9 @@ export default function Links({
               {t("otherLinks")}
             </div>
 
-            <ul className="lg:flex lg:flex-wrap  ">
+            <ul className="lg:flex lg:flex-wrap -my-[8px]  ">
               {policies?.map((item, index) => (
-                <li key={index} className="xl:w-1/2">
+                <li key={index} className="xl:w-1/2 px-[8px]">
                   <Link
                     href={`/${lang}/${item?.slug}`}
                     className={FOOTER_LINK_CLASS}
