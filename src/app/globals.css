@@ -152,16 +152,28 @@ html[lang="ar"] {
 
 body {
   font-family: var(--font-base1), Arial, sans-serif;
- 
+}
+
+/* Hide Scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 /* Prevent white gap when shadcn Select / Sheet opens */
 html,
 body {
   overflow-x: hidden;
+  overflow-y: auto !important;
   scroll-behavior: smooth;
   position: relative;
   z-index: 0;
+  padding-right: 0 !important;
+  margin-right: 0 !important;
 }
 body::before {
   content: "";
@@ -331,7 +343,9 @@ body::before {
 }
 
 body[data-scroll-locked] {
-  overflow: auto !important;
+  overflow: hidden !important;
+  padding-right: 0 !important;
+  margin-right: 0 !important;
 }
 
 @keyframes fadeInDown {

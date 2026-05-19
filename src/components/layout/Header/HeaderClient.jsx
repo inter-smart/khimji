@@ -133,7 +133,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
     <header ref={headerRef}>
       <div className={`w-full bg-white max-sm:hidden ${isScrolled ? "stickyHeader" : ""}`}>
         <div className="container">
-          <div className="w-full flex flex-wrap items-center justify-between p-[15px_0] border-[rgba(0,0,0,0.1)] border-b z-10">
+          <div className="relative w-full flex flex-wrap items-center justify-between p-[15px_0] border-[rgba(0,0,0,0.1)] border-b z-10">
             {/* logo */}
             <Link
               href={`/${lang}`}
@@ -561,7 +561,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
           </div>
         </div>
       </div>
-      <Sheet open={open} onOpenChange={setOpen}>
+      <Sheet open={open} onOpenChange={setOpen} className="z-[99999]">
 
         <div
           className={`sm:hidden relative z-1
