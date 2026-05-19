@@ -15,7 +15,7 @@ import VentureCard from "@/components/common/VentureCard";
 import { renderHtml } from "@/lib/helper";
 import dynamic from "next/dynamic";
 import GlobalLoader from "@/components/layout/GlobalLoader";
-
+import { useTranslations } from "next-intl";
 
 const VentureSectionmob = dynamic(() => import("./home-mobile/VentureSectionmob"), { ssr: false });
 
@@ -45,6 +45,7 @@ export default function VentureSection({
   const isRTL = lang?.trim() === "ar";
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const t = useTranslations("common");
 
   function handleViewAllClick(businessType) {
     document.cookie = `business_type=${businessType}; path=/`;
@@ -238,7 +239,7 @@ export default function VentureSection({
                     animate="rest"
                   >
                     <button onClick={() => handleViewAllClick("b2b")}   className={`${CONTACT_BUTTON_CLASS} text-white`}>
-                      <span>{lang === "en" ? "View All" : "عرض الكل"}</span>
+                      <span>{t("viewAll")}</span>
                       <motion.div
                         className={ARROW_ICON_CLASS}
                         variants={arrowVariants}
@@ -301,7 +302,7 @@ export default function VentureSection({
                   >
                     {ventures[0]?.ventures?.map((item, index) => (
                       <SwiperSlide key={index}>
-                        <Link href={`/venture/${item?.slug}`}>
+                        <Link href={`/${lang}/venture/${item?.slug}`}>
                           <VentureCard item={item} />
                         </Link>
                       </SwiperSlide>
@@ -363,7 +364,7 @@ export default function VentureSection({
                     animate="rest"
                   >
                     <button onClick={() => handleViewAllClick("b2c")} className={`${CONTACT_BUTTON_CLASS} text-white`}>
-                      <span>{lang === "en" ? "View All" : "عرض الكل"}</span>
+                      <span>{t("viewAll")}</span>
                       <motion.div
                         className={ARROW_ICON_CLASS}
                         variants={arrowVariants}
@@ -423,7 +424,7 @@ export default function VentureSection({
                   >
                     {ventures[1]?.ventures?.map((item, index) => (
                       <SwiperSlide key={index}>
-                        <Link href={`/venture/${item?.slug}`}>
+                        <Link href={`/${lang}/venture/${item?.slug}`}>
                           <VentureCard item={item} />
                         </Link>
                       </SwiperSlide>

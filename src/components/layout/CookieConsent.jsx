@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 export default function CookieConsent() {
+    const t = useTranslations("cookie");
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -43,12 +45,10 @@ export default function CookieConsent() {
                     className="fixed bottom-6 left-6 z-[9999] w-[calc(100%-48px)] max-w-[480px] bg-white p-6 md:p-8 shadow-[0_10px_40px_-5px_rgba(0,0,0,0.1)] border border-gray-100"
                 >
                     <h3 className="text-[#0B436A] text-[20px] md:text-[22px] font-normal uppercase tracking-wide mb-4">
-                        We Value Your Privacy
+                        {t("title")}
                     </h3>
                     <p className="text-[#333333] text-[14px] md:text-[15px] leading-relaxed mb-8 font-light">
-                        We use cookies to enhance your browsing experience, serve
-                        personalised ads or content, and analyse our traffic. By clicking
-                        "Accept All", you consent to our use of cookies.
+                        {t("description")}
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-3">
@@ -56,19 +56,19 @@ export default function CookieConsent() {
                             onClick={handleCustomise}
                             className="flex-1 py-3 px-4 border border-[#0B436A]/30 text-[#0B436A] text-[14px] cursor-pointer bg-transparent hover:bg-[#0B436A] hover:text-white transition-all duration-300"
                         >
-                            Customise
+                            {t("customise")}
                         </button>
                         <button
                             onClick={handleReject}
                             className="flex-1 py-3 px-4 border border-[#0B436A]/30 text-[#0B436A] text-[14px] cursor-pointer bg-transparent hover:bg-[#0B436A] hover:text-white transition-all duration-300"
                         >
-                            Reject All
+                            {t("rejectAll")}
                         </button>
                         <button
                             onClick={handleAccept}
                             className="flex-1 py-3 px-4 bg-[#0B436A] text-white text-[14px] hover:bg-[#082f4a] cursor-pointer transition-all duration-300 shadow-sm"
                         >
-                            Accept All
+                            {t("acceptAll")}
                         </button>
                     </div>
                 </motion.div>

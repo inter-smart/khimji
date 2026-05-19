@@ -1,5 +1,8 @@
+"use client";
+
 import { renderHtml } from "@/lib/helper";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const FOOTER_LINK_CLASS =
   "text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-white font-medium mb-[4px] xl:mb-[7px] 3xl:mb-[10px] inline-block transition-all duration-300 hover:text-white/80 hover:translate-x-1 cursor-pointer lg:gap-2";
@@ -16,7 +19,8 @@ export default function Links({
   policies,
   otherLinks
 }) {
-  
+  const t = useTranslations("footer");
+
 
   return (
     <>
@@ -31,7 +35,7 @@ export default function Links({
           {/* COUNTRIES */}
           <div className="w-1/2 p-[15px]">
             <div className="text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-white font-medium uppercase mb-[15px]">
-              {lang === "en" ? "Countries" : "بلدان"}
+              {t("countries")}
             </div>
 
             <ul>
@@ -51,7 +55,7 @@ export default function Links({
           {/* OTHER LINKS */}
           <div className="w-1/2 p-[15px]">
             <div className="text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-white font-medium uppercase mb-[15px]">
-              {lang === "en" ? "Other Links" : "روابط اخرى"}
+              {t("otherLinks")}
             </div>
 
             <ul className="lg:flex lg:flex-wrap  ">
@@ -84,7 +88,7 @@ export default function Links({
             </p>
 
             <Link href={`/${lang}/contact`} className={CONTACT_BUTTON_CLASS}>
-              {lang === "en" ? "Contact Us" : "اتصل بنا"}
+              {t("contactUs")}
               <div className={ARROW_ICON_CLASS}>
                 <svg className="w-full h-full object-cover" viewBox="0 0 14 15">
                   <g clipPath="url(#clip0_1055_230)">

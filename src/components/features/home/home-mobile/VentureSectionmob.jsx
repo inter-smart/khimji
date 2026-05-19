@@ -13,11 +13,12 @@ import { renderHtml } from "@/lib/helper";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import GlobalLoader from "@/components/layout/GlobalLoader";
-
+import { useTranslations } from "next-intl";
 const BUSINESS_TYPES = ["b2c", "b2b"];
 
 export default function VentureSectionmob({ title, banner, banner_alt_text, ventureSlider, lang }) {
   const isRTL = lang == "ar";
+  const tCommon = useTranslations("common");
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -83,7 +84,7 @@ export default function VentureSectionmob({ title, banner, banner_alt_text, vent
                 >
                   {venture?.ventures?.map((item, index) => (
                     <SwiperSlide key={index}>
-                       <Link href={`${lang}/venture/${item?.slug}`}>
+                       <Link href={`/${lang}/venture/${item?.slug}`}>
                           <VentureCard item={item} />
                       </Link>
                     </SwiperSlide>
@@ -121,7 +122,7 @@ export default function VentureSectionmob({ title, banner, banner_alt_text, vent
                 className="text-[16px] xs:text-[18px] text-[#000000] font-medium w-fit flex items-center justify-center mt-[20px] h-[40px] xs:h-[50px]
                            min-w-[120px] xs:min-w-[140px] p-[8px] border border-[#000000] m-auto"
               >
-                  {!isRTL ? "View All" : "عرض الكل"}
+                  {tCommon("viewAll")}
                 <div className="w-[14px] xs:w-[17px] h-[14px] flex items-center mx-[10px]">
                   <svg className="w-full h-full object-contain" viewBox="0 0 18 14">
                     <g clipPath="url(#clip0_1342_4984)">

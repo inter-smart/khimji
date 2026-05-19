@@ -1,8 +1,13 @@
+"use client";
+
+import { createPortal } from "react-dom";
 import Image from "next/image";
 
 export default function GlobalLoader() {
-  return (
-    <div className={`fixed inset-0 z-[9999] bg-white flex flex-col items-center justify-center transition-opacity duration-500 `}>
+  if (typeof window === "undefined") return null;
+
+  return createPortal(
+    <div className="fixed inset-0 z-[99999] bg-white flex flex-col items-center justify-center transition-opacity duration-500">
       {/* Logo with rotating ring */}
       <div className="relative">
         {/* Rotating ring around logo */}
@@ -13,6 +18,7 @@ export default function GlobalLoader() {
           <Image src="/images/loader.png" alt="Logo" fill className="object-contain" priority />
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

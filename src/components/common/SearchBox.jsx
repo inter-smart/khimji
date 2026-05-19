@@ -1,15 +1,26 @@
+"use client";
 import { useState, useRef, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function SearchBox({ lang, country, businessType }) {
+  const t = useTranslations("search");
   const isRTL = lang == "ar";
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
   const [showResults, setShowResults] = useState(false);
+  const [dropdownPos, setDropdownPos] = useState({ top: 0, left: 0, width: 0 });
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const searchRef = useRef(null);
+  const inputContainerRef = useRef(null);
   const debounceRef = useRef(null);
+  const resultRefs = useRef([]);
 
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const fetchSearchResults = useCallback(
@@ -59,6 +70,7 @@ export default function SearchBox({ lang, country, businessType }) {
     }
 
     if (searchQuery.trim()) {
+      setIsLoading(true);
       debounceRef.current = setTimeout(() => {
         fetchSearchResults(searchQuery);
       }, 300);
@@ -74,10 +86,64 @@ export default function SearchBox({ lang, country, businessType }) {
     };
   }, [searchQuery, fetchSearchResults]);
 
+  // Auto-select first result when results arrive
+  useEffect(() => {
+    if (searchResults.length > 0) {
+      setSelectedIndex(0);
+    } else {
+      setSelectedIndex(-1);
+    }
+  }, [searchResults]);
+
+  // Scroll highlighted result into view
+  useEffect(() => {
+    if (selectedIndex >= 0 && resultRefs.current[selectedIndex]) {
+      resultRefs.current[selectedIndex].scrollIntoView({ block: "nearest" });
+    }
+  }, [selectedIndex]);
+
+  // Calculate dropdown position relative to input container
+  useEffect(() => {
+    const shouldShow =
+      (showResults || (isLoading && searchQuery.trim())) && isSearchOpen;
+    if (shouldShow && inputContainerRef.current) {
+      const rect = inputContainerRef.current.getBoundingClientRect();
+      setDropdownPos({
+        top: rect.bottom + 8,
+        left: rect.left,
+        width: rect.width,
+      });
+    }
+  }, [showResults, isLoading, searchQuery, isSearchOpen]);
+
+  const handleKeyDown = (e) => {
+    if (!showDropdown || isLoading) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setSelectedIndex((prev) =>
+        prev < searchResults.length - 1 ? prev + 1 : 0,
+      );
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setSelectedIndex((prev) =>
+        prev > 0 ? prev - 1 : searchResults.length - 1,
+      );
+    } else if (e.key === "Enter" && selectedIndex >= 0) {
+      e.preventDefault();
+      const result = searchResults[selectedIndex];
+      if (result) {
+        router.push(`/${lang}/${result.type}/${result.url || result.slug}`);
+        closeSearch();
+      }
+    }
+  };
+
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      fetchSearchResults(searchQuery);
+    const q = searchQuery.trim();
+    if (q) {
+      setIsNavigating(true);
+      closeSearch();
     }
   };
 
@@ -91,6 +157,7 @@ export default function SearchBox({ lang, country, businessType }) {
     setSearchQuery("");
     setSearchResults([]);
     setShowResults(false);
+    setSelectedIndex(-1);
   };
 
   const handleResultClick = () => {
@@ -112,15 +179,18 @@ export default function SearchBox({ lang, country, businessType }) {
     };
   }, [isSearchOpen]);
 
+  const showDropdown =
+    (showResults || (isLoading && searchQuery.trim())) && isSearchOpen;
+
   return (
     <div
-      className={`relative flex items-center ${isRTL ? "flex-row-reverse" : ""}`}
+      className={`relative flex items-center z-100 ${isRTL ? "flex-row-reverse" : ""}`}
       ref={searchRef}
     >
       {/* Search Icon Button */}
       <button
         type="button"
-        aria-label="Search"
+        aria-label={t("ariaLabel")}
         onClick={openSearch}
         className={`
                         flex items-center justify-center
@@ -177,12 +247,12 @@ export default function SearchBox({ lang, country, businessType }) {
                       ${isSearchOpen ? "w-[300px] sm:w-[280px] opacity-100 translate-x-0" : "w-0 opacity-0 pointer-events-none"}
                     `}
       >
-        <div className="relative w-full">
+        <div className="relative w-full" ref={inputContainerRef}>
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder={isRTL ? "ابحث هنا..." : "Search here..."}
+            placeholder={t("placeholder")}
             className={`
                           w-full h-[40px] 3xl:h-[45px]  ${isRTL ? "pr-5 pl-12" : "pl-5 pr-12"}
                           bg-white border-2 border-gray-200
@@ -194,10 +264,12 @@ export default function SearchBox({ lang, country, businessType }) {
                           ${isRTL ? "text-right" : "text-left"}
                         `}
             autoFocus={isSearchOpen}
+            onKeyDown={handleKeyDown}
           />
           {/* Submit Button Inside Input */}
           <button
             type="submit"
+            aria-label={t("submitAriaLabel")}
             className={`
                           absolute end-1 top-1/2 -translate-y-1/2
                           flex items-center justify-center
@@ -209,7 +281,7 @@ export default function SearchBox({ lang, country, businessType }) {
                           hover:scale-105 active:scale-95
                         `}
           >
-            {isLoading ? (
+            {isLoading || isNavigating ? (
               <svg
                 className="animate-spin"
                 width="18"
@@ -245,6 +317,7 @@ export default function SearchBox({ lang, country, businessType }) {
           {searchQuery && (
             <button
               type="button"
+              aria-label={t("clearAriaLabel")}
               onClick={() => setSearchQuery("")}
               className={`
                             absolute end-12 top-1/2 -translate-y-1/2
@@ -268,59 +341,70 @@ export default function SearchBox({ lang, country, businessType }) {
               </svg>
             </button>
           )}
-
-          {/* Search Results Dropdown */}
-          {showResults && isSearchOpen && (
-            <div
-              className={`
-                absolute top-full mt-2 w-full
-                bg-white rounded-lg shadow-lg
-                border border-gray-200
-                max-h-[300px] overflow-y-auto
-                z-50
-                ${isRTL ? "text-right" : "text-left"}
-              `}
-            >
-              {isLoading ? (
-                <div className="p-4 text-center text-gray-500">
-                  {isRTL ? "جاري البحث..." : "Searching..."}
-                </div>
-              ) : searchResults.length > 0 ? (
-                <ul className="py-2 -z-10">
-                  {searchResults.map((result, index) => (
-                    <li key={result.id || index}>
-                      <Link
-                        href={`/${result.type}/${result.url || result.slug}`}
-                        onClick={handleResultClick}
-                        className="
-                          px-4 py-3
-                          hover:bg-gray-50
-                          transition-colors duration-150
-                          border-b border-gray-100 last:border-b-0
-                          flex items-center justify-between
-                        "
-                      >
-                        <p className="text-sm font-medium text-gray-800 line-clamp-1 hover:underline">
-                          {result.name}
-                        </p>
-                        {result.type && (
-                          <span className="inline-block mt-1 text-xspx-2 py-0.5 rounded">
-                            {result.type}
-                          </span>
-                        )}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              ) : searchQuery.trim() ? (
-                <div className="p-4 text-center text-gray-500">
-                  {isRTL ? "لا توجد نتائج" : "No results found"}
-                </div>
-              ) : null}
-            </div>
-          )}
         </div>
       </form>
+
+      {/* Search Results Dropdown — rendered via portal to escape header stacking context */}
+      {showDropdown &&
+        typeof window !== "undefined" &&
+        createPortal(
+          <div
+            style={{
+              position: "fixed",
+              top: dropdownPos.top,
+              left: dropdownPos.left,
+              width: dropdownPos.width,
+              zIndex: 9999,
+            }}
+            className={`
+              bg-white rounded-lg shadow-lg
+              border border-gray-200
+              max-h-[300px] overflow-y-auto
+              ${isRTL ? "text-right" : "text-left"}
+            `}
+          >
+            {isLoading ? (
+              <div className="p-4 text-center text-gray-500">
+                {t("searching")}
+              </div>
+            ) : searchResults.length > 0 ? (
+              <ul className="py-2">
+                {searchResults.map((result, index) => (
+                  <li
+                    key={result.id || index}
+                    ref={(el) => (resultRefs.current[index] = el)}
+                  >
+                    <Link
+                      href={`/${lang}/${result.type}/${result.url || result.slug}`}
+                      onClick={handleResultClick}
+                      className={`
+                        px-4 py-3
+                        transition-colors duration-150
+                        border-b border-gray-100 last:border-b-0
+                        flex items-center justify-between
+                        ${selectedIndex === index ? "bg-gray-100" : "hover:bg-gray-50"}
+                      `}
+                    >
+                      <p className="text-sm font-medium text-gray-800 line-clamp-1 hover:underline">
+                        {result.name}
+                      </p>
+                      {result.type && (
+                        <span className="inline-block mt-1 text-xspx-2 py-0.5 rounded">
+                          {result.type}
+                        </span>
+                      )}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : searchQuery.trim() ? (
+              <div className="p-4 text-center text-gray-500">
+                {t("noResults")}
+              </div>
+            ) : null}
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }

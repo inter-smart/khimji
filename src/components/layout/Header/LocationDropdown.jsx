@@ -1,5 +1,11 @@
 "use client";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, use, useTransition } from "react";
@@ -36,17 +42,24 @@ export default function LocationDropdown({ locationsPromise }) {
   function changeCountry(slug) {
     document.cookie = `country=${slug}; path=/`;
     setSelectedCountry(slug);
-    startTransition(() => { router.refresh(); });
+    startTransition(() => {
+      router.refresh();
+    });
   }
 
   return (
     <>
-    {isPending && <GlobalLoader />}
-    <div className="px-[7px] sm:px-[3px]">
-      <div className="relative inline-flex rounded-full">
-        <Select  value={selectedCountry} onValueChange={changeCountry} modal={false}>
-          <SelectTrigger
-           className="
+      {isPending && <GlobalLoader />}
+      <div className="px-[7px] sm:px-[3px]">
+        <div className="relative inline-flex rounded-full">
+          <Select
+            value={selectedCountry}
+            onValueChange={changeCountry}
+            modal={false}
+          >
+            <SelectTrigger
+              aria-label="Select Location"
+              className="
                           relative
                           text-[16px] 3xs:text-[18px] lg:text-[12px] 2xl:text-[14px] 3xl:text-[18px] text-white sm:text-black font-medium max-w-full min-h-[30px]
                            2xl:min-h-[35px] 3xl:min-h-[45px] px-3 sm:px-2 
@@ -58,21 +71,30 @@ export default function LocationDropdown({ locationsPromise }) {
                           after:content-[''] after:absolute after:right-2 after:top-1/2 after:-translate-y-1/2  after:w-[12px] after:h-[12px]
                            after:bg-[url('/images/arrow.svg')] after:max-sm:invert-100 after:max-sm:brightness-100 after:bg-no-repeat after:bg-center
                         "
-                        >
-            <SelectValue placeholder="Location" />
-          </SelectTrigger>
-          <SelectContent className="max-w-[180px]">
-            {countries.map((c) => (
-              <SelectItem key={c.id} value={c.slug}>
-                {c.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <BorderBeam duration={15} size={60} reverse className="from-transparent via-white/70 to-transparent" />
-        <BorderBeam duration={13} size={70} className="from-transparent via-white/70 to-transparent" />
+            >
+              <SelectValue placeholder="Location" />
+            </SelectTrigger>
+            <SelectContent className="max-w-[180px]">
+              {countries.map((c) => (
+                <SelectItem key={c.id} value={c.slug}>
+                  {c.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <BorderBeam
+            duration={15}
+            size={60}
+            reverse
+            className="from-transparent via-white/70 to-transparent"
+          />
+          <BorderBeam
+            duration={13}
+            size={70}
+            className="from-transparent via-white/70 to-transparent"
+          />
+        </div>
       </div>
-    </div>
     </>
   );
 }

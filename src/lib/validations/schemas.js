@@ -11,129 +11,129 @@ import {
   validateNotOnlyInvisibleChars,
 } from "./validateFunctions";
 
-const careerFormSchema = z.object({
-  name: z
-    .string()
-    .transform((val) => val?.trim() || "")
-    .refine(validateNotEmpty, "Name is required")
-    .refine(validateNotOnlyWhitespace, "Name cannot be only whitespace")
-    .refine((val) => val.length >= 2, "Name must be at least 2 characters")
-    .refine((val) => val.length <= 255, "Name is too long")
-    .refine(validateSecurity, "Invalid characters detected")
-    .refine(validateNotOnlySpecialChars, "Name cannot contain only special characters")
-    .refine((val) => !/\d/.test(val), "Name cannot contain numbers")
-    .refine(
-      (val) => /^[a-zA-Z\u00C0-\u017F\u0100-\u024F\u1E00-\u1EFF\s'\-]+$/u.test(val),
-      "Name can only contain letters, spaces, hyphens, and apostrophes"
-    ),
+const createCareerFormSchema = (t) =>
+  z.object({
+    name: z
+      .string()
+      .transform((val) => val?.trim() || "")
+      .refine(validateNotEmpty, t("nameRequired"))
+      .refine(validateNotOnlyWhitespace, t("nameWhitespace"))
+      .refine((val) => val.length >= 2, t("nameMinLength"))
+      .refine((val) => val.length <= 255, t("nameTooLong"))
+      .refine(validateSecurity, t("nameInvalidChars"))
+      .refine(validateNotOnlySpecialChars, t("nameSpecialChars"))
+      .refine((val) => !/\d/.test(val), t("nameNoNumbers"))
+      .refine(
+        (val) => /^[a-zA-ZÀ-ſĀ-ɏḀ-ỿ\s'\-]+$/u.test(val),
+        t("nameLettersOnly")
+      ),
 
-  phone_number: z
-    .string()
-    .transform((val) => val?.trim() || "")
-    .refine(validateNotEmpty, "Phone number is required")
-    .refine(validateNotOnlyWhitespace, "Phone number cannot be only whitespace")
-    .refine(validateSecurity, "Invalid characters detected")
-    .refine((val) => {
-      const cleaned = val.replace(/[\s\(\)\-\+]/g, "");
-      return cleaned.length >= 5 && cleaned.length <= 15;
-    }, "Phone number must be between 5-15 digits")
-    .refine((val) => {
-      const cleaned = val.replace(/[\s\(\)\-\+]/g, "");
-      return /^\d+$/.test(cleaned) && !/^0+$/.test(cleaned);
-    }, "Phone number must contain valid digits and cannot be all zeros")
-    .refine((val) => /^[\d\s\(\)\-\+]+$/.test(val), "Phone number contains invalid characters"),
+    phone_number: z
+      .string()
+      .transform((val) => val?.trim() || "")
+      .refine(validateNotEmpty, t("phoneRequired"))
+      .refine(validateNotOnlyWhitespace, t("phoneWhitespace"))
+      .refine(validateSecurity, t("phoneInvalidChars"))
+      .refine((val) => {
+        const cleaned = val.replace(/[\s\(\)\-\+]/g, "");
+        return cleaned.length >= 5 && cleaned.length <= 15;
+      }, t("phoneLength"))
+      .refine((val) => {
+        const cleaned = val.replace(/[\s\(\)\-\+]/g, "");
+        return /^\d+$/.test(cleaned) && !/^0+$/.test(cleaned);
+      }, t("phoneInvalidDigits"))
+      .refine((val) => /^[\d\s\(\)\-\+]+$/.test(val), t("phoneFormat")),
 
-  email: z
-    .string()
-    .email("Please enter a valid email address")
-    .transform((val) => val?.trim().toLowerCase() || "")
-    .refine(validateNotEmpty, "Email is required")
-    .refine(validateNotOnlyWhitespace, "Email cannot be only whitespace")
-    .refine(validateSecurity, "Invalid characters detected")
-    .refine((val) => val.length <= 256, "Email is too long")
-    .refine((val) => val.includes("@"), "Email must contain @ symbol")
-    .refine((val) => {
-      const parts = val.split("@");
-      return parts.length === 2 && parts[1].length > 0;
-    }, "Email must have a valid domain"),
+    email: z
+      .string()
+      .email(t("emailInvalid"))
+      .transform((val) => val?.trim().toLowerCase() || "")
+      .refine(validateNotEmpty, t("emailRequired"))
+      .refine(validateNotOnlyWhitespace, t("emailWhitespace"))
+      .refine(validateSecurity, t("emailSecurityChars"))
+      .refine((val) => val.length <= 256, t("emailTooLong"))
+      .refine((val) => val.includes("@"), t("emailAtSymbol"))
+      .refine((val) => {
+        const parts = val.split("@");
+        return parts.length === 2 && parts[1].length > 0;
+      }, t("emailDomain")),
 
-  message: z
-    .string()
-    .optional()
-    .transform((val) => val?.trim() || "")
-    // Only run validations if value is not empty
-    .refine((val) => !val || validateNotEmpty(val), "Message is required")
-    .refine((val) => !val || validateNotOnlyWhitespace(val), "Message cannot be only whitespace")
-    .refine((val) => !val || validateSingleCharacter(val), "Message must be at least 2 characters")
-    .refine((val) => !val || validateMessageLength(val), "Message is too long (maximum 5000 characters)")
-    .refine((val) => !val || validateSecurity(val), "Invalid characters or potential security risk detected")
-    .refine((val) => !val || validateNotOnlyInvisibleChars(val), "Cannot contain only spaces, tabs, or new lines")
+    message: z
+      .string()
+      .optional()
+      .transform((val) => val?.trim() || "")
+      .refine((val) => !val || validateNotEmpty(val), t("messageRequired"))
+      .refine((val) => !val || validateNotOnlyWhitespace(val), t("messageWhitespace"))
+      .refine((val) => !val || validateSingleCharacter(val), t("messageMinLength"))
+      .refine((val) => !val || validateMessageLength(val), t("messageTooLong"))
+      .refine((val) => !val || validateSecurity(val), t("messageSecurityChars"))
+      .refine((val) => !val || validateNotOnlyInvisibleChars(val), t("messageInvisibleChars"))
+      .refine((val) => !val || validateNotOnlySpecialChars(val), t("messageSpecialChars")),
 
-    .refine((val) => !val || validateNotOnlySpecialChars(val), "Message cannot contain only special characters"),
-  resume: z
-    .any()
-    .refine((files) => files?.length === 1, "Please upload your resume file")
-    .refine((files) => files?.[0]?.size <= MAX_FILE_SIZE, `File size must be less than ${MAX_FILE_SIZE / (1024 * 1024)}MB`)
-    .refine((files) => ACCEPTED_FILE_TYPES.includes(files?.[0]?.type), "Only .pdf, .doc, and .docx files are allowed"),
-});
+    resume: z
+      .any()
+      .refine((files) => files?.length === 1, t("resumeRequired"))
+      .refine((files) => files?.[0]?.size <= MAX_FILE_SIZE, t("resumeSize"))
+      .refine((files) => ACCEPTED_FILE_TYPES.includes(files?.[0]?.type), t("resumeType")),
+  });
 
-const questionFormSchema = z.object({
-  name: z
-    .string()
-    .transform((val) => val?.trim() || "")
-    .refine(validateNotEmpty, "Name is required")
-    .refine(validateNotOnlyWhitespace, "Name cannot be only whitespace")
-    .refine((val) => val.length >= 2, "Name must be at least 2 characters")
-    .refine((val) => val.length <= 255, "Name is too long")
-    .refine(validateSecurity, "Invalid characters detected")
-    .refine(validateNotOnlySpecialChars, "Name cannot contain only special characters")
-    .refine((val) => !/\d/.test(val), "Name cannot contain numbers")
-    .refine(
-      (val) => /^[a-zA-Z\u00C0-\u017F\u0100-\u024F\u1E00-\u1EFF\s'\-]+$/u.test(val),
-      "Name can only contain letters, spaces, hyphens, and apostrophes"
-    ),
+const createQuestionFormSchema = (t) =>
+  z.object({
+    name: z
+      .string()
+      .transform((val) => val?.trim() || "")
+      .refine(validateNotEmpty, t("nameRequired"))
+      .refine(validateNotOnlyWhitespace, t("nameWhitespace"))
+      .refine((val) => val.length >= 2, t("nameMinLength"))
+      .refine((val) => val.length <= 255, t("nameTooLong"))
+      .refine(validateSecurity, t("nameInvalidChars"))
+      .refine(validateNotOnlySpecialChars, t("nameSpecialChars"))
+      .refine((val) => !/\d/.test(val), t("nameNoNumbers"))
+      .refine(
+        (val) => /^[a-zA-ZÀ-ſĀ-ɏḀ-ỿ\s'\-]+$/u.test(val),
+        t("nameLettersOnly")
+      ),
 
-  phone_number: z
-    .string()
-    .transform((val) => val?.trim() || "")
-    .refine(validateNotEmpty, "Phone number is required")
-    .refine(validateNotOnlyWhitespace, "Phone number cannot be only whitespace")
-    .refine(validateSecurity, "Invalid characters detected")
-    .refine((val) => {
-      const cleaned = val.replace(/[\s\(\)\-\+]/g, "");
-      return cleaned.length >= 5 && cleaned.length <= 15;
-    }, "Phone number must be between 5-15 digits")
-    .refine((val) => {
-      const cleaned = val.replace(/[\s\(\)\-\+]/g, "");
-      return /^\d+$/.test(cleaned) && !/^0+$/.test(cleaned);
-    }, "Phone number must contain valid digits and cannot be all zeros")
-    .refine((val) => /^[\d\s\(\)\-\+]+$/.test(val), "Phone number contains invalid characters"),
+    phone_number: z
+      .string()
+      .transform((val) => val?.trim() || "")
+      .refine(validateNotEmpty, t("phoneRequired"))
+      .refine(validateNotOnlyWhitespace, t("phoneWhitespace"))
+      .refine(validateSecurity, t("phoneInvalidChars"))
+      .refine((val) => {
+        const cleaned = val.replace(/[\s\(\)\-\+]/g, "");
+        return cleaned.length >= 5 && cleaned.length <= 15;
+      }, t("phoneLength"))
+      .refine((val) => {
+        const cleaned = val.replace(/[\s\(\)\-\+]/g, "");
+        return /^\d+$/.test(cleaned) && !/^0+$/.test(cleaned);
+      }, t("phoneInvalidDigits"))
+      .refine((val) => /^[\d\s\(\)\-\+]+$/.test(val), t("phoneFormat")),
 
-  email: z
-    .string()
-    .email("Please enter a valid email address")
-    .transform((val) => val?.trim().toLowerCase() || "")
-    .refine(validateNotEmpty, "Email is required")
-    .refine(validateNotOnlyWhitespace, "Email cannot be only whitespace")
-    .refine(validateSecurity, "Invalid characters detected")
-    .refine((val) => val.length <= 256, "Email is too long")
-    .refine((val) => val.includes("@"), "Email must contain @ symbol")
-    .refine((val) => {
-      const parts = val.split("@");
-      return parts.length === 2 && parts[1].length > 0;
-    }, "Email must have a valid domain"),
+    email: z
+      .string()
+      .email(t("emailInvalid"))
+      .transform((val) => val?.trim().toLowerCase() || "")
+      .refine(validateNotEmpty, t("emailRequired"))
+      .refine(validateNotOnlyWhitespace, t("emailWhitespace"))
+      .refine(validateSecurity, t("emailSecurityChars"))
+      .refine((val) => val.length <= 256, t("emailTooLong"))
+      .refine((val) => val.includes("@"), t("emailAtSymbol"))
+      .refine((val) => {
+        const parts = val.split("@");
+        return parts.length === 2 && parts[1].length > 0;
+      }, t("emailDomain")),
 
-  message: z
-    .string()
-    .transform((val) => val?.trim() || "")
-    .refine(validateNotEmpty, "Question is required")
-    .refine(validateNotOnlyWhitespace, "Question cannot be only whitespace")
-    .refine(validateSingleCharacter, "Question must be at least 2 characters")
-    .refine(validateMessageLength, "Question is too long (maximum 5000 characters)")
-    .refine(validateSecurity, "Invalid characters or potential security risk detected")
-    .refine(validateNotOnlySpecialChars, "Question cannot contain only special characters")
-    .refine(validateNotOnlyInvisibleChars, "Question cannot contain only spaces, tabs, or new lines")
+    message: z
+      .string()
+      .transform((val) => val?.trim() || "")
+      .refine(validateNotEmpty, t("questionRequired"))
+      .refine(validateNotOnlyWhitespace, t("questionWhitespace"))
+      .refine(validateSingleCharacter, t("questionMinLength"))
+      .refine(validateMessageLength, t("questionTooLong"))
+      .refine(validateSecurity, t("questionSecurityChars"))
+      .refine(validateNotOnlySpecialChars, t("questionSpecialChars"))
+      .refine(validateNotOnlyInvisibleChars, t("questionInvisibleChars")),
+  });
 
-});
-
-export { careerFormSchema, questionFormSchema };
+export { createCareerFormSchema, createQuestionFormSchema };

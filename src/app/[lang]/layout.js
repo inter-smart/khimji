@@ -6,6 +6,8 @@ import localFont from "next/font/local";
 import { Toaster } from "@/components/ui/sonner";
 import CookieConsent from "@/components/layout/CookieConsent";
 import { PolicySlugProvider } from "@/context/PolicySlugContext";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages, setRequestLocale } from "next-intl/server";
 
 const Nobel = localFont({
   src: [
@@ -57,17 +59,21 @@ export const metadata = {
 export default async function RootLayout({ children, params }) {
   const paramsResolved = await params;
   const { lang } = paramsResolved || { lang: "en" };
+  setRequestLocale(lang);
+  const messages = await getMessages();
 
   return (
     <html lang={lang} dir={lang == "ar" ? "rtl" : "ltr"} className={`${Nobel.variable} ${Bukra.variable} ${Brown.variable}`}>
       <body className="font-base1">
-        <PolicySlugProvider>
-          <Header lang={lang} />
-          <main className="grow">{children}</main>
-          <Footer lang={lang} />
-          <CookieConsent />
-          <Toaster />
-        </PolicySlugProvider>
+        <NextIntlClientProvider locale={lang} messages={messages}>
+          <PolicySlugProvider>
+            <Header lang={lang} />
+            <main className="grow">{children}</main>
+            <Footer lang={lang} />
+            <CookieConsent />
+            <Toaster />
+          </PolicySlugProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

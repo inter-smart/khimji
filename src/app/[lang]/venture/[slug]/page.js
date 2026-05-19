@@ -4,7 +4,9 @@ import { getData } from "@/lib/server/api";
 import { DefaultOgImage } from "@/lib/server/constants";
 import { getRequestContext } from "@/lib/server/getCookieData";
 import dynamic from "next/dynamic";
+import NotFound from "../../not-found";
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 const VendordetailsSection = dynamic(() => import("@/components/features/venture/VendordetailsSection"));
 
@@ -84,21 +86,24 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
   const resolvedParams = await params;
   const { slug, lang } = resolvedParams;
+  setRequestLocale(lang);
+  const t = await getTranslations("common");
 
   const { business_type } = await getRequestContext();
   const categorySlug = business_type === "b2c" ? "consumer-oriented" : "corporate-oriented";
   const { data, error, structuredData, lineScripts } = await getData(`venture-details?slug=${slug}&category_slug=${categorySlug}`, lang);
 
-  if (!data || error) {
-    notFound();
-  }
+
+   if (!data || error) {
+     notFound();
+   }
   return (
     <>
       <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />
       <VendordetailsSection
         breadCrumb_data={[
-          { href: `/${lang}`, label: "Home" },
-          { href: "/venture", label: "Venture" },
+          { href: `/${lang}`, label: t("home") },
+          { href: "/venture", label: t("venture") },
           {
             href: `/venture/${slug}`,
             label: data?.title,

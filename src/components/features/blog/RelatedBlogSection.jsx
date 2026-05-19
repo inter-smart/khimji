@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
-export default function RelatedBlogSection({ data }) {
+export default function RelatedBlogSection({ data, lang }) {
     return (
         <section className="w-full h-auto py-[5px_40px] sm:py-[10px_60px] lg:py-[10px_80px] 2xl:py-[10px_100px] 3xl:py-[10px_125px] block">
             <div className="container">
@@ -45,7 +45,7 @@ export default function RelatedBlogSection({ data }) {
                 >
                     {data?.map((item, index) => (
                         <SwiperSlide key={index}>
-                            <BlogCard page={"blog_details"} item={item} />
+                            <BlogCard page={"blog_details"} item={item} lang={lang} />
                         </SwiperSlide>
                     ))}
                 </Swiper>

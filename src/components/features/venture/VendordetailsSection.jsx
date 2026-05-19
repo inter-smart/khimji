@@ -13,6 +13,7 @@ import { Fragment } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { renderHtml } from "@/lib/helper";
+import { useTranslations } from "next-intl";
 
 const CONTACT_BUTTON_CLASS = `
   text-[12px] 2xl:text-[16px] 3xl:text-[18px]
@@ -33,6 +34,7 @@ export default function VendordetailsSection({
   pageData,
   lang,
 }) {
+  const t = useTranslations("common");
   const isRTL = lang?.trim() === "ar";
 
   const arrowVariants = {
@@ -211,7 +213,7 @@ export default function VendordetailsSection({
                         className={CONTACT_BUTTON_CLASS}
                       >
                         <span>
-                          {lang === "ar" ? "اكتشف المزيد" : "Discover More"}
+                          {t("discoverMore")}
                         </span>
                         <motion.div
                           className={ARROW_ICON_CLASS}

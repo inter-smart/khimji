@@ -70,15 +70,15 @@ export default async function page({ params }) {
   const { slug, lang } = resolvedParams;
   const { data, error, structuredData, lineScripts } = await getData(`blog-details?slug=${slug}&type=blog`, lang);
 
-  if (!data || error) {
-    notFound();
-  }
+   if (!data || error) {
+     notFound();
+   }
 
   return (
     <>
       <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />
       <BlogDetailSection data={data} />
-      {data?.related_blogs?.length > 0 && <RelatedBlogSection data={data?.related_blogs} />}
+      {data?.related_blogs?.length > 0 && <RelatedBlogSection data={data?.related_blogs} lang={lang} />}
     </>
   );
 }

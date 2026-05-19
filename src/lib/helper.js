@@ -18,6 +18,11 @@ export function renderHtml(htmlString, className = "") {
           if (domNode.attribs) {
             // Remove ALL attributes from incoming HTML
             delete domNode.attribs.class;
+
+            if (domNode.name === "a") {
+              domNode.attribs.style = "text-decoration: underline;";
+            }
+
           }
         },
       })}

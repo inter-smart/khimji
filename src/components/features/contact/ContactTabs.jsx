@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { useTranslations } from "next-intl";
 
 export default function ContactTabs({ sectors, contactData }) {
+  const t = useTranslations("contact");
   const [activeTab, setActiveTab] = useState(sectors?.[0]?.id);
 
   const handleTabChange = (value) => {
@@ -59,7 +61,7 @@ export default function ContactTabs({ sectors, contactData }) {
             ))}
             {!contactData[sector.id] && (
               <div className="w-full h-[200px] flex items-center justify-center">
-                <p className="text-[14px] text-gray-500">No contact details available</p>
+                <p className="text-[14px] text-gray-500">{t("noContactDetails")}</p>
               </div>
             )}
           </div>

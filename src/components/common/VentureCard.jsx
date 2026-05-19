@@ -1,6 +1,7 @@
 import { renderHtml } from "@/lib/helper";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const CONTACT_BUTTON_CLASS = `
   text-[14px] 2xl:text-[16px] 3xl:text-[18px]
@@ -18,6 +19,7 @@ const ARROW_ICON_CLASS = `
 
 
 export default function VentureCard({ item, lang = "en" }) {
+  const t = useTranslations("common");
 
   const isRTL = lang?.trim() === "ar";
 
@@ -186,7 +188,7 @@ export default function VentureCard({ item, lang = "en" }) {
               </div>
             </div>
            <div className={`${CONTACT_BUTTON_CLASS} w-full flex mt-[20px]`}>
-              <span>{lang === "ar" ? "اكتشف المزيد" : "View"}</span>
+              <span>{t("view")}</span>
               <div className={ARROW_ICON_CLASS} variants={arrowVariants}>
                 <svg className="w-full h-full" viewBox="0 0 14 15">
                   <path

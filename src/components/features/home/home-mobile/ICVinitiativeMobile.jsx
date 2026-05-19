@@ -8,10 +8,11 @@ import "swiper/css/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { renderHtml } from "@/lib/helper";
+import {useTranslations} from "next-intl";
 
 export default function ICVinitiativeMobile({ title, description, banner, banner_alt_text, data, lang }) {
   const isRTL = lang == "ar";
-
+  const t = useTranslations("common")
   return (
     <section className="pb-[75px] w-full sm:hidden">
       <div className="w-full h-[290px] relative before:absolute before:left-0 before:content-[''] before:bottom-0 before:w-full before:h-full before:bg-black/40 before:z-1">
@@ -79,7 +80,7 @@ export default function ICVinitiativeMobile({ title, description, banner, banner
             className="text-[16px] xs:text-[18px] text-[#000000] font-medium w-fit flex items-center justify-center h-[40px] xs:h-[50px]
                            min-w-[120px] xs:min-w-[140px] p-[8px] border border-[#000000] "
           >
-            {!isRTL ? "View All" : "عرض الكل"}
+            {t("viewAll")}
             <div className="w-[14px] xs:w-[17px] h-[14px] flex items-center mx-[10px]">
               <svg className="w-full h-full object-contain" viewBox="0 0 18 14">
                 <g clipPath="url(#clip0_1342_4984)">

@@ -3,6 +3,8 @@ import { getData } from "@/lib/server/api";
 import { getRequestContext } from "@/lib/server/getCookieData";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
+import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
 const ContactSection = dynamic(() => import("@/components/features/contact/ContactSection"));
@@ -27,10 +29,12 @@ export default async function Page({ params }) {
   const resolvedParams = await params;
   const { country } = await getRequestContext();
   const lang = resolvedParams.lang;
+  setRequestLocale(lang);
   const { data, error, structuredData, lineScripts } = await getData("contact", lang);
+  const t = await getTranslations("common");
 
   if (!data || error) {
-    return <div>Error loading data</div>;
+    notFound();
   }
   const { banner, contact_cms, contact_sectors } = data;
 
@@ -43,8 +47,8 @@ export default async function Page({ params }) {
         alt={banner?.banner_alt_text || "Contact Banner"}
         title={banner?.banner_title || "CONTACT"}
         breadCrumb_data={[
-          { link: { href: `/${lang}`, label: lang === "en" ? "Home" : "بيت" } },
-          { link: { href: "/Contact", label: lang === "en" ? "Contact" : "اتصال" } },
+          { link: { href: `/${lang}`, label: t("home") } },
+          { link: { href: "/Contact", label: t("contact") } },
         ]}
       />
       <ContactSection sectors={contact_sectors} cms={contact_cms} lang={lang} key={country} />

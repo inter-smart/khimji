@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Heading } from "@/components/layout/Heading";
 import Image from "next/image";
 import {
@@ -13,6 +14,7 @@ import { Button } from "@/components/ui/button";
 
 export default function ProcurementSection({ initiatives }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const t = useTranslations("common");
 
   return (
     <section className="relative">
@@ -305,12 +307,12 @@ export default function ProcurementSection({ initiatives }) {
                       )}
 
                       {/* CLIENT & YEAR → ONLY FOR PROCUREMENT */}
-                      {!item.logo && (item.client || item.year) && (
+                      {(item.client || item.year) && (
                         <ul className="mb-[25px] 2xl:mb-[40px] 3xl:mb-[60px]">
                           {item.client && (
                             <li className="text-[14px] xl:text-[16px] 2xl:text-[18px] 3xl:text-[20px] text-[#000000] mb-[15px]">
                               <span className="lg:px-[25px] uppercase">
-                                client :
+                                {t("client")} :
                               </span>
                               {item.client}
                             </li>
@@ -318,9 +320,9 @@ export default function ProcurementSection({ initiatives }) {
                           {item.year && (
                             <li className="text-[14px] xl:text-[16px] 2xl:text-[18px] 3xl:text-[20px] text-[#000000] mb-[15px]">
                               <span className="lg:px-[25px] uppercase">
-                                Year :
+                                {t("year")} :
                               </span>
-                              {item.year}
+                              <span dir="ltr">{item.year}</span>
                             </li>
                           )}
                         </ul>
@@ -364,7 +366,7 @@ export default function ProcurementSection({ initiatives }) {
                                 onClick={() => setIsExpanded(!isExpanded)}
                                 className="text-[18px] text-[#000000] flex items-center gap-2 border border-[#000] w-fit h-[40px] px-4 mt-[30px]"
                               >
-                                {isExpanded ? "Show Less" : "Show More"}
+                                {isExpanded ? t("showLess") : t("showMore")}
                               </button>
                             )}
                           </>

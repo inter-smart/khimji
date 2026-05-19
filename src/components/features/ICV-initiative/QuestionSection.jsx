@@ -1,6 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { useMemo } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -10,15 +11,22 @@ import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/layout/Heading";
 import { renderHtml } from "@/lib/helper";
 import { Loader2 } from "lucide-react";
-import { questionFormSchema } from "@/lib/validations/schemas";
+import { createQuestionFormSchema } from "@/lib/validations/schemas";
 import { toast } from "sonner";
 import { multipartPostToAPI, postToAPI } from "@/lib/server/clientApi";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 export default function QuestionSection({ title, description, form_title }) {
+  const t = useTranslations("icv");
+  const tVal = useTranslations("validation");
   const { executeRecaptcha } = useGoogleReCaptcha();
+
+  const schema = useMemo(() => createQuestionFormSchema(tVal), [tVal]);
+
   const form = useForm({
-    resolver: zodResolver(questionFormSchema),
+    resolver: zodResolver(schema),
     defaultValues: {
       name: "",
       email: "",
@@ -44,12 +52,12 @@ export default function QuestionSection({ title, description, form_title }) {
       const response = await multipartPostToAPI("contact-enquiry", formData);
 
       if (!response.status) {
-        toast.error(response.message || "Failed to submit application");
+        toast.error(response.message || t("submitError"));
         return;
       }
 
       if (response.status) {
-        toast.success("Application submitted successfully!", {
+        toast.success(t("submitSuccess"), {
           style: {
             background: "#10b981",
             color: "white",
@@ -64,7 +72,7 @@ export default function QuestionSection({ title, description, form_title }) {
         });
       }
     } catch (error) {
-      toast.error("An error occurred while submitting your question");
+      toast.error(t("submitError"));
     }
   }
 
@@ -103,7 +111,7 @@ export default function QuestionSection({ title, description, form_title }) {
                       render={({ field }) => (
                         <FormItem className={formItemStyle}>
                           <FormControl>
-                            <Input placeholder="Full Name*" {...field} className={inputStyle} disabled={isSubmitting} />
+                            <Input placeholder={t("fullName")} {...field} className={inputStyle} disabled={isSubmitting} />
                           </FormControl>
                           <FormMessage className="text-[12px] mt-1" />
                         </FormItem>
@@ -115,7 +123,7 @@ export default function QuestionSection({ title, description, form_title }) {
                       render={({ field }) => (
                         <FormItem className={formItemStyle}>
                           <FormControl>
-                            <Input placeholder="Phone Number*" {...field} className={inputStyle} disabled={isSubmitting} />
+                            <Input placeholder={t("phoneNumber")} {...field} className={inputStyle} disabled={isSubmitting} />
                           </FormControl>
                           <FormMessage className="text-[12px] mt-1" />
                         </FormItem>
@@ -129,7 +137,7 @@ export default function QuestionSection({ title, description, form_title }) {
                     render={({ field }) => (
                       <FormItem className={formItemStyle}>
                         <FormControl>
-                          <Input placeholder="Email*" type="email" {...field} className={inputStyle} disabled={isSubmitting} />
+                          <Input placeholder={t("email")} type="email" {...field} className={inputStyle} disabled={isSubmitting} />
                         </FormControl>
                         <FormMessage className="text-[12px] mt-1" />
                       </FormItem>
@@ -143,7 +151,7 @@ export default function QuestionSection({ title, description, form_title }) {
                       <FormItem className={formItemStyle}>
                         <FormControl>
                           <Textarea
-                            placeholder="Your Question*"
+                            placeholder={t("yourQuestion")}
                             className={`${inputStyle} min-h-[80px] 2xl:min-h-[100px] 3xl:min-h-[120px] resize-none`}
                             {...field}
                             disabled={isSubmitting}
@@ -169,7 +177,16 @@ export default function QuestionSection({ title, description, form_title }) {
                         </FormControl>
                         <div className="flex-1 space-y-1 leading-none">
                           <FormLabel className="text-[13px] 2xl:text-[15px] 3xl:text-[18px] font-normal text-black cursor-pointer">
-                            I agree to the Privacy Policy and consent to the processing of my information.*
+                            {t("iAgreeTo")}
+                            <Link
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href="/privacy-policy"
+                              className="text-[#299B8A] underline"
+                            >
+                              {t("privacyPolicy")}
+                            </Link>
+                            {t("consentText")}
                           </FormLabel>
                           <FormMessage className="text-[12px]" />
                         </div>
@@ -187,10 +204,10 @@ export default function QuestionSection({ title, description, form_title }) {
                       {isSubmitting ? (
                         <>
                           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Submitting...
+                          {t("submitting")}
                         </>
                       ) : (
-                        "Submit"
+                        t("submit")
                       )}
                     </Button>
                   </div>

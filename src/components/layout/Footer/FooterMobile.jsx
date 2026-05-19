@@ -1,9 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { renderHtml } from "@/lib/helper";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import GlobalLoader from "@/components/layout/GlobalLoader";
+import { useTranslations } from "next-intl";
 
 const FOOTER_LINK_CLASS =
   "text-[14px] text-white font-medium mb-[6px] inline-block transition-all duration-300 hover:text-white/80 hover:translate-x-1";
@@ -13,6 +16,7 @@ const SOCIAL_ICON_CLASS =
 export default function FooterMobile({ data, lang, otherLinks }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const t = useTranslations("footer");
 
   function changeCountry(slug) {
     setLoading(true);
@@ -37,19 +41,17 @@ export default function FooterMobile({ data, lang, otherLinks }) {
               width="205"
               height="45"
               className="w-full h-full object-contain"
-              alt="foter_img"
+              alt="footer_img"
             />
           </Link>
-          {/* <div className="[&_]:text-[23px] [&_]:text-white [&_]:text-center [&_]:uppercase [&_]:mb-[15px]"> */}
           {renderHtml(
             data?.site_settings?.footer_title,
             "[&_]:text-[23px] [&_]:text-white [&_]:text-center [&_]:uppercase [&_]:mb-[15px]",
           )}
-          {/* </div> */}
           {/* countryBx */}
           <div className="w-full h-full border border-[#d9d9d93a] p-[15px] text-center rounded-[10px] bg-transparent backdrop-blur-[2px] mb-[30px]">
             <div className="text-[16px] text-white uppercase mb-[10px]">
-              {lang === "en" ? "Countries" : "بلدان"}
+              {t("countries")}
             </div>
             <div className="flex flex-wrap justify-center items-center gap-4">
               {data?.locations?.map((item, index) => (
@@ -68,7 +70,7 @@ export default function FooterMobile({ data, lang, otherLinks }) {
           <div className="flex">
             <div className="w-1/2">
               <div className="text-[16px] text-white font-medium uppercase mb-[15px]">
-                {lang === "en" ? "Other Links" : "روابط اخرى"}
+                {t("otherLinks")}
               </div>
               <ul>
                 {data?.policies?.map((item, index) => (
@@ -95,7 +97,7 @@ export default function FooterMobile({ data, lang, otherLinks }) {
             </div>
             <div className="w-1/2">
               <div className="text-[16px] text-white font-medium uppercase mb-[15px]">
-                {lang === "en" ? "Contact us" : "اتصل بنا"}
+                {t("contactUs")}
               </div>
               <p className="text-[14px] text-white mb-[20px]">
                 {data?.site_settings?.footer_description}
@@ -105,7 +107,7 @@ export default function FooterMobile({ data, lang, otherLinks }) {
                 className="text-[16px] xs:text`-[18px] text-white font-medium w-fit flex items-center justify-center h-[40px] xs:h-[50px]
                            min-w-[120px] xs:min-w-[140px] p-[8px] border border-white "
               >
-                {lang === "en" ? "Contact us" : "اتصل بنا"}
+                {t("contactUs")}
                 <div className="w-[14px] xs:w-[17px] h-[14px] flex items-center mx-[10px]">
                   <svg
                     className="w-full h-full object-contain"
@@ -113,9 +115,9 @@ export default function FooterMobile({ data, lang, otherLinks }) {
                   >
                     <g clipPath="url(#clip0_1342_4984)">
                       <path
-                        d="M9.38156 13.4279C9.27201 13.43 9.16155 13.4034 9.0641 13.3431C8.78295 13.17 8.69731 12.7942 8.86648 12.5133C8.8807 12.4885 10.6478 9.53965 14.0209 7.68392H0.907875C0.574073 7.68392 0.302612 7.41246 0.302612 7.07865C0.302612 
-                                        6.74485 0.574073 6.47339 0.907875 6.47339H14.0209C10.6665 4.62824 8.87949 1.66639 8.86194 1.63673C8.6964 1.35407 8.7881 0.977903 
-                                        9.07045 0.810547C9.35674 0.640771 9.73382 0.739126 9.90481 1.02693C10.1799 1.46574 12.7595 5.39965 17.3865 6.48822C17.6634 6.55631 17.8552 6.79872 17.8552 
+                        d="M9.38156 13.4279C9.27201 13.43 9.16155 13.4034 9.0641 13.3431C8.78295 13.17 8.69731 12.7942 8.86648 12.5133C8.8807 12.4885 10.6478 9.53965 14.0209 7.68392H0.907875C0.574073 7.68392 0.302612 7.41246 0.302612 7.07865C0.302612
+                                        6.74485 0.574073 6.47339 0.907875 6.47339H14.0209C10.6665 4.62824 8.87949 1.66639 8.86194 1.63673C8.6964 1.35407 8.7881 0.977903
+                                        9.07045 0.810547C9.35674 0.640771 9.73382 0.739126 9.90481 1.02693C10.1799 1.46574 12.7595 5.39965 17.3865 6.48822C17.6634 6.55631 17.8552 6.79872 17.8552
                                         7.07896C17.8552 7.35919 17.6646 7.60221 17.3916 7.66848C12.745 8.76098 10.1742 12.7 9.89634 13.1458C9.78739 13.3204 9.58584 13.4239 9.38156 13.4279Z"
                         fill="white"
                       />
@@ -135,7 +137,7 @@ export default function FooterMobile({ data, lang, otherLinks }) {
             {data?.site_settings?.footer_social_title && (
               <>
                 <div className="text-[14px] xs:text-[16px]  text-white font-medium mb-[15px] 2xl:mb-[20px] 3xl:mb-[30px] uppercase">
-                  {lang === "en" ? "Follow us" : "تابعنا"}
+                  {t("followUs")}
                 </div>
                 <div className="flex items-center -m-[10px] pb-[40px]">
                   {data?.social_links?.map((item, index) => (
@@ -157,12 +159,17 @@ export default function FooterMobile({ data, lang, otherLinks }) {
               </>
             )}
           </div>
-          <p className="text-[14px] text-white max-w-[190px]">
-            {lang === "en"
-              ? "Copyright © 2025 Khimji Ramdas. All Rights Reserved."
-              : "جميع الحقوق محفوظة © 2025 خيمجي رامداس."}
-          </p>
+          <div className="text-[14px] text-white flex flex-col items-center gap-3">
+            <p className="text-white">
+              {t("copyright", { year: new Date().getFullYear() })}
+            </p>
+            <Link href="https://www.intersmartsolution.com/" target="_blank" className="flex items-center gap-[2px] sm:gap-2">
+              {t("designedBy")}
+              <Image src="/images/intersmart.png" width={110} height={28} alt="InterSmart" />
+            </Link>
+          </div>
         </div>
+
       </section>
     </>
   );
