@@ -1,7 +1,11 @@
 "use client";
 import React from "react";
 import dynamic from "next/dynamic";
-import NewsSection from "../features/home/NewsSection";
+
+const BannerSection = dynamic(
+  () => import("@/components/features/home/BannerSection"),
+  { ssr: true },
+);
 
 const VentureSection = dynamic(
   () => import("@/components/features/home/VentureSection"),
@@ -11,10 +15,11 @@ const HeritageSection = dynamic(
   () => import("@/components/features/home/HeritageSection"),
   { ssr: false },
 );
-const ArchiveSection = dynamic(
-  () => import("@/components/features/home/ArchiveSection"),
+const NewsSection = dynamic(
+  () => import("@/components/features/home/NewsSection"),
   { ssr: false },
 );
+
 const ICVSection = dynamic(
   () => import("@/components/features/home/ICVSection"),
   { ssr: false },
@@ -24,13 +29,12 @@ const ParnerSectionMobile = dynamic(
   { ssr: false },
 );
 
-const HomeClient = ({ data, lang }) => {
+const HomeClient = ({ data,  lang, country }) => {
   const {
     home_cms,
     ventures,
     metrics,
     timelines,
-    archives,
     initiatives,
     brands,
     news
@@ -38,6 +42,9 @@ const HomeClient = ({ data, lang }) => {
 
   return (
     <>
+
+      <BannerSection data={data?.sliders} key={country} />
+
       {ventures?.length > 0 && (
         <VentureSection
           title={home_cms?.section1_title}
@@ -58,13 +65,6 @@ const HomeClient = ({ data, lang }) => {
         timelines={timelines}
         lang={lang}
       />
-      {/* {archives?.length > 0 && (
-        <ArchiveSection
-          title={home_cms?.section3_title}
-          archives={archives}
-          lang={lang}
-        />
-      )} */}
 
       <NewsSection data={news} lang={lang}/>
 

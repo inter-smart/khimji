@@ -14,8 +14,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const VENTURE_SUBMENU = [
-  { label: "Consumer Oriented", businessType: "b2c" },
-  { label: "Corporate Oriented", businessType: "b2b" },
+  { label: "Consumer Oriented", label_ar: "موجه للمستهلك", businessType: "b2c" },
+  { label: "Corporate Oriented", label_ar: "موجه للشركات", businessType: "b2b" },
 ];
 
 export default function HeaderNavigation({ locale, pathname, onNavigationClick, menuItems, showDarkHeader }) {
@@ -59,7 +59,7 @@ export default function HeaderNavigation({ locale, pathname, onNavigationClick, 
                         onClick={() => handleVentureClick(opt.businessType)}
                         className="cursor-pointer"
                       >
-                        {opt.label}
+                        {isEN ? opt.label : opt.label_ar}
                       </DropdownMenuItem>
                     ))}
                   </DropdownMenuContent>

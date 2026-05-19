@@ -7,8 +7,11 @@ import "swiper/css/autoplay";
 import Image from "next/image";
 import { Heading } from "@/components/layout/Heading";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function NewsSection({ lang, data }) {
+    const tHome = useTranslations("home");
+    const tCommon = useTranslations("common");
     const isRTL = lang?.trim() === "ar";
     const news = data|| [];
 
@@ -20,7 +23,7 @@ export default function NewsSection({ lang, data }) {
             <div className="container">
                 <div className="max-w-[420px] 2xl:max-w-[450px] 3xl:max-w-[600px] m-auto text-center relative z-20">
                     <Heading size="heading1" as="h2" className="mb-[30px]">
-                        News
+                        {tHome("news")}
                     </Heading>
                 </div>
 
@@ -67,7 +70,7 @@ export default function NewsSection({ lang, data }) {
                                     <Link
                                         href={`/${lang}/newsroom/${item.slug}`}
                                         target={"_self"}
-                                        className="text-[13px] sm:text-[14px] 2xl:text-[15px] 3xl:text-[18px] leading-[1.5] font-normal text-black w-fit flex items-center hover:text-[#0B436A] transition-colors duration-300">View All
+                                        className="text-[13px] sm:text-[14px] 2xl:text-[15px] 3xl:text-[18px] leading-[1.5] font-normal text-black w-fit flex items-center hover:text-[#0B436A] transition-colors duration-300">{tCommon("viewAll")}
                                         <span className="w-[15px] 3xl:w-[20px] h-auto aspect-square ms-[8px] sm:ms-[10px] 3xl:ms-[15px] flex items-center justify-center">
                                             <Image
                                                 src="/images/blog_arrow.svg"

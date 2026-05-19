@@ -8,9 +8,11 @@ import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/
 import { renderHtml } from "@/lib/helper";
 import { useState } from "react";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import {useTranslations} from "next-intl";
 
 export default function CareerSection({ data }) {
   const [openDialog, setOpenDialog] = useState({});
+  const t = useTranslations("career");
 
   const handleCloseDialog = (careerId) => {
     setOpenDialog((prev) => ({ ...prev, [careerId]: false }));
@@ -27,7 +29,7 @@ export default function CareerSection({ data }) {
             {data?.title}
           </Heading>
           <div className="text-[13px] lg:text-[14px] 2xl:text-[16px] 3xl:text-[20px] leading-[1.5] font-normal text-black mb-[15px] sm:mb-[20px] 2xl:mb-[25px] 3xl:mb-[35px]">
-            {renderHtml(data?.description,"[&_li]:my-[8px] [&_ul]:list-disc [&_ul]:list-inside [&_ol]:list-decimal [&_ol]:list-inside")}
+            {renderHtml(data?.description,"[&_li]:my-[8px] [&_ul]:list-disc [&_ul]:list-outside [&_ul]:ps-[20px] [&_ol]:list-decimal [&_ol]:list-outside [&_ol]:ps-[20px]")}
           </div>
           <Link
             href={`mailto:${data?.email}` || "#"}
@@ -55,12 +57,12 @@ export default function CareerSection({ data }) {
                     <div className="w-full xl:w-1/2 h-full flex flex-wrap [&>*]:flex [&>*]:items-center sm:[&>*]:justify-center max-sm:[&>*]:mb-[10px]">
                       <div className="w-full sm:w-[30%] h-auto xl:h-full sm:px-[10px] relative z-0 before:content-[''] before:w-[2px] before:h-full before:bg-gradient-to-b before:from-[#F8F8F8] before:via-[#D0D0D0] before:to-[#F8F8F8] before:absolute before:z-1 before:inset-[0_auto_0_0] after:content-[''] after:w-[2px] after:h-full after:bg-gradient-to-b after:from-[#F8F8F8] after:via-[#D0D0D0] after:to-[#F8F8F8] after:absolute after:z-1 after:inset-[0_0_0_auto] max-sm:before:hidden max-sm:after:hidden">
                         <div className="text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.2] font-normal text-[#1C2222]">
-                          Job Type: {item?.job_type}
+                          {t("jobType")}: {item?.job_type}
                         </div>
                       </div>
                       <div className="text-center w-full sm:w-[50%] sm:px-[10px]">
                         <div className="text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.2] font-normal text-[#1C2222]">
-                          Requirements: {item?.experience}
+                          {t("requirements")} : {item?.experience}
                         </div>
                       </div>
                       <div onClick={(e) => e.stopPropagation()} className="w-full sm:w-[20%] flex sm:justify-end sm:ps-[10px]  ">
@@ -71,12 +73,12 @@ export default function CareerSection({ data }) {
                         >
                           <DialogTrigger asChild>
                             <div className="text-[12px] 2xl:text-[15px] 3xl:text-[18px] leading-[1.2] font-normal text-black p-[10px_15px] 2xl:p-[15px_20px] 3xl:p-[15px_25px] rounded-[5px] border-1 border-black hover:bg-black hover:text-white transition-all duration-300">
-                              Apply Now
+                              {t("applyNow")}
                             </div>
                           </DialogTrigger>
                           <DialogContent className="lg:max-w-[600px] 2xl:max-w-[720px] 3xl:max-w-[900px] sm:p-[40px] lg:p-[50px] 2xl:p-[60px] 3xl:p-[80px] max-h-[100vh]      overflow-y-auto">
                             <DialogTitle className="text-[18px] sm:text-[20px] 2xl:text-[25px] 3xl:text-[32px] leading-[1] font-normal bg-gradient-to-r from-[#0B436A] to-[#299B8A] bg-clip-text text-transparent w-fit uppercase mb-[15px] sm:mb-[20px] lg:mb-[30px] 2xl:mb-[35px] 3xl:mb-[50px]">
-                              Fill the form below
+                              {t("formTitle")}
                             </DialogTitle>
                             <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}>
                               <CareerForm careerId={item?.id} onSuccess={() => handleCloseDialog(item?.id)} />
@@ -91,20 +93,20 @@ export default function CareerSection({ data }) {
                   <div className="w-full h-auto py-[10px] sm:py-[20px] 2xl:py-[20px_30px] 3xl:py-[20px_40px] flex flex-wrap">
                     <div className="w-full sm:w-[35%] sm:me-10 max-sm:mb-[20px]">
                       <div className="text-[16px] 3xl:text-[20px] leading-[1] font-normal text-[#00416B] mb-[15px] sm:mb-[25px]">
-                        Responsibilities:
+                        {t("responsibilities")} :
                       </div>
                       {renderHtml(
                         item?.responsibilities,
-                        "[&_li]:text-[13px] 2xl:[&_li]:text-[14px] 3xl:[&_li]:text-[16px] [&_li]:leading-[1.2] [&_li]:font-normal [&_li]:text-[#1E1E1E] [&_li]:mb-[15px] [&_ul]:list-disc [&_ul]:list-inside [&_ol]:list-decimal [&_ol]:list-inside"
+                        "[&_li]:text-[13px] 2xl:[&_li]:text-[14px] 3xl:[&_li]:text-[16px] [&_li]:leading-[1.2] [&_li]:font-normal [&_li]:text-[#1E1E1E] [&_li]:mb-[15px] [&_ul]:list-disc [&_ul]:list-outside [&_ul]:ps-[20px] [&_ol]:list-decimal [&_ol]:list-outside [&_ol]:ps-[20px]"
                       )}
                     </div>
                     <div className="w-full sm:w-[35%]">
                       <div className="text-[16px] 3xl:text-[20px] leading-[1] font-normal text-[#00416B] mb-[15px] sm:mb-[25px]">
-                        Required Skills:
+                        {t("requiredSkills")} :
                       </div>
                       {renderHtml(
                         item?.required_skills,
-                        "[&_li]:text-[13px] 2xl:[&_li]:text-[14px] 3xl:[&_li]:text-[16px] [&_li]:leading-[1.2] [&_li]:font-normal [&_li]:text-[#1E1E1E] [&_li]:mb-[15px] [&_ul]:list-disc [&_ul]:list-inside [&_ol]:list-decimal [&_ol]:list-inside"
+                        "[&_li]:text-[13px] 2xl:[&_li]:text-[14px] 3xl:[&_li]:text-[16px] [&_li]:leading-[1.2] [&_li]:font-normal [&_li]:text-[#1E1E1E] [&_li]:mb-[15px] [&_ul]:list-disc [&_ul]:list-outside [&_ul]:ps-[20px] [&_ol]:list-decimal [&_ol]:list-outside [&_ol]:ps-[20px]"
                       )}
                     </div>
                   </div>

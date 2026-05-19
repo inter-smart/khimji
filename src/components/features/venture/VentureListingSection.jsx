@@ -7,8 +7,10 @@ import VentureCard from "@/components/common/VentureCard";
 import { useState, useEffect } from "react";
 import { NoDataState, renderHtml } from "@/lib/helper";
 import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function VentureListingSection({ data, title, context }) {
+  const t = useTranslations("venture");
   const [activeSlug, setActiveSlug] = useState();
   const [ventures, setVentures] = useState([]);
   // category usetsate
@@ -72,7 +74,7 @@ export default function VentureListingSection({ data, title, context }) {
 
 
   if (!data || data.length === 0) {
-    return <NoDataState title="No Ventures Found" message="There are no ventures available." />;
+    return <NoDataState title={t("noVenturesFound")} message={t("noVenturesAvailable")} />;
   }
 
   return (
@@ -141,7 +143,7 @@ export default function VentureListingSection({ data, title, context }) {
               ) : error ? (
                 <ErrorState message={error} />
               ) : ventures.length === 0 ? (
-                <NoDataState title="No Ventures Found" message="There are no ventures available for this category" />
+                <NoDataState title={t("noVenturesFound")} message={t("noVenturesForCategory")} />
               ) : (
                 <div>
                   <div className="mb-[20px] 2xl:mb-[40px] 3xl:mb-[60px]">
@@ -195,12 +197,13 @@ export default function VentureListingSection({ data, title, context }) {
 }
 
 function LoadingState() {
+  const t = useTranslations("venture");
   return (
     <div className="w-full h-[400px] flex items-center justify-center">
       <div className="text-center">
         <div className="w-[50px] h-[50px] border-4 border-[#299B8A] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
         <p className="text-[16px] 2xl:text-[18px] text-[#666]">
-          Loading ventures...
+          {t("loadingVentures")}
         </p>
       </div>
     </div>
@@ -208,6 +211,7 @@ function LoadingState() {
 }
 
 function ErrorState({ message }) {
+  const t = useTranslations("venture");
   return (
     <div className="w-full h-[400px] flex items-center justify-center">
       <div className="text-center">
@@ -227,7 +231,7 @@ function ErrorState({ message }) {
           </svg>
         </div>
         <p className="text-[16px] 2xl:text-[18px] text-red-600 font-medium mb-2">
-          Error Loading Ventures
+          {t("errorLoadingVentures")}
         </p>
         <p className="text-[14px] 2xl:text-[16px] text-[#666]">{message}</p>
       </div>

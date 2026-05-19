@@ -4,9 +4,14 @@
 //   enabled: process.env.ANALYZE === "true",
 // });
 
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.js");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    qualities: [100],
     remotePatterns: [
       {
         protocol: "https",
@@ -63,4 +68,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

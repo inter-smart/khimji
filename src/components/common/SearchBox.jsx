@@ -3,8 +3,10 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function SearchBox({ lang, country, businessType }) {
+  const t = useTranslations("search");
   const isRTL = lang == "ar";
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
@@ -188,7 +190,7 @@ export default function SearchBox({ lang, country, businessType }) {
       {/* Search Icon Button */}
       <button
         type="button"
-        aria-label="Search"
+        aria-label={t("ariaLabel")}
         onClick={openSearch}
         className={`
                         flex items-center justify-center
@@ -250,7 +252,7 @@ export default function SearchBox({ lang, country, businessType }) {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder={isRTL ? "ابحث هنا..." : "Search here..."}
+            placeholder={t("placeholder")}
             className={`
                           w-full h-[40px] 3xl:h-[45px]  ${isRTL ? "pr-5 pl-12" : "pl-5 pr-12"}
                           bg-white border-2 border-gray-200
@@ -267,7 +269,7 @@ export default function SearchBox({ lang, country, businessType }) {
           {/* Submit Button Inside Input */}
           <button
             type="submit"
-            aria-label={isRTL ? "إرسال البحث" : "Submit search"}
+            aria-label={t("submitAriaLabel")}
             className={`
                           absolute end-1 top-1/2 -translate-y-1/2
                           flex items-center justify-center
@@ -315,7 +317,7 @@ export default function SearchBox({ lang, country, businessType }) {
           {searchQuery && (
             <button
               type="button"
-              aria-label={isRTL ? "مسح البحث" : "Clear search"}
+              aria-label={t("clearAriaLabel")}
               onClick={() => setSearchQuery("")}
               className={`
                             absolute end-12 top-1/2 -translate-y-1/2
@@ -363,7 +365,7 @@ export default function SearchBox({ lang, country, businessType }) {
           >
             {isLoading ? (
               <div className="p-4 text-center text-gray-500">
-                {isRTL ? "جاري البحث..." : "Searching..."}
+                {t("searching")}
               </div>
             ) : searchResults.length > 0 ? (
               <ul className="py-2">
@@ -397,7 +399,7 @@ export default function SearchBox({ lang, country, businessType }) {
               </ul>
             ) : searchQuery.trim() ? (
               <div className="p-4 text-center text-gray-500">
-                {isRTL ? "لا توجد نتائج" : "No results found"}
+                {t("noResults")}
               </div>
             ) : null}
           </div>,

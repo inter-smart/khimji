@@ -1,8 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { formatDate } from "@/lib/helper";
+import { useTranslations } from "next-intl";
 
 export default function BlogCard({page="blog", item, variant, lang }) {
+    
+
+    const t = useTranslations("common");
+
     return (
         <div className="group w-full h-full p-[10px] sm:p-[15px] 2xl:p-[20px] bg-transparent rounded-[5px] 2xl:rounded-[10px] border border-white backdrop-blur-[20px] backdrop-saturate-[180%] shadow-[inset_5px_1px_33px_#f1f1f1,inset_3px_-3px_5px_#fafafa] block">
             <div className="w-full h-auto aspect-[500/290] mb-[10px] rounded-[5px] 2xl:rounded-[10px] overflow-hidden block">
@@ -20,7 +25,7 @@ export default function BlogCard({page="blog", item, variant, lang }) {
                 <Link
                     href={`/${lang}/${variant === "news" ? "newsroom" : "blog"}/${item?.slug}`}
                     target={"_self"}
-                    className="text-[13px] sm:text-[14px] 2xl:text-[15px] 3xl:text-[18px] leading-[1.5] font-normal text-black w-fit flex items-center hover:text-[#0B436A] transition-colors duration-300">View All
+                    className="text-[13px] sm:text-[14px] 2xl:text-[15px] 3xl:text-[18px] leading-[1.5] font-normal text-black w-fit flex items-center hover:text-[#0B436A] transition-colors duration-300">{t("viewAll")}
                     <span className="w-[15px] 3xl:w-[20px] h-auto aspect-square ms-[8px] sm:ms-[10px] 3xl:ms-[15px] flex items-center justify-center">
                         <Image
                             src="/images/blog_arrow.svg"

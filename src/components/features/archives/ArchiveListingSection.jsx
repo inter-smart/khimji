@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "@/components/ui/pagination";
+import { useTranslations } from "next-intl";
 
 export default function ArchiveListingSection({ categories, lang, country }) {
   const [activeCategory, setActiveCategory] = useState(categories?.[0]?.id || null);
@@ -154,6 +155,7 @@ export default function ArchiveListingSection({ categories, lang, country }) {
 }
 
 function ArchiveCard({ item, category }) {
+  const t = useTranslations("archive");
   return (
     <div className="group [--image-size:100%] sm:[--image-size:210px] 2xl:[--image-size:310px] 3xl:[--image-size:385px] w-full h-full p-[10px_10px_15px_10px] sm:p-[15px_15px_20px_15px] 2xl:p-[20px_20px_30px_20px] rounded-[5px] 2xl:rounded-[8px] border border-white backdrop-blur-[20px] backdrop-saturate-[180%] shadow-[inset_5px_1px_33px_#f1f1f1,inset_3px_-3px_5px_#fafafa] flex flex-wrap">
       <div
@@ -195,7 +197,7 @@ function ArchiveCard({ item, category }) {
         <div className="[--icon-size:30px] 2xl:[--icon-size:35px] 3xl:[--icon-size:40px] [--text-size:13px] sm:[--text-size:14px] 2xl:[--text-size:16px] 3xl:[--text-size:20px] w-full h-auto [&>*]:mb-[10px] sm:[&>*]:mb-[15px] 2xl:[&>*]:mb-[25px] 3xl:[&>*]:mb-[35px] [&>*]:last:mb-0 block">
           <div className="w-full h-auto flex items-center">
             <div className="w-[var(--icon-size)] h-auto aspect-square p-[8px] 2xl:p-[10px] bg-gradient-to-t from-[#0C456B]/20 to-[#299A8B]/20 rounded-full overflow-hidden block">
-              <Image src="/images/archive_date_icon.svg" alt="Date" width={15} height={15} className="w-full h-full object-contain" />
+              <Image src="/images/archive_date_icon.svg" alt={t("dateAlt")} width={15} height={15} className="w-full h-full object-contain" />
             </div>
             <div className="text-[length:var(--text-size)] leading-[1] font-normal text-black w-[calc(100%-var(--icon-size))] pl-[10px]">
               {item?.event_date || "N/A"}
@@ -203,7 +205,7 @@ function ArchiveCard({ item, category }) {
           </div>
           <div className="w-full h-auto flex items-center">
             <div className="w-[var(--icon-size)] h-auto aspect-square p-[8px] 2xl:p-[10px] bg-gradient-to-t from-[#0C456B]/20 to-[#299A8B]/20 rounded-full overflow-hidden block">
-              <Image src="/images/archive_location_icon.svg" alt="Location" width={15} height={15} className="w-full h-full object-contain" />
+              <Image src="/images/archive_location_icon.svg" alt={t("locationAlt")} width={15} height={15} className="w-full h-full object-contain" />
             </div>
             <div className="text-[length:var(--text-size)] leading-[1] font-normal text-black w-[calc(100%-var(--icon-size))] pl-[10px]">
               {item?.location || "N/A"}
@@ -211,7 +213,7 @@ function ArchiveCard({ item, category }) {
           </div>
           <div className="w-full h-auto flex items-center">
             <div className="w-[var(--icon-size)] h-auto aspect-square p-[8px] 2xl:p-[10px] bg-gradient-to-t from-[#0C456B]/20 to-[#299A8B]/20 rounded-full overflow-hidden block">
-              <Image src="/images/archive_award_icon.svg" alt="Awards" width={15} height={15} className="w-full h-full object-contain" />
+              <Image src="/images/archive_award_icon.svg" alt={t("awardsAlt")} width={15} height={15} className="w-full h-full object-contain" />
             </div>
             <div className="text-[length:var(--text-size)] leading-[1] font-normal text-black w-[calc(100%-var(--icon-size))] pl-[10px]">
               {item?.title || "N/A"}
@@ -220,7 +222,7 @@ function ArchiveCard({ item, category }) {
           {item?.link && (
             <Link href={item.link} target="_blank" rel="noopener noreferrer" className="w-full h-auto flex items-center">
               <div className="w-[var(--icon-size)] h-auto aspect-square p-[8px] 2xl:p-[10px] bg-gradient-to-t from-[#0C456B]/20 to-[#299A8B]/20 rounded-full overflow-hidden block">
-                <Image src="/images/archive_link_icon.svg" alt="Link" width={15} height={15} className="w-full h-full object-contain" />
+                <Image src="/images/archive_link_icon.svg" alt={t("linkAlt")} width={15} height={15} className="w-full h-full object-contain" />
               </div>
               <div className="text-[length:var(--text-size)] leading-[1] font-normal text-black w-[calc(100%-var(--icon-size))] pl-[10px] hover:text-[#299A8B] transition-colors duration-300">
                 {item?.link || "View More"}
@@ -234,17 +236,19 @@ function ArchiveCard({ item, category }) {
 }
 
 function LoadingState() {
+  const t = useTranslations("archive");
   return (
     <div className="w-full h-[400px] flex items-center justify-center">
       <div className="text-center">
         <div className="w-[50px] h-[50px] border-4 border-[#299B8A] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-        <p className="text-[16px] 2xl:text-[18px] text-[#666]">Loading archives...</p>
+        <p className="text-[16px] 2xl:text-[18px] text-[#666]">{t("loadingArchives")}</p>
       </div>
     </div>
   );
 }
 
 function ErrorState({ message }) {
+  const t = useTranslations("archive");
   return (
     <div className="w-full h-[400px] flex items-center justify-center">
       <div className="text-center">
@@ -253,7 +257,7 @@ function ErrorState({ message }) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </div>
-        <p className="text-[16px] 2xl:text-[18px] text-red-600 font-medium mb-2">Error Loading Archives</p>
+        <p className="text-[16px] 2xl:text-[18px] text-red-600 font-medium mb-2">{t("errorLoadingArchives")}</p>
         <p className="text-[14px] 2xl:text-[16px] text-[#666]">{message}</p>
       </div>
     </div>
@@ -261,6 +265,7 @@ function ErrorState({ message }) {
 }
 
 function NoDataState() {
+  const t = useTranslations("archive");
   return (
     <div className="w-full h-[400px] flex items-center justify-center">
       <div className="text-center">
@@ -274,14 +279,15 @@ function NoDataState() {
             />
           </svg>
         </div>
-        <p className="text-[16px] 2xl:text-[18px] text-[#666] font-medium mb-2">No Archives Found</p>
-        <p className="text-[14px] 2xl:text-[16px] text-[#999]">There are no archives available for this category.</p>
+        <p className="text-[16px] 2xl:text-[18px] text-[#666] font-medium mb-2">{t("noArchivesFound")}</p>
+        <p className="text-[14px] 2xl:text-[16px] text-[#999]">{t("noArchivesAvailable")}</p>
       </div>
     </div>
   );
 }
 
 function CustomPagination({ paginationData, currentPage, onPageChange, pageNumbers }) {
+  const t = useTranslations("blog");
   const { last_page, has_more_pages } = paginationData;
 
   const handlePrevious = (e) => {
@@ -310,13 +316,13 @@ function CustomPagination({ paginationData, currentPage, onPageChange, pageNumbe
           <PaginationLink
             href="#"
             onClick={handlePrevious}
-            aria-label="Previous"
+            aria-label={t("previousAriaLabel")}
             className={`w-[var(--width)] h-auto aspect-square p-0 flex items-center justify-center hover:bg-transparent transition-opacity duration-300 ${
               currentPage === 1 ? "opacity-30 cursor-not-allowed" : "hover:opacity-50 cursor-pointer"
             }`}
             aria-disabled={currentPage === 1}
           >
-            <Image src="/images/previous_pagination.svg" alt="previous pagination" width={35} height={35} className="w-full h-full object-contain" />
+            <Image src="/images/previous_pagination.svg" alt={t("previousPaginationAlt")} width={35} height={35} className="w-full h-full object-contain" />
           </PaginationLink>
         </PaginationItem>
 
@@ -340,13 +346,13 @@ function CustomPagination({ paginationData, currentPage, onPageChange, pageNumbe
           <PaginationLink
             href="#"
             onClick={handleNext}
-            aria-label="Next"
+            aria-label={t("nextAriaLabel")}
             className={`w-[var(--width)] h-auto aspect-square p-0 flex items-center justify-center hover:bg-transparent transition-opacity duration-300 ${
               !has_more_pages || currentPage === last_page ? "opacity-30 cursor-not-allowed" : "hover:opacity-50 cursor-pointer"
             }`}
             aria-disabled={!has_more_pages || currentPage === last_page}
           >
-            <Image src="/images/next_pagination.svg" alt="next pagination" width={35} height={35} className="w-full h-full object-contain" />
+            <Image src="/images/next_pagination.svg" alt={t("nextPaginationAlt")} width={35} height={35} className="w-full h-full object-contain" />
           </PaginationLink>
         </PaginationItem>
       </PaginationContent>

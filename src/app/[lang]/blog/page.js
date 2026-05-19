@@ -32,7 +32,7 @@ export default async function Page({ params, searchParams }) {
 
   const { data: cms, error, structuredData, lineScripts } = await getData("blogs?page=blogs", lang);
 
-  if (!data || error) {
+  if (!cms || error) {
      notFound();
    }
   const bannerData = cms?.banner;

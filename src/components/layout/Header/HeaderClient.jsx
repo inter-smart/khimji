@@ -36,31 +36,37 @@ export const LANGUAGES = {
 const navMenu = [
   {
     label: "Home",
+    label_ar: "الرئيسية",
     link: "/",
   },
   {
     label: "Ventures",
+    label_ar: "الأعمال التجارية",
     link: "/venture",
     hasSubmenu: true,
     subMenu: [
-      { label: "Consumer Oriented", businessType: "b2c" },
-      { label: "Corporate Oriented", businessType: "b2b" },
+      { label: "Consumer Oriented", label_ar: "موجه للمستهلك", businessType: "b2c" },
+      { label: "Corporate Oriented", label_ar: "موجه للشركات", businessType: "b2b" },
     ],
   },
   {
     label: "Heritage",
+    label_ar: "الإرث",
     link: "/heritage",
   },
   {
     label: "ICV",
+    label_ar: "القيمة المحلية المضافة",
     link: "/icv-initiatives",
   },
   {
     label: "Careers",
+    label_ar: "أعمل معنا",
     link: "/career",
   },
   {
     label: "Contact",
+    label_ar: "تواصل معنا",
     link: "/contact",
   },
 ];
@@ -77,7 +83,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
   const navigationData = navMenu.map((item) => ({
     slug: item.link,
     name: item.label,
-    name_ar: item.label,
+    name_ar: item.label_ar,
     hasSubmenu: false,
   }));
 
@@ -321,7 +327,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                               item.hasSubmenu ? (
                                 <AccordionItem key={index} value={`item-${index}`} className="border-b border-[#f4f4f4]">
                                   <AccordionTrigger className="text-[12px] font-normal text-black py-[8px] w-full">
-                                    {item.label}
+                                    {lang === "ar" ? item.label_ar : item.label}
                                   </AccordionTrigger>
                                   <AccordionContent>
                                     <div className="flex flex-col ps-3">
@@ -331,7 +337,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                                           onClick={() => handleVentureClick(sub.businessType)}
                                           className="text-[12px] text-black py-[6px] text-start hover:text-[#299b8a] transition-colors"
                                         >
-                                          {sub.label}
+                                          {lang === "ar" ? sub.label_ar : sub.label}
                                         </button>
                                       ))}
                                     </div>
@@ -344,7 +350,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                                     className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
                                     aria-label="menuLink"
                                   >
-                                    <span>{item?.label}</span>
+                                    <span>{lang === "ar" ? item?.label_ar : item?.label}</span>
                                   </Link>
                                 </AccordionItem>
                               )
@@ -522,7 +528,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                               item.hasSubmenu ? (
                                 <AccordionItem key={index} value={`item-${index}`} className="border-b border-[#f4f4f4]">
                                   <AccordionTrigger className="text-[12px] font-normal text-black py-[8px] w-full">
-                                    {item.label}
+                                    {lang === "ar" ? item.label_ar : item.label}
                                   </AccordionTrigger>
                                   <AccordionContent>
                                     <div className="flex flex-col ps-3">
@@ -532,7 +538,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                                           onClick={() => handleVentureClick(sub.businessType)}
                                           className="text-[12px] text-black py-[6px] text-start hover:text-[#299b8a] transition-colors"
                                         >
-                                          {sub.label}
+                                          {lang === "ar" ? sub.label_ar : sub.label}
                                         </button>
                                       ))}
                                     </div>
@@ -545,7 +551,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                                     className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
                                     aria-label="menuLink"
                                   >
-                                    <span>{item?.label}</span>
+                                    <span>{lang === "ar" ? item?.label_ar : item?.label}</span>
                                   </Link>
                                 </AccordionItem>
                               )
@@ -720,7 +726,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                         item.hasSubmenu ? (
                           <AccordionItem key={index} value={`item-${index}`} className="border-b border-[#f4f4f4]">
                             <AccordionTrigger className="text-[12px] font-normal text-black py-[8px] w-full">
-                              {item.label}
+                              {lang === "ar" ? item.label_ar : item.label}
                             </AccordionTrigger>
                             <AccordionContent>
                               <div className="flex flex-col ps-3">
@@ -730,7 +736,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                                     onClick={() => handleVentureClick(sub.businessType)}
                                     className="text-[12px] text-black py-[6px] text-start hover:text-[#299b8a] transition-colors"
                                   >
-                                    {sub.label}
+                                    {lang === "ar" ? sub.label_ar : sub.label}
                                   </button>
                                 ))}
                               </div>
@@ -743,7 +749,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                               className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
                               aria-label="menuLink"
                             >
-                              <span>{item?.label}</span>
+                              <span>{lang === "ar" ? item?.label_ar : item?.label}</span>
                             </Link>
                           </AccordionItem>
                         )

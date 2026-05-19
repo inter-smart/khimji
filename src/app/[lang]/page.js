@@ -4,7 +4,6 @@ import HomeClient from "@/components/clientWrappers/HomeClient";
 import DynamicMeta from "@/components/layout/DynamicMeta";
 import { getRequestContext } from "@/lib/server/getCookieData";
 import { notFound } from "next/navigation";
-import BannerSection from "@/components/features/home/BannerSection";
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
@@ -45,13 +44,11 @@ export default async function Page({ params }) {
     notFound();
   }
 
-  const { sliders, ...rest } = data;
 
   return (
     <>
       <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />
-      <BannerSection data={sliders} key={country} />
-      <HomeClient data={rest} lang={lang} />
+      <HomeClient data={data} country={country} lang={lang} />
     </>
   );
 }

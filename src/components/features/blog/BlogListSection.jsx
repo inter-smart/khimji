@@ -8,8 +8,10 @@ import {
 } from "@/components/ui/pagination";
 import BlogCard from "@/components/common/BlogCard";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function BlogListSection({ lang, country }) {
+  const t = useTranslations("blog");
   const [paginationData, setPaginationData] = useState(null);
   const [blogs, setBlogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -120,7 +122,7 @@ export default function BlogListSection({ lang, country }) {
                 ))
               ) : (
                 <div className="w-full text-center py-12">
-                  <p className="text-gray-500">No blogs found</p>
+                  <p className="text-gray-500">{t("noBlogsFound")}</p>
                 </div>
               )}
             </div>
@@ -149,6 +151,7 @@ function CustomPagination({
   onPageChange,
   pageNumbers,
 }) {
+  const t = useTranslations("blog");
   const { last_page, has_more_pages } = paginationData;
 
   const handlePrevious = (e) => {
@@ -177,7 +180,7 @@ function CustomPagination({
           <PaginationLink
             href="#"
             onClick={handlePrevious}
-            aria-label="Previous"
+            aria-label={t("previousAriaLabel")}
             className={`w-[var(--width)] h-auto aspect-square p-0 flex items-center justify-center hover:bg-transparent transition-opacity duration-300 ${
               currentPage === 1
                 ? "opacity-30 cursor-not-allowed"
@@ -187,7 +190,7 @@ function CustomPagination({
           >
             <Image
               src="/images/previous_pagination.svg"
-              alt="previous pagination"
+              alt={t("previousPaginationAlt")}
               width={35}
               height={35}
               className="w-full h-full object-contain"
@@ -215,7 +218,7 @@ function CustomPagination({
           <PaginationLink
             href="#"
             onClick={handleNext}
-            aria-label="Next"
+            aria-label={t("nextAriaLabel")}
             className={`w-[var(--width)] h-auto aspect-square p-0 flex items-center justify-center hover:bg-transparent transition-opacity duration-300 ${
               !has_more_pages || currentPage === last_page
                 ? "opacity-30 cursor-not-allowed"
@@ -225,7 +228,7 @@ function CustomPagination({
           >
             <Image
               src="/images/next_pagination.svg"
-              alt="next pagination"
+              alt={t("nextPaginationAlt")}
               width={35}
               height={35}
               className="w-full h-full object-contain"
@@ -238,12 +241,13 @@ function CustomPagination({
 }
 
 function LoadingState() {
+  const t = useTranslations("blog");
   return (
     <div className="w-full h-[400px] flex items-center justify-center">
       <div className="text-center">
         <div className="w-[50px] h-[50px] border-4 border-[#299B8A] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
         <p className="text-[16px] 2xl:text-[18px] text-[#666]">
-          Loading blogs...
+          {t("loadingBlogs")}
         </p>
       </div>
     </div>
@@ -251,6 +255,7 @@ function LoadingState() {
 }
 
 function ErrorState({ message }) {
+  const t = useTranslations("blog");
   return (
     <div className="w-full h-[400px] flex items-center justify-center">
       <div className="text-center">
@@ -270,7 +275,7 @@ function ErrorState({ message }) {
           </svg>
         </div>
         <p className="text-[16px] 2xl:text-[18px] text-red-600 font-medium mb-2">
-          Error Loading Blogs
+          {t("errorLoadingBlogs")}
         </p>
         <p className="text-[14px] 2xl:text-[16px] text-[#666]">{message}</p>
       </div>
@@ -279,6 +284,7 @@ function ErrorState({ message }) {
 }
 
 function NoDataState() {
+  const t = useTranslations("blog");
   return (
     <div className="w-full h-[400px] flex items-center justify-center">
       <div className="text-center">
@@ -298,10 +304,10 @@ function NoDataState() {
           </svg>
         </div>
         <p className="text-[16px] 2xl:text-[18px] text-[#666] font-medium mb-2">
-          No Blogs Found
+          {t("noBlogsFound")}
         </p>
         <p className="text-[14px] 2xl:text-[16px] text-[#999]">
-          There are no blogs available.
+          {t("noBlogsAvailable")}
         </p>
       </div>
     </div>

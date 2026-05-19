@@ -3,6 +3,7 @@ import { getData } from "@/lib/server/api";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
 const CareerSection = dynamic(() => import("@/components/features/career/CareerSection"));
@@ -26,13 +27,15 @@ export async function generateMetadata({ params }) {
 export default async function page({ params }) {
   const resolvedParams = await params;
   const { lang } = resolvedParams;
+  setRequestLocale(lang);
+  const t = await getTranslations("common");
 
   const { data, error, structuredData, lineScripts } = await getData("careers", lang);
 
   if (!data || error) {
     notFound();
   }
-  
+
   const { banner, career_cms, careers } = data;
 
   const career_section_data = {
@@ -48,7 +51,7 @@ export default async function page({ params }) {
         coverImageMobile={banner?.banner_mobile}
         alt={banner?.banner_alt_text}
         title={banner?.banner_title}
-        breadCrumb_data={[{ link: { href: `/${lang}`, label: "Home" } }, { link: { href: "/career", label: "Careers" } }]}
+        breadCrumb_data={[{ link: { href: `/${lang}`, label: t("home") } }, { link: { href: "/career", label: t("careers") } }]}
       />
       <CareerSection data={career_section_data} />
     </>

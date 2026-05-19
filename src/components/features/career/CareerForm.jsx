@@ -15,21 +15,26 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import { careerFormSchema } from "@/lib/validations/schemas";
+import { createCareerFormSchema } from "@/lib/validations/schemas";
 import { toast } from "sonner";
 import { multipartPostToAPI } from "@/lib/server/clientApi";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Loader2 } from "lucide-react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function CareerForm({ careerId, onSuccess }) {
+  const t = useTranslations("career");
+  const tVal = useTranslations("validation");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState(null);
   const { executeRecaptcha } = useGoogleReCaptcha();
 
+  const schema = useMemo(() => createCareerFormSchema(tVal), [tVal]);
+
   const form = useForm({
-    resolver: zodResolver(careerFormSchema),
+    resolver: zodResolver(schema),
     defaultValues: {
       name: "",
       email: "",
@@ -42,7 +47,7 @@ export default function CareerForm({ careerId, onSuccess }) {
 
   const handleFormSubmit = async (data) => {
     if (!careerId) {
-      toast.error("Career ID missing!");
+      toast.error(t("submitError"));
       return;
     }
 
@@ -70,11 +75,11 @@ export default function CareerForm({ careerId, onSuccess }) {
       const response = await multipartPostToAPI("career-enquiry", formData);
 
       if (!response.status || response.ok) {
-        return setFormError(response.message || "Failed to submit application");
+        return setFormError(response.message || t("submitError"));
       }
 
       if (response.status) {
-        toast.success("Application submitted successfully!", {
+        toast.success(t("submitSuccess"), {
           style: {
             background: "#10b981",
             color: "white",
@@ -96,7 +101,7 @@ export default function CareerForm({ careerId, onSuccess }) {
       }
     } catch (err) {
       console.error("❌ Submission error:", err);
-      setFormError("An error occurred while submitting your application");
+      setFormError(t("submitError"));
     } finally {
       setIsSubmitting(false);
     }
@@ -120,7 +125,7 @@ export default function CareerForm({ careerId, onSuccess }) {
               <FormItem className={formItemStyle}>
                 <FormControl>
                   <Input
-                    placeholder="Full Name*"
+                    placeholder={t("fullName")}
                     {...field}
                     className={inputStyle}
                     disabled={isSubmitting}
@@ -137,7 +142,7 @@ export default function CareerForm({ careerId, onSuccess }) {
               <FormItem className={formItemStyle}>
                 <FormControl>
                   <Input
-                    placeholder="Phone Number*"
+                    placeholder={t("phoneNumber")}
                     {...field}
                     className={inputStyle}
                     disabled={isSubmitting}
@@ -155,7 +160,7 @@ export default function CareerForm({ careerId, onSuccess }) {
             <FormItem className={formItemStyle}>
               <FormControl>
                 <Input
-                  placeholder="Email*"
+                  placeholder={t("email")}
                   type="email"
                   {...field}
                   className={inputStyle}
@@ -173,7 +178,7 @@ export default function CareerForm({ careerId, onSuccess }) {
             <FormItem className={formItemStyle}>
               <FormControl>
                 <Textarea
-                  placeholder="Your Message*"
+                  placeholder={t("yourMessage")}
                   className={`${inputStyle} min-h-[75px] 3xl:min-h-[100px]`}
                   {...field}
                   disabled={isSubmitting}
@@ -201,11 +206,11 @@ export default function CareerForm({ careerId, onSuccess }) {
                   </span>
                   <div className="text-center">
                     <div className="text-[14px] 2xl:text-[16px] 3xl:text-[20px] leading-[1.2] font-normal text-black mb-[5px] sm:mb-[10px]">
-                      {value && value[0] ? value[0].name : "Upload Resume"}
+                      {value && value[0] ? value[0].name : t("uploadResume")}
                     </div>
                     {!value && (
                       <div className="text-[12px] 2xl:text-[13px] 3xl:text-[15px] leading-[1.2] font-normal text-black/50">
-                        Max file size 5 MB, PDF / DOC / DOCX Format
+                        {t("maxFileSize")}
                       </div>
                     )}
                   </div>
@@ -239,7 +244,7 @@ export default function CareerForm({ careerId, onSuccess }) {
               </FormControl>
               <div className="flex-1 leading-none space-y-1">
                 <FormLabel className="text-[14px] 2xl:text-[16px] 3xl:text-[20px] leading-[1.2] font-normal text-black/60 cursor-pointer">
-                  I agree to the
+                  {t("iAgreeTo")}
                   <span>
                     <Link
                       target="_blank"
@@ -247,10 +252,10 @@ export default function CareerForm({ careerId, onSuccess }) {
                       href="/privacy-policy"
                       className="text-[#299B8A] underline"
                     >
-                    Privacy Policy
+                    {t("privacyPolicy")}
                     </Link>
                   </span>
-                  and consent to the processing of my information.*
+                  {t("consentText")}
                 </FormLabel>
                 <FormMessage />
               </div>
@@ -273,10 +278,10 @@ export default function CareerForm({ careerId, onSuccess }) {
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Submitting...
+                {t("submitting")}
               </>
             ) : (
-              "Submit"
+              t("submit")
             )}
           </Button>
         </div>

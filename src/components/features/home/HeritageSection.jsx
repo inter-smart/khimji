@@ -8,6 +8,7 @@ import Image from "next/image";
 import CircularSwiper from "./CircularSwiper";
 import HeritageMobile from "./home-mobile/HeritageMobile";
 import { renderHtml } from "@/lib/helper";
+import { useTranslations } from "next-intl";
 
 const CONTACT_BUTTON_CLASS = `
   text-[12px] 2xl:text-[16px] 3xl:text-[18px]
@@ -75,6 +76,7 @@ const Counter = ({ end, suffix = "" }) => {
 export default function HeritageSection({ title, description, banner, banner_alt_text, metrics, timelines, image, image_alt, lang }) {
   const counterContainerRef = useRef(null);
   const isRTL = lang?.trim() === "ar";
+  const tCommon = useTranslations("common");
 
 
   // Animation variants
@@ -249,7 +251,7 @@ export default function HeritageSection({ title, description, banner, banner_alt
 
                 <motion.div variants={buttonVariants} whileHover="hover" initial="rest" animate="rest">
                   <Link href={`/${lang}/heritage`} className={CONTACT_BUTTON_CLASS}>
-                    <span>{lang === "ar" ? "اكتشف المزيد" : "Discover More"}</span>
+                    <span>{tCommon("discoverMore")}</span>
                     <motion.div className={ARROW_ICON_CLASS} variants={arrowVariants}>
                       <svg className="w-full h-full" viewBox="0 0 14 15">
                         <path

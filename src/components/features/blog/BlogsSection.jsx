@@ -1,7 +1,9 @@
 import BlogCard from "@/components/common/BlogCard";
 import BlogPagination from "./Pagination";
+import { useTranslations } from "next-intl";
 
 export default function BlogsSection({ blogs, paginationData, error, variant, lang }) {
+  const t = useTranslations("blog");
   return (
     <section className="w-full h-auto py-[40px] sm:py-[50px] lg:py-[60px_70px] 2xl:py-[70px_90px] 3xl:py-[90px_115px] overflow-hidden block relative z-0">
       <div className="w-[120px] sm:w-[180px] 2xl:w-[225px] 3xl:w-[280px] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] pointer-events-none absolute -z-1 inset-[0_auto_auto_-2%]"></div>
@@ -24,7 +26,7 @@ export default function BlogsSection({ blogs, paginationData, error, variant, la
                 ))
               ) : (
                 <div className="w-full text-center py-12">
-                  <p className="text-gray-500">No blogs found</p>
+                  <p className="text-gray-500">{variant === "news" ? t("noNewsFound") : t("noBlogsFound")}</p>
                 </div>
               )}
             </div>
@@ -38,6 +40,7 @@ export default function BlogsSection({ blogs, paginationData, error, variant, la
 }
 
 function ErrorState({ message, variant }) {
+  const t = useTranslations("blog");
   return (
     <div className="w-full h-[400px] flex items-center justify-center">
       <div className="text-center">
@@ -46,7 +49,7 @@ function ErrorState({ message, variant }) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </div>
-        <p className="text-[16px] 2xl:text-[18px] text-red-600 font-medium mb-2">Error Loading ${variant==="news"? "News": "Blogs"}</p>
+        <p className="text-[16px] 2xl:text-[18px] text-red-600 font-medium mb-2">{variant === "news" ? t("errorLoadingNews") : t("errorLoadingBlogs")}</p>
         <p className="text-[14px] 2xl:text-[16px] text-[#666]">{message}</p>
       </div>
     </div>
@@ -54,6 +57,7 @@ function ErrorState({ message, variant }) {
 }
 
 function NoDataState({variant}) {
+  const t = useTranslations("blog");
   return (
     <div className="w-full h-[400px] flex items-center justify-center">
       <div className="text-center">
@@ -67,8 +71,8 @@ function NoDataState({variant}) {
             />
           </svg>
         </div>
-        <p className="text-[16px] 2xl:text-[18px] text-[#666] font-medium mb-2">No ${variant==="news"? "News": "Blogs"} Found</p>
-        <p className="text-[14px] 2xl:text-[16px] text-[#999]">There are no ${variant==="news"? "news": "blogs"} available.</p>
+        <p className="text-[16px] 2xl:text-[18px] text-[#666] font-medium mb-2">{variant === "news" ? t("noNewsFound") : t("noBlogsFound")}</p>
+        <p className="text-[14px] 2xl:text-[16px] text-[#999]">{variant === "news" ? t("noNewsAvailable") : t("noBlogsAvailable")}</p>
       </div>
     </div>
   );

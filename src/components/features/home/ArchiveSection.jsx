@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Heading } from "@/components/layout/Heading";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function ArchiveSection({ archives, title, lang }) {
   const globeContainerRef = useRef(null);
@@ -16,6 +17,7 @@ export default function ArchiveSection({ archives, title, lang }) {
   const isRTL = lang?.trim() === "ar";
 
   const router = useRouter();
+  const tHome = useTranslations("home");
   const transformArchivesToFrontend = (backendArchives) => {
     const frontendData = {};
 
@@ -450,7 +452,7 @@ export default function ArchiveSection({ archives, title, lang }) {
             {isLoading && (
               <div className="absolute inset-0 flex items-center justify-center z-10">
                 <div className="text-lg text-teal-600 font-medium">
-                  Loading globe...
+                  {tHome("loadingGlobe")}
                 </div>
               </div>
             )}

@@ -1,11 +1,13 @@
 import { Heading } from "@/components/layout/Heading";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { NoDataState } from "@/lib/helper";
+import { useTranslations } from "next-intl";
 
 export default function FaqSection({ cms, data }) {
+  const t = useTranslations("faq");
 
   if (!data || data.length === 0) {
-      return <NoDataState title="No FAQ Found" message="There are no FAQ available." />
+      return <NoDataState title={t("noFaqFound")} message={t("noFaqAvailable")} />
     }
 
   return (

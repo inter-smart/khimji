@@ -3,6 +3,7 @@ import { getData } from "@/lib/server/api";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
 const NationSection = dynamic(
@@ -42,6 +43,8 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
   const resolvedParams = await params;
   const lang = resolvedParams.lang;
+  setRequestLocale(lang);
+  const t = await getTranslations("common");
 
   // Simple GET request
   const { data, error, structuredData, lineScripts } = await getData(
@@ -63,8 +66,8 @@ export default async function Page({ params }) {
         alt={banner?.banner_alt_text}
         title={banner?.banner_title}
         breadCrumb_data={[
-          { link: { href: "/", label: "Home" } },
-          { link: { href: "/icv-initiatives", label: "ICV Initiatives" } },
+          { link: { href: `/${lang}`, label: t("home") } },
+          { link: { href: "/icv-initiatives", label: t("icvInitiatives") } },
         ]}
       />
 
