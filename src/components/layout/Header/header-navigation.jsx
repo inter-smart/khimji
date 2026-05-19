@@ -47,19 +47,23 @@ export default function HeaderNavigation({ locale, pathname, onNavigationClick, 
               <li key={item.slug}>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <button className={cn(linkClass, "flex items-center gap-1 outline-none")}>
+                    <button className={cn(linkClass, "flex items-center gap-1 outline-none group")}>
                       {isEN ? item.name : item.name_ar}
-                      <ChevronDown className="w-4 h-4" />
+                      <ChevronDown className="w-4 h-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                     </button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start">
+                  <DropdownMenuContent 
+                    align="start"
+                    className="w-56 mt-2 rounded-xl border border-gray-100 bg-white/95 backdrop-blur-md p-2 shadow-xl"
+                  >
                     {VENTURE_SUBMENU.map((opt) => (
                       <DropdownMenuItem
                         key={opt.businessType}
                         onClick={() => handleVentureClick(opt.businessType)}
-                        className="cursor-pointer"
+                        className="cursor-pointer group flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition-all hover:bg-[#299b8a]/10 hover:text-[#299b8a] focus:bg-[#299b8a]/10 focus:text-[#299b8a]"
                       >
-                        {isEN ? opt.label : opt.label_ar}
+                        <span>{isEN ? opt.label : opt.label_ar}</span>
+                        <ChevronDown className="w-4 h-4 opacity-0 -rotate-90 transition-all group-hover:opacity-100 group-hover:translate-x-1 group-focus:opacity-100 group-focus:translate-x-1" />
                       </DropdownMenuItem>
                     ))}
                   </DropdownMenuContent>

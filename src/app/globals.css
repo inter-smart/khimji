@@ -468,3 +468,7 @@ a:hover,
 button:hover {
   will-change: transform, opacity;
 }
+
+p{
+  line-height: 1.6;
+}

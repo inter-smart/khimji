@@ -99,11 +99,11 @@ export default function BoardDirectorSection({ title, directors }) {
         open={!!selected}
         onOpenChange={(open) => !open && setSelected(null)}
       >
-        <DialogContent
-          className="max-w-[460px] px-6 sm:px-8"
+        <DialogContent className="max-w-[350px] xs:max-w-[460px] sm:max-w-[650px] xl:max-w-[950px]   px-6 sm:px-8 max-sm:px-5 max-sm:rounded-3xl max-sm:border-slate-200/60 max-sm:bg-gradient-to-b max-sm:from-white max-sm:via-slate-50/50 max-sm:to-white/95 max-sm:shadow-[0_20px_50px_rgba(0,0,0,0.12)] max-sm:[top:50%!important]"
           style={{ top: "calc(50vh + var(--header-height, 108px) / 2)" }}
         >
-          <div className="flex flex-col items-center text-center">
+          {/* Desktop & Tablet Layout (Original - completely unchanged) */}
+          <div className="hidden sm:flex flex-col items-center text-center">
             <div className="w-[160px] sm:w-[200px] select-none mb-5 relative mt-2">
               <div className="w-full aspect-280/325 rounded-full overflow-hidden flex items-center justify-center relative z-0">
                 <div className="absolute bottom-0 left-0 right-0 h-[80%] rounded-full bg-linear-to-t from-white to-[#C0E7E9] z-[-1]" />
@@ -127,10 +127,42 @@ export default function BoardDirectorSection({ title, directors }) {
               )}
             </DialogHeader>
             {
-              <p className="text-[14px] sm:text-[15px] text-gray-600 leading-relaxed text-left mt-4">
+              <p className="text-[14px] sm:text-[15px] text-gray-600 leading-relaxed text-left mt-4 w-full max-w-full [&_br]:hidden">
                 {parse(selected?.description ?? "")}
               </p>
             }
+          </div>
+
+          {/* Mobile Layout (Modernized - active only on mobile screens) */}
+          <div className="flex sm:hidden flex-col items-stretch text-left mt-2">
+            <div className="text-[11px] font-bold tracking-widest text-[#238A84] uppercase mb-2">
+              Board Profile
+            </div>
+            <div className="bg-gradient-to-br from-[#013763]/5 to-[#238A84]/5 p-4 rounded-2xl border-l-[3px] border-[#238A84] text-[13.5px] text-slate-700 leading-relaxed text-left max-h-[280px] overflow-y-auto">
+              {parse(selected?.description ?? "")}
+            </div>
+            <div className="flex items-center gap-4 mt-5 pt-4 border-t border-slate-100">
+              <div className="w-[60px] aspect-[280/325] shrink-0 rounded-full overflow-hidden relative border border-slate-100 ring-2 ring-white shadow-md">
+                <div className="absolute bottom-0 left-0 right-0 h-[80%] rounded-full bg-linear-to-t from-white to-[#C0E7E9] z-[-1]" />
+                <Image
+                  src={selected?.image}
+                  alt={selected?.image_alt_text || selected?.name || "Director"}
+                  width={280}
+                  height={325}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <DialogHeader className="w-full space-y-0.5 text-left">
+                <DialogTitle className="text-[16px] font-bold text-[#013763] leading-tight">
+                  {selected?.name}
+                </DialogTitle>
+                {selected?.designation && (
+                  <DialogDescription className="text-[12px] font-semibold text-[#238A84]">
+                    {selected.designation}
+                  </DialogDescription>
+                )}
+              </DialogHeader>
+            </div>
           </div>
         </DialogContent>
       </Dialog>

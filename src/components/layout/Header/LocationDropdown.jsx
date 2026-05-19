@@ -74,9 +74,13 @@ export default function LocationDropdown({ locationsPromise }) {
             >
               <SelectValue placeholder="Location" />
             </SelectTrigger>
-            <SelectContent className="max-w-[180px]">
+            <SelectContent className="max-w-[180px] rounded-xl border border-gray-100 bg-white/95 backdrop-blur-md p-2 shadow-xl">
               {countries.map((c) => (
-                <SelectItem key={c.id} value={c.slug}>
+                <SelectItem 
+                  key={c.id} 
+                  value={c.slug}
+                  className="cursor-pointer rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-all hover:bg-[#299b8a]/10 hover:text-[#299b8a] focus:bg-[#299b8a]/10 focus:text-[#299b8a] my-0.5"
+                >
                   {c.name}
                 </SelectItem>
               ))}

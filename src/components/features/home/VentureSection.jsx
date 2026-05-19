@@ -267,10 +267,10 @@ export default function VentureSection({
                 >
                   <Swiper
                     dir={isRTL ? "rtl" : "ltr"}
-                    // modules={[Autoplay]}
-                    // autoplay={{ delay: 0, disableOnInteraction: false }}
-                    modules={[Pagination]}
-                    pagination={{ clickable: true }}
+                    modules={[Autoplay]}
+                    autoplay={{ delay: 0, disableOnInteraction: false }}
+                    // modules={[Pagination]}
+                    // pagination={{ clickable: true }}
                     speed={3500}
                     loop={true}
                     slidesPerView={2}

@@ -194,12 +194,12 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                     <span className="font-medium text-[16px] uppercase">{languageData?.name}</span>
                   </DropdownMenuTrigger>
 
-                  <DropdownMenuContent align="end">
+                  <DropdownMenuContent align="end" className="w-40 mt-2 rounded-xl border border-gray-100 bg-white/95 backdrop-blur-md p-2 shadow-xl">
                     {languages.map((lang) => (
                       <DropdownMenuItem
                         key={lang.code}
                         onClick={() => changeLanguage(lang.code)}
-                        className={`cursor-pointer ${languageData?.code === lang.code ? "bg-accent" : ""}`}
+                        className={`cursor-pointer rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition-all hover:bg-[#299b8a]/10 hover:text-[#299b8a] focus:bg-[#299b8a]/10 focus:text-[#299b8a] ${languageData?.code === lang.code ? "bg-[#299b8a]/5 text-[#299b8a]" : ""}`}
                       >
                         <div className="flex items-center gap-2 w-full">
                           <Image src="/images/langicon.png" alt={lang.fullName} width={20} height={20} className=" object-cover w-[20px] h-[20px]" />
@@ -216,13 +216,10 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
             <Sheet open={open} onOpenChange={setOpen}>
               <div
                 className={`hidden sm:block xl:hidden relative z-1
-            ${isScrolled
-                    ? "stickyHeader w-full"
-                    : " "
-                  }`}
+             `}
               >
                 <div
-                  className={`w-full h-[25px]  ${isScrolled ? "stickyHeader pt-[10px] w-full" : ""
+                  className={`w-full h-[25px]  ${isScrolled ? " pt-[10px] w-full " : ""
                     }`}
                 >
                   <div className="relative">
@@ -330,12 +327,12 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                                     {lang === "ar" ? item.label_ar : item.label}
                                   </AccordionTrigger>
                                   <AccordionContent>
-                                    <div className="flex flex-col ps-3">
+                                    <div className="flex flex-col !ps-0 space-y-1 mt-1 mb-2">
                                       {item.subMenu?.map((sub) => (
                                         <button
                                           key={sub.businessType}
                                           onClick={() => handleVentureClick(sub.businessType)}
-                                          className="text-[12px] text-black py-[6px] text-start hover:text-[#299b8a] transition-colors"
+                                          className="text-[13px] text-gray-600 py-2 !px-0 rounded-md text-start hover:bg-[#299b8a]/10 hover:text-[#299b8a] transition-all font-medium"
                                         >
                                           {lang === "ar" ? sub.label_ar : sub.label}
                                         </button>
@@ -408,9 +405,13 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                                 <SelectValue placeholder="Select Country" />
                               </SelectTrigger>
 
-                              <SelectContent className=" min-w-[120px] rounded-xl bg-white text-black shadow-lg  ">
+                              <SelectContent className="min-w-[120px] rounded-xl border border-gray-100 bg-white/95 backdrop-blur-md p-2 shadow-xl">
                                 {languages.map((lang) => (
-                                  <SelectItem key={lang.code} value={lang.code}>
+                                  <SelectItem 
+                                    key={lang.code} 
+                                    value={lang.code}
+                                    className="cursor-pointer rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-all hover:bg-[#299b8a]/10 hover:text-[#299b8a] focus:bg-[#299b8a]/10 focus:text-[#299b8a] my-0.5"
+                                  >
                                     {lang.fullName}
                                   </SelectItem>
                                 ))}
@@ -612,9 +613,13 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                           />
                           <SelectValue placeholder="Select Country" />
                         </SelectTrigger>
-                        <SelectContent className=" min-w-[120px] rounded-xl bg-white text-black shadow-lg  ">
+                        <SelectContent className="min-w-[120px] rounded-xl border border-gray-100 bg-white/95 backdrop-blur-md p-2 shadow-xl">
                           {languages.map((lang) => (
-                            <SelectItem key={lang.code} value={lang.code}>
+                            <SelectItem 
+                              key={lang.code} 
+                              value={lang.code}
+                              className="cursor-pointer rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-all hover:bg-[#299b8a]/10 hover:text-[#299b8a] focus:bg-[#299b8a]/10 focus:text-[#299b8a] my-0.5"
+                            >
                               {lang.fullName}
                             </SelectItem>
                           ))}
@@ -729,12 +734,12 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                               {lang === "ar" ? item.label_ar : item.label}
                             </AccordionTrigger>
                             <AccordionContent>
-                              <div className="flex flex-col ps-3">
+                              <div className="flex flex-col ps-0 space-y-1 mt-1 mb-2">
                                 {item.subMenu?.map((sub) => (
                                   <button
                                     key={sub.businessType}
                                     onClick={() => handleVentureClick(sub.businessType)}
-                                    className="text-[12px] text-black py-[6px] text-start hover:text-[#299b8a] transition-colors"
+                                    className="text-[13px] text-gray-600 py-2 px-0 rounded-md text-start hover:bg-[#299b8a]/10 hover:text-[#299b8a] transition-all font-medium"
                                   >
                                     {lang === "ar" ? sub.label_ar : sub.label}
                                   </button>
