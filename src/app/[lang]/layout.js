@@ -23,33 +23,6 @@ const Nobel = localFont({
 });
 
 
-const Bukra = localFont({
-  src: [
-    {
-      path: "../../../public/fonts/bukra-regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  variable: "--font-Bukra",
-  preload: true,
-  display: "swap",
-});
-
-const Brown = localFont({
-  src: [
-    {
-      path: "../../../public/fonts/brown-light.woff2",
-      weight: "300",
-      style: "normal",
-      
-    },
-  ],
-  variable: "--font-Brown",
-  preload: true,
-  display: "swap",
-});
-
 export const metadata = {
   title: "Khimji Ramdas",
   description: "Khimji Ramdas is a Ramdas company",
@@ -63,7 +36,7 @@ export default async function RootLayout({ children, params }) {
   const messages = await getMessages();
 
   return (
-    <html lang={lang} dir={lang == "ar" ? "rtl" : "ltr"} className={`${Nobel.variable} ${Bukra.variable} ${Brown.variable}`}>
+    <html lang={lang} dir={lang == "ar" ? "rtl" : "ltr"} className={`${Nobel.variable}`}>
       <body className="font-base1">
         <NextIntlClientProvider locale={lang} messages={messages}>
           <PolicySlugProvider>
