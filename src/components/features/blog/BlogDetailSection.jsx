@@ -1,7 +1,7 @@
 import { formatDate } from "@/lib/helper";
 import Image from "next/image";
 
-export default function BlogDetailSection({ data }) {
+export default function BlogDetailSection({ data, lang="en" }) {
 
   return (
     <section className="w-full h-auto py-[185px] sm:py-[50px_70px] lg:py-[65px_80px] 2xl:py-[110px_120px] 3xl:py-[135px_160px] block relative z-0">
@@ -22,7 +22,7 @@ export default function BlogDetailSection({ data }) {
           />
         </div>
         <div className="text-[12px] sm:text-[14px] 2xl:text-[15px] 3xl:text-[16px] leading-[1] font-normal text-white w-fit p-[5px_15px] sm:p-[5px_20px] 2xl:p-[10px_25px] mb-[20px] sm:mb-[30px] 2xl:mb-[35px] 3xl:mb-[50px] bg-linear-to-r from-[#0B436A] to-[#299B8A] rounded-full">
-          {formatDate(data?.published_on)}
+          {formatDate(data?.published_on, lang)}
         </div>
         <div
           className="typography sm:[&_img]:float-left [&_img]:w-full sm:[&_img]:w-[240px] lg:[&_img]:w-[320px] 2xl:[&_img]:w-[385px] 3xl:[&_img]:w-[485px] sm:[&_img]:m-[0_30px_20px_0] lg:[&_img]:m-[0_40px_30px_0] 2xl:[&_img]:m-[0_50px_30px_0] 3xl:[&_img]:m-[0_70px_40px_0] [&_p]:text-[14px] 2xl:[&_p]:text-[16px] 3xl:[&_p]:text-[20px] [&_p]:leading-[1.8] [&_p]:font-normal [&_p]:text-black [&>*]:mb-[20px] 2xl:[&>*]:mb-[30px]"

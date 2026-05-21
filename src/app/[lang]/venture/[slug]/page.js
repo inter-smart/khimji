@@ -103,7 +103,7 @@ export default async function Page({ params }) {
       <VendordetailsSection
         breadCrumb_data={[
           { href: `/${lang}`, label: t("home") },
-          { href: "/venture", label: t("venture") },
+          { href: `/${lang}/venture`, label: t("venture") },
           {
             href: `/venture/${slug}`,
             label: data?.title,

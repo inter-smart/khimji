@@ -30,7 +30,9 @@
     "showMore": "Show More",
     "showLess": "Show Less",
     "client": "Client",
-    "year": "Year"
+    "year": "Year",
+    "noPolicyFound": "No Policy Found",
+    "noPolicyAvailable": "There are no policies available."
   },
   "home": {
     "news": "News",

@@ -4,22 +4,30 @@ import { getData } from "@/lib/server/api";
 import { DefaultOgImage } from "@/lib/server/constants";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 
-const PrivacySection = dynamic(() =>
-  import("@/components/features/privacy/PrivacySection")
+const PrivacySection = dynamic(
+  () => import("@/components/features/privacy/PrivacySection"),
 );
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const { lang, slug } = resolvedParams;
 
+  // If slug is not privacy-policy, return default metadata
+  if (slug !== "privacy-policy") {
+    return {
+      title: "Page Not Found",
+      description: "The page you are looking for does not exist.",
+    };
+  }
+
   const { data, error } = await getData(`policy?slug=${slug}`, lang);
 
-  // Handle error or missing data
-  if (error || !data) {
+  if (!data || error) {
     return {
-      title: "Privacy Policy",
-      description: "The requested policy page could not be found.",
+      title: "Content Not Found",
+      description: "The content you are looking for could not be found.",
     };
   }
 
@@ -37,7 +45,6 @@ export async function generateMetadata({ params }) {
     description: meta_description || "View our policy details",
     keywords: meta_keywords || "",
 
-    // Enhanced SEO fields
     openGraph: {
       title: meta_title || title || "Policy",
       description: meta_description || "View our policy details",
@@ -67,14 +74,22 @@ export default async function page({ params }) {
   const resolvedParams = await params;
   const { lang, slug } = resolvedParams;
 
+  const t = await getTranslations("common");
+
+  // If slug is not privacy-policy, show Next.js 404 page
+  if (slug !== "privacy-policy") {
+    notFound();
+  }
+
   const { data, error, structuredData, lineScripts } = await getData(
     `policy?slug=${slug}`,
-    lang
+    lang,
   );
-  
-  
-  if (!data || error) {
-    notFound();
+
+  if (!data || data.length === 0) {
+    return (
+      <NoDataState title={t("noPolicyFound")} message={t("noPolicyAvailable")} />
+    );
   }
 
   return (

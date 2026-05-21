@@ -1,7 +1,9 @@
-import parse, { domToReact } from "html-react-parser";
+import parse from "html-react-parser";
 
-export function formatDate(dateStr) {
-  return new Date(`${dateStr}T00:00:00`).toLocaleDateString("en-US", {
+export function formatDate(dateStr, lang = "en") {
+  const locale = lang === "ar" ? "ar-SA-u-nu-latn" : "en-US";
+  
+  return new Date(`${dateStr}T00:00:00`).toLocaleDateString(locale, {
     month: "long",
     day: "numeric",
     year: "numeric",
@@ -23,12 +25,7 @@ export function renderHtml(htmlString, className = "") {
               domNode.attribs.style = "text-decoration: underline;";
             }
 
-            console.log("domNode", domNode)
-
-          // Remove span tags but keep their children
-          if (domNode.name === "span") {
-            return <>{domToReact(domNode.children)}</>;
-          }}
+          }
         },
       })}
     </div>

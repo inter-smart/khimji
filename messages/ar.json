@@ -30,7 +30,9 @@
     "showMore": "عرض المزيد",
     "showLess": "عرض أقل",
     "client": "العميل",
-    "year": "السنة"
+    "year": "السنة",
+    "noPolicyFound": "لم يتم العثور على سياسة",
+    "noPolicyAvailable": "لا توجد سياسات متاحة."
   },
   "home": {
     "news": "أخبار",

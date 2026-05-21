@@ -20,7 +20,7 @@ export default function BlogCard({page="blog", item, variant, lang }) {
                 />
             </div>
             <div className="w-full h-auto p-[10px] sm:p-[15px] 2xl:p-[20px]">
-                <div className="text-[12px] sm:text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.5] font-normal text-white w-fit p-[5px_15px] 2xl:p-[7px_20px] 3xl:p-[10px_30px] mb-[10px] sm:mb-[15px] lg:mb-[20px] 3xl:mb-[30px] bg-linear-to-r from-[#0B436A] to-[#299B8A] rounded-full">{formatDate(item?.published_on)}</div>
+                <div className="text-[12px] sm:text-[13px] 2xl:text-[14px] 3xl:text-[16px] leading-[1.5] font-normal text-white w-fit p-[5px_15px] 2xl:p-[7px_20px] 3xl:p-[10px_30px] mb-[10px] sm:mb-[15px] lg:mb-[20px] 3xl:mb-[30px] bg-linear-to-r from-[#0B436A] to-[#299B8A] rounded-full">{formatDate(item?.published_on, lang)}</div>
                 <div className="text-[13px] sm:text-[14px] 2xl:text-[18px] 3xl:text-[22px] leading-[1.5] font-normal text-black mb-[10px] sm:mb-[15px] lg:mb-[20px] 3xl:mb-[30px] line-clamp-2">{item?.title}</div>
                 <Link
                     href={`/${lang}/${variant === "news" ? "newsroom" : "blog"}/${item?.slug}`}
