@@ -13,6 +13,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { renderHtml } from "@/lib/helper";
 
 export default function BoardDirectorSection({ title, directors }) {
   const [selected, setSelected] = useState(null);
@@ -128,7 +129,7 @@ export default function BoardDirectorSection({ title, directors }) {
             </DialogHeader>
             {
               <p className="text-[14px] sm:text-[15px] text-gray-600 leading-relaxed text-left mt-4 w-full max-w-full [&_br]:hidden">
-                {parse(selected?.description ?? "")}
+                {renderHtml(selected?.description ?? "")}
               </p>
             }
           </div>
@@ -139,7 +140,7 @@ export default function BoardDirectorSection({ title, directors }) {
               Board Profile
             </div>
             <div className="bg-gradient-to-br from-[#013763]/5 to-[#238A84]/5 p-4 rounded-2xl border-l-[3px] border-[#238A84] text-[13.5px] text-slate-700 leading-relaxed text-left max-h-[280px] overflow-y-auto">
-              {parse(selected?.description ?? "")}
+              {renderHtml(selected?.description ?? "")}
             </div>
             <div className="flex items-center gap-4 mt-5 pt-4 border-t border-slate-100">
               <div className="w-[60px] aspect-[280/325] shrink-0 rounded-full overflow-hidden relative border border-slate-100 ring-2 ring-white shadow-md">
