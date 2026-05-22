@@ -311,18 +311,19 @@ export default function ProcurementSection({ initiatives }) {
                         <ul className="mb-[25px] 2xl:mb-[40px] 3xl:mb-[60px]">
                           {item.client && (
                             <li className="text-[14px] xl:text-[16px] 2xl:text-[18px] 3xl:text-[20px] text-[#000000] mb-[15px]">
-                              <span className="lg:px-[25px] uppercase">
+                              <span className="uppercase">
                                 {t("client")} :
                               </span>
-                              {item.client}
+                              <span className="px-[10px] ">{item.client}</span>
+                              
                             </li>
                           )}
                           {item.year && (
                             <li className="text-[14px] xl:text-[16px] 2xl:text-[18px] 3xl:text-[20px] text-[#000000] mb-[15px]">
-                              <span className="lg:px-[25px] uppercase">
+                              <span className=" uppercase">
                                 {t("year")} :
                               </span>
-                              <span dir="ltr">{item.year}</span>
+                              <span dir="ltr" className=" px-[10px] ">{item.year}</span>
                             </li>
                           )}
                         </ul>

@@ -17,7 +17,7 @@ import { useTranslations } from "next-intl";
 
 const CONTACT_BUTTON_CLASS = `
   text-[12px] 2xl:text-[16px] 3xl:text-[18px]
-  text-black capitalize font-medium
+  !text-black capitalize font-medium
   flex items-center group transition-all duration-300
   hover:text-[#299B8A] max-w-fit max-lg:mb-[25px]
 `;

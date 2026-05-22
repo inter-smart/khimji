@@ -31,7 +31,7 @@ export default function ContactSection({ sectors, cms, lang }) {
                 <Link
                   href={`tel:${cms?.phone_number1}`}
                   target="self"
-                  className="text-black pl-2 hover:text-[#2FDDC3] transition-colors duration-300"
+                  className="text-black pl-2 hover:text-[#2FDDC3] transition-colors duration-300 direction"
                 >
                   {cms?.phone_number1}
                 </Link>
@@ -41,7 +41,7 @@ export default function ContactSection({ sectors, cms, lang }) {
                 <Link
                   href={`tel:${cms?.phone_number2}`}
                   target="self"
-                  className="text-black pl-2 hover:text-[#2FDDC3] transition-colors duration-300"
+                  className="text-black pl-2 hover:text-[#2FDDC3] transition-colors duration-300 direction"
                 >
                   {cms?.phone_number2}
                 </Link>

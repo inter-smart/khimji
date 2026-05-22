@@ -160,7 +160,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
               </span>
             </Link>
 
-            <div className="hidden xl:flex lg:flex-1 lg:justify-center ml-[25px] xl:ml-[40px] 3xl:ml-[60px]">
+            <div className="hidden xl:flex lg:flex-1 lg:justify-center mx-[25px] xl:mx-[40px] 3xl:mx-[60px]">
               <HeaderNavigation
                 locale={lang}
                 pathname={pathname}

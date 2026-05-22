@@ -110,7 +110,7 @@ export default function VentureCard({ item, lang = "en" }) {
           max-sm:p-[35px_20px_75px]
           after:absolute after:top-0 after:left-0
           after:w-full after:h-full
-          after:bg-gradient-to-t after:from-black after:to-black/0
+          after:bg-gradient-to-t after:from-black after:to-black/30
           after:sm:hidden
         "
       >

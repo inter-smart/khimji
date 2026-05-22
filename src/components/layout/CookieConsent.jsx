@@ -42,7 +42,7 @@ export default function CookieConsent() {
                     animate={{ opacity: 1, y: 0, x: 0 }}
                     exit={{ opacity: 0, y: 50 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
-                    className="fixed bottom-6 left-6 z-[9999] w-[calc(100%-48px)] max-w-[480px] bg-white p-6 md:p-8 shadow-[0_10px_40px_-5px_rgba(0,0,0,0.1)] border border-gray-100"
+                    className="fixed bottom-6 left-6 z-[9999999] w-[calc(100%-48px)] max-w-[480px] bg-white p-6 md:p-8 shadow-[0_10px_40px_-5px_rgba(0,0,0,0.1)] border border-gray-100"
                 >
                     <h3 className="text-[#0B436A] text-[20px] md:text-[22px] font-normal uppercase tracking-wide mb-4">
                         {t("title")}

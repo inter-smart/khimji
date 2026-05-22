@@ -488,3 +488,8 @@ button:hover {
 p{
   line-height: 1.6;
 }
+
+.direction{
+  direction: ltr;
+  text-align: end;
+}

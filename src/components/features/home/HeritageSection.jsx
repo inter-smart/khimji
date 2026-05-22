@@ -316,8 +316,8 @@ export default function HeritageSection({ title, description, banner, banner_alt
                         custom={index}
                         variants={counterItemVariants}
                       >
-                        <Heading size="heading1" as="div" className="leading-none !mb-[8px]">
-                          <Counter end={Number(item.value)} suffix={item?.suffix} />
+                        <Heading size="heading1" as="div" className="leading-none !mb-[8px] direction">
+                          <Counter  end={Number(item.value)} suffix={item?.suffix} />
                         </Heading>
                         <motion.p
                           className="uppercase mb-0 leading-relaxed"
