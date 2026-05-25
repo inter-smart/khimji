@@ -141,7 +141,9 @@ export default function VentureCard({ item, lang = "en" }) {
           </h3>
 
           {/* DESCRIPTION */}
+
           <div className="relative z-10">
+          {item.description && (  
             <div
               className="
                 w-full
@@ -154,7 +156,11 @@ export default function VentureCard({ item, lang = "en" }) {
               {renderHtml(item.description, "max-sm:[&_*]:text-white")}
             </div>
 
+            )}
+
             {/* LOGOS */}
+                      {item.partners?.length>0 && (  
+
             <div
               className="
                 mt-[8px] sm:mt-[20px]
@@ -187,6 +193,7 @@ export default function VentureCard({ item, lang = "en" }) {
                 ))}
               </div>
             </div>
+                      )}
            <div className={`${CONTACT_BUTTON_CLASS} w-full flex mt-[20px]`}>
               <span>{t("view")}</span>
               <div className={ARROW_ICON_CLASS} variants={arrowVariants}>
