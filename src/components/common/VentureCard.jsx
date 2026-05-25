@@ -143,58 +143,58 @@ export default function VentureCard({ item, lang = "en" }) {
           {/* DESCRIPTION */}
 
           <div className="relative z-10">
-          {item.description && (  
-            <div
-              className="
+            {item.description && (
+              <div
+                className="
                 w-full
                 max-sm:bg-transparent
                 max-sm:backdrop-blur-[3px]
                 max-sm:border max-sm:border-white/20
                 p-[12px_8px] xs:p-[12px] sm:p-0
               "
-            >
-              {renderHtml(item.description, "max-sm:[&_*]:text-white")}
-            </div>
+              >
+                {renderHtml(item.description, "max-sm:[&_*]:text-white")}
+              </div>
 
             )}
 
             {/* LOGOS */}
-                      {item.partners?.length>0 && (  
+            {item.partners?.length > 0 && (
 
-            <div
-              className="
+              <div
+                className="
                 mt-[8px] sm:mt-[20px]
                 max-sm:bg-transparent
                 max-sm:backdrop-blur-[3px]
                 max-sm:border max-sm:border-white/20
                 w-full
               "
-            >
-              <div className="flex flex-wrap items-center justify-center gap-1 3xl:gap-4 max-sm:w-[85%] mx-auto p-[10px]">
-                {item?.partners?.map((partner, i) => (
-                  <div
-                    key={i}
-                    className="
+              >
+                <div className="flex flex-wrap items-center justify-center gap-1 3xl:gap-4 max-sm:w-[85%] mx-auto p-[10px]">
+                  {item?.partners?.map((partner, i) => (
+                    <div
+                      key={i}
+                      className="
                       flex items-center justify-center
                       w-[45px] h-[28px]
                       sm:w-[55px] sm:h-[32px]
                       2xl:w-[65px] 2xl:h-[38px]
                       3xl:w-[75px] 3xl:h-[45px]
                     "
-                  >
-                    <Image
-                      src={partner?.logo}
-                      alt={partner?.logo_alt_text}
-                      width={80}
-                      height={40}
-                      className="object-contain  min-w-[38px] max-w-[38px] 3xl:min-width-[50px] 3xl:max-w-[50px]"
-                    />
-                  </div>
-                ))}
+                    >
+                      <Image
+                        src={partner?.logo}
+                        alt={partner?.logo_alt_text}
+                        width={80}
+                        height={40}
+                        className="object-contain  min-w-[38px] max-w-[38px] 3xl:min-width-[50px] 3xl:max-w-[50px]"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-                      )}
-           <div className={`${CONTACT_BUTTON_CLASS} w-full flex mt-[20px]`}>
+            )}
+            <div className={`${CONTACT_BUTTON_CLASS} w-full flex mt-[20px]`}>
               <span>{t("view")}</span>
               <div className={ARROW_ICON_CLASS} variants={arrowVariants}>
                 <svg className="w-full h-full" viewBox="0 0 14 15">

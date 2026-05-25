@@ -13,7 +13,6 @@ import {
 import { Button } from "@/components/ui/button";
 
 export default function ProcurementSection({ initiatives }) {
-  const [isExpanded, setIsExpanded] = useState(false);
   const t = useTranslations("common");
 
   return (
@@ -236,23 +235,35 @@ export default function ProcurementSection({ initiatives }) {
 
             {/* ITEMS */}
             {group.initiatives?.map((item, index) => (
-              <div
-                key={item.id}
-                className={`flex flex-wrap -m-[7px] last-of-type:mb-0 mb-[25px] xl:mb-[40px] 2xl:mb-[50px] 3xl:mb-[70px]
-          ${
-            item.logo
-              ? index % 2 === 0
-                ? "lg:flex-row-reverse"
-                : ""
-              : index % 2 === 1
-                ? "lg:flex-row-reverse"
-                : ""
-          }`}
-              >
-                {/* IMAGE */}
-                <div className="w-full lg:w-1/2 p-[7px]">
-                  <div
-                    className={`w-full h-full p-[15px] 2xl:p-[20px_24px] rounded-[10px] bg-transparent
+              <InitiativeItem key={item.id} item={item} index={index} t={t} />
+            ))}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function InitiativeItem({ item, index, t }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div
+      className={`flex flex-wrap -m-[7px] last-of-type:mb-0 mb-[25px] xl:mb-[40px] 2xl:mb-[50px] 3xl:mb-[70px]
+        ${
+          item.logo
+            ? index % 2 === 0
+              ? "lg:flex-row-reverse"
+              : ""
+            : index % 2 === 1
+              ? "lg:flex-row-reverse"
+              : ""
+        }`}
+    >
+      {/* IMAGE */}
+      <div className="w-full lg:w-1/2 p-[7px]">
+        <div
+          className={`w-full h-full p-[15px] 2xl:p-[20px_24px] rounded-[10px] bg-transparent
             backdrop-blur-[20px] backdrop-saturate-[180%]
             shadow-[inset_5px_1px_33px_#f1f1f1,inset_3px_-3px_5px_#fafafa]
             ${
@@ -262,125 +273,114 @@ export default function ProcurementSection({ initiatives }) {
                   ? "aspect-[770/830]"
                   : "aspect-[800/570]"
             }`}
-                  >
-                    <div className="w-full h-full overflow-hidden rounded-[10px]">
-                      <Image
-                        src={item.image}
-                        className="w-full h-full object-cover"
-                        width={770}
-                        height={830}
-                        alt={item.image_alt_text || "initiative-image"}
-                      />
-                    </div>
-                  </div>
-                </div>
+        >
+          <div className="w-full h-full overflow-hidden rounded-[10px]">
+            <Image
+              src={item.image}
+              className="w-full h-full object-cover"
+              width={770}
+              height={830}
+              alt={item.image_alt_text || "initiative-image"}
+            />
+          </div>
+        </div>
+      </div>
 
-                {/* CONTENT */}
-                <div className="w-full lg:w-1/2 p-[7px]">
-                  <div
-                    className={`w-full h-full ${
-                      item.logo ? "flex items-center" : ""
-                    } p-[35px_25px] lg:p-[45px_35px] 2xl:p-[70px_40px_40px] rounded-[10px] bg-transparent
+      {/* CONTENT */}
+      <div className="w-full lg:w-1/2 p-[7px]">
+        <div
+          className={`w-full h-full ${
+            item.logo ? "flex items-center" : ""
+          } p-[35px_25px] lg:p-[45px_35px] 2xl:p-[70px_40px_40px] rounded-[10px] bg-transparent
             backdrop-blur-[20px] backdrop-saturate-[180%]
             shadow-[inset_5px_1px_3px_#f1f1f1]`}
-                  >
-                    <div className="w-full">
-                      <Heading
-                        as="div"
-                        size="heading3"
-                        className="!mb-[25px] 2xl:!mb-[30px] 3xl:!mb-[45px]"
-                      >
-                        {item.title}
-                      </Heading>
+        >
+          <div className="w-full">
+            <Heading
+              as="div"
+              size="heading3"
+              className="!mb-[25px] 2xl:!mb-[30px] 3xl:!mb-[45px]"
+            >
+              {item.title}
+            </Heading>
 
-                      {/* LOGO → ONLY FOR BUILDING */}
-                      {item.logo && (
-                        <div className="mb-[15px] xl:mb-[20px] 3xl:mb-[30px]">
-                          <Image
-                            src={item.logo}
-                            alt={item.logo_alt_text}
-                            width={150}
-                            height={60}
-                            className="h-[40px] xl:h-[50px] 3xl:h-[60px] w-auto object-contain"
-                          />
-                        </div>
-                      )}
-
-                      {/* CLIENT & YEAR → ONLY FOR PROCUREMENT */}
-                      {(item.client || item.year) && (
-                        <ul className="mb-[25px] 2xl:mb-[40px] 3xl:mb-[60px]">
-                          {item.client && (
-                            <li className="text-[14px] xl:text-[16px] 2xl:text-[18px] 3xl:text-[20px] text-[#000000] mb-[15px]">
-                              <span className="uppercase">
-                                {t("client")} :
-                              </span>
-                              <span className="px-[10px] ">{item.client}</span>
-                              
-                            </li>
-                          )}
-                          {item.year && (
-                            <li className="text-[14px] xl:text-[16px] 2xl:text-[18px] 3xl:text-[20px] text-[#000000] mb-[15px]">
-                              <span className=" uppercase">
-                                {t("year")} :
-                              </span>
-                              <span dir="ltr" className=" px-[10px] ">{item.year}</span>
-                            </li>
-                          )}
-                        </ul>
-                      )}
-
-                      {(() => {
-                        const sections = splitIntoSections(item.description);
-                        const isExpandable = sections.length > 1;
-                        const sectionStyles =
-                          "[&_strong]:text-[15px] [&_strong]:lg:text-[16px] [&_strong]:xl:text-[18px] [&_strong]:2xl:text-[20px] [&_strong]:3xl:text-[25px] [&_strong]:font-medium [&_strong]:bg-gradient-to-r [&_strong]:from-[#0B436A] [&_strong]:to-[#299B8A] [&_strong]:bg-clip-text [&_strong]:text-transparent [&_strong]:uppercase [&_strong]:tracking-wide [&_strong]:my-[14px] text-[14px] lg:text-[15px] xl:text-[16px] 2xl:text-[18px] text-gray-700 [&_p]:mb-4";
-                        const result = `<strong>${sections[0]?.title}</strong>${sections[0]?.description}`;
-                        if (!sections.length) return null; // <-- early exit if no section
-
-                        return (
-                          <>
-                            {!isExpanded && sections[0] && (
-                              <div>
-                                {renderHtml(
-                                  sections[0].title
-                                    ? `<strong>${sections[0].title}</strong>${sections[0].description}`
-                                    : sections[0].description,
-                                  sectionStyles,
-                                )}
-                              </div>
-                            )}
-
-                            {isExpanded &&
-                              sections.map((section, index) => (
-                                <div key={index}>
-                                  {renderHtml(
-                                    section.title
-                                      ? `<strong>${section.title}</strong>${section.description}`
-                                      : section.description,
-                                    sectionStyles,
-                                  )}
-                                </div>
-                              ))}
-
-                            {isExpandable && (
-                              <button
-                                onClick={() => setIsExpanded(!isExpanded)}
-                                className="text-[18px] text-[#000000] flex items-center gap-2 border border-[#000] w-fit h-[40px] px-4 mt-[30px]"
-                              >
-                                {isExpanded ? t("showLess") : t("showMore")}
-                              </button>
-                            )}
-                          </>
-                        );
-                      })()}
-                    </div>
-                  </div>
-                </div>
+            {/* LOGO → ONLY FOR BUILDING */}
+            {item.logo && (
+              <div className="mb-[15px] xl:mb-[20px] 3xl:mb-[30px]">
+                <Image
+                  src={item.logo}
+                  alt={item.logo_alt_text}
+                  width={150}
+                  height={60}
+                  className="h-[40px] xl:h-[50px] 3xl:h-[60px] w-auto object-contain"
+                />
               </div>
-            ))}
+            )}
+
+            {/* CLIENT & YEAR → ONLY FOR PROCUREMENT */}
+            {(item.client || item.year) && (
+              <ul className="mb-[25px] 2xl:mb-[40px] 3xl:mb-[60px]">
+                {item.client && (
+                  <li className="text-[14px] xl:text-[16px] 2xl:text-[18px] 3xl:text-[20px] text-[#000000] mb-[15px]">
+                    <span className="uppercase">{t("client")} :</span>
+                    <span className="px-[10px] ">{item.client}</span>
+                  </li>
+                )}
+                {item.year && (
+                  <li className="text-[14px] xl:text-[16px] 2xl:text-[18px] 3xl:text-[20px] text-[#000000] mb-[15px]">
+                    <span className=" uppercase">{t("year")} :</span>
+                    <span dir="ltr" className=" px-[10px] ">{item.year}</span>
+                  </li>
+                )}
+              </ul>
+            )}
+
+            {(() => {
+              const sections = splitIntoSections(item.description);
+              const isExpandable = sections.length > 1;
+              const sectionStyles =
+                "[&_strong]:text-[15px] [&_strong]:lg:text-[16px] [&_strong]:xl:text-[18px] [&_strong]:2xl:text-[20px] [&_strong]:3xl:text-[25px] [&_strong]:font-medium [&_strong]:bg-gradient-to-r [&_strong]:from-[#0B436A] [&_strong]:to-[#299B8A] [&_strong]:bg-clip-text [&_strong]:text-transparent [&_strong]:uppercase [&_strong]:tracking-wide [&_strong]:my-[14px] text-[14px] lg:text-[15px] xl:text-[16px] 2xl:text-[18px] text-gray-700 [&_p]:mb-4";
+              if (!sections.length) return null;
+
+              return (
+                <>
+                  {!isExpanded && sections[0] && (
+                    <div>
+                      {renderHtml(
+                        sections[0].title
+                          ? `<strong>${sections[0].title}</strong>${sections[0].description}`
+                          : sections[0].description,
+                        sectionStyles,
+                      )}
+                    </div>
+                  )}
+
+                  {isExpanded &&
+                    sections.map((section, index) => (
+                      <div key={index}>
+                        {renderHtml(
+                          section.title
+                            ? `<strong>${section.title}</strong>${section.description}`
+                            : section.description,
+                          sectionStyles,
+                        )}
+                      </div>
+                    ))}
+
+                  {isExpandable && (
+                    <button
+                      onClick={() => setIsExpanded(!isExpanded)}
+                      className="text-[18px] text-[#000000] flex items-center gap-2 border border-[#000] w-fit h-[40px] px-4 mt-[30px] cursor-pointer"
+                    >
+                      {isExpanded ? t("showLess") : t("showMore")}
+                    </button>
+                  )}
+                </>
+              );
+            })()}
           </div>
-        ))}
+        </div>
       </div>
-    </section>
+    </div>
   );
 }

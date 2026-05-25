@@ -43,10 +43,10 @@ export default function BlogPagination({ paginationData }) {
             asChild
             aria-disabled={current_page === 1}
             className={`w-[var(--width)] h-auto aspect-square p-0 flex items-center justify-center hover:bg-transparent transition-opacity duration-300 ${
-              current_page === 1 ? "opacity-30 cursor-not-allowed" : "hover:opacity-50 cursor-pointer"
+              current_page === 1 ? "opacity-30 pointer-events-none cursor-not-allowed" : "hover:opacity-50 cursor-pointer"
             }`}
           >
-            <Link href={getPageHref(current_page - 1)}>
+            <a href={getPageHref(current_page - 1)}>
               <Image
                 src="/images/previous_pagination.svg"
                 alt="previous pagination"
@@ -54,7 +54,7 @@ export default function BlogPagination({ paginationData }) {
                 height={35}
                 className="w-full h-full object-contain"
               />
-            </Link>
+            </a>
           </PaginationLink>
         </PaginationItem>
 
@@ -70,7 +70,7 @@ export default function BlogPagination({ paginationData }) {
                   : "text-[#919193] hover:text-[#2C8F87]"
               }`}
             >
-              <Link href={getPageHref(page)}>{String(page).padStart(2, "0")}</Link>
+              <a href={getPageHref(page)}>{String(page).padStart(2, "0")}</a>
             </PaginationLink>
           </PaginationItem>
         ))}
@@ -84,9 +84,9 @@ export default function BlogPagination({ paginationData }) {
               !has_more_pages || current_page === last_page ? "opacity-30 pointer-events-none" : "hover:opacity-50"
             }`}
           >
-            <Link href={getPageHref(current_page + 1)}>
+            <a href={getPageHref(current_page + 1)}>
               <Image src="/images/next_pagination.svg" alt="next pagination" width={35} height={35} className="w-full h-full object-contain" />
-            </Link>
+            </a>
           </PaginationLink>
         </PaginationItem>
       </PaginationContent>
