@@ -363,7 +363,7 @@ export default function VentureSection({
                     initial="rest"
                     animate="rest"
                   >
-                    <button onClick={() => handleViewAllClick("b2c")} className={`${CONTACT_BUTTON_CLASS} text-white`}>
+                    <button onClick={() => handleViewAllClick("b2c")} className={`${CONTACT_BUTTON_CLASS}`}>
                       <span>{t("viewAll")}</span>
                       <motion.div
                         className={ARROW_ICON_CLASS}
