@@ -3,26 +3,16 @@
 import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
 
 export default function ContactTabs({ sectors, contactData }) {
   const t = useTranslations("contact");
-  const { lang } = useParams();
   const [activeTab, setActiveTab] = useState(sectors?.[0]?.id);
 
   const handleTabChange = (value) => {
     setActiveTab(value);
   };
 
-  const processContent = (content) => {
-    if (!content) return "";
-    if (lang === "ar") {
-      return content.replace(/(هاتف|فاكس|الهاتف|الفاكس)\s*:\s*([^<]+)/g, (match, prefix, num) => {
-        return `${prefix}: <span dir="ltr">${num.trim()}</span>`;
-      });
-    }
-    return content;
-  };
+
 
   return (
     <Tabs value={activeTab} onValueChange={handleTabChange}>
@@ -60,7 +50,7 @@ export default function ContactTabs({ sectors, contactData }) {
                         </div>
                         {contact?.content && (
                           <div
-                            dangerouslySetInnerHTML={{ __html: processContent(contact.content) }}
+                            dangerouslySetInnerHTML={{ __html: contact.content }}
                             suppressHydrationWarning
                             className="text-[14px] 2xl:text-[16px] 3xl:text-[20px] leading-[1.4] font-normal text-black [&>p]:m-0 [&_p_strong]:text-[#00416B]"
                           />
