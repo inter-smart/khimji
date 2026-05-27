@@ -7,13 +7,21 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { BorderBeam } from "@/components/ui/border-beam";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { useEffect, useState, use, useTransition } from "react";
 import GlobalLoader from "@/components/layout/GlobalLoader";
 import { DEFAULT_COUNTRY } from "@/lib/server/constants";
 
+const LOCATION_AR_NAMES = {
+  "united-arab-emirates": "الإمارات العربية المتحدة",
+  "oman": "عُمان",
+  "india": "الهند",
+  "saudi-arabia-1": "المملكة العربية السعودية",
+};
+
 export default function LocationDropdown({ locationsPromise }) {
   const router = useRouter();
+  const { lang } = useParams();
   const locations = use(locationsPromise);
   const countries = locations?.data || [];
   const [selectedCountry, setSelectedCountry] = useState("");
@@ -62,26 +70,30 @@ export default function LocationDropdown({ locationsPromise }) {
               className="
                           relative
                           text-[16px] 3xs:text-[18px] lg:text-[12px] 2xl:text-[14px] 3xl:text-[18px] text-white sm:text-black font-medium max-w-full min-h-[30px]
-                           2xl:min-h-[35px] 3xl:min-h-[45px] px-3 sm:px-2 
+                           2xl:min-h-[35px] 3xl:min-h-[45px] px-3 sm:px-2
                           border border-white/5 sm:border-black min-w-[145px] lg:min-w-[90px] lxl:min-w-[155px] rounded-[40px] sm:rounded-[5px]
                           outline-none shadow-none focus:outline-none focus:ring-0 focus:shadow-none backdrop-blur-[2px]
-                          data-[state=open]:border-[#00095b]                         
+                          data-[state=open]:border-[#00095b]
                           data-[placeholder]:sm:text-black  !pr-[25px]
                            data-[placeholder]:text-white  [&>svg]:hidden
                           after:content-[''] after:absolute after:right-2 after:top-1/2 after:-translate-y-1/2  after:w-[12px] after:h-[12px]
                            after:bg-[url('/images/arrow.svg')] after:max-sm:invert-100 after:max-sm:brightness-100 after:bg-no-repeat after:bg-center
                         "
             >
-              <SelectValue placeholder="Location" />
+              <SelectValue placeholder={lang === "ar" ? "الموقع" : "Location"}>
+                {selectedCountry
+                  ? (lang === "ar" ? LOCATION_AR_NAMES[selectedCountry] : null) ?? countries.find((c) => c.slug === selectedCountry)?.name ?? ""
+                  : null}
+              </SelectValue>
             </SelectTrigger>
-            <SelectContent className="max-w-[180px] rounded-xl border border-gray-100 bg-white/95 backdrop-blur-md p-2 shadow-xl">
+            <SelectContent className="w-max rounded-xl border border-gray-100 bg-white/95 backdrop-blur-md p-2 shadow-xl">
               {countries.map((c) => (
-                <SelectItem 
-                  key={c.id} 
+                <SelectItem
+                  key={c.id}
                   value={c.slug}
                   className="cursor-pointer rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-all hover:bg-[#299b8a]/10 hover:text-[#299b8a] focus:bg-[#299b8a]/10 focus:text-[#299b8a] my-0.5"
                 >
-                  {c.name}
+                  {lang === "ar" ? (LOCATION_AR_NAMES[c.slug] ?? c.name) : c.name}
                 </SelectItem>
               ))}
             </SelectContent>

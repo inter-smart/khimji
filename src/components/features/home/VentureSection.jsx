@@ -268,7 +268,7 @@ export default function VentureSection({
                   <Swiper
                     dir={isRTL ? "rtl" : "ltr"}
                     modules={[Autoplay]}
-                    autoplay={{ delay: 0, disableOnInteraction: false }}
+                    autoplay={{ delay: 0, pauseOnMouseEnter: true }}
                     // modules={[Pagination]}
                     // pagination={{ clickable: true }}
                     speed={3500}
@@ -392,7 +392,7 @@ export default function VentureSection({
                   <Swiper
                     dir={isRTL ? "rtl" : "ltr"}
                     modules={[Autoplay]}
-                    autoplay={{ delay: 0, disableOnInteraction: false }}
+                    autoplay={{ delay: 0, pauseOnMouseEnter: true }}
                     speed={5000}
                     loop={true}
                     slidesPerView={2}
