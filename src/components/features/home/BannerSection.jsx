@@ -5,11 +5,11 @@ const BannerDesktop = dynamic(() => import("./BannerClient"), {
   ssr: true,
 });
 
-export default function BannerSection({ data }) {
+export default function BannerSection({ data, country }) {
   return (
     <div>
       <BannerMobile data={data} />
-      <BannerDesktop data={data} />
+      <BannerDesktop data={data} country={country} />
     </div>
   );
 }

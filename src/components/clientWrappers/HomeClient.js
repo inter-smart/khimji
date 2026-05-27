@@ -43,7 +43,7 @@ const HomeClient = ({ data,  lang, country }) => {
   return (
     <>
 
-      <BannerSection data={data?.sliders} key={country} />
+      <BannerSection data={data?.sliders} key={country} country={country} />
 
       {ventures?.length > 0 && (
         <VentureSection
