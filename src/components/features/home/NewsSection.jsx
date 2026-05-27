@@ -1,11 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
-import "swiper/css/navigation";
 import Image from "next/image";
 import { Heading } from "@/components/layout/Heading";
 import Link from "next/link";
@@ -17,9 +15,6 @@ export default function NewsSection({ lang, data }) {
     const tCommon = useTranslations("common");
     const isRTL = lang?.trim() === "ar";
     const news = data|| [];
-
-    const [prevEl, setPrevEl] = useState(null);
-    const [nextEl, setNextEl] = useState(null);
 
     if (!news.length) return null;
 
@@ -33,14 +28,9 @@ export default function NewsSection({ lang, data }) {
                     </Heading>
                 </div>
 
-            <div className="relative w-full z-20 px-4 md:px-12">
                 <Swiper
                     dir={isRTL ? "rtl" : "ltr"}
-                    modules={[Autoplay, Navigation]}
-                    navigation={{
-                        prevEl,
-                        nextEl,
-                    }}
+                    modules={[Autoplay]}
                     autoplay={{
                         delay: 100,
                         disableOnInteraction: false,
@@ -57,7 +47,7 @@ export default function NewsSection({ lang, data }) {
                         1024: { slidesPerView: 3 },
                         1280: { slidesPerView: 3 },
                     }}
-                    className="w-full"
+                    className="relative z-20"
                 >
                     {news.map((item) => (
                         <SwiperSlide key={item.id}>
@@ -97,27 +87,6 @@ export default function NewsSection({ lang, data }) {
                         </SwiperSlide>
                     ))}
                 </Swiper>
-
-                {/* Custom Navigation Arrows */}
-                <button
-                    ref={setPrevEl}
-                    className="news-prev absolute left-0 md:left-2 top-[50%] -translate-y-1/2 z-30 w-8 h-8 md:w-10 md:h-10 rounded-full border border-black/10 bg-white/95 backdrop-blur-sm shadow-sm text-black hover:bg-black hover:text-white transition-all flex items-center justify-center cursor-pointer"
-                    aria-label="Previous slide"
-                >
-                    <svg width="8" height="14" viewBox="0 0 8 14" fill="none" className="w-2 md:w-2.5 h-auto">
-                        <path d="M7 13L1 7L7 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                </button>
-                <button
-                    ref={setNextEl}
-                    className="news-next absolute right-0 md:right-2 top-[50%] -translate-y-1/2 z-30 w-8 h-8 md:w-10 md:h-10 rounded-full border border-black/10 bg-white/95 backdrop-blur-sm shadow-sm text-black hover:bg-black hover:text-white transition-all flex items-center justify-center cursor-pointer"
-                    aria-label="Next slide"
-                >
-                    <svg width="8" height="14" viewBox="0 0 8 14" fill="none" className="w-2 md:w-2.5 h-auto">
-                        <path d="M1 13L7 7L1 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                </button>
-            </div>
             </div>
         </section>
     )
