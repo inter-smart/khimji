@@ -4,6 +4,7 @@ import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 
 const BlogBanner = dynamic(() => import("@/components/features/blog/BlogBanner"));
 const BlogList = dynamic(() => import("@/components/features/blog/BlogList"));
@@ -29,6 +30,7 @@ export default async function Page({ params, searchParams }) {
   const resolvedParams = await params;
   const resollvedSearchParams = await searchParams;
   const { lang } = resolvedParams;
+  setRequestLocale(lang);
 
   const { data: cms, error, structuredData, lineScripts } = await getData("blogs?page=blogs", lang);
 
