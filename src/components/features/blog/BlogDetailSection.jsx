@@ -16,7 +16,6 @@ export default function BlogDetailSection({ data, lang="en" }) {
           <Image
             src={data?.featured_image || "/images/placeholder.png"}
             alt={data?.image_alt_text || "Blog Detail"}
-            title={data?.image_alt_text || "Blog Detail"}
             width={1640}
             height={590}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
