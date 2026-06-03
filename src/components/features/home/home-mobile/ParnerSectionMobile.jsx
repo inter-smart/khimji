@@ -11,7 +11,7 @@ export default function ParnerSectionMobile({brands}) {
                             <div className="w-full h-full flex items-center justify-center p-[5px]">
                                 <Image
                                     src={item?.logo}
-                                    alt={item?.logo_alt_text}
+                                    alt={item?.logo_alt_text === ""? "brand logo": item?.logo_alt_text}
                                     width={140}
                                     height={65}
                                     className="w-auto object-contain  max-w-[70px] min-w-[42px]  3xs:min-w-[50px] invert-0 brightness-0 saturate-0"

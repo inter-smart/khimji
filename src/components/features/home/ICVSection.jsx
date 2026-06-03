@@ -75,7 +75,7 @@ export default function ICVSection({ title, description, banner, banner_alt_text
                       {tHome("videoNotSupported")}
                     </video>
                   ) : (
-                    <Image src={item?.image} alt={item?.image_alt_text} width={500} height={500} className="w-full h-full object-cover" />
+                    <Image src={item?.image} alt={item?.image_alt_text || item?.title}  width={500} height={500} className="w-full h-full object-cover" />
                   )}
 
                   {/* Gradient overlay */}

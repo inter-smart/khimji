@@ -32,7 +32,7 @@ export default function VentureSectionmob({ title, banner, banner_alt_text, vent
     <section className="sm:hidden mt-[3px]">
       {isPending && <GlobalLoader />}
       <div className="w-full h-[290px] relative before:absolute before:left-0 before:content-[''] before:bottom-0 before:w-full before:h-full before:bg-black/40 before:z-1">
-        <Image src={banner} width="441" height="290" className="absolute top-0 left-0 w-full h-full object-cover" alt={banner_alt_text} />
+        <Image src={banner} width="441" height="290" className="absolute top-0 left-0 w-full h-full object-cover" alt={banner_alt_text} title={banner_alt_text} />
         <div className="container flex items-end h-full">
           <div className="relative w-full py-[25px] z-1">
             <div className="text-[43px] text-white font-medium uppercase">{title}</div>

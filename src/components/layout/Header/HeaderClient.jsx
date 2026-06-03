@@ -187,6 +187,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                     <Image
                       src="/images/langicon.png"
                       alt={languageData?.fullName}
+                      title={languageData?.fullName}
                       width={28}
                       height={20}
                       className=" object-cover w-[25px] h-[25px] 2xl:w-[28px] 2xl:h-[28px]"
@@ -202,7 +203,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                         className={`cursor-pointer rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition-all hover:bg-[#299b8a]/10 hover:text-[#299b8a] focus:bg-[#299b8a]/10 focus:text-[#299b8a] ${languageData?.code === lang.code ? "bg-[#299b8a]/5 text-[#299b8a]" : ""}`}
                       >
                         <div className="flex items-center gap-2 w-full">
-                          <Image src="/images/langicon.png" alt={lang.fullName} width={20} height={20} className=" object-cover w-[20px] h-[20px]" />
+                          <Image src="/images/langicon.png" alt={lang.fullName} title={lang.fullName} width={20} height={20} className=" object-cover w-[20px] h-[20px]" />
                           <span>{lang.fullName}</span>
                         </div>
                       </DropdownMenuItem>
@@ -363,7 +364,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                 className={`sm:hidden relative z-1
             ${isScrolled
                     ? "stickyHeader w-full"
-                    : " before:content-[''] before:block before:absolute before:top-0 before:start-0 before:w-full before:h-[250px] before:bg-gradient-to-b before:from-black before:to-black/0"
+                    : " before:content-[''] before:block before:absolute before:top-0 before:start-0 before:w-full before:h-[250px] before:bg-gradient-to-b before:from-black before:to-black/0 before:pointer-events-none"
                   }`}
               >
                 <div
@@ -397,6 +398,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                                 <Image
                                   src={languageData?.flag}
                                   alt={languageData?.fullName}
+                                  title={languageData?.fullName}
                                   width={17}
                                   height={17}
                                   className="rounded-full me-1 object-cover w-[17px] h-[17px]"
@@ -574,7 +576,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
           className={`sm:hidden relative z-1
             ${isScrolled
               ? "stickyHeader w-full"
-              : " before:content-[''] before:block before:absolute before:top-0 before:start-0 before:w-full before:h-[250px] before:bg-gradient-to-b before:from-black before:to-black/0"
+              : " before:content-[''] before:block before:absolute before:top-0 before:start-0 before:w-full before:h-[250px] before:bg-gradient-to-b before:from-black before:to-black/0 before:pointer-events-none"
             }`}
         >
           <div
@@ -607,6 +609,7 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                           <Image
                             src={languageData?.flag}
                             alt={languageData?.fullName}
+                            title={languageData?.fullName}
                             width={17}
                             height={17}
                             className="rounded-full me-1 object-cover w-[17px] h-[17px]"

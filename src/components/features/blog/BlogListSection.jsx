@@ -191,6 +191,7 @@ function CustomPagination({
             <Image
               src="/images/previous_pagination.svg"
               alt={t("previousPaginationAlt")}
+              title={t("previousPaginationAlt")}
               width={35}
               height={35}
               className="w-full h-full object-contain"
@@ -229,6 +230,7 @@ function CustomPagination({
             <Image
               src="/images/next_pagination.svg"
               alt={t("nextPaginationAlt")}
+              title={t("nextPaginationAlt")}
               width={35}
               height={35}
               className="w-full h-full object-contain"

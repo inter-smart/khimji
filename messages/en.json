@@ -56,7 +56,7 @@
     "fullName": "Full Name*",
     "phoneNumber": "Phone Number*",
     "email": "Email*",
-    "yourMessage": "Your Message*",
+    "yourMessage": "Your Message",
     "uploadResume": "Upload Resume",
     "maxFileSize": "Max file size 5 MB, PDF / DOC / DOCX Format",
     "iAgreeTo": "I agree to the",
@@ -118,9 +118,9 @@
     "acceptAll": "Accept All"
   },
   "notFound": {
-    "title": "Page Not Found",
-    "description": "Sorry, the page you are looking for doesn't exist or has been moved.",
-    "goHome": "Go Home",
+    "title": "Oops! Page Not Found",
+    "description": "The page you are looking for might have been removed, renamed, or is temporarily unavailable. Let’s get you back on track.",
+    "goHome": "Back to Home",
     "goBack": "Go Back"
   },
   "validation": {

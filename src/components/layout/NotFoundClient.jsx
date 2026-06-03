@@ -52,7 +52,7 @@ export default function NotFoundClient() {
                     transition={{ delay: 0.35 }}
                     className="text-[28px] sm:text-[36px] lg:text-[48px] font-semibold text-[#0B436A] mt-2"
                 >
-                    Oops! Page Not Found
+                    {t("title")}
                 </motion.h2>
 
                 {/* Description */}
@@ -62,9 +62,7 @@ export default function NotFoundClient() {
                     transition={{ delay: 0.5 }}
                     className="max-w-[650px] mx-auto mt-6 text-[15px] sm:text-[18px] leading-[1.8] text-[#5B5B5B]"
                 >
-                    The page you are looking for might have been removed,
-                    renamed, or is temporarily unavailable. Let’s get you back
-                    on track.
+                    {t("description")}
                 </motion.p>
 
                 {/* Buttons */}
@@ -75,11 +73,11 @@ export default function NotFoundClient() {
                     className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10"
                 >
                     <Link
-                        href="/"
+                        href={`/${locale}`}
                         className="group inline-flex items-center gap-2 px-7 py-4 rounded-full leading-1 bg-[#0B436A] text-white text-[15px] font-medium hover:bg-[#299B8A] transition-all duration-300 shadow-lg"
                     >
                         <Home className="w-5 h-5" />
-                        Back to Home
+                        {t("goHome")}
                     </Link>
 
                     <button
@@ -87,7 +85,7 @@ export default function NotFoundClient() {
                         className="group inline-flex items-center gap-2 px-7 py-4 rounded-full leading-1 border border-[#0B436A]/20 text-[#0B436A] text-[15px] font-medium hover:bg-[#0B436A] hover:text-white transition-all duration-300"
                     >
                         <ArrowLeft className="w-5 h-5" />
-                        Go Back
+                        {t("goBack")}
                     </button>
                 </motion.div>
 

@@ -1,9 +1,25 @@
 import parse from "html-react-parser";
 
 export function formatDate(dateStr, lang = "en") {
-  const locale = lang === "ar" ? "ar-SA-u-nu-latn" : "en-US";
-  
-  return new Date(`${dateStr}T00:00:00`).toLocaleDateString(locale, {
+  const date = new Date(`${dateStr}T00:00:00`);
+
+  if (lang === "ar") {
+    const formatter = new Intl.DateTimeFormat("ar-SA-u-nu-latn", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
+
+    const parts = formatter.formatToParts(date);
+
+    const month = parts.find((p) => p.type === "month")?.value;
+    const day = parts.find((p) => p.type === "day")?.value;
+    const year = parts.find((p) => p.type === "year")?.value;
+
+    return `${year}, ${day} ${month}`;
+  }
+
+  return date.toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",

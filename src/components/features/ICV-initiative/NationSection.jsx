@@ -27,7 +27,7 @@ export default function NationSection({
                             backdrop-blur-[20px] backdrop-saturate-[180%]
                             shadow-[inset_5px_1px_33px_#f1f1f1,inset_3px_-3px_5px_#fafafa]">
                             <div className="w-full h-full overflow-hidden rounded-[10px] ">
-                                <Image src={image} className="w-full h-full object-cover" width="630" height="350" alt={image_alt_text} />
+                                <Image src={image} className="w-full h-full object-cover" width="630" height="350" alt={image_alt_text} title={image_alt_text} />
                             </div>
                         </div>
                     </div>

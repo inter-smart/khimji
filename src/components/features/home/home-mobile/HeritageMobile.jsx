@@ -6,7 +6,7 @@ import { renderHtml } from "@/lib/helper";
 export default function HeritageMobile({ title, description, banner, banner_alt_text, metrics }) {
   return (
     <section className="relative py-[55px] before:absolute before:top-0 before:left-0 before:bg-black/20 before:content-[''] before:z-10 before:w-full before:h-full lg:hidden h-[820px]">
-      <Image src={banner} width="450" height="820" className="w-full h-full object-cover absolute top-0 left-0" alt={banner_alt_text} />
+      <Image src={banner} width="450" height="820" className="w-full h-full object-cover absolute top-0 left-0" alt={banner_alt_text} title={banner_alt_text} />
       <div className="container relative flex items-end h-full  z-20" >
         <div className="w-full">
           <div className="text-[43px] text-white font-medium uppercase">{title}</div>

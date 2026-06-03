@@ -36,7 +36,7 @@ export default function Brands({ brands, lang }) {
                   >
                     <Image
                       src={item?.logo}
-                      alt={item?.logo_alt_text}
+                      alt={item?.logo_alt_text === ""?  "brand logo": item?.logo_alt_text}
                       width={140}
                       height={65}
                       prop="true"
@@ -47,7 +47,7 @@ export default function Brands({ brands, lang }) {
                   <div>
                     <Image
                       src={item?.logo}
-                      alt={item?.logo_alt_text}
+                      alt={item?.logo_alt_text === ""?  "brand logo": item?.logo_alt_text}
                       width={140}
                       height={65}
                       prop="true"

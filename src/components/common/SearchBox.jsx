@@ -19,13 +19,14 @@ export default function SearchBox({ lang, country, businessType }) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const searchRef = useRef(null);
   const inputContainerRef = useRef(null);
+  const dropdownRef = useRef(null);
   const debounceRef = useRef(null);
   const resultRefs = useRef([]);
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
   const fetchSearchResults = useCallback(
     async (keyword) => {
       const trimmed = keyword.trim();
+      const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
       if (!trimmed) {
         setSearchResults([]);
@@ -167,7 +168,10 @@ export default function SearchBox({ lang, country, businessType }) {
   // Close search on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (searchRef.current && !searchRef.current.contains(event.target)) {
+      if (
+        searchRef.current && !searchRef.current.contains(event.target) &&
+        dropdownRef.current && !dropdownRef.current.contains(event.target)
+      ) {
         closeSearch();
       }
     };
@@ -240,7 +244,7 @@ export default function SearchBox({ lang, country, businessType }) {
 
       {/* Expandable Search Input */}
       <form
-        onSubmit={handleSearch}
+        onSubmit={handleKeyDown}
         className={`
                       absolute  ${isRTL ? "left-0" : "right-0"} flex items-center
                       transition-all duration-500 ease-out
@@ -349,6 +353,7 @@ export default function SearchBox({ lang, country, businessType }) {
         typeof window !== "undefined" &&
         createPortal(
           <div
+            ref={dropdownRef}
             style={{
               position: "fixed",
               top: dropdownPos.top,

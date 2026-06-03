@@ -111,6 +111,7 @@ export default function BoardDirectorSection({ title, directors }) {
                 <Image
                   src={selected?.image}
                   alt={selected?.image_alt_text || selected?.name || "Director"}
+                  title={selected?.image_alt_text || selected?.name || "Director"}
                   width={280}
                   height={325}
                   className="w-full h-full object-cover"
@@ -148,6 +149,7 @@ export default function BoardDirectorSection({ title, directors }) {
                 <Image
                   src={selected?.image}
                   alt={selected?.image_alt_text || selected?.name || "Director"}
+                  title={selected?.image_alt_text || selected?.name || "Director"}
                   width={280}
                   height={325}
                   className="w-full h-full object-cover"

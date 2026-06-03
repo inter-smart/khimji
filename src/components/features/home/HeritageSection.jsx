@@ -299,6 +299,7 @@ export default function HeritageSection({ title, description, banner, banner_alt
                         width={285}
                         height={350}
                         alt={image_alt}
+                        title={image_alt}
                       />
                     </motion.div>
                   </motion.div>

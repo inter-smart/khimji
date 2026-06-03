@@ -76,7 +76,7 @@ export default function VentureCard({ item, lang = "en" }) {
                 src={item?.image || "/images/placeholder.png"}
                 width={395}
                 height={465}
-                alt={item?.image_alt_text || ""}
+                alt={item?.image_alt_text || "Venture image"}
                 className="hidden sm:block w-full h-full object-cover"
               />
             )}
@@ -87,7 +87,7 @@ export default function VentureCard({ item, lang = "en" }) {
             src={item.image_mobile}
             width={395}
             height={465}
-            alt={item?.image_mobile_alt_text || ""}
+            alt={item?.image_mobile_alt_text || "Venture mobile image"}
             className="block sm:hidden w-full h-full object-cover"
           />
 
@@ -184,7 +184,8 @@ export default function VentureCard({ item, lang = "en" }) {
                     >
                       <Image
                         src={partner?.logo}
-                        alt={partner?.logo_alt_text}
+                        alt={partner?.logo_alt_text || "Partner logo"}
+                        title={partner?.logo_alt_text || "Partner logo"}
                         width={80}
                         height={40}
                         className="object-contain  min-w-[38px] max-w-[38px] 3xl:min-width-[50px] 3xl:max-w-[50px]"

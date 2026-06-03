@@ -2,6 +2,7 @@ import DynamicMeta from "@/components/layout/DynamicMeta";
 import { getData } from "@/lib/server/api";
 import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
+import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
@@ -41,6 +42,7 @@ export default async function Page({ params, searchParams }) {
   const resolvedParams = await params;
   const resollvedSearchParams = await searchParams;
   const { lang } = resolvedParams;
+  setRequestLocale(lang);
 
   const {
     data: cms,

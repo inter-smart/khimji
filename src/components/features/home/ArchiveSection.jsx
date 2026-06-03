@@ -555,6 +555,7 @@ export default function ArchiveSection({ archives, title, lang }) {
                       <Image
                         src={currentItem.image}
                         alt={currentItem.title}
+                        title={currentItem.title}
                         width="600"
                         height="300"
                         className="w-full h-full object-cover transition-all group-hover:scale-105"

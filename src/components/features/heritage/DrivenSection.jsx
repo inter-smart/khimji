@@ -33,6 +33,7 @@ export default function DrivenSection({ title, description, image, image_alt_tex
                 <Image
                   src={image || "/images/placeholder.png"}
                   alt={image_alt_text || "Image"}
+                  title={image_alt_text || "Image"}
                   width={620}
                   height={300}
                   className="w-full h-full rounded-[7px] 2xl:rounded-[10px] object-cover"

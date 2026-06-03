@@ -185,7 +185,7 @@ function ArchiveCard({ item, category }) {
               src={item?.image_mobile}
               width={395}
               height={465}
-              alt={item?.image_mobile_alt_text}
+              alt={item?.image_mobile_alt_text || "Archive image"}
               className="block sm:hidden w-full h-full object-cover"
             />
   
@@ -197,7 +197,7 @@ function ArchiveCard({ item, category }) {
         <div className="[--icon-size:30px] 2xl:[--icon-size:35px] 3xl:[--icon-size:40px] [--text-size:13px] sm:[--text-size:14px] 2xl:[--text-size:16px] 3xl:[--text-size:20px] w-full h-auto [&>*]:mb-[10px] sm:[&>*]:mb-[15px] 2xl:[&>*]:mb-[25px] 3xl:[&>*]:mb-[35px] [&>*]:last:mb-0 block">
           <div className="w-full h-auto flex items-center">
             <div className="w-[var(--icon-size)] h-auto aspect-square p-[8px] 2xl:p-[10px] bg-gradient-to-t from-[#0C456B]/20 to-[#299A8B]/20 rounded-full overflow-hidden block">
-              <Image src="/images/archive_date_icon.svg" alt={t("dateAlt")} width={15} height={15} className="w-full h-full object-contain" />
+              <Image src="/images/archive_date_icon.svg" alt={t("dateAlt")} title={t("dateAlt")} width={15} height={15} className="w-full h-full object-contain" />
             </div>
             <div className="text-[length:var(--text-size)] leading-[1] font-normal text-black w-[calc(100%-var(--icon-size))] pl-[10px]">
               {item?.event_date || "N/A"}
@@ -205,7 +205,7 @@ function ArchiveCard({ item, category }) {
           </div>
           <div className="w-full h-auto flex items-center">
             <div className="w-[var(--icon-size)] h-auto aspect-square p-[8px] 2xl:p-[10px] bg-gradient-to-t from-[#0C456B]/20 to-[#299A8B]/20 rounded-full overflow-hidden block">
-              <Image src="/images/archive_location_icon.svg" alt={t("locationAlt")} width={15} height={15} className="w-full h-full object-contain" />
+              <Image src="/images/archive_location_icon.svg" alt={t("locationAlt")} title={t("locationAlt")} width={15} height={15} className="w-full h-full object-contain" />
             </div>
             <div className="text-[length:var(--text-size)] leading-[1] font-normal text-black w-[calc(100%-var(--icon-size))] pl-[10px]">
               {item?.location || "N/A"}
@@ -213,7 +213,7 @@ function ArchiveCard({ item, category }) {
           </div>
           <div className="w-full h-auto flex items-center">
             <div className="w-[var(--icon-size)] h-auto aspect-square p-[8px] 2xl:p-[10px] bg-gradient-to-t from-[#0C456B]/20 to-[#299A8B]/20 rounded-full overflow-hidden block">
-              <Image src="/images/archive_award_icon.svg" alt={t("awardsAlt")} width={15} height={15} className="w-full h-full object-contain" />
+              <Image src="/images/archive_award_icon.svg" alt={t("awardsAlt")} title={t("awardsAlt")} width={15} height={15} className="w-full h-full object-contain" />
             </div>
             <div className="text-[length:var(--text-size)] leading-[1] font-normal text-black w-[calc(100%-var(--icon-size))] pl-[10px]">
               {item?.title || "N/A"}
@@ -222,7 +222,7 @@ function ArchiveCard({ item, category }) {
           {item?.link && (
             <Link href={item.link} target="_blank" rel="noopener noreferrer" className="w-full h-auto flex items-center">
               <div className="w-[var(--icon-size)] h-auto aspect-square p-[8px] 2xl:p-[10px] bg-gradient-to-t from-[#0C456B]/20 to-[#299A8B]/20 rounded-full overflow-hidden block">
-                <Image src="/images/archive_link_icon.svg" alt={t("linkAlt")} width={15} height={15} className="w-full h-full object-contain" />
+                <Image src="/images/archive_link_icon.svg" alt={t("linkAlt")} title={t("linkAlt")} width={15} height={15} className="w-full h-full object-contain" />
               </div>
               <div className="text-[length:var(--text-size)] leading-[1] font-normal text-black w-[calc(100%-var(--icon-size))] pl-[10px] hover:text-[#299A8B] transition-colors duration-300">
                 {item?.link || "View More"}
@@ -322,7 +322,7 @@ function CustomPagination({ paginationData, currentPage, onPageChange, pageNumbe
             }`}
             aria-disabled={currentPage === 1}
           >
-            <Image src="/images/previous_pagination.svg" alt={t("previousPaginationAlt")} width={35} height={35} className="w-full h-full object-contain" />
+            <Image src="/images/previous_pagination.svg" alt={t("previousPaginationAlt")} title={t("previousPaginationAlt")} width={35} height={35} className="w-full h-full object-contain" />
           </PaginationLink>
         </PaginationItem>
 
@@ -352,7 +352,7 @@ function CustomPagination({ paginationData, currentPage, onPageChange, pageNumbe
             }`}
             aria-disabled={!has_more_pages || currentPage === last_page}
           >
-            <Image src="/images/next_pagination.svg" alt={t("nextPaginationAlt")} width={35} height={35} className="w-full h-full object-contain" />
+            <Image src="/images/next_pagination.svg" alt={t("nextPaginationAlt")} title={t("nextPaginationAlt")} width={35} height={35} className="w-full h-full object-contain" />
           </PaginationLink>
         </PaginationItem>
       </PaginationContent>

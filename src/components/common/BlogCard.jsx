@@ -13,7 +13,7 @@ export default function BlogCard({page="blog", item, variant, lang }) {
             <div className="w-full h-auto aspect-[500/290] mb-[10px] rounded-[5px] 2xl:rounded-[10px] overflow-hidden block">
                 <Image
                     src={item?.thumbnail_image}
-                    alt={item?.image_alt_text}
+                    alt={item?.image_alt_text || "Blog thumbnail"}
                     width={500}
                     height={290}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
