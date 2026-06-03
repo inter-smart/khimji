@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
+import "swiper/css/navigation";
 import Image from "next/image";
 import { Heading } from "@/components/layout/Heading";
 import Link from "next/link";
@@ -17,9 +17,6 @@ export default function NewsSection({ lang, data }) {
 
     const isRTL = lang?.trim() === "ar";
     const news = data || [];
-
-    const prevRef = useRef(null);
-    const nextRef = useRef(null);
 
     if (!news.length) return null;
 
@@ -37,12 +34,8 @@ export default function NewsSection({ lang, data }) {
                         dir={isRTL ? "rtl" : "ltr"}
                         modules={[Autoplay, Navigation]}
                         navigation={{
-                            prevEl: prevRef.current,
-                            nextEl: nextRef.current,
-                        }}
-                        onBeforeInit={(swiper) => {
-                            swiper.params.navigation.prevEl = prevRef.current;
-                            swiper.params.navigation.nextEl = nextRef.current;
+                            prevEl: ".news-prev",
+                            nextEl: ".news-next",
                         }}
                         // autoplay={{
                         //     delay: 100,
@@ -108,7 +101,6 @@ export default function NewsSection({ lang, data }) {
                     </Swiper>
 
                     <button
-                        ref={prevRef}
                         className="news-prev absolute left-0 md:left-2 top-[50%] -translate-y-1/2 z-30 w-8 h-8 md:w-10 md:h-10 rounded-full border border-black/10 bg-white/95 backdrop-blur-sm shadow-sm text-black hover:bg-black hover:text-white transition-all flex items-center justify-center cursor-pointer"
                         aria-label="Previous slide"
                     >
@@ -130,7 +122,6 @@ export default function NewsSection({ lang, data }) {
                     </button>
 
                     <button
-                        ref={nextRef}
                         className="news-next absolute right-0 md:right-2 top-[50%] -translate-y-1/2 z-30 w-8 h-8 md:w-10 md:h-10 rounded-full border border-black/10 bg-white/95 backdrop-blur-sm shadow-sm text-black hover:bg-black hover:text-white transition-all flex items-center justify-center cursor-pointer"
                         aria-label="Next slide"
                     >
