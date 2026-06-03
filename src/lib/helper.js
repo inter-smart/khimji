@@ -38,7 +38,9 @@ export function renderHtml(htmlString, className = "") {
             delete domNode.attribs.class;
 
             if (domNode.name === "a") {
-              domNode.attribs.style = "text-decoration: underline;";
+              if (!domNode.attribs.href?.startsWith("tel:")) {
+                domNode.attribs.style = "text-decoration: underline;";
+              }
             }
 
           }
@@ -467,3 +469,62 @@ export const splitIntoSections = (html) => {
 
   return sections;
 };
+
+
+
+function linkifyPhoneWithCode(text) {
+  return text.replace(
+    /\(\+(\d{1,4})\)\s*([^\n<]+)/g,
+    (match, countryCode, rest) => {
+      const parts = rest.trim().split(/\s*\/\s*/);
+      const firstDigits = parts[0].replace(/\D/g, "");
+      if (firstDigits.length < 6) return match;
+
+      const linked = parts.map((part, index) => {
+        const partDigits = part.replace(/\D/g, "");
+        let digits = partDigits;
+        if (index > 0 && partDigits.length < firstDigits.length) {
+          digits = firstDigits.slice(0, firstDigits.length - partDigits.length) + partDigits;
+        }
+        const displayText = index === 0 ? `(+${countryCode}) ${part.trim()}` : part.trim();
+        return `<a href="tel:+${countryCode}${digits}">${displayText}</a>`;
+      });
+
+      return linked.join(" / ");
+    }
+  );
+}
+
+function linkifyStandalonePhones(text) {
+  // Match 7–10 digit standalone numbers (toll-free, local, etc.)
+  return text.replace(/\b(\d{7,10})\b/g, (match) => `<a href="tel:${match}">${match}</a>`);
+}
+
+function linkifyEmails(text) {
+  return text.replace(
+    /([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})/g,
+    (match) => `<a href="mailto:${match}">${match}</a>`
+  );
+}
+
+export function linkifyPhones(html) {
+  if (!html) return html;
+  // Split on existing anchor tags so we never double-link already-linked content
+  const parts = html.split(/(<a\b[^>]*>[\s\S]*?<\/a>)/);
+  return parts
+    .map((part, i) => {
+      if (i % 2 === 1) return part;
+      part = linkifyPhoneWithCode(part);
+      // Re-split to skip numbers inside <a> tags just created by linkifyPhoneWithCode
+      const subParts = part.split(/(<a\b[^>]*>[\s\S]*?<\/a>)/);
+      return subParts
+        .map((sub, j) => {
+          if (j % 2 === 1) return sub;
+          sub = linkifyStandalonePhones(sub);
+          sub = linkifyEmails(sub);
+          return sub;
+        })
+        .join("");
+    })
+    .join("");
+}

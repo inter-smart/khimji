@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useTranslations } from "next-intl";
+import { linkifyPhones, renderHtml } from "@/lib/helper";
+
 
 export default function ContactTabs({ sectors, contactData }) {
   const t = useTranslations("contact");
@@ -48,13 +50,11 @@ export default function ContactTabs({ sectors, contactData }) {
                         <div className="text-[16px] lg:text-[18px] 2xl:text-[22px] 3xl:text-[28px] leading-[1.3] font-normal text-[#0B436A] mb-[10px] sm:mb-[15px] 2xl:mb-[25px]">
                           {contact?.title}
                         </div>
-                        {contact?.content && (
-                          <div
-                            dangerouslySetInnerHTML={{ __html: contact.content }}
-                            suppressHydrationWarning
-                            className="text-[14px] 2xl:text-[16px] 3xl:text-[20px] leading-[1.4] font-normal text-black [&>p]:m-0 [&_p_strong]:text-[#00416B]"
-                          />
-                        )}
+                        {contact?.content &&
+                          renderHtml(
+                            linkifyPhones(contact.content),
+                            "text-[14px] 2xl:text-[16px] 3xl:text-[20px] leading-[1.4] font-normal text-black [&>p]:m-0 [&_p_strong]:text-[#00416B]"
+                          )}
                       </div>
                     </div>
                   ))}
