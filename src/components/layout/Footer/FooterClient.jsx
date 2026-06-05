@@ -110,7 +110,7 @@ export default function FooterClient({ siteSettingPromise, lang }) {
       {loading && <GlobalLoader />}
       <section className="w-full relative bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[30px] overflow-hidden max-sm:hidden  min-h-[520px] lg:min-h-[580px]">
         <div className="container">
-          <div className="min-h-[80px]">
+          <div className="min-h-[80px] xl:min-h-[105px] 3xl:min-h-[110px]">
             <Brands brands={brands} lang={lang} />
           </div>
           <div className="flex flex-wrap pb-[80px]">

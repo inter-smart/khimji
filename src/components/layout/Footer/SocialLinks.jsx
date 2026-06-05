@@ -33,48 +33,46 @@ export default function SocialLinks({ social_links, site_settings, lang }) {
 
         {/* SOCIAL ICONS */}
 
-{social_links?.length > 0 && (
-
-        <div className="mt-[25px] xl:mt-[30px] 2xl:mt-[35px] 3xl:mt-[50px]">
-          <div className="text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-white font-medium mb-[15px] 2xl:mb-[20px] 3xl:mb-[30px] uppercase">
-            {t("followUs")}
-          </div>
-          <div className="flex items-center -m-[10px] xl:-m-[14px] 2xl:-m-[17px] 3xl:-m-[22px]">
-            {
-              // map
-              social_links?.map((item, index) => (
-                <div
-                  key={index}
-                  className="p-[10px] xl:p-[14px] 2xl:p-[17px] 3xl:p-[22px]"
-                >
-                  <Link
-                    target="_blank"
-                    href={item?.url}
-                    className={SOCIAL_ICON_CLASS}
-                    rel="noopener noreferrer"
+        <div className="min-h-[60px] xl:min-h-[70px] 2xl:min-h-[85px]">
+          {social_links?.length > 0 && (
+            <div className="mt-[25px] xl:mt-[30px] 2xl:mt-[35px] 3xl:mt-[50px]">
+              <div className="text-[11px] xl:text-[13px] 2xl:text-[16px] 3xl:text-[20px] text-white font-medium mb-[15px] 2xl:mb-[20px] 3xl:mb-[30px] uppercase">
+                {t("followUs")}
+              </div>
+              <div className="flex items-center -m-[10px] xl:-m-[14px] 2xl:-m-[17px] 3xl:-m-[22px]">
+                {social_links?.map((item, index) => (
+                  <div
+                    key={index}
+                    className="p-[10px] xl:p-[14px] 2xl:p-[17px] 3xl:p-[22px]"
                   >
-                    <div
-                      className="w-[15px] 2xl:w-[20px] 3xl:w-[30px] h-[15px] 2xl:h-[20px] 3xl:h-[25px] flex items-center justify-center"
-                      aria-label={`Visit us on ${item?.name}`}
+                    <Link
+                      target="_blank"
+                      href={item?.url}
+                      className={SOCIAL_ICON_CLASS}
+                      rel="noopener noreferrer"
                     >
-                      {item?.icon && (
-                        <Image
-                          src={item?.icon}
-                          width={30}
-                          height={30}
-                          alt={item?.name}
-                          className="w-full object-contain"
-                          priority
-                        />
-                      )}
-                    </div>
-                  </Link>
-                </div>
-              ))
-            }
-          </div>
+                      <div
+                        className="w-[15px] 2xl:w-[20px] 3xl:w-[30px] h-[15px] 2xl:h-[20px] 3xl:h-[25px] flex items-center justify-center"
+                        aria-label={`Visit us on ${item?.name}`}
+                      >
+                        {item?.icon && (
+                          <Image
+                            src={item?.icon}
+                            width={30}
+                            height={30}
+                            alt={item?.name}
+                            className="w-full object-contain"
+                            priority
+                          />
+                        )}
+                      </div>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-)}
       </div>
     </div>
   );

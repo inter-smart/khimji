@@ -1,4 +1,3 @@
-
 export default function DynamicMeta({ structuredData = [], lineScripts = [] }) {
   return (
     <>

@@ -30,7 +30,7 @@ export default function FooterMobile({ data, lang, otherLinks }) {
   return (
     <>
       {loading && <GlobalLoader />}
-      <section className="bg-gradient-to-r from-[#0B436A] to-[#299B8A] py-[45px_30px] sm:hidden">
+      <section className="bg-gradient-to-r from-[#0B436A] to-[#299B8A] pt-[45px] pb-[30px] sm:hidden">
         <div className="container">
           <Link
             href={`/${lang}`}

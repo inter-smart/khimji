@@ -9,7 +9,7 @@ import Link from "next/link";
 export default function Brands({ brands, lang }) {
   return (
     <div className="flex flex-wrap pb-[30px] border-b border-white/20 mb-[65px] ">
-      <div className="w-full">
+      <div className="w-full h-[50px] xl:h-[75px] 3xl:h-[80px]">
         <Swiper
           dir={lang === "ar" ? "rtl" : "ltr"}
           modules={[Autoplay]}
@@ -24,7 +24,7 @@ export default function Brands({ brands, lang }) {
             1024: { slidesPerView: 10 },
             1280: { slidesPerView: 10 },
           }}
-          className="w-full h-[50px] xl:h-[75px] 3xl:h-[80px]"
+          className="w-full h-full"
         >
           {brands?.map((item, index) => (
             <SwiperSlide key={index}>
