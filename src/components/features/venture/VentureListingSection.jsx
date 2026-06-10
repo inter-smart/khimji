@@ -46,11 +46,8 @@ export default function VentureListingSection({ data, title, context }) {
         }
       );
 
-      // if (result?.status && result.data) {
       const data = await result.json();
       setVentures(data?.data ?? []);
-
-      // }
     } catch (err) {
       setError(err.message);
     } finally {

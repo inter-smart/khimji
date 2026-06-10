@@ -23,7 +23,7 @@ export async function generateMetadata({ params }) {
 
   // Use blog's own image or fallback
   const ogImage = featured_image || DefaultOgImage;
-  const { other, scripts } = parseOtherMeta(other_meta_tags);
+  const { other } = parseOtherMeta(other_meta_tags);
 
   return {
     title: meta_title || title || "Blog Post",
@@ -44,7 +44,6 @@ export async function generateMetadata({ params }) {
       ],
       type: "article",
       publishedTime: published_on ? published_on : undefined,
-      authors: undefined,
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blog/${slug}`,
     },
 
@@ -70,13 +69,10 @@ export default async function page({ params }) {
   const { slug, lang } = resolvedParams;
   const { data, error, structuredData, lineScripts } = await getData(`blog-details?slug=${slug}&type=blog`, lang);
 
-   if (!data || error) {
-     notFound();
+  if (!data || error) {
+    notFound();
+  }
 
-    }
-    
-      console.log("news", data)
-    
   return (
     <>
       <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />

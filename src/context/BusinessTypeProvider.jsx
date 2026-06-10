@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import GlobalLoader from "@/components/layout/GlobalLoader";
 
 export default function BusinessTypeProvider({ children }) {
-  const [ready, setReady] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -36,14 +34,10 @@ export default function BusinessTypeProvider({ children }) {
         document.cookie = `business_type=${businessTypes[0].slug}; path=/`;
         router.refresh();
       }
-
-      setReady(true);
     }
 
     initBusinessType();
   }, []);
-
-  // if (!ready) return <GlobalLoader />;
 
   return children;
 }

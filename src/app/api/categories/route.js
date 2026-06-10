@@ -11,9 +11,6 @@ const DUMMY_CATEGORIES = [
 
 export async function GET() {
   try {
-    // Simulate API delay (optional - remove in production)
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
     // Return response in the expected format
     return NextResponse.json({
       data: {

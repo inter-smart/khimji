@@ -574,9 +574,6 @@ export async function GET(request) {
     // Get paginated archives
     const paginatedArchives = filteredArchives.slice(startIndex, endIndex);
 
-    // Simulate API delay (optional - remove in production)
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
     // Return response in the expected format
     return NextResponse.json({
       data: {

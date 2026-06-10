@@ -29,9 +29,7 @@ export default function CookieConsent() {
     };
 
     const handleCustomise = () => {
-        // Logic for customize modal or settings page could go here
-        console.log("Customise cookies clicked");
-        // For now, treat as accept or implement specific logic
+        handleAccept();
     };
 
     return (

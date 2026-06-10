@@ -134,9 +134,6 @@ export async function GET(perPage, page) {
     // Get paginated archives
     const paginatedArchives = DUMMY_BLOG.slice(startIndex, endIndex);
 
-    // Simulate API delay (optional - remove in production)
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
     // Return response in the expected format
     return NextResponse.json({
       data: {
