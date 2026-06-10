@@ -36,9 +36,15 @@ export default function HeaderNavigation({
   const isEN = locale === "en";
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const [activeBusinessType, setActiveBusinessType] = useState(() => {
+    if (typeof window === "undefined") return null;
+    const match = document.cookie.split("; ").find((c) => c.startsWith("business_type="));
+    return match ? match.split("=")[1] : null;
+  });
 
   function handleVentureClick(businessType) {
     document.cookie = `business_type=${businessType}; path=/`;
+    setActiveBusinessType(businessType);
     window.dispatchEvent(
       new CustomEvent("businessTypeChanged", {
         detail: { business_type: businessType },

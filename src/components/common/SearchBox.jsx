@@ -13,7 +13,6 @@ export default function SearchBox({ lang, country, businessType }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isNavigating, setIsNavigating] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [dropdownPos, setDropdownPos] = useState({ top: 0, left: 0, width: 0 });
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -139,14 +138,6 @@ export default function SearchBox({ lang, country, businessType }) {
     }
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    const q = searchQuery.trim();
-    if (q) {
-      setIsNavigating(true);
-      closeSearch();
-    }
-  };
 
   const openSearch = (e) => {
     e.stopPropagation();
@@ -285,7 +276,7 @@ export default function SearchBox({ lang, country, businessType }) {
                           hover:scale-105 active:scale-95
                         `}
           >
-            {isLoading || isNavigating ? (
+            {isLoading ? (
               <svg
                 className="animate-spin"
                 width="18"

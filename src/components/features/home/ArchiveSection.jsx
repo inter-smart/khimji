@@ -548,8 +548,6 @@ export default function ArchiveSection({ archives, title, lang }) {
                         playsInline
                         autoPlay
                         preload="metadata"
-                      // onMouseEnter={(e) => e.currentTarget.play()}
-                      // onMouseLeave={(e) => e.currentTarget.pause()}
                       />
                     ) : (
                       <Image
