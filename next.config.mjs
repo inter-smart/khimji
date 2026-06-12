@@ -31,6 +31,14 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    optimizePackageImports: [
+      "lucide-react",
+      "@tabler/icons-react",
+      "framer-motion",
+      "motion",
+    ],
+  },
 
   async redirects() {
     return [
