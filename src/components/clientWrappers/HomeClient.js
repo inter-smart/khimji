@@ -9,24 +9,24 @@ const BannerSection = dynamic(
 
 const VentureSection = dynamic(
   () => import("@/components/features/home/VentureSection"),
-  { ssr: false },
+  { ssr: true },
 );
 const HeritageSection = dynamic(
   () => import("@/components/features/home/HeritageSection"),
-  { ssr: false },
+  { ssr: true },
 );
 const NewsSection = dynamic(
   () => import("@/components/features/home/NewsSection"),
-  { ssr: false },
+  { ssr: true },
 );
 
 const ICVSection = dynamic(
   () => import("@/components/features/home/ICVSection"),
-  { ssr: false },
+  { ssr: true },
 );
 const ParnerSectionMobile = dynamic(
   () => import("@/components/features/home/home-mobile/ParnerSectionMobile"),
-  { ssr: false },
+  { ssr: true },
 );
 
 const HomeClient = ({ data,  lang, country }) => {

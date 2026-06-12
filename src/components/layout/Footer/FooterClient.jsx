@@ -29,7 +29,7 @@ const otherLinks = [
   },
   {
     label: "ICV Initiatives",
-    label_ar: "استثمارات ICV",
+    label_ar: "مبادرة القيمة المحلية المضافة",
     link: "icv-initiatives",
   },
   {
