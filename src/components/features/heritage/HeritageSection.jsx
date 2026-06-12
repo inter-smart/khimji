@@ -86,13 +86,19 @@ export default function HeritageSection({ title, timelines, data, lang }) {
     setcirclePosition(newPositions);
   }, [emblaApi, selectedIndex]);
 
+  const rafRef = useRef(null);
+
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
   }, [emblaApi]);
 
   const onScroll = useCallback(() => {
-    updatecirclePosition();
+    if (rafRef.current) return;
+    rafRef.current = requestAnimationFrame(() => {
+      updatecirclePosition();
+      rafRef.current = null;
+    });
   }, [updatecirclePosition]);
 
   useEffect(() => {
@@ -107,7 +113,7 @@ export default function HeritageSection({ title, timelines, data, lang }) {
     emblaApi.on("reInit", updatecirclePosition);
     emblaApi.on("resize", updatecirclePosition);
 
-    setTimeout(updatecirclePosition, 100);
+    const timer = setTimeout(updatecirclePosition, 100);
 
     return () => {
       emblaApi.off("select", onSelect);
@@ -115,6 +121,9 @@ export default function HeritageSection({ title, timelines, data, lang }) {
       emblaApi.off("reInit", onSelect);
       emblaApi.off("reInit", updatecirclePosition);
       emblaApi.off("resize", updatecirclePosition);
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
     };
   }, [emblaApi, onSelect, onScroll, updatecirclePosition]);
   return (

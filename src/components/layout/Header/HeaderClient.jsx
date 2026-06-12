@@ -108,19 +108,26 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
   }, [currentPath]);
 
   useEffect(() => {
+    let rafId = null;
     const updateHeaderHeight = () => {
       // Only update the height when not scrolled to avoid measurement changes when sticky
       if (headerRef.current && !isScrolled) {
         const height = headerRef.current.offsetHeight;
         if (height > 0) {
-          document.documentElement.style.setProperty("--header-height", `${height}px`);
+          cancelAnimationFrame(rafId);
+          rafId = requestAnimationFrame(() => {
+            document.documentElement.style.setProperty("--header-height", `${height}px`);
+          });
         }
       }
     };
 
     updateHeaderHeight();
     window.addEventListener("resize", updateHeaderHeight);
-    return () => window.removeEventListener("resize", updateHeaderHeight);
+    return () => {
+      window.removeEventListener("resize", updateHeaderHeight);
+      cancelAnimationFrame(rafId);
+    };
   }, [isScrolled]);
 
   const languageData = LANGUAGES[lang];

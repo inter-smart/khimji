@@ -6,7 +6,10 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
-const CareerSection = dynamic(() => import("@/components/features/career/CareerSection"));
+const CareerSection = dynamic(
+  () => import("@/components/features/career/CareerSection"),
+  { ssr: false }
+);
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
