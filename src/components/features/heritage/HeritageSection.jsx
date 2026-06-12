@@ -113,7 +113,7 @@ export default function HeritageSection({ title, timelines, data, lang }) {
     emblaApi.on("reInit", updatecirclePosition);
     emblaApi.on("resize", updatecirclePosition);
 
-    setTimeout(updatecirclePosition, 100);
+    const timer = setTimeout(updatecirclePosition, 100);
 
     return () => {
       emblaApi.off("select", onSelect);

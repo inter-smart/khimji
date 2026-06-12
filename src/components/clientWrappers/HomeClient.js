@@ -9,24 +9,24 @@ const BannerSection = dynamic(
  
 const VentureSection = dynamic(
   () => import("@/components/features/home/VentureSection"),
-  { ssr: true },
+  { ssr: false },
 );
 const HeritageSection = dynamic(
   () => import("@/components/features/home/HeritageSection"),
-  { ssr: true },
+  { ssr: false },
 );
 const NewsSection = dynamic(
   () => import("@/components/features/home/NewsSection"),
-  { ssr: true },
+  { ssr: false },
 );
  
 const ICVSection = dynamic(
   () => import("@/components/features/home/ICVSection"),
-  { ssr: true },
+  { ssr: false },
 );
 const ParnerSectionMobile = dynamic(
   () => import("@/components/features/home/home-mobile/ParnerSectionMobile"),
-  { ssr: true },
+  { ssr: false },
 );
 
 // Helper component to lazy load offscreen sections

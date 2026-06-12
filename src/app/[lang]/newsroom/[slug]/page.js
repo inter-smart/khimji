@@ -6,7 +6,10 @@ import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 
 const BlogDetailSection = dynamic(() => import("@/components/features/blog/BlogDetailSection"));
-const RelatedBlogSection = dynamic(() => import("@/components/features/blog/RelatedBlogSection"));
+const RelatedBlogSection = dynamic(
+  () => import("@/components/features/blog/RelatedBlogSection"),
+  { ssr: false }
+);
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const { slug, lang } = resolvedParams;

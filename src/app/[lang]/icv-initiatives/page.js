@@ -11,9 +11,11 @@ const NationSection = dynamic(
 );
 const ProcurementSection = dynamic(
   () => import("@/components/features/ICV-initiative/ProcurementSection"),
+  { ssr: false }
 );
 const QuestionSectionClient = dynamic(
   () => import("@/components/features/ICV-initiative/QuestionSectionClient"),
+  { ssr: false }
 );
 
 export async function generateMetadata({ params }) {

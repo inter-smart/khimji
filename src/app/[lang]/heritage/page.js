@@ -11,9 +11,11 @@ const DrivenSection = dynamic(
 );
 const HeritageSection = dynamic(
   () => import("@/components/features/heritage/HeritageSection"),
+  { ssr: false }
 );
 const BoardDirectorSection = dynamic(
   () => import("@/components/features/heritage/BoardDirectorSection"),
+  { ssr: false }
 );
 
 export async function generateMetadata({ params }) {
