@@ -1,21 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
-
-const textVariants = {
-  offscreen: {
-    y: 60,
-    opacity: 0,
-  },
-  onscreen: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "easeOuteaseOut",
-      bounce: 0.4,
-      duration: 0.8,
-    },
-  },
-};
+import React, { useState, useEffect, useRef } from "react";
 
 const sizes = {
   text1:
@@ -30,18 +14,43 @@ const sizes = {
 
 const Text = ({ children, className = "", as, size, ...restProps }) => {
   const Component = as || "p";
+  const [isInView, setIsInView] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.05,
+        rootMargin: "0px 0px -30px 0px",
+      }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
-    <motion.div
-      variants={textVariants}
-      initial="offscreen"
-      whileInView="onscreen"
-      viewport={{ once: true }}
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out transform ${
+        isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[30px]"
+      }`}
     >
       <Component className={`${className} ${sizes[size]} `} {...restProps}>
         {children}
       </Component>
-    </motion.div>
+    </div>
   );
 };
 
