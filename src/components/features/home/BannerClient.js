@@ -10,8 +10,15 @@ const ARROW_ICON_CLASS =
   "w-[14px] h-[14px] flex items-center mt-[5px] mx-[15px] transition-transform duration-300 group-hover:translate-x-1";
 
 export default function BannerClient({ data, country }) {
+  const posterUrl = data?.[0]?.video_thumbnail_image || data?.[0]?.image;
+
   return (
     <div>
+      {posterUrl && (
+        <link rel="preload" as="image" href={posterUrl} fetchPriority="high" />
+      )}
+      <link rel="preload" as="image" href="/images/clipImg.avif" type="image/avif" />
+
       {country === "oman" ? (
         <section className="py-[60px_40px] xl:py-[60px_40px] 2xl:py-[80px_40px] 3xl:py-[145px_60px] max-sm:hidden relative z-0">
           <div className="w-[120px] sm:w-[180px] 2xl:w-[225px] 3xl:w-[280px] h-auto aspect-square bg-[#2FDDC3] rounded-full blur-[50px] sm:blur-[80px] 2xl:blur-[120px] pointer-events-none absolute -z-1 inset-[0_auto_auto_-2%]"></div>
@@ -113,14 +120,14 @@ export default function BannerClient({ data, country }) {
                     />
                   </div>
                   <video
-                    preload="none"
+                    preload="auto"
                     autoPlay
                     loop
                     muted
                     playsInline
-                    poster={data[0]?.video_thumbnail_image ? data[0]?.video_thumbnail_image : data[0]?.image}
+                    poster={posterUrl}
                     className="w-full h-full object-cover
-                    [mask-image:url('/images/krBg.avif')]
+                    [mask-image:url('/images/clipImg.avif')]
                     [mask-repeat:no-repeat]
                     [mask-position:center]
                     [mask-size:cover]
@@ -141,12 +148,12 @@ export default function BannerClient({ data, country }) {
         <section className="relative w-full h-[calc(100vh-var(--header-height,108px))] max-sm:hidden after:absolute after:content-[''] after:top-0 after:bottom-0 after:bg-gradient-to-t after:from-black/70 after:from-[40%] after:to-transparent after:w-full after:h-full">
           <div className="w-full h-full">
             <video
-              preload="none"
+              preload="auto"
               autoPlay
               loop
               muted
               playsInline
-              poster={data[0]?.video_thumbnail_image ? data[0]?.video_thumbnail_image : data[0]?.image}
+              poster={posterUrl}
               className="w-full h-full object-cover "
             >
               <source src={data[0]?.video} type="video/mp4" />
