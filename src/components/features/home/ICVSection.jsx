@@ -54,7 +54,7 @@ export default function ICVSection({ title, description, banner, banner_alt_text
             speed={2500}
             loop={true}
             slidesPerView={2}
-            spaceBetween={25}
+            spaceBetween={25} 
             breakpoints={{
               640: { slidesPerView: 2 },
               768: { slidesPerView: 2.5 },
