@@ -321,7 +321,7 @@ export default function HeritageSection({ title, description, banner, banner_alt
                           <Counter  end={Number(item.value)} suffix={item?.suffix} />
                         </Heading>
                         <motion.p
-                          className="uppercase mb-0 leading-relaxed"
+                          className="uppercase mb-0 leading-relaxed lg:text-[11px] 2xl:text-[14px] 3xl:text-[16px]"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ delay: 0.4 + index * 0.2, duration: 0.6 }}

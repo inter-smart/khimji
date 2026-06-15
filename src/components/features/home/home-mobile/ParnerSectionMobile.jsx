@@ -7,7 +7,7 @@ export default function ParnerSectionMobile({brands}) {
             <div className="container">
                 <div className="flex flex-wrap -m-[5px]">
                     {brands?.map((item, index) => (
-                        <div className="flex-grow-1 p-[5px]" key={index}>
+                        <div className="flex-grow-1 w-1/4 p-[5px] border border-[rgba(0,0,0,0.05)]" key={index}>
                             <div className="w-full h-full flex items-center justify-center p-[5px]">
                                 <Image
                                     src={item?.logo}

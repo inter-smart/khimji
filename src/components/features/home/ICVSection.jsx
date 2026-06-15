@@ -15,7 +15,7 @@ import { useTranslations } from "next-intl";
 const ICVinitiativeMobile = dynamic(() => import("./home-mobile/ICVinitiativeMobile"));
 
 export default function ICVSection({ title, description, banner, banner_alt_text, initiatives, lang }) {
-  const isRTL = lang?.trim() === "ar";
+  // const isRTL = lang?.trim() === "ar";
   const tHome = useTranslations("home");
 
 
@@ -30,13 +30,9 @@ export default function ICVSection({ title, description, banner, banner_alt_text
   return (
     <>
       <section
-        className='relative z-0 py-[45px] 2xl:py-[80px_50px] 3xl:py-[100px_70px] bg-[#FAFAFA] overflow-hidden max-sm:hidden
-        after:absolute after:content-[""] after:left-0 after:top-0 after:w-full after:h-[170px] after:md:h-[185px] after:xl:h-[200px] after:2xl:h-[240px] after:3xl:h-[300px] after:rounded-[0_0_100%_100%] after:scale-[1.57] after:bg-[#FAFAFA] after:z-10
-        before:absolute before:content-[""] before:left-0 before:bottom-0 before:w-full before:h-[100px] before:xl:h-[140px] before:2xl:h-[160px] before:3xl:h-[180px] before:rounded-[100%_100%_0_0] before:scale-[1.15] before:bg-[#FAFAFA] before:z-10
-        '
-      >
-        <div className="container">
-          <div className="max-w-[420px] 2xl:max-w-[450px] 3xl:max-w-[600px] m-auto text-center relative z-20">
+        className='relative z-0 py-[45px] 2xl:py-[80px_50px] 3xl:py-[100px_70px] bg-[#FAFAFA] overflow-hidden max-sm:hidden'  >
+        <div className="container relative">
+          <div className="max-w-[420px] 2xl:max-w-[450px] 3xl:max-w-[600px] m-auto text-center relative z-20 absolute top-0 left-0 right-0">
             <Heading size="heading1" as="h2" className="mb-[30px]">
               {title}
             </Heading>
@@ -48,10 +44,11 @@ export default function ICVSection({ title, description, banner, banner_alt_text
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
           viewport={{ once: true }}
-          className="relative z-0"
+          className={`relative z-0  after:absolute after:content-[""] after:left-0 after:top-0 after:lg:top-[-70px] after:w-full after:h-[50px] after:lg:h-[100px] after:xl:h-[130px]   after:rounded-[0_0_100%_100%] after:scale-[1.15] after:bg-[#FAFAFA] after:z-10
+        before:absolute before:content-[""] before:left-0 before:bottom-0 before:lg:bottom-[-70px] before:w-full before:h-[50px] before:lg:h-[100px] before:xl:h-[130px] before:rounded-[100%_100%_0_0] before:scale-[1.15] before:bg-[#FAFAFA] before:z-10 `}
         >
           <Swiper
-            dir={isRTL ? "rtl" : "ltr"}
+            // dir={isRTL ? "rtl" : "ltr"}
             modules={[Autoplay]}
             autoplay={{ delay: 0, disableOnInteraction: false }}
             speed={2500}
