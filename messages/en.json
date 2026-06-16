@@ -50,7 +50,9 @@
     "previousAriaLabel": "Previous",
     "nextAriaLabel": "Next",
     "previousPaginationAlt": "previous pagination",
-    "nextPaginationAlt": "next pagination"
+    "nextPaginationAlt": "next pagination",
+    "related_news": "RELATED NEWS & EVENTS",
+    "related_blogs": "RELATED BLOGS"
   },
   "career": {
     "fullName": "Full Name*",

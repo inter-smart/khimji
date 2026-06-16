@@ -4,12 +4,9 @@ import { getData } from "@/lib/server/api";
 import { DefaultOgImage } from "@/lib/server/constants";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
+import RelatedBlogSection from "@/components/features/blog/RelatedBlogSection";
 
 const BlogDetailSection = dynamic(() => import("@/components/features/blog/BlogDetailSection"));
-const RelatedBlogSection = dynamic(
-  () => import("@/components/features/blog/RelatedBlogSection"),
-  { ssr: false }
-);
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const { slug, lang } = resolvedParams;
@@ -81,7 +78,7 @@ export default async function page({ params }) {
     <>
       <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />
       <BlogDetailSection data={data} lang={lang}/>
-      {data?.related_blogs?.length > 0 && <RelatedBlogSection data={data?.related_blogs} lang={lang} />}
+      {data?.related_blogs?.length > 0 && <RelatedBlogSection data={data?.related_blogs} lang={lang} variant="news" />}
     </>
   );
 }

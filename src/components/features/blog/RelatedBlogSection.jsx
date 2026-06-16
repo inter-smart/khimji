@@ -4,8 +4,12 @@ import { Heading } from "@/components/layout/Heading";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
+import { useTranslations } from "next-intl";
 
-export default function RelatedBlogSection({ data, lang }) {
+
+
+export default function RelatedBlogSection({ data, lang, variant }) {
+    const t = useTranslations("blog")
     return (
         <section className="w-full h-auto py-[5px_40px] sm:py-[10px_60px] lg:py-[10px_80px] 2xl:py-[10px_100px] 3xl:py-[10px_125px] block">
             <div className="container">
@@ -14,7 +18,7 @@ export default function RelatedBlogSection({ data, lang }) {
                     size="heading1"
                     className="!mb-[20px] sm:!mb-[35px] 2xl:!mb-[40px] 3xl:!mb-[60px]"
                 >
-                    RELATED NEWS & EVENTS
+                    { variant === "news" ? t("related_news") : t("related_blogs")}
                 </Heading>
                 <Swiper
                     modules={[Autoplay]}
@@ -45,7 +49,7 @@ export default function RelatedBlogSection({ data, lang }) {
                 >
                     {data?.map((item, index) => (
                         <SwiperSlide key={index}>
-                            <BlogCard page={"blog_details"} item={item} lang={lang} />
+                            <BlogCard variant={variant} page={"blog_details"} item={item} lang={lang} />
                         </SwiperSlide>
                     ))}
                 </Swiper>

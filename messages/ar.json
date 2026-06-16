@@ -50,7 +50,9 @@
     "previousAriaLabel": "السابق",
     "nextAriaLabel": "التالي",
     "previousPaginationAlt": "الصفحة السابقة",
-    "nextPaginationAlt": "الصفحة التالية"
+    "nextPaginationAlt": "الصفحة التالية",
+    "related_news": "الأخبار والحدثات المرتبطة",
+    "related_blogs": "المدونات المرتبطة"
   },
   "career": {
     "fullName": "الاسم الكامل*",
