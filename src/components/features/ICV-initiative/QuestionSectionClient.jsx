@@ -1,6 +1,10 @@
 "use client";
+
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
-import QuestionSection from "@/components/features/ICV-initiative/QuestionSection";
+const QuestionSection = dynamic(
+  () => import("@/components/features/ICV-initiative/QuestionSection"),
+  { ssr: false }
+);
 
 export default function QuestionSectionClient({ intiatives_cms }) {
   return (

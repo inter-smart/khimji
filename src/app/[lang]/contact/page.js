@@ -8,9 +8,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
 const ContactSection = dynamic(
-  () => import("@/components/features/contact/ContactSection"),
-  { ssr: false }
-);
+  () => import("@/components/features/contact/ContactSection"));
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
