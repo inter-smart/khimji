@@ -44,7 +44,7 @@ export default function NewsSection({ lang, data }) {
                         // }}
                         speed={3000}
                         loop={true}
-                        slidesPerView={2}
+                        slidesPerView={1}
                         spaceBetween={15}
                         breakpoints={{
                             640: { slidesPerView: 2 },
