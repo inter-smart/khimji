@@ -268,66 +268,6 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                       <SheetDescription asChild>
                         <div>
                           <Accordion type="single" collapsible>
-                            {/* <AccordionItem
-                        value="item-1"
-                        className="border-b border-[#f4f4f4]"
-                      >
-                        <Link
-                          href="/"
-                          className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
-                          aria-label="menuLink"
-                        >
-                          <span>Home</span>
-                        </Link>
-                      </AccordionItem>
-                      <AccordionItem
-                        value="item-2"
-                        className="border-b border-[#f4f4f4]"
-                      >
-                        <Link
-                          href="/heritage"
-                          className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
-                          aria-label="menuLink"
-                        >
-                          <span>About Us</span>
-                        </Link>
-                      </AccordionItem>
-                      <AccordionItem
-                        value="item-3"
-                        className="border-b border-[#f4f4f4]"
-                      >
-                        <AccordionTrigger className="text-[12px] font-normal text-black py-[8px] w-full flex items-center  ">
-                          <Link href="/service" className="flex items-center">
-                            <span>Services</span>
-                          </Link>
-                        </AccordionTrigger>
-                        <AccordionContent className="text-[12px] bg-[#671448] p-[10px] "></AccordionContent>
-                      </AccordionItem>
-                      <AccordionItem
-                        value="item-4"
-                        className="border-b border-[#f4f4f4]"
-                      >
-                        <Link
-                          href="/consultants"
-                          className="text-[12px] font-normal text-black py-[8px] w-full flex items-center  "
-                        >
-                          <span>Consultants</span>
-                        </Link>
-                      </AccordionItem>
-
-                      <AccordionItem
-                        value="item-5"
-                        className="border-b border-[#f4f4f4]"
-                      >
-                        <Link
-                          href="/news"
-                          className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
-                          aria-label="menuLink"
-                        >
-                          <span>News & Insights </span>
-                        </Link>
-                      </AccordionItem> */}
-
                             {navMenu?.map((item, index) => (
                               item.hasSubmenu ? (
                                 <AccordionItem key={index} value={`item-${index}`} className="border-b border-[#f4f4f4]">
@@ -474,66 +414,6 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                       <SheetDescription asChild>
                         <div>
                           <Accordion type="single" collapsible>
-                            {/* <AccordionItem
-                        value="item-1"
-                        className="border-b border-[#f4f4f4]"
-                      >
-                        <Link
-                          href="/"
-                          className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
-                          aria-label="menuLink"
-                        >
-                          <span>Home</span>
-                        </Link>
-                      </AccordionItem>
-                      <AccordionItem
-                        value="item-2"
-                        className="border-b border-[#f4f4f4]"
-                      >
-                        <Link
-                          href="/heritage"
-                          className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
-                          aria-label="menuLink"
-                        >
-                          <span>About Us</span>
-                        </Link>
-                      </AccordionItem>
-                      <AccordionItem
-                        value="item-3"
-                        className="border-b border-[#f4f4f4]"
-                      >
-                        <AccordionTrigger className="text-[12px] font-normal text-black py-[8px] w-full flex items-center  ">
-                          <Link href="/service" className="flex items-center">
-                            <span>Services</span>
-                          </Link>
-                        </AccordionTrigger>
-                        <AccordionContent className="text-[12px] bg-[#671448] p-[10px] "></AccordionContent>
-                      </AccordionItem>
-                      <AccordionItem
-                        value="item-4"
-                        className="border-b border-[#f4f4f4]"
-                      >
-                        <Link
-                          href="/consultants"
-                          className="text-[12px] font-normal text-black py-[8px] w-full flex items-center  "
-                        >
-                          <span>Consultants</span>
-                        </Link>
-                      </AccordionItem>
-
-                      <AccordionItem
-                        value="item-5"
-                        className="border-b border-[#f4f4f4]"
-                      >
-                        <Link
-                          href="/news"
-                          className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
-                          aria-label="menuLink"
-                        >
-                          <span>News & Insights </span>
-                        </Link>
-                      </AccordionItem> */}
-
                             {navMenu?.map((item, index) => (
                               item.hasSubmenu ? (
                                 <AccordionItem key={index} value={`item-${index}`} className="border-b border-[#f4f4f4]">
@@ -677,66 +557,6 @@ export default function Header({ businessTypePromise, locationsPromise, lang, co
                 <SheetDescription asChild>
                   <div>
                     <Accordion type="single" collapsible>
-                      {/* <AccordionItem
-                        value="item-1"
-                        className="border-b border-[#f4f4f4]"
-                      >
-                        <Link
-                          href="/"
-                          className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
-                          aria-label="menuLink"
-                        >
-                          <span>Home</span>
-                        </Link>
-                      </AccordionItem>
-                      <AccordionItem
-                        value="item-2"
-                        className="border-b border-[#f4f4f4]"
-                      >
-                        <Link
-                          href="/heritage"
-                          className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
-                          aria-label="menuLink"
-                        >
-                          <span>About Us</span>
-                        </Link>
-                      </AccordionItem>
-                      <AccordionItem
-                        value="item-3"
-                        className="border-b border-[#f4f4f4]"
-                      >
-                        <AccordionTrigger className="text-[12px] font-normal text-black py-[8px] w-full flex items-center  ">
-                          <Link href="/service" className="flex items-center">
-                            <span>Services</span>
-                          </Link>
-                        </AccordionTrigger>
-                        <AccordionContent className="text-[12px] bg-[#671448] p-[10px] "></AccordionContent>
-                      </AccordionItem>
-                      <AccordionItem
-                        value="item-4"
-                        className="border-b border-[#f4f4f4]"
-                      >
-                        <Link
-                          href="/consultants"
-                          className="text-[12px] font-normal text-black py-[8px] w-full flex items-center  "
-                        >
-                          <span>Consultants</span>
-                        </Link>
-                      </AccordionItem>
-
-                      <AccordionItem
-                        value="item-5"
-                        className="border-b border-[#f4f4f4]"
-                      >
-                        <Link
-                          href="/news"
-                          className="text-[12px] font-normal text-black py-[8px] w-full flex items-center"
-                          aria-label="menuLink"
-                        >
-                          <span>News & Insights </span>
-                        </Link>
-                      </AccordionItem> */}
-
                       {navMenu?.map((item, index) => (
                         item.hasSubmenu ? (
                           <AccordionItem key={index} value={`item-${index}`} className="border-b border-[#f4f4f4]">

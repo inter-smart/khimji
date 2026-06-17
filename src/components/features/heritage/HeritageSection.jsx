@@ -198,9 +198,7 @@ export default function HeritageSection({ title, timelines, data, lang }) {
                   <div className="text-[13px] sm:text-[14px] 2xl:text-[16px] 3xl:text-[20px] leading-[1.2] font-normal text-black mb-[5px]">
                     {item?.title}
                   </div>
-                  {/* <div className="text-[14px] sm:text-[16px] 2xl:text-[20px] 3xl:text-[25px] leading-[1.2] font-normal text-black">
-                    {item?.subtitle}
-                  </div> */}
+
                 </motion.div>
               </div>
             ))}
