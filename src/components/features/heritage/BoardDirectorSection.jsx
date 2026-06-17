@@ -101,7 +101,7 @@ export default function BoardDirectorSection({ title, directors }) {
         onOpenChange={(open) => !open && setSelected(null)}
       >
         <DialogContent className="max-w-[350px] xs:max-w-[460px] sm:max-w-[650px] lg:max-w-[850px] xl:max-w-[950px] 2xl:max-w-[1150px]   px-6 lg:p-0 lg:bg-transparent lg:border-0 lg:shadow-none max-sm:px-5  max-sm:rounded-3xl max-sm:border-slate-200/60 max-sm:bg-gradient-to-b max-sm:from-white max-sm:via-slate-50/50 max-sm:to-white/95 max-sm:shadow-[0_20px_50px_rgba(0,0,0,0.12)] max-sm:[top:50%!important]"
-       
+
         >
           {/* Desktop & Tablet Layout (Original - completely unchanged) */}
           {/* <div className="hidden sm:flex flex-col items-center text-center">
@@ -135,53 +135,47 @@ export default function BoardDirectorSection({ title, directors }) {
             }
           </div> */}
 
-         <div className="relative overflow-hidden rounded-[15px] bg-gradient-to-br from-[#5f6677] to-[#737c90] max-lg:hidden">
+          <div className="relative overflow-hidden rounded-[15px] bg-gradient-to-br from-[#5f6677] to-[#737c90] max-lg:hidden">
 
-  <DialogHeader className="space-y-3 text-left mb-2 p-[25px] !pb-0">
-    <DialogTitle className="text-[35px] 2xl:text-[40px] 3xl:text-[48px] font-bold uppercase text-[#D7B07A] leading-none">
-      {selected?.name}
-    </DialogTitle>
+            <DialogHeader className="space-y-3 text-left mb-2 p-[25px] !pb-0">
+              <DialogTitle className="text-[35px] 2xl:text-[40px] 3xl:text-[48px] font-bold uppercase text-[#D7B07A] leading-none">
+                {selected?.name}
+              </DialogTitle>
 
-    {selected?.designation && (
-      <DialogDescription className="text-[#C0E7E9] text-lg">
-        {selected.designation}
-      </DialogDescription>
-    )}
-  </DialogHeader>
+              {selected?.designation && (
+                <DialogDescription className="text-[#C0E7E9] text-lg">
+                  {selected.designation}
+                </DialogDescription>
+              )}
+            </DialogHeader>
 
-  <div className="flex items-start gap-8">
+            <div className="flex items-start gap-8">
 
-    {/* Content */}
-    <div className="w-[60%] lg:w-[65%] p-[25px] ">
-      <div className="w-20 h-1 bg-[#D7B07A] mb-8" />
+              {/* Content */}
+              <div className="w-[60%] lg:w-[65%] p-[25px] ">
+                <div className="w-20 h-1 bg-[#D7B07A] mb-8" />
 
-      <div className="max-h-[65vh] overflow-y-auto pr-4">
-        <div className="text-white/90 leading-8 [&_p]:mb-5 [&_br]:hidden">
-          {renderHtml(selected?.description ?? "")}
-        </div>
-      </div>
-    </div>
+                <div className="max-h-[65vh] overflow-y-auto pr-4">
+                  <div className="text-white/90 leading-8 [&_p]:mb-5 [&_br]:hidden">
+                    {renderHtml(selected?.description ?? "")}
+                  </div>
+                </div>
+              </div>
 
-    {/* Image */}
-    <div className="w-[40%] lg:w-[35%] flex items-end justify-end self-end">
-      <Image
-        src={selected?.image}
-        alt={selected?.image_alt_text || selected?.name || "Director"}
-        title={selected?.image_alt_text || selected?.name || "Director"}
-        width={500}
-        height={700}
-        className="
-          w-full
-          max-w-[350px]
-          h-auto
-          object-contain
-          drop-shadow-[0_25px_60px_rgba(0,0,0,0.25)]
-        "
-      />
-    </div>
+              {/* Image */}
+              <div className="w-[40%] lg:w-[35%] flex items-end justify-end self-end">
+                <Image
+                  src={selected?.image}
+                  alt={selected?.image_alt_text || selected?.name || "Director"}
+                  title={selected?.image_alt_text || selected?.name || "Director"}
+                  width={500}
+                  height={700}
+                  className="w-full max-w-[350px] h-auto object-contain  drop-shadow-[0_25px_60px_rgba(0,0,0,0.25)] "
+                />
+              </div>
 
-  </div>
-</div>
+            </div>
+          </div>
           {/* Mobile Layout (Modernized - active only on mobile screens) */}
           <div className="flex lg:hidden flex-col items-stretch text-left mt-2">
             <div className="text-[11px] font-bold tracking-widest text-[#238A84] uppercase mb-2">
