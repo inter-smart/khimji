@@ -135,7 +135,7 @@ export default function BoardDirectorSection({ title, directors }) {
             }
           </div> */}
 
-          <div className="relative overflow-hidden rounded-[15px] bg-gradient-to-br from-[#5f6677] to-[#737c90] max-lg:hidden">
+          <div className="relative overflow-hidden rounded-[15px] bg-gradient-to-r from-[#0B436A] to-[#299B8A] max-lg:hidden">
 
             <DialogHeader className="space-y-3 text-left mb-2 p-[25px] !pb-0">
               <DialogTitle className="text-[35px] 2xl:text-[40px] 3xl:text-[48px] font-bold uppercase text-[#D7B07A] leading-none">
@@ -143,7 +143,7 @@ export default function BoardDirectorSection({ title, directors }) {
               </DialogTitle>
 
               {selected?.designation && (
-                <DialogDescription className="text-[#C0E7E9] text-lg">
+                <DialogDescription className="text-[#C0E7E9] text-lg [&_*]:!text-white">
                   {selected.designation}
                 </DialogDescription>
               )}
@@ -156,7 +156,7 @@ export default function BoardDirectorSection({ title, directors }) {
                 <div className="w-20 h-1 bg-[#D7B07A] mb-8" />
 
                 <div className="max-h-[65vh] overflow-y-auto pr-4">
-                  <div className="text-white/90 leading-8 [&_p]:mb-5 [&_br]:hidden">
+                  <div className="text-white/90 leading-8 [&_p]:mb-5 [&_br]:hidden [&_*]:!text-white">
                     {renderHtml(selected?.description ?? "")}
                   </div>
                 </div>
