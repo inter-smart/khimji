@@ -1,11 +1,7 @@
 "use client";
-import parse from "html-react-parser";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Heading } from "@/components/layout/Heading";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
 import {
   Dialog,
   DialogContent,
@@ -15,8 +11,43 @@ import {
 } from "@/components/ui/dialog";
 import { renderHtml } from "@/lib/helper";
 
+function normalizeDirectors(directors, itemsPerRow) {
+  if (!Array.isArray(directors) || directors.length === 0) return [];
+  // Already grouped: [[{...}, {...}], ...]
+  if (Array.isArray(directors[0])) return directors;
+  // Flat API array: [{ id, name, ... }, ...]
+  const rows = [];
+  for (let i = 0; i < directors.length; i += itemsPerRow) {
+    rows.push(directors.slice(i, i + itemsPerRow));
+  }
+  return rows;
+}
+
 export default function BoardDirectorSection({ title, directors }) {
   const [selected, setSelected] = useState(null);
+  const [cols, setCols] = useState(4);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const updateCols = () => {
+      const width = window.innerWidth;
+      if (width < 800) {
+        setCols(2);
+      } else if (width <= 1280) {
+        setCols(3);
+      } else {
+        setCols(4);
+      }
+    };
+
+    updateCols();
+    window.addEventListener("resize", updateCols);
+    return () => window.removeEventListener("resize", updateCols);
+  }, []);
+
+  const activeCols = mounted ? cols : 4;
+  const directorRows = normalizeDirectors(directors, activeCols);
 
   return (
     <>
@@ -32,64 +63,43 @@ export default function BoardDirectorSection({ title, directors }) {
             {title}
           </Heading>
           <div className="w-full h-auto block">
-            {directors?.map((director, index) => (
+            {directorRows.map((row, index) => (
               <div
                 key={index}
                 className="w-full h-auto py-[40px] sm:py-[50px] lg:py-[70px] 2xl:py-[90px] 3xl:py-[120px] last:pb-0 first:pt-0 block relative z-0 before:content-[''] before:w-full before:h-[7px] sm:before:h-[10px] before:bg-[linear-gradient(90deg,#0C476B_0%,#0C476B_70%,#238A84_70%,#238A84_100%)] before:[mask-image:repeating-linear-gradient(90deg,#000_0_1px,transparent_1px_8px)] sm:before:[mask-image:repeating-linear-gradient(90deg,#000_0_1px,transparent_1px_16px)] before:[-webkit-mask-image:repeating-linear-gradient(90deg,#000_0_1px,transparent_1px_8px)] sm:before:[-webkit-mask-image:repeating-linear-gradient(90deg,#000_0_1px,transparent_1px_16px)] before:bg-no-repeat before:contain before:bg-center before:absolute border-z-1 before:inset-[auto_0_0_0] last:before:hidden"
               >
-                <Swiper
-                  modules={[Autoplay]}
-                  spaceBetween={20}
-                  slidesPerView={2}
-                  autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: true,
-                  }}
-                  speed={500}
-                  loop={true}
-                  breakpoints={{
-                    640: { slidesPerView: 3, spaceBetween: 30 },
-                    1024: { slidesPerView: 4, spaceBetween: 40 },
-                    1280: { slidesPerView: 4, spaceBetween: 70 },
-                    1536: { slidesPerView: 4, spaceBetween: 90 },
-                    1771: { slidesPerView: 4, spaceBetween: 110 },
-                  }}
-                  className="board_directorSlider"
-                >
-                  {director?.map((item, idx) => (
-                    <SwiperSlide key={idx}>
-                      <div className="group w-full h-full block">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-[30px] lg:gap-10 xl:gap-[70px] 2xl:gap-[90px] 3xl:gap-[110px]">
+                  {row.map((item) => (
+                    <div key={item.id ?? item.name} className="group w-full h-full block">
+                      <button
+                        onClick={() => setSelected(item)}
+                        className="w-full h-auto aspect-[280/325] mb-[10px] 2xl:mb-[15px] 3xl:mb-[20px] rounded-full select-none overflow-hidden flex items-center justify-center relative z-0 before:content-[''] before:w-full before:h-[80%] before:bg-linear-to-t before:from-white before:to-[#C0E7E9] before:rounded-full before:absolute before:z-[-1] before:inset-[auto_0_0_0] group-hover:translate-y-[-10px] transition-transform duration-500 ease-in-out cursor-pointer"
+                        aria-label={`View profile of ${item?.name}`}
+                      >
+                        <Image
+                          src={item?.image || "/images/placeholder.png"}
+                          alt={item?.image_alt_text || "Image"}
+                          width={280}
+                          height={325}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                      <div className="w-full h-auto text-center">
                         <button
                           onClick={() => setSelected(item)}
-                          className="w-full h-auto aspect-[280/325] mb-[10px] 2xl:mb-[15px] 3xl:mb-[20px] rounded-full select-none overflow-hidden flex items-center justify-center relative z-0 before:content-[''] before:w-full before:h-[80%] before:bg-linear-to-t before:from-white before:to-[#C0E7E9] before:rounded-full before:absolute before:z-[-1] before:inset-[auto_0_0_0] group-hover:translate-y-[-10px] transition-transform duration-500 ease-in-out cursor-pointer"
-                          aria-label={`View profile of ${item?.name}`}
+                          className="text-[15px] sm:text-[16px] 2xl:text-[20px] 3xl:text-[24px] leading-[1.2] font-semibold text-[#013763] mb-[5px] hover:text-[#238A84] transition-colors cursor-pointer"
                         >
-                          <Image
-                            src={item?.image || "/images/placeholder.png"}
-                            alt={item?.image_alt_text || "Image"}
-                            width={280}
-                            height={325}
-                            className="w-full h-full object-cover"
-                          />
+                          {item?.name}
                         </button>
-                        <div className="w-full h-auto text-center">
-                          <button
-                            onClick={() => setSelected(item)}
-                            className="text-[15px] sm:text-[16px] 2xl:text-[20px] 3xl:text-[24px] leading-[1.2] font-semibold text-[#013763] mb-[5px] hover:text-[#238A84] transition-colors cursor-pointer"
-                          >
-                            {item?.name}
-                          </button>
-                          {item?.designation && (
-                            <div className="text-[13px] sm:text-[14px] 2xl:text-[16px] leading-[1.3] text-[#238A84]">
-                              {item.designation}
-                            </div>
-                          )}
-                        </div>
+                        {item?.designation && (
+                          <div className="text-[13px] sm:text-[14px] 2xl:text-[16px] leading-[1.3] text-[#238A84]">
+                            {item.designation}
+                          </div>
+                        )}
                       </div>
-                    </SwiperSlide>
+                    </div>
                   ))}
-                </Swiper>
+                </div>
               </div>
             ))}
           </div>
