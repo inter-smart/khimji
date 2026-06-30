@@ -13,7 +13,6 @@ export default function VentureListingSection({ data, title, context }) {
   const t = useTranslations("venture");
   const [activeSlug, setActiveSlug] = useState();
   const [ventures, setVentures] = useState([]);
-  // category usetsate
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const API_BASE_URL =
@@ -96,7 +95,6 @@ export default function VentureListingSection({ data, title, context }) {
                 <div key={index} className="w-full px-[3px]">
                   <TabsTrigger
                     value={item?.slug}
-                    // onClick={() => setActiveSlug(item.slug)}
                     className=" w-full
                   text-[11px] xs:text-[16px]
                   border border-[#2E8B8B]
@@ -113,23 +111,6 @@ export default function VentureListingSection({ data, title, context }) {
                 </div>
               ))}
 
-              {/* 
-              <div className="w-1/2 px-[3px]">
-                <TabsTrigger
-                  value="consumer"
-                  className="w-full
-                  text-[11px] xs:text-[16px]
-                  border border-[#2E8B8B]
-                  cursor-pointer
-                  data-[state=active]:bg-gradient-to-r
-                  data-[state=active]:from-[#0B436A]
-                  data-[state=active]:to-[#299B8A]
-                  data-[state=active]:text-white
-                  data-[state=inactive]:text-[#000000]
-                  rounded-none py-2 px-3  font-medium "  >
-                  CONSUMER ORIENTED
-                </TabsTrigger>
-              </div> */}
             </TabsList>
           </div>
 
@@ -168,25 +149,6 @@ export default function VentureListingSection({ data, title, context }) {
               )}
             </TabsContent>
           ))}
-
-          {/* 
-          <TabsContent value="consumer" >
-            <div className="mb-[20px] 2xl:mb-[40px] 3xl:mb-[60px]">
-              <div className="text-[16px] md:text-[18px] lg:text-[25px] xl:text-[30px] 2xl:text-[35px] 3xl:text-[40px] font-medium bg-gradient-to-r from-[#0B436A]
-                to-[#299B8A] from-[30%] to-[100%] bg-clip-text text-transparent
-                uppercase tracking-wide !mb-[10px] 2xl:!mb-[10px] 3xl:!mb-[15px]">
-                Corporate Oriented
-              </div>
-              <p>Khimji Ramdas drives growth across Retail, Infrastructure, Logistics, Lifestyle, and Travel. Through strong joint ventures and international presence, we connect markets and enrich communities</p>
-            </div>
-            <div className="flex flex-wrap -m-[5px] lg:-m-[10px] 3xl:-m-[15px]">
-              {consumerVentures.map((venture) => (
-                <div key={venture.id} className="w-full sm:w-1/2 p-[5px]  lg:p-[10px] 3xl:p-[15px]">
-                  <VentureCard item={venture} />
-                </div>
-              ))}
-            </div>
-          </TabsContent> */}
         </Tabs>
       </div>
     </section>

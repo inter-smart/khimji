@@ -1,4 +1,5 @@
 "use client";
+import dynamic from "next/dynamic";
 
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 const QuestionSection = dynamic(
