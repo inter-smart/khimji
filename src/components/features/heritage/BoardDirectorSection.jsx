@@ -137,22 +137,22 @@ export default function BoardDirectorSection({ title, directors }) {
 
           <div className="relative overflow-hidden rounded-[15px] bg-gradient-to-r from-[#0B436A] to-[#299B8A] max-lg:hidden">
 
-            <DialogHeader className="space-y-3 text-left mb-2 p-[25px] !pb-0">
-              <DialogTitle className="text-[35px] 2xl:text-[40px] 3xl:text-[48px] font-bold uppercase text-[#D7B07A] leading-none">
-                {selected?.name}
-              </DialogTitle>
 
-              {selected?.designation && (
-                <DialogDescription className="text-[#C0E7E9] text-lg [&_*]:!text-white">
-                  {selected.designation}
-                </DialogDescription>
-              )}
-            </DialogHeader>
-
-            <div className="flex items-start gap-8">
+            <div className="flex items-end gap-8">
 
               {/* Content */}
-              <div className="w-[60%] lg:w-[65%] p-[25px] ">
+              <div className="w-[55%] lg:w-[60%] p-[25px] ">
+                <DialogHeader className="space-y-3 text-left mb-2 p-[25px] !pb-0 !pl-0">
+                  <DialogTitle className="text-[35px] 2xl:text-[40px] 3xl:text-[48px] font-bold uppercase text-[#D7B07A] leading-none">
+                    {selected?.name}
+                  </DialogTitle>
+
+                  {selected?.designation && (
+                    <DialogDescription className="text-[#C0E7E9] text-lg [&_*]:!text-white">
+                      {selected.designation}
+                    </DialogDescription>
+                  )}
+                </DialogHeader>
                 <div className="w-20 h-1 bg-[#D7B07A] mb-8" />
 
                 <div className="max-h-[65vh] overflow-y-auto pr-4">
@@ -163,14 +163,14 @@ export default function BoardDirectorSection({ title, directors }) {
               </div>
 
               {/* Image */}
-              <div className="w-[40%] lg:w-[35%] flex items-end justify-end self-end">
+              <div className="w-[45%] lg:w-[40%] flex items-end justify-end self-end">
                 <Image
                   src={selected?.image}
                   alt={selected?.image_alt_text || selected?.name || "Director"}
                   title={selected?.image_alt_text || selected?.name || "Director"}
                   width={500}
                   height={700}
-                  className="w-full max-w-[350px] h-auto object-contain  drop-shadow-[0_25px_60px_rgba(0,0,0,0.25)] "
+                  className="w-full max-w-[450px] h-auto object-contain  drop-shadow-[0_25px_60px_rgba(0,0,0,0.25)] "
                 />
               </div>
 
