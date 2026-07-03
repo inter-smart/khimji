@@ -26,7 +26,7 @@ export default function InnerHero({
             src={coverImage}
             alt={alt}
             fill
-            sizes="(max-width: 768px) 100vw, 33vw"
+            sizes="100vw"
             style={{ objectFit: "cover" }}
           />
         </picture>
