@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 import { Heading } from "@/components/layout/Heading";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import CareerForm from "./CareerForm";

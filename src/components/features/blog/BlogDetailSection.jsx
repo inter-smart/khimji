@@ -1,5 +1,5 @@
 import { formatDate } from "@/lib/helper";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 
 export default function BlogDetailSection({ data, lang="en" }) {
 

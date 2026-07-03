@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 import { useTranslations } from "next-intl";
 
 export default function BottomLine() {

@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 import { renderHtml } from "@/lib/helper";
 
 export default function HeritageMobile({ title, description, banner, banner_alt_text, metrics }) {

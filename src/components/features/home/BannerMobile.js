@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 
 export default function BannerMobile({ data }) {
   if (!data || data.length === 0) return null;

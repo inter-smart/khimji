@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Heading } from "@/components/layout/Heading";
 import Link from "next/link";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 import CircularSwiper from "./CircularSwiper";
 import HeritageMobile from "./home-mobile/HeritageMobile";
 import { renderHtml } from "@/lib/helper";

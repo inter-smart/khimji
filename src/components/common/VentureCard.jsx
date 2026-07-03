@@ -1,5 +1,5 @@
 import { renderHtml } from "@/lib/helper";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 

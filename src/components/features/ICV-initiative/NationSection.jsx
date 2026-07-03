@@ -1,7 +1,7 @@
 
 import { Heading } from "@/components/layout/Heading";
 import { renderHtml } from "@/lib/helper";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 
 export default function NationSection({
     title,

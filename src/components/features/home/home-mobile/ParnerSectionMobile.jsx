@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 
 
 export default function ParnerSectionMobile({brands}) {

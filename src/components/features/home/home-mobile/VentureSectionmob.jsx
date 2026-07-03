@@ -7,7 +7,7 @@ import "swiper/css/autoplay";
 import "swiper/css/navigation";
 import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 import VentureCard from "@/components/common/VentureCard";
 import { renderHtml } from "@/lib/helper";
 import { useRouter } from "next/navigation";

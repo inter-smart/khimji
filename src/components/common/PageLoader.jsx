@@ -3,7 +3,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 
 export default function PageLoader() {
   const [loading, setLoading] = useState(true);

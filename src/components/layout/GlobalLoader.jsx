@@ -1,7 +1,7 @@
 "use client";
 
 import { createPortal } from "react-dom";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 
 export default function GlobalLoader() {
   if (typeof window === "undefined") return null;

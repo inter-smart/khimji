@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 import { motion } from "framer-motion";
 
 const CONTACT_BUTTON_CLASS =

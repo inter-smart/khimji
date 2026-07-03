@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 import { Heading } from "@/components/layout/Heading";
 import { motion } from "framer-motion";
 import Link from "next/link";

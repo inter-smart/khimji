@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 import { renderHtml } from "@/lib/helper";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

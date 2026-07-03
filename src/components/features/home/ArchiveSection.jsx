@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 import { Heading } from "@/components/layout/Heading";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 import Link from "next/link";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "@/components/ui/pagination";

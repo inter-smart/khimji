@@ -5,7 +5,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 import Link from "next/link";
 import { renderHtml } from "@/lib/helper";
 import {useTranslations} from "next-intl";

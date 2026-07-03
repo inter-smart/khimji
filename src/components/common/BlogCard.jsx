@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 import { formatDate } from "@/lib/helper";
 import { useTranslations } from "next-intl";
 

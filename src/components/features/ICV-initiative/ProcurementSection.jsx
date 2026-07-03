@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { Heading } from "@/components/layout/Heading";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 import {
   parseInitiativeDescription,
   renderHtml,

@@ -4,7 +4,7 @@ import { useState, useEffect, useTransition, useRef } from "react";
 import GlobalLoader from "@/components/layout/GlobalLoader";
 import Link from "next/link";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 import { usePathname } from "next/navigation";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";

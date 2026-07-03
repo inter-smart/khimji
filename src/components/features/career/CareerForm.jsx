@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 import { createCareerFormSchema } from "@/lib/validations/schemas";
 import { toast } from "sonner";
 import { multipartPostToAPI } from "@/lib/server/clientApi";

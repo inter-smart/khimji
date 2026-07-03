@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import Image from '@/components/common/ContentImage';
 import CountUp from "react-countup";
 import { Heading } from "@/components/layout/Heading";
 import { renderHtml } from "@/lib/helper";
