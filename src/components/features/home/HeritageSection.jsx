@@ -264,16 +264,21 @@ export default function HeritageSection({ title, description, banner, banner_alt
                 </motion.div>
               </motion.div>
 
-              <motion.div
-                className="w-full relative lg:absolute start-[-180px] lg:start-[-190px] xl:start-[-200px] 2xl:start-[-260px] 3xl:start-[-280px] bottom-0 2xl:bottom-[60px] z-10 
+              {
+                timelines?.length > 0 && (
+                  <motion.div
+                    className="w-full relative lg:absolute start-[-180px] lg:start-[-190px] xl:start-[-200px] 2xl:start-[-260px] 3xl:start-[-280px] bottom-0 2xl:bottom-[60px] z-10 
                             before:absolute before:content-[''] before:bg-[#F9F9F9] before:start-0 xs:before:w-[33%] sm:before:w-[30%] before:md:w-[25%] before:top-0 before:h-full before:z-1 lg:before:hidden"
-                variants={scaleIn}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-              >
-                <CircularSwiper timeline={timelines} lang={lang} />
-              </motion.div>
+                    variants={scaleIn}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                  >
+                    <CircularSwiper timeline={timelines} lang={lang} />
+                  </motion.div>
+
+                )
+              }
             </div>
 
             <div className="w-full lg:w-1/2">
@@ -318,7 +323,7 @@ export default function HeritageSection({ title, description, banner, banner_alt
                         variants={counterItemVariants}
                       >
                         <Heading size="heading1" as="div" className="leading-none !mb-[8px] direction">
-                          <Counter  end={Number(item.value)} suffix={item?.suffix} />
+                          <Counter end={Number(item.value)} suffix={item?.suffix} />
                         </Heading>
                         <motion.p
                           className="uppercase mb-0 leading-relaxed lg:text-[11px] 2xl:text-[14px] 3xl:text-[16px]"

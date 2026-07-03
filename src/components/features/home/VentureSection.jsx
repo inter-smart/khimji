@@ -41,6 +41,7 @@ export default function VentureSection({
   banner,
   banner_alt_text,
   lang,
+  desc
 }) {
   const isRTL = lang?.trim() === "ar";
   const router = useRouter();
@@ -187,7 +188,11 @@ export default function VentureSection({
               <Heading size="heading1" as="h1" className="mb-[30px]">
                 {title}
               </Heading>
-              {renderHtml(ventures[0]?.description)}
+              {
+                desc && (
+                  renderHtml(desc)
+                )
+              }
             </div>
           </motion.div>
         </div>

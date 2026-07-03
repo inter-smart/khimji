@@ -1,12 +1,12 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
- 
+
 const BannerSection = dynamic(
   () => import("@/components/features/home/BannerSection"),
   { ssr: true },
 );
- 
+
 const VentureSection = dynamic(
   () => import("@/components/features/home/VentureSection"),
   { ssr: false },
@@ -19,7 +19,7 @@ const NewsSection = dynamic(
   () => import("@/components/features/home/NewsSection"),
   { ssr: false },
 );
- 
+
 const ICVSection = dynamic(
   () => import("@/components/features/home/ICVSection"),
   { ssr: false },
@@ -62,8 +62,8 @@ const LazySection = ({ children, height = "500px" }) => {
     </div>
   );
 };
- 
-const HomeClient = ({ data,  lang, country }) => {
+
+const HomeClient = ({ data, lang, country }) => {
   const {
     home_cms,
     ventures,
@@ -73,12 +73,12 @@ const HomeClient = ({ data,  lang, country }) => {
     brands,
     news
   } = data;
- 
+
   return (
     <>
- 
+
       <BannerSection data={data?.sliders} key={country} country={country} />
- 
+
       {ventures?.length > 0 && (
         <LazySection height="600px">
           <VentureSection
@@ -87,6 +87,7 @@ const HomeClient = ({ data,  lang, country }) => {
             banner_alt_text={home_cms?.section1_banner_alt_text}
             ventures={ventures}
             lang={lang}
+            desc={home_cms?.corporate_oriented_description}
           />
         </LazySection>
       )}
@@ -104,11 +105,11 @@ const HomeClient = ({ data,  lang, country }) => {
           lang={lang}
         />
       </LazySection>
- 
+
       <LazySection height="450px">
-        <NewsSection data={news} lang={lang}/>
+        <NewsSection data={news} lang={lang} />
       </LazySection>
- 
+
       {initiatives?.length > 0 && (
         <LazySection height="500px">
           <ICVSection
@@ -121,12 +122,12 @@ const HomeClient = ({ data,  lang, country }) => {
           />
         </LazySection>
       )}
-      
+
       <LazySection height="100px">
         <ParnerSectionMobile brands={brands} />
       </LazySection>
     </>
   );
 };
- 
+
 export default HomeClient;
