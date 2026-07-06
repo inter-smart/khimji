@@ -5,6 +5,7 @@ import { getMetaData } from "@/lib/server/metaApi";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Suspense } from "react";
 
 const InnerHero = dynamic(() => import("@/components/common/InnerHero"));
 const VentureListingSection = dynamic(() => import("@/components/features/venture/VentureListingSection"));
@@ -54,7 +55,9 @@ export default async function Page({ params }) {
           title={banner?.banner_title}
           breadCrumb_data={[{ link: { href: `/${lang}`, label: t("home") } }, { link: { href: "/venture", label: t("ventures") } }]}
         />
-        <VentureListingSection data={venture_categories} title={venture_cms?.title} context={context} />
+        <Suspense fallback={null}>
+          <VentureListingSection data={venture_categories} title={venture_cms?.title} context={context} />
+        </Suspense>
       </div>
     </>
   );

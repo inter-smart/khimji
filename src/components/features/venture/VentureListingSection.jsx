@@ -13,22 +13,42 @@ import VentureCard from "@/components/common/VentureCard";
 import { useState, useEffect } from "react";
 import { NoDataState, renderHtml } from "@/lib/helper";
 import Image from "@/components/common/ContentImage";
-import { useParams } from "next/navigation";
+import { useParams, useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 export default function VentureListingSection({ data, title, context }) {
   const t = useTranslations("venture");
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { country, business_type } = context;
-  const [activeSlug, setActiveSlug] = useState(business_type);
   const [ventures, setVentures] = useState([]);
   const [paginationData, setPaginationData] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const perPage = 8;
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
 
   const { lang } = useParams();
+
+  const validSlugs = data?.map((d) => d.business_slug) || [];
+  const businessFromUrl = searchParams.get("business");
+  const pageFromUrl = parseInt(searchParams.get("page") || "1", 10);
+  const isValidBusiness = businessFromUrl && validSlugs.includes(businessFromUrl);
+  const defaultSlug =
+    business_type && validSlugs.includes(business_type)
+      ? business_type
+      : data?.[0]?.business_slug || "";
+  const activeSlug = isValidBusiness ? businessFromUrl : defaultSlug;
+  const currentPage = !isNaN(pageFromUrl) && pageFromUrl >= 1 ? pageFromUrl : 1;
+
+  useEffect(() => {
+    if (!businessFromUrl && activeSlug) {
+      router.replace(`${pathname}?business=${activeSlug}&page=${currentPage}`, {
+        scroll: false,
+      });
+    }
+  }, [businessFromUrl, activeSlug, currentPage, pathname, router]);
 
   const fetchVentures = async (slug, page) => {
     if (!slug) return;
@@ -61,21 +81,14 @@ export default function VentureListingSection({ data, title, context }) {
   };
 
   useEffect(() => {
-    if (!activeSlug) return;
-    fetchVentures(activeSlug, currentPage);
-  }, [activeSlug, currentPage, business_type, country, lang]);
-
-  useEffect(() => {
-    if (data?.length) {
-      const target = business_type;
-      const match = target && data.find((item) => item.business_slug === target);
-      setActiveSlug(match ? match.business_slug : data[0].business_slug);
+    if (activeSlug) {
+      fetchVentures(activeSlug, currentPage);
     }
-  }, [data, business_type, country, lang]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeSlug, currentPage, country, lang]);
 
   const handleTabChange = (slug) => {
-    setActiveSlug(slug);
-    setCurrentPage(1);
+    router.push(`${pathname}?business=${slug}&page=1`, { scroll: false });
   };
 
   const handlePageChange = (page) => {
@@ -85,7 +98,9 @@ export default function VentureListingSection({ data, title, context }) {
       paginationData &&
       page <= paginationData.last_page
     ) {
-      setCurrentPage(page);
+      router.push(`${pathname}?business=${activeSlug}&page=${page}`, {
+        scroll: false,
+      });
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
