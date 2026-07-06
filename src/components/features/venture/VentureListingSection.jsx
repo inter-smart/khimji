@@ -21,9 +21,9 @@ export default function VentureListingSection({ data, title, context }) {
 
   const { lang } = useParams();
 
-  const BUSINESS_SLUG_MAP = { b2b: "corporate-oriented", b2c: "consumer-oriented" };
+  const BUSINESS_SLUG_MAP = { b2b: "enterprise", b2c: "consumer" };
 
-  const SLUG_TO_BUSINESS = { "corporate-oriented": "b2b", "consumer-oriented": "b2c" };
+  const SLUG_TO_BUSINESS = { "enterprise": "b2b", "consumer": "b2c" };
 
   const fetchVentures = async (slug) => {
     if (!slug) return;

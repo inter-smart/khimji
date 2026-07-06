@@ -15,7 +15,7 @@ export async function generateMetadata({ params }) {
   const { slug, lang } = resolvedParams;
 
   const { business_type } = await getRequestContext();
-  const categorySlug = business_type === "b2c" ? "consumer-oriented" : "corporate-oriented";
+  const categorySlug = business_type === "b2c" ? "consumer" : "enterprise";
   const { data, error } = await getData(`venture-details?slug=${slug}&category_slug=${categorySlug}`, lang);
 
   if (!data || error) {
@@ -90,13 +90,13 @@ export default async function Page({ params }) {
   const t = await getTranslations("common");
 
   const { business_type } = await getRequestContext();
-  const categorySlug = business_type === "b2c" ? "consumer-oriented" : "corporate-oriented";
+  const categorySlug = business_type === "b2c" ? "consumer" : "enterprise";
   const { data, error, structuredData, lineScripts } = await getData(`venture-details?slug=${slug}&category_slug=${categorySlug}`, lang);
 
 
-   if (!data || error) {
-     notFound();
-   }
+  if (!data || error) {
+    notFound();
+  }
   return (
     <>
       <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />
