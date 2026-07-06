@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { use, useState, useTransition } from "react";
 import GlobalLoader from "@/components/layout/GlobalLoader";
 import { ChevronDown } from "lucide-react";
 import {
@@ -15,14 +15,14 @@ import {
 
 const VENTURE_SUBMENU = [
   {
-    label: "Consumer Oriented",
-    label_ar: "موجه للمستهلك",
-    businessType: "b2c",
+    title: "Consumer",
+    title_ar: "موجه للمستهلك",
+    business_type: "b2c",
   },
   {
-    label: "Corporate Oriented",
-    label_ar: "موجه للشركات",
-    businessType: "b2b",
+    title: "Enterprise",
+    title_ar: "موجه للشركات",
+    business_type: "b2b",
   },
 ];
 
@@ -32,9 +32,11 @@ export default function HeaderNavigation({
   onNavigationClick,
   menuItems,
   showDarkHeader,
+  locationsPromise
 }) {
   const isEN = locale === "en";
   const router = useRouter();
+  const locations = use(locationsPromise);
   const [isPending, startTransition] = useTransition();
   const [activeBusinessType, setActiveBusinessType] = useState(() => {
     if (typeof window === "undefined") return null;
@@ -54,6 +56,10 @@ export default function HeaderNavigation({
       router.push(`/${locale}/venture`);
     });
   }
+
+
+  const dropDownData = locations?.data ? locations.data[0]?.ventureCategories : VENTURE_SUBMENU;
+
 
   return (
     <>
@@ -89,13 +95,13 @@ export default function HeaderNavigation({
                       align="start"
                       className="w-56 mt-2 rounded-xl border border-gray-100 bg-white/95 backdrop-blur-md p-2 shadow-xl"
                     >
-                      {VENTURE_SUBMENU.map((opt) => {
+                      {dropDownData?.map((opt) => {
                         const isActive =
-                          document.cookie.split("; ").find((c) => c.startsWith("business_type=")) === `business_type=${opt.businessType}`;
+                          document.cookie.split("; ").find((c) => c.startsWith("business_type=")) === `business_type=${opt.business_type}`;
                         return (
                           <DropdownMenuItem
-                            key={opt.businessType}
-                            onClick={() => handleVentureClick(opt.businessType)}
+                            key={opt.business_type}
+                            onClick={() => handleVentureClick(opt.business_type)}
                             className={cn(
                               "cursor-pointer group flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 transition-all",
                               isActive
@@ -103,7 +109,7 @@ export default function HeaderNavigation({
                                 : "hover:bg-[#299b8a]/10 hover:text-[#299b8a] focus:bg-[#299b8a]/10 focus:text-[#299b8a]",
                             )}
                           >
-                            <span>{isEN ? opt.label : opt.label_ar}</span>
+                            <span>{isEN ? opt.title : opt.title_ar}</span>
                             <ChevronDown className="w-4 h-4 opacity-0 -rotate-90 transition-all group-hover:opacity-100 group-hover:translate-x-1 group-focus:opacity-100 group-focus:translate-x-1" />
                           </DropdownMenuItem>
                         );

@@ -36,9 +36,9 @@ export default async function Page({ params }) {
   // Simple GET request
   const { data, error, structuredData, lineScripts } = await getData("ventures", lang, country);
 
-   if (!data || error) {
-     notFound();
-   }
+  if (!data || error) {
+    notFound();
+  }
   const { banner, venture_cms, venture_categories } = data;
 
   return (
