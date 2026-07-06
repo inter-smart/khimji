@@ -92,7 +92,11 @@
     "noVenturesAvailable": "There are no ventures available.",
     "noVenturesForCategory": "There are no ventures available for this category",
     "loadingVentures": "Loading ventures...",
-    "errorLoadingVentures": "Error Loading Ventures"
+    "errorLoadingVentures": "Error Loading Ventures",
+    "previousAriaLabel": "Previous",
+    "nextAriaLabel": "Next",
+    "previousPaginationAlt": "previous pagination",
+    "nextPaginationAlt": "next pagination"
   },
   "archive": {
     "loadingArchives": "Loading archives...",

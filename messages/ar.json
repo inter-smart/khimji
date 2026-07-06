@@ -91,7 +91,11 @@
     "noVenturesAvailable": "لا تتوفر مشاريع.",
     "noVenturesForCategory": "لا تتوفر مشاريع لهذه الفئة",
     "loadingVentures": "جارٍ تحميل المشاريع...",
-    "errorLoadingVentures": "خطأ في تحميل المشاريع"
+    "errorLoadingVentures": "خطأ في تحميل المشاريع",
+    "previousAriaLabel": "السابق",
+    "nextAriaLabel": "التالي",
+    "previousPaginationAlt": "الصفحة السابقة",
+    "nextPaginationAlt": "الصفحة التالية"
   },
   "archive": {
     "loadingArchives": "جارٍ تحميل الأرشيف...",

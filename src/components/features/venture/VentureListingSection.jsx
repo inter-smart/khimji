@@ -3,46 +3,58 @@
 import { Heading } from "@/components/layout/Heading";
 import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+} from "@/components/ui/pagination";
 import VentureCard from "@/components/common/VentureCard";
 import { useState, useEffect } from "react";
 import { NoDataState, renderHtml } from "@/lib/helper";
+import Image from "@/components/common/ContentImage";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 export default function VentureListingSection({ data, title, context }) {
   const t = useTranslations("venture");
   const { country, business_type } = context;
-  console.log("SLUGGGGG", business_type);
   const [activeSlug, setActiveSlug] = useState(business_type);
   const [ventures, setVentures] = useState([]);
+  const [paginationData, setPaginationData] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const perPage = 8;
   const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
 
   const { lang } = useParams();
 
-
-  const fetchVentures = async (slug) => {
+  const fetchVentures = async (slug, page) => {
     if (!slug) return;
-
-
 
     setIsLoading(true);
     setError(null);
     try {
-      const result = await fetch(`${API_BASE_URL}/api/venture-list?business_slug=${slug}&per_page=66&page=1`, {
-        method: "GET",
-        headers: {
-          "Accept-Language": lang,
-          "Location-Slug": country,
-          "Business-Slug": slug,
-        },
-      });
+      const result = await fetch(
+        `${API_BASE_URL}/api/venture-list?business_slug=${slug}&per_page=${perPage}&page=${page}`,
+        {
+          method: "GET",
+          headers: {
+            "Accept-Language": lang,
+            "Location-Slug": country,
+            "Business-Slug": slug,
+          },
+        }
+      );
 
-      const data = await result.json();
-      setVentures(data?.data?.ventures ?? []);
+      const res = await result.json();
+      setVentures(res?.data?.ventures ?? []);
+      setPaginationData(res?.data?.pagination ?? null);
     } catch (err) {
       setError(err.message);
+      setVentures([]);
+      setPaginationData(null);
     } finally {
       setIsLoading(false);
     }
@@ -50,21 +62,57 @@ export default function VentureListingSection({ data, title, context }) {
 
   useEffect(() => {
     if (!activeSlug) return;
-    fetchVentures(activeSlug);
-  }, [activeSlug, business_type, country, lang]);
+    fetchVentures(activeSlug, currentPage);
+  }, [activeSlug, currentPage, business_type, country, lang]);
 
   useEffect(() => {
     if (data?.length) {
       const target = business_type;
-      console.log("target", target);
       const match = target && data.find((item) => item.business_slug === target);
-      console.log("match", match);
-      console.log("data", data[0].business_slug);
       setActiveSlug(match ? match.business_slug : data[0].business_slug);
     }
   }, [data, business_type, country, lang]);
 
-  console.log("activeSlug", ventures);
+  const handleTabChange = (slug) => {
+    setActiveSlug(slug);
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (page) => {
+    if (
+      page !== currentPage &&
+      page >= 1 &&
+      paginationData &&
+      page <= paginationData.last_page
+    ) {
+      setCurrentPage(page);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const generatePageNumbers = () => {
+    if (!paginationData) return [];
+
+    const { current_page, last_page } = paginationData;
+    const pages = [];
+
+    let startPage = Math.max(1, current_page - 2);
+    let endPage = Math.min(last_page, current_page + 2);
+
+    if (current_page <= 3) {
+      endPage = Math.min(5, last_page);
+    }
+
+    if (current_page >= last_page - 2) {
+      startPage = Math.max(1, last_page - 4);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+
+    return pages;
+  };
 
   if (!data || data.length === 0) {
     return <NoDataState title={t("noVenturesFound")} message={t("noVenturesAvailable")} />;
@@ -76,7 +124,7 @@ export default function VentureListingSection({ data, title, context }) {
       <div className="absolute top-0 bottom-0 left-[70px] 2xl:left-[100px] 3xl:left-[150px] m-auto w-[150px] 2xl:w-[200px] 3xl:w-[245px] h-[150px] 2xl:h-[200px] 3xl:h-[245px] blur-[165px] rounded-full bg-[#2FDDC3] animate-float" />
 
       <div className="container">
-        <Tabs value={activeSlug} onValueChange={setActiveSlug} className="w-full mb-[35px ]">
+        <Tabs value={activeSlug} onValueChange={handleTabChange} className="w-full mb-[35px]">
           <div className="flex flex-wrap justify-between items-center gap-2 mb-[20px] xl:mb-[30px] 2xl:mb-[50px] 3xl:mb-[70px]">
             <Heading as="h2" size="heading1" className="mb-[10px] sm:!mb-0">
               {title}
@@ -142,8 +190,115 @@ export default function VentureListingSection({ data, title, context }) {
             </TabsContent>
           ))}
         </Tabs>
+
+        {!isLoading &&
+          !error &&
+          ventures.length > 0 &&
+          paginationData &&
+          paginationData.last_page > 1 && (
+            <CustomPagination
+              paginationData={paginationData}
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+              pageNumbers={generatePageNumbers()}
+            />
+          )}
       </div>
     </section>
+  );
+}
+
+function CustomPagination({
+  paginationData,
+  currentPage,
+  onPageChange,
+  pageNumbers,
+}) {
+  const t = useTranslations("venture");
+  const { last_page, has_more_pages } = paginationData;
+
+  const handlePrevious = (e) => {
+    e.preventDefault();
+    if (currentPage > 1) {
+      onPageChange(currentPage - 1);
+    }
+  };
+
+  const handleNext = (e) => {
+    e.preventDefault();
+    if (has_more_pages && currentPage < last_page) {
+      onPageChange(currentPage + 1);
+    }
+  };
+
+  const handlePageClick = (e, page) => {
+    e.preventDefault();
+    onPageChange(page);
+  };
+
+  return (
+    <Pagination>
+      <PaginationContent className="[--width:25px] 2xl:[--width:30px] 3xl:[--width:35px]">
+        <PaginationItem>
+          <PaginationLink
+            href="#"
+            onClick={handlePrevious}
+            aria-label={t("previousAriaLabel")}
+            className={`w-[var(--width)] h-auto aspect-square p-0 flex items-center justify-center hover:bg-transparent transition-opacity duration-300 ${currentPage === 1
+              ? "opacity-30 cursor-not-allowed"
+              : "hover:opacity-50 cursor-pointer"
+              }`}
+            aria-disabled={currentPage === 1}
+          >
+            <Image
+              src="/images/previous_pagination.svg"
+              alt={t("previousPaginationAlt")}
+              title={t("previousPaginationAlt")}
+              width={35}
+              height={35}
+              className="w-full h-full object-contain"
+            />
+          </PaginationLink>
+        </PaginationItem>
+
+        {pageNumbers?.map((page) => (
+          <PaginationItem key={page} className="mx-[5px] 2xl:mx-[10px]">
+            <PaginationLink
+              href="#"
+              onClick={(e) => handlePageClick(e, page)}
+              className={`text-[13px] sm:text-[14px] 2xl:text-[15px] 3xl:text-[18px] leading-[1] font-normal tracking-[1px] px-[5px] sm:px-[10px] 2xl:px-[15px] transition-all duration-300 relative z-0 ${page === currentPage
+                ? "font-semibold bg-gradient-to-r from-[#0B436A] to-[#299B8A] bg-clip-text text-transparent before:content-[''] before:w-full before:h-[1px] before:bg-gradient-to-r before:from-[#0B436A] before:to-[#299B8A] before:absolute before:z-1 before:left-0 before:bottom-0"
+                : "text-[#919193] hover:text-[#2C8F87]"
+                }`}
+            >
+              {String(page).padStart(2, "0")}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
+
+        <PaginationItem>
+          <PaginationLink
+            href="#"
+            onClick={handleNext}
+            aria-label={t("nextAriaLabel")}
+            className={`w-[var(--width)] h-auto aspect-square p-0 flex items-center justify-center hover:bg-transparent transition-opacity duration-300 ${!has_more_pages || currentPage === last_page
+              ? "opacity-30 cursor-not-allowed"
+              : "hover:opacity-50 cursor-pointer"
+              }`}
+            aria-disabled={!has_more_pages || currentPage === last_page}
+          >
+            <Image
+              src="/images/next_pagination.svg"
+              alt={t("nextPaginationAlt")}
+              title={t("nextPaginationAlt")}
+              width={35}
+              height={35}
+              className="w-full h-full object-contain"
+            />
+          </PaginationLink>
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
   );
 }
 
