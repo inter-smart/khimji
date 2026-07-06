@@ -41,6 +41,8 @@ export default async function Page({ params }) {
   }
   const { banner, venture_cms, venture_categories } = data;
 
+
+
   return (
     <>
       <DynamicMeta structuredData={structuredData} lineScripts={lineScripts} />

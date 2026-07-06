@@ -11,42 +11,36 @@ import { useTranslations } from "next-intl";
 
 export default function VentureListingSection({ data, title, context }) {
   const t = useTranslations("venture");
-  const [activeSlug, setActiveSlug] = useState();
+  const { country, business_type } = context;
+  console.log("SLUGGGGG", business_type);
+  const [activeSlug, setActiveSlug] = useState(business_type);
   const [ventures, setVentures] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const API_BASE_URL =
-    process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
-  const { country, business_type } = context;
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000";
 
   const { lang } = useParams();
 
-  const BUSINESS_SLUG_MAP = { b2b: "enterprise", b2c: "consumer" };
-
-  const SLUG_TO_BUSINESS = { "enterprise": "b2b", "consumer": "b2c" };
 
   const fetchVentures = async (slug) => {
     if (!slug) return;
 
-    const businessType = SLUG_TO_BUSINESS[slug] ?? business_type;
+
 
     setIsLoading(true);
     setError(null);
     try {
-      const result = await fetch(
-        `${API_BASE_URL}/api/venture-list?category_slug=${slug}&per_page=66&page=1`,
-        {
-          method: "GET",
-          headers: {
-            "Accept-Language": lang,
-            "Location-Slug": country,
-            "Business-Slug": businessType,
-          },
-        }
-      );
+      const result = await fetch(`${API_BASE_URL}/api/venture-list?business_slug=${slug}&per_page=66&page=1`, {
+        method: "GET",
+        headers: {
+          "Accept-Language": lang,
+          "Location-Slug": country,
+          "Business-Slug": slug,
+        },
+      });
 
       const data = await result.json();
-      setVentures(data?.data ?? []);
+      setVentures(data?.data?.ventures ?? []);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -59,15 +53,18 @@ export default function VentureListingSection({ data, title, context }) {
     fetchVentures(activeSlug);
   }, [activeSlug, business_type, country, lang]);
 
-
   useEffect(() => {
     if (data?.length) {
-      const target = BUSINESS_SLUG_MAP[business_type];
-      const match = target && data.find((item) => item.slug === target);
-      setActiveSlug(match ? match.slug : data[0].slug);
+      const target = business_type;
+      console.log("target", target);
+      const match = target && data.find((item) => item.business_slug === target);
+      console.log("match", match);
+      console.log("data", data[0].business_slug);
+      setActiveSlug(match ? match.business_slug : data[0].business_slug);
     }
   }, [data, business_type, country, lang]);
 
+  console.log("activeSlug", ventures);
 
   if (!data || data.length === 0) {
     return <NoDataState title={t("noVenturesFound")} message={t("noVenturesAvailable")} />;
@@ -79,11 +76,7 @@ export default function VentureListingSection({ data, title, context }) {
       <div className="absolute top-0 bottom-0 left-[70px] 2xl:left-[100px] 3xl:left-[150px] m-auto w-[150px] 2xl:w-[200px] 3xl:w-[245px] h-[150px] 2xl:h-[200px] 3xl:h-[245px] blur-[165px] rounded-full bg-[#2FDDC3] animate-float" />
 
       <div className="container">
-        <Tabs
-          value={activeSlug}
-          onValueChange={setActiveSlug}
-          className="w-full mb-[35px ]"
-        >
+        <Tabs value={activeSlug} onValueChange={setActiveSlug} className="w-full mb-[35px ]">
           <div className="flex flex-wrap justify-between items-center gap-2 mb-[20px] xl:mb-[30px] 2xl:mb-[50px] 3xl:mb-[70px]">
             <Heading as="h2" size="heading1" className="mb-[10px] sm:!mb-0">
               {title}
@@ -94,7 +87,7 @@ export default function VentureListingSection({ data, title, context }) {
               {data?.map((item, index) => (
                 <div key={index} className="w-full px-[3px]">
                   <TabsTrigger
-                    value={item?.slug}
+                    value={item?.business_slug}
                     className=" w-full
                   text-[11px] xs:text-[16px]
                   border border-[#2E8B8B]
@@ -110,12 +103,11 @@ export default function VentureListingSection({ data, title, context }) {
                   </TabsTrigger>
                 </div>
               ))}
-
             </TabsList>
           </div>
 
           {data?.map((item, index) => (
-            <TabsContent key={index} value={item?.slug}>
+            <TabsContent key={index} value={item?.business_slug}>
               {isLoading ? (
                 <LoadingState />
               ) : error ? (
@@ -135,7 +127,7 @@ export default function VentureListingSection({ data, title, context }) {
                     {renderHtml(item?.description)}
                   </div>
                   <div className="flex flex-wrap -m-[5px] lg:-m-[10px] 3xl:-m-[15px]">
-                    {ventures?.ventures?.map((venture) => (
+                    {ventures?.map((venture) => (
                       <Link
                         href={`/${lang}/venture/${venture?.slug}`}
                         key={venture?.id}
@@ -161,9 +153,7 @@ function LoadingState() {
     <div className="w-full h-[400px] flex items-center justify-center">
       <div className="text-center">
         <div className="w-[50px] h-[50px] border-4 border-[#299B8A] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-        <p className="text-[16px] 2xl:text-[18px] text-[#666]">
-          {t("loadingVentures")}
-        </p>
+        <p className="text-[16px] 2xl:text-[18px] text-[#666]">{t("loadingVentures")}</p>
       </div>
     </div>
   );
@@ -175,27 +165,13 @@ function ErrorState({ message }) {
     <div className="w-full h-[400px] flex items-center justify-center">
       <div className="text-center">
         <div className="w-[60px] h-[60px] bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg
-            className="w-[30px] h-[30px] text-red-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
+          <svg className="w-[30px] h-[30px] text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </div>
-        <p className="text-[16px] 2xl:text-[18px] text-red-600 font-medium mb-2">
-          {t("errorLoadingVentures")}
-        </p>
+        <p className="text-[16px] 2xl:text-[18px] text-red-600 font-medium mb-2">{t("errorLoadingVentures")}</p>
         <p className="text-[14px] 2xl:text-[16px] text-[#666]">{message}</p>
       </div>
     </div>
   );
 }
-
-
