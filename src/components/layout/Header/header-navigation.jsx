@@ -109,7 +109,7 @@ export default function HeaderNavigation({
                                 : "hover:bg-[#299b8a]/10 hover:text-[#299b8a] focus:bg-[#299b8a]/10 focus:text-[#299b8a]",
                             )}
                           >
-                            <span>{opt.title}</span>
+                            <span>{isEN ? opt.title : opt.title_ar}</span>
                             <ChevronDown className="w-4 h-4 opacity-0 -rotate-90 transition-all group-hover:opacity-100 group-hover:translate-x-1 group-focus:opacity-100 group-focus:translate-x-1" />
                           </DropdownMenuItem>
                         );
