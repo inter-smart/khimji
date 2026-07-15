@@ -56,7 +56,7 @@ export default function VentureCard({ item, lang = "en" }) {
     >
       {/* LEFT MEDIA */}
       <div className="w-full lg:w-[180px] xl:w-[200px] 2xl:w-[250px] 3xl:w-[350px]">
-        <div className="w-full h-full overflow-hidden rounded-[10px]">
+        <div className="w-full h-full overflow-hidden rounded-[10px] aspect-[395/355]">
 
           {/* DESKTOP VIDEO ONLY */}
 
@@ -88,7 +88,7 @@ export default function VentureCard({ item, lang = "en" }) {
             width={395}
             height={465}
             alt={item?.image_mobile_alt_text || "Venture mobile image"}
-            className="block sm:hidden w-full h-full object-cover"
+            className="block sm:hidden w-full h-full object-cover "
           />
 
         </div>

@@ -225,11 +225,11 @@ export default function VentureSection({
                   slidesPerView={2}
                   spaceBetween={25}
                   breakpoints={{
-                    640: { slidesPerView: 2, spaceBetween: 10 },
-                    768: { slidesPerView: 2, spaceBetween: 15 },
-                    1024: { slidesPerView: 1.4, spaceBetween: 30 },
-                    1280: { slidesPerView: 1.5, spaceBetween: 40 },
-                    1920: { slidesPerView: 1.5, spaceBetween: 50 },
+                    640: { slidesPerView: 2.5, spaceBetween: 10 },
+                    768: { slidesPerView: 2.5, spaceBetween: 15 },
+                    1024: { slidesPerView: 2, spaceBetween: 30 },
+                    1280: { slidesPerView: 2.2, spaceBetween: 40 },
+                    1920: { slidesPerView: 2.2, spaceBetween: 50 },
                   }}
                   className="overflow-hidden pb-[50px] !h-auto [&_.swiper-slide]:!h-auto"
                 >
