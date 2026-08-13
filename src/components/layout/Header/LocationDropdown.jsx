@@ -16,7 +16,7 @@ const LOCATION_AR_NAMES = {
   "united-arab-emirates": "الإمارات العربية المتحدة",
   "oman": "عُمان",
   "india": "الهند",
-  "saudi-arabia-1": "المملكة العربية السعودية",
+  "saudi-arabia": "المملكة العربية السعودية",
 };
 
 export default function LocationDropdown({ locationsPromise }) {
@@ -82,7 +82,7 @@ export default function LocationDropdown({ locationsPromise }) {
             >
               <SelectValue placeholder={lang === "ar" ? "الموقع" : "Location"}>
                 {selectedCountry
-                  ? (lang === "ar" ? LOCATION_AR_NAMES[selectedCountry] : null) ?? countries.find((c) => c.slug === selectedCountry)?.name ?? ""
+                  ? (lang === "ar" ? countries.find((c) => c.slug === selectedCountry)?.name_ar : null) ?? countries.find((c) => c.slug === selectedCountry)?.name ?? ""
                   : null}
               </SelectValue>
             </SelectTrigger>
@@ -93,7 +93,7 @@ export default function LocationDropdown({ locationsPromise }) {
                   value={c.slug}
                   className="cursor-pointer rounded-lg px-3 py-2 text-sm font-medium text-gray-700 transition-all hover:bg-[#299b8a]/10 hover:text-[#299b8a] focus:bg-[#299b8a]/10 focus:text-[#299b8a] my-0.5"
                 >
-                  {lang === "ar" ? (LOCATION_AR_NAMES[c.slug] ?? c.name) : c.name}
+                  {lang === "ar" ? c.name_ar : c.name}
                 </SelectItem>
               ))}
             </SelectContent>

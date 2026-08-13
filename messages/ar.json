@@ -4,13 +4,13 @@
     "otherLinks": "روابط اخرى",
     "contactUs": "اتصل بنا",
     "followUs": "تابعنا",
-    "copyright": "جميع الحقوق محفوظة © {year} خيمجي رامداس.",
+    "copyright": "جميع الحقوق محفوظة © {year}  كيمجي رامداس",
     "designedBy": "تم التصميم والتطوير بواسطة"
   },
   "common": {
     "viewAll": "عرض الكل",
     "view": "عرض",
-    "home": "بيت",
+    "home": "الرئيسية",
     "contact": "اتصال",
     "viewMore": "عرض المزيد",
     "discoverMore": "اكتشف المزيد",
@@ -21,7 +21,7 @@
     "heritage": "التراث",
     "faq": "الأسئلة الشائعة",
     "careers": "وظائف",
-    "ventures": "المشاريع",
+    "ventures": "الأعمال التجارية",
     "venture": "مشروع",
     "icvInitiatives": "مبادرة القيمة المحلية المضافة",
     "archives": "الأرشيف",
@@ -70,7 +70,7 @@
     "submitError": "حدث خطأ أثناء تقديم طلبك",
     "applyNow": "تقدم بطلبك الآن",
     "formTitle": "املأ النموذج أدناه",
-    "jobType": "نوع الوظيفة", 
+    "jobType": "نوع الوظيفة",
     "requirements": "المتطلبات",
     "responsibilities": "المسؤوليات",
     "requiredSkills": "المهارات المطلوبة"
