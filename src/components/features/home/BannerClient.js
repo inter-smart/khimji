@@ -165,7 +165,7 @@ export default function BannerClient({ data, country }) {
                 <div className="w-full h-full flex items-end pb-[130px] justify-center z-0">
                   <div className="w-full">
                     <motion.div
-                      className="sm:text-[25px] md:text-[30px] lg:text-[50px] xl:text-[60px] 2xl:text-[80px] 3xl:text-[100px] text-[#0B436A] font-medium leading-[30px] lg:leading-[50px] xl:leading-[60px] 2xl:leading-[80px] 3xl:leading-[100px] uppercase mb-[20px]"
+                      className="sm:text-[25px] md:text-[30px] lg:text-[50px] xl:text-[60px] 2xl:text-[80px] 3xl:text-[100px] text-white font-medium leading-[30px] lg:leading-[50px] xl:leading-[60px] 2xl:leading-[80px] 3xl:leading-[100px] uppercase mb-[20px]"
                       initial={{ opacity: 0, y: 30 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8 }}
